@@ -52,7 +52,6 @@ public class Robots {
                 if (m.getMinerai() == type){
 
 
-
                     }
                 }
             }
