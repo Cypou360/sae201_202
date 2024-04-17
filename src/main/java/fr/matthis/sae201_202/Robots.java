@@ -40,7 +40,7 @@ public class Robots {
     private Coordonnee position;
 
     public String toString() {
-        return "R n°" + id  + position.getX() + position.getY() + " " + type + " " + capacity + "/" + maxCapacity;
+        return "R" + id + " " + position.getX() + position.getY() + " " + type + " " + capacity + "/" + maxCapacity;
     }
 
     public void extraction(Sector s) {

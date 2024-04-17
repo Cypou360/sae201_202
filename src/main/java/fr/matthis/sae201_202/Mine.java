@@ -30,7 +30,7 @@ public class Mine extends Sector {
     private static int idCounter = 0;
 
     public String toString() {
-        return "/ " + minerai + " " + id + " /";
+        return "M" + id + " " + position.getX() + position.getY() + " " + minerai + " " + capacity + "/" + maxCapacity;
     }
     public Ore getMinerai() {
         return minerai;

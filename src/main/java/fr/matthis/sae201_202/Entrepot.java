@@ -26,7 +26,7 @@ public class Entrepot extends Sector {
     private static int idCounter = 0;
 
     public String toString() {
-        return "E" + this.id + this.position.getX() + this.position.getY() + this.type + this.capacity;
+        return "E" + id + " " + position.getX() + position.getY() + " " + type + " " + capacity;
     }
 
     public void deposer(int qte) {
