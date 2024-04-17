@@ -10,7 +10,7 @@ public class Robots {
         this.nbDeplacement = 0;
         this.type = null;
         this.id = 0;
-        this.exctration = 0;
+        this.exctration = r.nextInt(1,3);
         this.position = new Coordonnee(0, 0);
     }
 
@@ -21,7 +21,7 @@ public class Robots {
         this.nbDeplacement = 0;
         this.type = type;
         this.id = 0;
-        this.exctration = 0;
+        this.exctration = r.nextInt(1,3);
         this.position = new Coordonnee(x, y);
 
     }
@@ -45,8 +45,18 @@ public class Robots {
         return "R n°" + id  + position.getX() + position.getY() + " " + type + " " + capacity + "/" + maxCapacity;
     }
 
-    public void addMinerai() {
-        // TODO implement here
+    public void extration(Sector s) {
+        if (s.getDisponible()){
+            if (s instanceof Mine){
+                Mine m = (Mine) s;
+                if (m.getMinerai() == type){
+
+
+
+                    }
+                }
+            }
+
     }
 
     public boolean goTo(Coordonnee c) {
@@ -54,15 +64,10 @@ public class Robots {
         return false;
     }
 
-    public int extraction() {
-
-    }
-
-    public boolean  deposer(int quantite, Sector s) {
 
 
-
-
+    public void  deposer(int quantite, Sector s) {
+        s.deposer(quantite);
 
     }
 
