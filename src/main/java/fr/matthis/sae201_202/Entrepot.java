@@ -14,6 +14,8 @@ public class Entrepot extends Sector {
         this.id = id;
         this.type = type;
         this.position = new Coordonnee(x,y);
+        this.capacity = 0;
+        this.maxCapacity = 999999999;
     }
 
     private int id;
