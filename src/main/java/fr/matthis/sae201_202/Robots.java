@@ -1,9 +1,31 @@
 package fr.matthis.sae201_202;
+import java.util.Random;
 
 public class Robots {
 
     public Robots() {
+        Random r = new Random();
+        this.maxCapacity = r.nextInt(5,9);
+        this.capacity = 0;
+        this.nbDeplacement = 0;
+        this.type = null;
+        this.id = 0;
+        this.exctration = 0;
+        this.position = new Coordonnee(0, 0);
     }
+
+    public Robots(int x, int y, Ore type){
+        Random r = new Random();
+        this.maxCapacity = r.nextInt(5,9);
+        this.capacity = 0;
+        this.nbDeplacement = 0;
+        this.type = type;
+        this.id = 0;
+        this.exctration = 0;
+        this.position = new Coordonnee(x, y);
+
+    }
+
 
     private int nbDeplacement;
 
@@ -17,9 +39,10 @@ public class Robots {
 
     private int exctration;
 
+    private Coordonnee position;
+
     public String toString() {
-        // TODO implement here
-        return "";
+        return "R n°" + id  + position.getX() + position.getY() + " " + type + " " + capacity + "/" + maxCapacity;
     }
 
     public void addMinerai() {
@@ -32,13 +55,15 @@ public class Robots {
     }
 
     public int extraction() {
-        // TODO implement here
-        return 0;
+
     }
 
-    public int deposer(int quantite) {
-        // TODO implement here
-        return 0;
+    public boolean  deposer(int quantite, Sector s) {
+
+
+
+
+
     }
 
 }
