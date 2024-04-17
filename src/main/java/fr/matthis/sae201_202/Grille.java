@@ -90,10 +90,10 @@ public class Grille {
                     grille[l][c] = new Vide(l, c);
                 }
                 else if(a == 91){
-                    grille[l][c] = new Entrepot(0, Ore.nickel, l, c);
+                    grille[l][c] = new Entrepot(Ore.nickel, l, c);
                 }
                 else if(a == 92){
-                    grille[l][c] = new Entrepot(1,Ore.gold,l,c);
+                    grille[l][c] = new Entrepot(Ore.gold,l,c);
                 }
                 else if((a == 93 | a == 94) && nbMineNickel != 0){
                     nbMineNickel -= 1;
