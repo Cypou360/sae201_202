@@ -5,14 +5,14 @@ public abstract class Sector {
     public Sector() {
         this.maxCapacity = 0;
         this.capacity = 0;
-        this.disponible = true;
+        this.robot = null;
         this.position = new Coordonnee(0, 0);
     }
 
     public Sector(int x, int y) {
         this.maxCapacity = 0;
         this.capacity = 0;
-        this.disponible = true;
+        this.robot = null;
         this.position = new Coordonnee(x, y);
     }
 
@@ -20,18 +20,22 @@ public abstract class Sector {
 
     protected int capacity;
 
-    protected boolean disponible;
+    protected Robots robot;
 
     protected Coordonnee position;
 
     public abstract String toString();
 
-    public void setDisponible(boolean s) {
-        this.disponible = s;
+    public void setRobot(Robots r) {
+        this.robot = r;
     }
 
     public boolean getDisponible() {
-        return this.disponible;
+        return this.robot == null;
+    }
+
+    public Robots getRobot() {
+        return this.robot;
     }
 
     public Coordonnee getPosition() {
