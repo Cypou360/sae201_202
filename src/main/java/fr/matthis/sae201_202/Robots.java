@@ -90,4 +90,7 @@ public class Robots {
     public void deposer(int quantite, Entrepot e){
         e.deposer(quantite);
     }
+    public int getId(){
+        return this.id;
+    }
 }

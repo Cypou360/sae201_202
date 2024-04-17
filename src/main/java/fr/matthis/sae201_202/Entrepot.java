@@ -28,4 +28,10 @@ public class Entrepot extends Sector {
     public void deposer(int qte) {
         this.capacity += qte;
     }
+    public String getType() {
+        return "E";
+    }
+    public String getId() {
+        return Integer.toString(id);
+    }
 }

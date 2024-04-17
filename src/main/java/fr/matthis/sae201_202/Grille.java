@@ -21,19 +21,47 @@ public class Grille {
 
     public String toString() {
         String out = "";
+        String tmp = "/";
         for (Sector[] s : grille) {
             out += "/---+---/---+---/---+---/---+---/---+---/---+---/---+---/---+---/---+---/---+---/\n/";
             for (Sector ss : s) {
-                out += ss.toString();
+                if (ss instanceof Mine) {
+                    Mine m = (Mine) ss;
+                    out += " " + m.getType() + " " + m.getId() + " /";
+                    if (!m.getDisponible()) {
+                        tmp += " R | " + m.getRobot().getId() + " /";
+                    }
+                    else {
+                        tmp += "   |   /";
+                    }
+                } else if (ss instanceof Lac) {
+                    out += " X | X /";
+                    tmp += "   |   /";
+                } else if (ss instanceof Entrepot) {
+                    Entrepot m = (Entrepot) ss;
+                    out += " " + m.getType() + " " + m.getId() + " /";
+                    if (!m.getDisponible()) {
+                        tmp += " R | " + m.getRobot().getId() + " /";
+                    }
+                    else {
+                        tmp += "   |   /";
+                    }
+                } else if (ss instanceof Vide) {
+                    out += "   |   /";
+                    Vide m = (Vide) ss;
+                    if (!m.getDisponible()) {
+                        tmp += " R | " + m.getRobot().getId() + " /";
+                    }
+                    else {
+                        tmp += "   |   /";
+                    }
+                }
             }
-            out += "\n";
+            out += "\n" + tmp + "\n";
+            tmp = "/";
         }
         out += "/---+---/---+---/---+---/---+---/---+---/---+---/---+---/---+---/---+---/---+---/";
         return out;
-    }
-
-    public void addSector(Sector s, int x, int y) {
-        //grille.add(s);
     }
 
     public void initialisation() {

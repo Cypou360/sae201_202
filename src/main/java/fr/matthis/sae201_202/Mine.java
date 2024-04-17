@@ -31,4 +31,11 @@ public class Mine extends Sector {
         return minerai;
     }
 
+    public String getType() {
+        return "M";
+    }
+    public String getId() {
+        return Integer.toString(id);
+    }
+
 }
