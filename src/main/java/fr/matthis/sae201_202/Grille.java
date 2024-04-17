@@ -43,4 +43,8 @@ public class Grille {
         robots.add(new Robots());
     }
 
+    public void test() {
+        int test = 0;
+    }
+
 }
