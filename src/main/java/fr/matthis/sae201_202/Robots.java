@@ -10,7 +10,7 @@ public class Robots {
         this.nbDeplacement = 0;
         this.type = null;
         this.id = 0;
-        this.exctration = r.nextInt(1,3);
+        this.extraction = r.nextInt(1,3);
         this.position = new Coordonnee(0, 0);
     }
 
@@ -21,7 +21,7 @@ public class Robots {
         this.nbDeplacement = 0;
         this.type = type;
         this.id = 0;
-        this.exctration = r.nextInt(1,3);
+        this.extraction = r.nextInt(1,3);
         this.position = new Coordonnee(x, y);
 
     }
@@ -37,7 +37,7 @@ public class Robots {
 
     private int id;
 
-    private int exctration;
+    private int extraction;
 
     private Coordonnee position;
 
@@ -45,11 +45,21 @@ public class Robots {
         return "R n°" + id  + position.getX() + position.getY() + " " + type + " " + capacity + "/" + maxCapacity;
     }
 
-    public void extration(Sector s) {
+    public void extraction(Sector s) {
         if (s.getDisponible()){
             if (s instanceof Mine){
                 Mine m = (Mine) s;
                 if (m.getMinerai() == type){
+                    if (m.capacity > 0){
+                        if (m.capacity >= extraction){
+                            m.capacity -= extraction;
+                            capacity += extraction;
+                        }
+                        else{
+                            capacity += m.capacity;
+                            m.capacity = 0;
+                        }
+                    }
 
 
                     }
@@ -58,15 +68,31 @@ public class Robots {
 
     }
 
-    public boolean goTo(Coordonnee c) {
-        // TODO implement here
-        return false;
+    public boolean goTo(String orientation ) {
+        /* x sera ordonnée et y sera en abscisse car x;y sera en position (0;0) en haut à gauche*/
+
+        if (orientation == 'N' && position.getX() >0){
+            this.position.setX(position.getX()-1);
+        }
+
+        if (orientation == 'S' && position.getX() < 10){
+            this.position.setX(position.getX()+1);
+        }
+
+        if (orientation == 'O' && position.getY() >0){
+            this.position.setY(position.getY()-1);
+        }
+
+        if (orientation == 'E' && position.getY() < 10){
+            this.position.setY(position.getY()+1);
+        }
+
     }
 
 
 
-    public void  deposer(int quantite, Sector s) {
-        s.deposer(quantite);
+    public void  deposer(int quantite, Entrepot e){
+        e.deposer(quantite);
 
     }
 
