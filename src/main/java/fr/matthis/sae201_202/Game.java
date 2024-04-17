@@ -4,6 +4,7 @@ public class Game {
 
     public static void main(String[] args) {
         Grille grille = new Grille();
+        grille.initialisation();
         System.out.println(grille.toString());
     }
 

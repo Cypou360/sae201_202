@@ -17,6 +17,6 @@ public class Vide extends Sector {
     }
 
     public String toString() {
-        return "/ " + " " + " " + " /";
+        return "   |   /";
     }
 }
