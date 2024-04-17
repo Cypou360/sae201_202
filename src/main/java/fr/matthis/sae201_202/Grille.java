@@ -1,14 +1,15 @@
 package fr.matthis.sae201_202;
 
-public class Grille {
+import java.util.ArrayList;
 
+public class Grille {
     public Grille() {
         this.nbLigne = 10;
         this.nbColonne = 10;
-        this.grille = new Sector[nbLigne][nbColonne];
-        for(int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                this.grille[i][j] = new Mine();
+        grille = new ArrayList<Sector>();
+        for(int i = 0; i != nbLigne; i++) {
+            for (int j = 0; j != nbColonne; j++) {
+               grille.add(new Mine());
             }
         }
     }
@@ -16,16 +17,21 @@ public class Grille {
     private int nbLigne;
 
     private int nbColonne;
-    private Sector[][] grille;
+
+    private ArrayList<Sector> grille;
 
     public String toString() {
         String out = "";
-        for (Sector[] i : grille) {
-            out += "+---+---+---+---+---+---+---+---+---+---+\n";
-            for (Sector j : i) {
-                out += j.toString();
+        int tmp = -1;
+        for (Sector sector : grille) {
+            tmp += 1;
+            if (tmp % 10 == 0){
+                out += "\n" + sector;
             }
-            out += "\n";
+
+            else{
+                out += "" + sector;
+            }
         }
         return out;
     }
