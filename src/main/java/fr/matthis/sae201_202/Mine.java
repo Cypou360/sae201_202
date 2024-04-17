@@ -9,6 +9,15 @@ public class Mine extends Sector {
         Random r = new Random();
         this.maxCapacity = r.nextInt(50,100);
         this.capacity = this.maxCapacity;
+        this.minerai = Ore.gold;
+    }
+
+    public Mine(int x, int y, Ore m) {
+        super(x, y);
+        Random r = new Random();
+        this.maxCapacity = r.nextInt(50,100);
+        this.capacity = this.maxCapacity;
+        this.minerai = m;
     }
 
     private Ore minerai;
