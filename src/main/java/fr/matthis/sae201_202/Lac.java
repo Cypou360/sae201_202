@@ -10,6 +10,4 @@ public class Lac extends Sector {
         return "";
     }
 
-    public abstract String toString();
-
 }

@@ -16,7 +16,4 @@ public class Entrepot extends Sector {
         // TODO implement here
         return 0;
     }
-
-    public abstract String toString();
-
 }

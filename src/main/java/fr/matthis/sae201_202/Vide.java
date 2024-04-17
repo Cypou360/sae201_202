@@ -9,7 +9,4 @@ public class Vide extends Sector {
         // TODO implement here
         return "";
     }
-
-    public abstract String toString();
-
 }
