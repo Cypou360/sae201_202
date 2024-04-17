@@ -42,9 +42,4 @@ public class Grille {
         // TODO implement here
         robots.add(new Robots());
     }
-
-    public void test() {
-        int test = 0;
-    }
-
 }
