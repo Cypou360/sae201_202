@@ -34,4 +34,12 @@ public abstract class Sector {
         return this.disponible;
     }
 
+    public Coordonnee getPosition() {
+        return this.position;
+    }
+
+    public int getCapacity() {
+        return this.capacity;
+    }
+
 }
