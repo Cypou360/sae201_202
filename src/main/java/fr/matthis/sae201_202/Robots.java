@@ -23,9 +23,7 @@ public class Robots {
         this.id = 0;
         this.extraction = r.nextInt(1,3);
         this.position = new Coordonnee(x, y);
-
     }
-
 
     private int nbDeplacement;
 
@@ -60,40 +58,36 @@ public class Robots {
                             m.capacity = 0;
                         }
                     }
-
-
-                    }
                 }
             }
-
+        }
     }
 
     public boolean goTo(String orientation ) {
         /* x sera ordonnée et y sera en abscisse car x;y sera en position (0;0) en haut à gauche*/
 
-        if (orientation == 'N' && position.getX() >0){
+        if ("N".equals(orientation) && position.getX() > 0) {
             this.position.setX(position.getX()-1);
+            return true;
         }
 
-        if (orientation == 'S' && position.getX() < 10){
+        if ("S".equals(orientation) && position.getX() < 10){
             this.position.setX(position.getX()+1);
+            return true;
         }
 
-        if (orientation == 'O' && position.getY() >0){
+        if ("O".equals(orientation) && position.getY() >0){
             this.position.setY(position.getY()-1);
+            return true;
         }
 
-        if (orientation == 'E' && position.getY() < 10){
+        if ("E".equals(orientation) && position.getY() < 10){
             this.position.setY(position.getY()+1);
+            return true;
         }
-
+        return false;
     }
-
-
-
-    public void  deposer(int quantite, Entrepot e){
+    public void deposer(int quantite, Entrepot e){
         e.deposer(quantite);
-
     }
-
 }
