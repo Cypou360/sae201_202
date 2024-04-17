@@ -4,11 +4,19 @@ public class Vide extends Sector {
 
     public Vide() {
         super();
+        this.capacity = 0;
+        this.disponible = true;
+        this.maxCapacity = 0;
+    }
+
+    public Vide(int x, int y) {
+        super(x, y);
+        this.capacity = 0;
+        this.disponible = true;
+        this.maxCapacity = 0;
     }
 
     public String toString() {
-        // TODO implement here
         return "/ " + " " + " " + " /";
     }
-
 }
