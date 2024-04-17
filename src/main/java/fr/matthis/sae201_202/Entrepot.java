@@ -11,14 +11,12 @@ public class Entrepot extends Sector {
         this.id = idCounter;
         idCounter++;
     }
-    public Entrepot(int id, Ore type, int x, int y) {
+    public Entrepot( Ore type, int x, int y) {
         super();
-        this.id = id;
         this.type = type;
         this.position = new Coordonnee(x,y);
         this.capacity = 0;
         this.maxCapacity = 999999999;
-
         this.id = idCounter;
         idCounter++;
     }
