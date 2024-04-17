@@ -3,6 +3,9 @@ package fr.matthis.sae201_202;
 public abstract class Sector {
 
     public Sector() {
+        this.maxCapicty = 0;
+        this.capacity = 0;
+        this.disponible = false;
     }
 
     protected int maxCapicty;
@@ -18,8 +21,7 @@ public abstract class Sector {
     }
 
     public boolean getDisponible() {
-        // TODO implement here
-        return false;
+        return this.disponible;
     }
 
 }

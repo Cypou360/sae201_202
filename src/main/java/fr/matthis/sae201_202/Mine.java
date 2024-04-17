@@ -3,6 +3,8 @@ package fr.matthis.sae201_202;
 public class Mine extends Sector {
 
     public Mine() {
+        super();
+
     }
 
     private Ore minerai;
@@ -10,10 +12,10 @@ public class Mine extends Sector {
     private int id;
 
     public String toString() {
-        // TODO implement here
-        return "";
+        return "out";
     }
-
-    public abstract String toString();
+    public Ore getMinerai() {
+        return minerai;
+    }
 
 }
