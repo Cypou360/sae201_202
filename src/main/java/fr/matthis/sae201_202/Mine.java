@@ -10,6 +10,8 @@ public class Mine extends Sector {
         this.maxCapacity = r.nextInt(50,100);
         this.capacity = this.maxCapacity;
         this.minerai = Ore.gold;
+        this.id = idCounter;
+        idCounter++;
     }
 
     public Mine(int x, int y, Ore m) {
@@ -18,11 +20,14 @@ public class Mine extends Sector {
         this.maxCapacity = r.nextInt(50,100);
         this.capacity = this.maxCapacity;
         this.minerai = m;
+        this.id = idCounter;
+        idCounter++;
     }
 
     private Ore minerai;
 
     private int id;
+    private static int idCounter = 0;
 
     public String toString() {
         return "/ " + minerai + " " + id + " /";
