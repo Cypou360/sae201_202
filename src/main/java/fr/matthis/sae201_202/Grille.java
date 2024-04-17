@@ -27,7 +27,7 @@ public class Grille {
             for (Sector ss : s) {
                 if (ss instanceof Mine) {
                     Mine m = (Mine) ss;
-                    out += " " + m.getType() + " " + m.getId() + " /";
+                    out += " " + m.getType() + " | " + m.getId() + " /";
                     if (!m.getDisponible()) {
                         tmp += " R | " + m.getRobot().getId() + " /";
                     }
@@ -39,7 +39,7 @@ public class Grille {
                     tmp += "   |   /";
                 } else if (ss instanceof Entrepot) {
                     Entrepot m = (Entrepot) ss;
-                    out += " " + m.getType() + " " + m.getId() + " /";
+                    out += " " + m.getType() + " | " + m.getId() + " /";
                     if (!m.getDisponible()) {
                         tmp += " R | " + m.getRobot().getId() + " /";
                     }
@@ -76,7 +76,7 @@ public class Grille {
 
         for (int l = 0; l < nbLigne; l++) {
             for (int c = 0; c < nbColonne; c++) {
-                grille[l][c] = new Vide(l, c);
+                grille[l][c] = new Mine(l, c, Ore.gold);
             }
         }
     }
