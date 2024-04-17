@@ -1,13 +1,21 @@
 package fr.matthis.sae201_202;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.shuffle;
+
 public class Game {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Grille grille = new Grille();
         grille.initialisation();
-        System.out.println(grille.toString());
+        boolean bool = true;
+        int nbtour = 0;
+        while (bool){
+            nbtour += 1;
+            System.out.println(grille);
+            System.out.println("tour : " + nbtour);
+            Thread.sleep(10000);
+
+        }
     }
-
-    private int tour;
-
 }
