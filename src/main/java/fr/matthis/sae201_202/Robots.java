@@ -5,24 +5,24 @@ public class Robots {
 
     public Robots() {
         Random r = new Random();
-        this.maxCapacity = r.nextInt(5,9);
+        this.maxCapacity = r.nextInt(5,10);
         this.capacity = 0;
         this.nbDeplacement = 0;
         this.type = null;
         this.id = idCounter;
-        this.extraction = r.nextInt(1,3);
+        this.extraction = r.nextInt(1,4);
         this.position = new Coordonnee(0, 0);
         this.idCounter++;
     }
 
     public Robots(int x, int y, Ore type){
         Random r = new Random();
-        this.maxCapacity = r.nextInt(5,9);
+        this.maxCapacity = r.nextInt(5,10);
         this.capacity = 0;
         this.nbDeplacement = 0;
         this.type = type;
         this.id = idCounter;
-        this.extraction = r.nextInt(1,3);
+        this.extraction = r.nextInt(1,4);
         this.position = new Coordonnee(x, y);
         this.idCounter++;
     }
@@ -46,10 +46,10 @@ public class Robots {
     /* Permet de récupérer toutes les informations sur le robot */
     public String toString() {
         if (type == Ore.gold) {
-            return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + "   |";
+            return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + "    |";
         }
         else {
-            return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + "   |";
+            return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + "    |";
         }
     }
 
