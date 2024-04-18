@@ -108,9 +108,33 @@ public class Grille {
                 }
             }
         }
+        for (int i = 0; i < nbRobot; i++) {
+            int x = r.nextInt(0, 10);
+            int y = r.nextInt(0, 10);
+            boolean dispo = false;
+            while (!dispo) {
+                if (grille[x][y].getDisponible()) {
+                    dispo = true;
+                } else {
+                    x = r.nextInt(0, 10);
+                    y = r.nextInt(0, 10);
+                }
+            }
+            if (i % 2 == 0) {
+                Robots ro = new Robots(x, y, Ore.nickel);
+                robots.add(ro);
+                Sector s = this.getSector(x, y);
+                s.setRobot(ro);
+            } else {
+                Robots ro = new Robots(x, y, Ore.gold);
+                robots.add(ro);
+                Sector s = this.getSector(x, y);
+                s.setRobot(ro);
+            }
+        }
     }
 
-    public Sector Sector(int x, int y){
+    public Sector getSector(int x, int y){
         return grille[x][y];
     }
 }
