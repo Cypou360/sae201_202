@@ -43,7 +43,7 @@ public class Robots {
 
     private static int idCounter = 1;
 
-    /* Permet de récupérer toutes les informations sur les robots */
+    /* Permet de récupérer toutes les informations sur le robot */
     public String toString() {
         return "R" + id + " " + position.getX() + position.getY() + " " + type + " " + capacity + "/" + maxCapacity;
     }
