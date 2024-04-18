@@ -55,7 +55,7 @@ public class Robots {
 
     /* Permet d'extraire un minerai si la mine possède le minerai adéquat */
     public void extraction(Sector s) {
-        if (s.getDisponible()){
+        if (!s.getDisponible()){
             if (s instanceof Mine){
                 Mine m = (Mine) s;
                 if (m.getMinerai() == type){
@@ -118,5 +118,9 @@ public class Robots {
     /* Permet de récupérer l'ID du robot */
     public int getId(){
         return this.id;
+    }
+
+    public Coordonnee getPosition() {
+        return position;
     }
 }

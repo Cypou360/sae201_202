@@ -14,7 +14,7 @@ public class Game {
         int nbtour = 1;
         System.out.println(grille);
         while (bool) {
-            System.out.println("tour : " + nbtour );
+            System.out.println("tour : " + nbtour);
             System.out.println(grille.afficherRecap());
 
             boolean[] movedRobot = new boolean[grille.getNbRobot()];
@@ -32,12 +32,12 @@ public class Game {
 
                 System.out.println("Robot " + idRobots);
                 System.out.println(Arrays.toString(movedRobot));
-                System.out.println("Donnez une direction: Droite(1), Gauche(2), Haut(3), Bas(4), ne rien faire(5) :");
+                System.out.println("Donnez une direction: Droite(1), Gauche(2), Haut(3), Bas(4), Extraire(5), Ne rien faire(6) :");
                 Scanner nb = new Scanner(System.in);
                 nombre = nb.nextInt();
 
-                System.out.println(movedRobot[idRobots-1]);
-                if (!movedRobot[idRobots-1] || idRobots < grille.getNbRobot()) {
+                System.out.println(movedRobot[idRobots - 1]);
+                if (!movedRobot[idRobots - 1] || idRobots < grille.getNbRobot()) {
                     System.out.println("Robot non bouger");
                     if (nombre == 1) {
                         if (!grille.getRobot(idRobots).goTo("E", grille)) {
@@ -64,24 +64,30 @@ public class Game {
                             movedRobot[idRobots - 1] = true;
                         }
                     } else if (nombre == 5) {
+                        grille.getRobot(idRobots).extraction(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()));
+                        movedRobot[idRobots - 1] = true;
+                    } else if (nombre == 6) {
                         System.out.println("Ne rien faire");
                         movedRobot[idRobots - 1] = true;
                     } else {
                         System.out.println("Fin du jeu");
                         break;
                     }
+
                 } else {
                     System.out.println("Robot déjà bouger");
                 }
                 System.out.println(grille);
             }
+
             if (nombre > 5 || idRobots > grille.getNbRobot()) {
                 break;
-            }
-            else {
+            } else {
                 System.out.println("Tour fini");
                 nbtour++;
             }
         }
     }
 }
+
+
