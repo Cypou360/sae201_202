@@ -159,4 +159,7 @@ public class Grille {
         }
         return null;
     }
+    public int getNbRobot(){
+        return robots.size();
+    }
 }
