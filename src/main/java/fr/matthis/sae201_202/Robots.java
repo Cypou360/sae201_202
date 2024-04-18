@@ -76,12 +76,12 @@ public class Robots {
             position.setY(position.getY()-1);
             grille.getSector(position.getX(), position.getY()).setRobot(this);
             return true;
-        } else if (orientation.equals("S") && position.getY() < 19 && grille.getSector(position.getX(), position.getY()+1).getDisponible()) {
+        } else if (orientation.equals("S") && position.getY() < grille.getNbLigne() && grille.getSector(position.getX(), position.getY()+1).getDisponible()) {
             grille.getSector(position.getX(), position.getY()).setRobot(null);
             position.setY(position.getY()+1);
             grille.getSector(position.getX(), position.getY()).setRobot(this);
             return true;
-        } else if (orientation.equals("E") && position.getX() < 19 && grille.getSector(position.getX()+1, position.getY()).getDisponible()) {
+        } else if (orientation.equals("E") && position.getX() < grille.getNbColonne() && grille.getSector(position.getX()+1, position.getY()).getDisponible()) {
             grille.getSector(position.getX(), position.getY()).setRobot(null);
             position.setX(position.getX()+1);
             grille.getSector(position.getX(), position.getY()).setRobot(this);
