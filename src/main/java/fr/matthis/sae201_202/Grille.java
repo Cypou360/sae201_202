@@ -109,4 +109,8 @@ public class Grille {
             }
         }
     }
+
+    public Sector Sector(int x, int y){
+        return grille[x][y];
+    }
 }
