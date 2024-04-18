@@ -43,10 +43,12 @@ public class Robots {
 
     private static int idCounter = 1;
 
+    /* Permet de récupérer toutes les informations sur les robots */
     public String toString() {
         return "R" + id + " " + position.getX() + position.getY() + " " + type + " " + capacity + "/" + maxCapacity;
     }
 
+    /* Permet d'extraire un minerai si la mine possède le minerai adéquat */
     public void extraction(Sector s) {
         if (s.getDisponible()){
             if (s instanceof Mine){
@@ -67,6 +69,7 @@ public class Robots {
         }
     }
 
+    /* Permet au robot de se déplacer */
     public boolean goTo(String orientation, Grille grille) {
         /* x sera ordonnée et y sera en abscisse car x;y sera en position (0;0) en haut à gauche*/
         for (int i = 0; i < grille.getNbLigne(); i++){
@@ -102,9 +105,13 @@ public class Robots {
         }
         return false;
     }
+
+    /* Permet de déposer les minerais que possède le robot dans l'entrepot approprié */
     public void deposer(int quantite, Entrepot e){
         e.deposer(quantite);
     }
+
+    /* Permet de récupérer l'ID du robot */
     public int getId(){
         return this.id;
     }
