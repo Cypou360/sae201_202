@@ -16,10 +16,12 @@ public class Lac extends Sector {
         this.robot = null;
     }
 
+    /* Permet d'afficher le lac */
     public String toString() {
         return "/X X/";
     }
 
+    /* Défini que le lac est une zone ou les robots ne peuvent pas aller */
     public boolean getDisponible() {
         return false;
     }

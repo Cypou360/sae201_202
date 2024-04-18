@@ -24,20 +24,25 @@ public abstract class Sector {
 
     protected Coordonnee position;
 
+    /* Permet d'afficher un secteur (partagé aux différents secteurs) */
     public abstract String toString();
 
+    /* Sélectionne le robot voulu */
     public void setRobot(Robots r) {
         this.robot = r;
     }
 
+    /*  */
     public boolean getDisponible() {
         return this.robot == null;
     }
 
+    /* Permet de récupérer le robot actuel */
     public Robots getRobot() {
         return this.robot;
     }
 
+    /* Permet de récupérer les coordonnées actuelles */
     public Coordonnee getPosition() {
         return this.position;
     }

@@ -16,6 +16,7 @@ public class Vide extends Sector {
         this.maxCapacity = 0;
     }
 
+    /* Affiche une section vide */
     public String toString() {
         return "   |   /";
     }

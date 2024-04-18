@@ -21,20 +21,27 @@ public class Entrepot extends Sector {
         idCounter++;
     }
 
+    /* maxCapacity à 999999999 pour simuler le fait de ne pas avoir de limite */
     private int id;
     private Ore type;
     private static int idCounter = 1;
 
+    /* Avoir toutes les infos sur les entrepots */
     public String toString() {
         return "E" + id + " " + position.getX() + position.getY() + " " + type + " " + capacity;
     }
 
+    /* Ajoute des minerais dans l'entrepot */
     public void deposer(int qte) {
         this.capacity += qte;
     }
+
+    /* Permet de montrer le type de batiment (ici, un Entrepot) */
     public String getType() {
         return "E";
     }
+
+    /* Permet d'avoir l'Id de l'entrepot */
     public String getId() {
         return Integer.toString(id);
     }

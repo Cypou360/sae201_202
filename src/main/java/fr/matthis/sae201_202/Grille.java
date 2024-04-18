@@ -24,6 +24,7 @@ public class Grille {
 
     private Sector[][] grille;
 
+    /* Permet d'afficher la grille dans la console */
     public String toString() {
         String out = "";
         String tmp = "/";
@@ -69,6 +70,7 @@ public class Grille {
         return out;
     }
 
+    /* Permet d'initialiser les différents secteurs */
     public void initialisation() {
         Random r = new Random();
         int nbMineOr = r.nextInt(1,3);
@@ -134,12 +136,17 @@ public class Grille {
         }
     }
 
+    /* Permet de récuperer le secteur situé dans l'emplacement voulu */
     public Sector getSector(int x, int y){
         return grille[x][y];
     }
+
+    /* Permet de récupérer le nombre de colones */
     public int getNbColonne() {
         return nbColonne;
     }
+
+    /* Permet de récupérer le nombre de lignes */
     public int getNbLigne() {
         return nbLigne;
     }

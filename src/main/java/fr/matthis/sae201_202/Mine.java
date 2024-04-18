@@ -29,16 +29,22 @@ public class Mine extends Sector {
     private int id;
     private static int idCounter = 1;
 
+    /* affiche toutes les informations sur la mine */
     public String toString() {
         return "M" + id + " " + position.getX() + position.getY() + " " + minerai + " " + capacity + "/" + maxCapacity;
     }
+
+    /* Montre le type de minerai disponible dans la grille */
     public Ore getMinerai() {
         return minerai;
     }
 
+    /* Permet de montrer le type de batiment (ici, une Mine) */
     public String getType() {
         return "M";
     }
+
+    /* Affiche l'ID de la Mine */
     public String getId() {
         return Integer.toString(id);
     }
