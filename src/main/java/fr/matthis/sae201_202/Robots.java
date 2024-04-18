@@ -9,9 +9,10 @@ public class Robots {
         this.capacity = 0;
         this.nbDeplacement = 0;
         this.type = null;
-        this.id = 0;
+        this.id = idCounter;
         this.extraction = r.nextInt(1,3);
         this.position = new Coordonnee(0, 0);
+        this.idCounter++;
     }
 
     public Robots(int x, int y, Ore type){
@@ -20,9 +21,10 @@ public class Robots {
         this.capacity = 0;
         this.nbDeplacement = 0;
         this.type = type;
-        this.id = 0;
+        this.id = idCounter;
         this.extraction = r.nextInt(1,3);
         this.position = new Coordonnee(x, y);
+        this.idCounter++;
     }
 
     private int nbDeplacement;
@@ -38,6 +40,8 @@ public class Robots {
     private int extraction;
 
     private Coordonnee position;
+
+    private static int idCounter = 1;
 
     public String toString() {
         return "R" + id + " " + position.getX() + position.getY() + " " + type + " " + capacity + "/" + maxCapacity;
