@@ -23,7 +23,7 @@ public class Entrepot extends Sector {
 
     private int id;
     private Ore type;
-    private static int idCounter = 0;
+    private static int idCounter = 1;
 
     public String toString() {
         return "E" + id + " " + position.getX() + position.getY() + " " + type + " " + capacity;

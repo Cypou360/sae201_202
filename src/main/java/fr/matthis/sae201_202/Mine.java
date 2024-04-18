@@ -27,7 +27,7 @@ public class Mine extends Sector {
     private Ore minerai;
 
     private int id;
-    private static int idCounter = 0;
+    private static int idCounter = 1;
 
     public String toString() {
         return "M" + id + " " + position.getX() + position.getY() + " " + minerai + " " + capacity + "/" + maxCapacity;
