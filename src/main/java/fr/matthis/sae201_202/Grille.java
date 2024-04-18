@@ -77,14 +77,14 @@ public class Grille {
         Integer[] Entier = new Integer[100];
         int tmp = -1;
         for(int i = 0; i!= 100; i++){
-            tmp += 1;
+            tmp++;
             Entier[i] = tmp;
         }
         shuffle(asList(Entier));
         int entier = -1;
         for (int l = 0; l < nbLigne; l++) {
             for (int c = 0; c < nbColonne; c++) {
-                entier += 1;
+                entier++;
                 int a = Entier[entier];
                 if (a < 91) {
                     grille[l][c] = new Vide(l, c);
@@ -96,11 +96,11 @@ public class Grille {
                     grille[l][c] = new Entrepot(Ore.gold,l,c);
                 }
                 else if((a == 93 | a == 94) && nbMineNickel != 0){
-                    nbMineNickel -= 1;
+                    nbMineNickel--;
                     grille[l][c] = new Mine(l, c, Ore.nickel);
                 }
                 else if((a == 95 | a == 96) && nbMineOr != 0){
-                    nbMineOr -= 1;
+                    nbMineOr--;
                     grille[l][c] = new Mine(l, c, Ore.gold);
                 }
                 else{
