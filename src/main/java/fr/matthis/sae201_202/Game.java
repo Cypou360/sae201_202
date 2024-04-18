@@ -36,7 +36,6 @@ public class Game {
                 nombre = nb.nextInt();
 
                 System.out.println(movedRobot[idRobots-1]);
-                System.out.println(grille.afficherRecap());
                 if (!movedRobot[idRobots-1] || idRobots < grille.getNbRobot()) {
                     System.out.println("Robot non bouger");
                     if (nombre == 1) {
