@@ -36,13 +36,6 @@ public class Entrepot extends Sector {
         }
     }
 
-    /* Ajoute des minerais dans l'entrepot */
-    public void deposer(int qte, Ore type) {
-        if (getType() == type){
-            this.capacity += qte;
-        }
-
-    }
 
     /* Permet de montrer le type de batiment (ici, un Entrepot) */
     public Ore getType() {

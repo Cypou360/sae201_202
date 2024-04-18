@@ -32,7 +32,7 @@ public class Game {
 
                 System.out.println("Robot " + idRobots);
                 System.out.println(Arrays.toString(movedRobot));
-                System.out.println("Donnez une direction: Droite(1), Gauche(2), Haut(3), Bas(4), Extraire(5), Ne rien faire(6) :");
+                System.out.println("Donnez une direction: Droite(1), Gauche(2), Haut(3), Bas(4), Extraire(5), deposer(6), Ne rien faire(7) :");
                 Scanner nb = new Scanner(System.in);
                 nombre = nb.nextInt();
 
@@ -66,10 +66,14 @@ public class Game {
                     } else if (nombre == 5) {
                         grille.getRobot(idRobots).extraction(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()));
                         movedRobot[idRobots - 1] = true;
-                    } else if (nombre == 6) {
+                    } else if(nombre == 6){
+                        grille.getRobot(idRobots).deposer(grille.getSector(grille.getRobot(idRobots).getPosition().getX(),grille.getRobot(idRobots).getPosition().getY()));
+                        movedRobot[idRobots - 1] = true;
+                    } else if (nombre == 7) {
                         System.out.println("Ne rien faire");
                         movedRobot[idRobots - 1] = true;
-                    } else {
+                    }
+                    else {
                         System.out.println("Fin du jeu");
                         break;
                     }
