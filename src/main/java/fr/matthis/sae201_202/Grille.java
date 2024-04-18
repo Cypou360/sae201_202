@@ -168,7 +168,7 @@ public class Grille {
 
     public String afficherRecap(){
         String out = "";
-        out += "|------------------------|\n";
+        out += "|-------------------------|\n";
         for(Sector[] s: grille) {
             for (Sector ss : s) {
                 if (ss instanceof Mine) {
@@ -196,7 +196,7 @@ public class Grille {
             }
         }
 
-        out += "|------------------------|";
+        out += "|-------------------------|";
         return out;
     }
 }

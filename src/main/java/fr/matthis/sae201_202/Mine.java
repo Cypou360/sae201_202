@@ -17,7 +17,7 @@ public class Mine extends Sector {
     public Mine(int x, int y, Ore m) {
         super(x, y);
         Random r = new Random();
-        this.maxCapacity = r.nextInt(50,101);
+        this.maxCapacity = r.nextInt(90,101);
         this.capacity = this.maxCapacity;
         this.minerai = m;
         this.id = idCounter;
@@ -31,13 +31,21 @@ public class Mine extends Sector {
 
     /* affiche toutes les informations sur la mine */
     public String toString() {
-        if (minerai == Ore.gold) {
-            return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + "  |";
-        }
-        else {
-            return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + "  |";
+        if (capacity < 100) {
+            if (minerai == Ore.gold) {
+                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + "   |";
+            } else {
+                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + "   |";
+            }
+        }else{
+            if (minerai == Ore.gold) {
+                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + " |";
+            } else {
+                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + " |";
+            }
         }
     }
+
 
     /* Montre le type de minerai disponible dans la grille */
     public Ore getMinerai() {

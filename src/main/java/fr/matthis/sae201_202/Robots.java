@@ -18,7 +18,7 @@ public class Robots {
     public Robots(int x, int y, Ore type){
         Random r = new Random();
         this.maxCapacity = r.nextInt(5,10);
-        this.capacity = 5;
+        this.capacity = 0;
         this.nbDeplacement = 0;
         this.type = type;
         this.id = idCounter;
@@ -46,10 +46,10 @@ public class Robots {
     /* Permet de récupérer toutes les informations sur le robot */
     public String toString() {
         if (type == Ore.gold) {
-            return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + "    |";
+            return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + "     |";
         }
         else {
-            return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + "    |";
+            return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + "     |";
         }
     }
 
