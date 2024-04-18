@@ -14,7 +14,8 @@ public class Game {
         int nbtour = 1;
         System.out.println(grille);
         while (bool) {
-            System.out.println("tour : " + nbtour + "\n");
+            System.out.println("tour : " + nbtour );
+            System.out.println(grille.afficherRecap());
 
             boolean[] movedRobot = new boolean[grille.getNbRobot()];
             boolean[] lstTrue = new boolean[grille.getNbRobot()];
@@ -78,7 +79,6 @@ public class Game {
                 break;
             }
             else {
-                System.out.println(grille.afficherRecap());
                 System.out.println("Tour fini");
                 nbtour++;
             }
