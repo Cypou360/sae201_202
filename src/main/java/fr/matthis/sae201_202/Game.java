@@ -1,8 +1,5 @@
 package fr.matthis.sae201_202;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.shuffle;
-
 public class Game {
 
     public static void main(String[] args) throws InterruptedException {
