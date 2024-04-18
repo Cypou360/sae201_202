@@ -31,7 +31,12 @@ public class Mine extends Sector {
 
     /* affiche toutes les informations sur la mine */
     public String toString() {
-        return "M" + id + " " + position.getX() + position.getY() + " " + minerai + " " + capacity + "/" + maxCapacity;
+        if (minerai == Ore.gold) {
+            return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + " |";
+        }
+        else {
+            return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + " |";
+        }
     }
 
     /* Montre le type de minerai disponible dans la grille */

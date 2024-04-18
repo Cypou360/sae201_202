@@ -45,7 +45,12 @@ public class Robots {
 
     /* Permet de récupérer toutes les informations sur le robot */
     public String toString() {
-        return "R" + id + " " + position.getX() + position.getY() + " " + type + " " + capacity + "/" + maxCapacity;
+        if (type == Ore.gold) {
+            return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + " |";
+        }
+        else {
+            return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + " |";
+        }
     }
 
     /* Permet d'extraire un minerai si la mine possède le minerai adéquat */
@@ -101,8 +106,13 @@ public class Robots {
     }
 
     /* Permet de déposer les minerais que possède le robot dans l'entrepot approprié */
-    public void deposer(int quantite, Entrepot e){
-        e.deposer(quantite);
+    public void deposer(int quantite, Entrepot e, Ore type){
+        if (this.type == type){
+            e.deposer(quantite,type);
+        }
+        else{
+            e.deposer(quantite,type);
+        }
     }
 
     /* Permet de récupérer l'ID du robot */

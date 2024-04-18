@@ -28,16 +28,28 @@ public class Entrepot extends Sector {
 
     /* Avoir toutes les infos sur les entrepots */
     public String toString() {
-        return "E" + id + " " + position.getX() + position.getY() + " " + type + " " + capacity;
+        if (type == Ore.gold) {
+            return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + "       |";
+        }
+        else{
+            return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + "       |";
+        }
     }
 
     /* Ajoute des minerais dans l'entrepot */
-    public void deposer(int qte) {
-        this.capacity += qte;
+    public void deposer(int qte, Ore type) {
+        if (getType() == type){
+            this.capacity += qte;
+        }
+
     }
 
     /* Permet de montrer le type de batiment (ici, un Entrepot) */
-    public String getType() {
+    public Ore getType() {
+        return type;
+    }
+
+    public String getNom(){
         return "E";
     }
 

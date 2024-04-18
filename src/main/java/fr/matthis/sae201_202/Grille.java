@@ -1,9 +1,7 @@
 package fr.matthis.sae201_202;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.Collections;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.shuffle;
@@ -45,7 +43,7 @@ public class Grille {
                     tmp += " X | X /";
                 } else if (ss instanceof Entrepot) {
                     Entrepot e = (Entrepot) ss;
-                    out += " " + e.getType() + " | " + e.getId() + " /";
+                    out += " " + e.getNom() + " | " + e.getId() + " /";
                     if (!e.getDisponible()) {
                         tmp += " R | " + e.getRobot().getId() + " /";
                     }
@@ -161,5 +159,28 @@ public class Grille {
     }
     public int getNbRobot(){
         return robots.size();
+    }
+
+    public void graphe(){
+        Graphique graphique = new Graphique(grille);
+    }
+
+    public String afficherRecap(){
+        String out = "";
+        out += "|-----------------------|\n";
+        for(Sector[] s: grille){
+            for (Sector ss: s){
+                if(ss instanceof Mine){
+                    Sector e = (Mine) ss;
+                    out += e + "\n";
+                }
+                if (ss instanceof Entrepot){
+                    Sector e = (Entrepot) ss;
+                    out += e + "\n";
+                }
+            }
+        }
+        out += "|-----------------------|";
+        return out;
     }
 }
