@@ -168,12 +168,16 @@ public class Grille {
     public String afficherRecap(){
         String out = "";
         out += "|-----------------------|\n";
-        for(Sector[] s: grille){
-            for (Sector ss: s){
-                if(ss instanceof Mine){
+        for(Sector[] s: grille) {
+            for (Sector ss : s) {
+                if (ss instanceof Mine) {
                     Sector e = (Mine) ss;
                     out += e + "\n";
                 }
+            }
+        }
+        for(Sector[] s: grille){
+            for (Sector ss: s){
                 if (ss instanceof Entrepot){
                     Sector e = (Entrepot) ss;
                     out += e + "\n";
