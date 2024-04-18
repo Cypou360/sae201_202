@@ -12,7 +12,7 @@ public class Game {
             System.out.println(grille);
             System.out.println("tour : " + nbtour);
             Thread.sleep(10000);
-
+            bool = false;
         }
     }
 }

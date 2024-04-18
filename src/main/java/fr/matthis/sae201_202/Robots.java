@@ -63,27 +63,38 @@ public class Robots {
         }
     }
 
-    public boolean goTo(String orientation ) {
+    public boolean goTo(String orientation, Grille grille) {
         /* x sera ordonnée et y sera en abscisse car x;y sera en position (0;0) en haut à gauche*/
+        for (int i = 0; i < grille.getNbLigne(); i++){
+            for( int j = 0; j < grille.getNbColonne(); j++){
+                if ("N".equals(orientation) && position.getX() > 0) {
+                    if(grille.getSector(i-1,j).getDisponible()){
+                        this.position.setX(position.getX()-1);
+                        return true;
+                    }
+                }
 
-        if ("N".equals(orientation) && position.getX() > 0) {
-            this.position.setX(position.getX()-1);
-            return true;
-        }
+                if ("S".equals(orientation) && position.getX() < 10){
+                    if(grille.getSector(i+1,j).getDisponible()){
+                        this.position.setX(position.getX()+1);
+                        return true;
+                    }
+                }
 
-        if ("S".equals(orientation) && position.getX() < 10){
-            this.position.setX(position.getX()+1);
-            return true;
-        }
+                if ("O".equals(orientation) && position.getY() >0){
+                    if(grille.getSector(i,j-1).getDisponible()){
+                        this.position.setY(position.getY()-1);
+                        return true;
+                    }
+                }
 
-        if ("O".equals(orientation) && position.getY() >0){
-            this.position.setY(position.getY()-1);
-            return true;
-        }
-
-        if ("E".equals(orientation) && position.getY() < 10){
-            this.position.setY(position.getY()+1);
-            return true;
+                if ("E".equals(orientation) && position.getY() < 10){
+                    if(grille.getSector(i,j+1).getDisponible()){
+                        this.position.setY(position.getY()+1);
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
