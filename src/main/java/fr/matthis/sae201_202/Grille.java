@@ -150,4 +150,13 @@ public class Grille {
     public int getNbLigne() {
         return nbLigne;
     }
+
+    public Robots getRobot(int id) {
+        for (Robots r : robots) {
+            if (r.getId() == id) {
+                return r;
+            }
+        }
+        return null;
+    }
 }
