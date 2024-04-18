@@ -25,6 +25,7 @@ public class Grille {
     /* Permet d'afficher la grille dans la console */
     public String toString() {
         String out = "";
+        out += "    0       1       2       3       4       5       6       7       8       9" + "\n";
         String tmp = "/";
         for (Sector[] s : grille) {
             out += "+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n/";
@@ -184,6 +185,17 @@ public class Grille {
                 }
             }
         }
+        int tmp = 0;
+        for(Sector[] s: grille){
+            tmp +=1;
+            for (Sector ss: s) {
+                if ((!ss.getDisponible()) && (ss.getRobot() !=null)){
+                    out += ss.getRobot();
+                    out += "\n";
+                }
+            }
+        }
+
         out += "|-----------------------|";
         return out;
     }
