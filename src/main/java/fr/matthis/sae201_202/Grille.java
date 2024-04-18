@@ -137,4 +137,10 @@ public class Grille {
     public Sector getSector(int x, int y){
         return grille[x][y];
     }
+    public int getNbColonne() {
+        return nbColonne;
+    }
+    public int getNbLigne() {
+        return nbLigne;
+    }
 }
