@@ -32,7 +32,7 @@ public abstract class Sector {
         this.robot = r;
     }
 
-    /*  */
+    /* Permet de savoir si un robot peut venir */
     public boolean getDisponible() {
         return this.robot == null;
     }
@@ -50,5 +50,4 @@ public abstract class Sector {
     public int getCapacity() {
         return this.capacity;
     }
-
 }
