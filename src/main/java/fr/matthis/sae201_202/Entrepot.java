@@ -3,7 +3,6 @@ package fr.matthis.sae201_202;
 public class Entrepot extends Sector {
 
     public Entrepot() {
-        this.id = 0;
         this.type = null;
         this.position = new Coordonnee(0,0);
         this.capacity = 0;

@@ -162,10 +162,6 @@ public class Grille {
         return robots.size();
     }
 
-    public void graphe(){
-        Graphique graphique = new Graphique(grille);
-    }
-
     public String afficherRecap(){
         String out = "";
         out += "|-------------------------|\n";
