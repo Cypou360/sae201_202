@@ -22,7 +22,7 @@ public class Robots {
         this.nbDeplacement = 0;
         this.type = type;
         this.id = idCounter;
-        this.extraction = r.nextInt(1,4);
+        this.extraction = r.nextInt(3,4);
         this.position = new Coordonnee(x, y);
         this.idCounter++;
     }
@@ -72,7 +72,7 @@ public class Robots {
                         } else if (capacity == maxCapacity) {
                             System.out.println("Capcity trop elevée");
                         } else{
-                            capacity += extraction - (maxCapacity - capacity);
+                            capacity += (maxCapacity - capacity);
                         }
                     }
                 }
