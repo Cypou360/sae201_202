@@ -49,4 +49,9 @@ public class Entrepot extends Sector {
     public String getId() {
         return Integer.toString(id);
     }
+
+    @Override
+    public Coordonnee getPosition() {
+        return super.getPosition();
+    }
 }

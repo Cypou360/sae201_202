@@ -60,13 +60,19 @@ public class Robots {
                 Mine m = (Mine) s;
                 if (m.getMinerai() == type){
                     if (m.capacity > 0){
-                        if (m.capacity >= extraction){
-                            m.capacity -= extraction;
-                            capacity += extraction;
-                        }
-                        else{
-                            capacity += m.capacity;
-                            m.capacity = 0;
+                        if (capacity <= maxCapacity - extraction){
+                            if (m.capacity >= extraction){
+                                m.capacity -= extraction;
+                                capacity += extraction;
+                            }
+                            else{
+                                capacity += m.capacity;
+                                m.capacity = 0;
+                            }
+                        } else if (capacity == maxCapacity) {
+                            System.out.println("Capcity trop elevée");
+                        } else{
+                            capacity += extraction - (maxCapacity - capacity);
                         }
                     }
                 }
