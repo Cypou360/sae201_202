@@ -7,25 +7,22 @@ public class Robots {
         Random r = new Random();
         this.maxCapacity = r.nextInt(5,10);
         this.capacity = 0;
-        this.nbDeplacement = 0;
         this.type = null;
         this.id = idCounter;
         this.position = new Coordonnee(0, 0);
-        this.idCounter++;
+        idCounter++;
     }
 
     public Robots(int x, int y, Ore type){
         Random r = new Random();
         this.maxCapacity = r.nextInt(5,10);
         this.capacity = 0;
-        this.nbDeplacement = 0;
         this.type = type;
         this.id = idCounter;
         this.position = new Coordonnee(x, y);
-        this.idCounter++;
+        idCounter++;
     }
 
-    private int nbDeplacement;
     private int maxCapacity;
     private int capacity;
     private Ore type;
