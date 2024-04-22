@@ -10,7 +10,6 @@ public class Robots {
         this.nbDeplacement = 0;
         this.type = null;
         this.id = idCounter;
-        this.extraction = r.nextInt(1,4);
         this.position = new Coordonnee(0, 0);
         this.idCounter++;
     }
@@ -22,25 +21,16 @@ public class Robots {
         this.nbDeplacement = 0;
         this.type = type;
         this.id = idCounter;
-        this.extraction = r.nextInt(3,4);
         this.position = new Coordonnee(x, y);
         this.idCounter++;
     }
 
     private int nbDeplacement;
-
     private int maxCapacity;
-
     private int capacity;
-
     private Ore type;
-
     private int id;
-
-    private int extraction;
-
     private Coordonnee position;
-
     private static int idCounter = 1;
 
     /* Permet de récupérer toutes les informations sur le robot */
@@ -60,6 +50,8 @@ public class Robots {
                 Mine m = (Mine) s;
                 if (m.getMinerai() == type){
                     if (m.capacity > 0){
+                        Random r = new Random();
+                        int extraction = r.nextInt(1,4);
                         if (capacity <= maxCapacity - extraction){
                             if (m.capacity >= extraction){
                                 m.capacity -= extraction;
