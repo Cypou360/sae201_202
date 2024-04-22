@@ -34,7 +34,10 @@ public abstract class Sector {
 
     /* Permet de savoir si un robot peut venir */
     public boolean getDisponible() {
-        return this.robot == null;
+        if (this.robot == null) {
+            return true;
+        }
+        return false;
     }
 
     /* Permet de récupérer le robot actuel */

@@ -22,6 +22,7 @@ public class Lac extends Sector {
     }
 
     /* Défini que le lac est une zone ou les robots ne peuvent pas aller */
+    @Override
     public boolean getDisponible() {
         return false;
     }
