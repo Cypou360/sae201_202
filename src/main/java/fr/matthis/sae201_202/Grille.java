@@ -15,12 +15,11 @@ public class Grille {
     }
 
     private int nbLigne;
-
     private int nbColonne;
-
     private ArrayList<Robots> robots;
-
     private Sector[][] grille;
+    private ArrayList<Entrepot> entrepots;
+    private ArrayList<Mine> mines;
 
     /* Permet d'afficher la grille dans la console */
     public String toString() {
@@ -74,7 +73,7 @@ public class Grille {
         Random r = new Random();
         int nbMineOr = r.nextInt(1,3);
         int nbMineNickel = r.nextInt(1,3);
-        int nbRobot = r.nextInt(2,4);
+        int nbRobot = r.nextInt(2,6);
         Integer[] Entier = new Integer[100];
         int tmp = -1;
         for(int i = 0; i!= 100; i++){
@@ -91,18 +90,26 @@ public class Grille {
                     grille[l][c] = new Vide(l, c);
                 }
                 else if(a == 91){
-                    grille[l][c] = new Entrepot(Ore.nickel, l, c);
+                    Entrepot e = new Entrepot(Ore.nickel, l, c);
+                    grille[l][c] = e;
+                    entrepots.add(e);
                 }
                 else if(a == 92){
-                    grille[l][c] = new Entrepot(Ore.gold,l,c);
+                    Entrepot e = new Entrepot(Ore.gold, l, c);
+                    grille[l][c] = e;
+                    entrepots.add(e);
                 }
                 else if((a == 93 | a == 94) && nbMineNickel != 0){
                     nbMineNickel--;
-                    grille[l][c] = new Mine(l, c, Ore.nickel);
+                    Mine m = new Mine(l, c, Ore.nickel);
+                    grille[l][c] = m;
+                    mines.add(m);
                 }
                 else if((a == 95 | a == 96) && nbMineOr != 0){
                     nbMineOr--;
-                    grille[l][c] = new Mine(l, c, Ore.gold);
+                    Mine m = new Mine(l, c, Ore.gold);
+                    grille[l][c] = m;
+                    mines.add(m);
                 }
                 else{
                     grille[l][c] = new Lac(l, c);
@@ -165,31 +172,17 @@ public class Grille {
     public String afficherRecap(){
         String out = "";
         out += "|-------------------------|\n";
-        for(Sector[] s: grille) {
-            for (Sector ss : s) {
-                if (ss instanceof Mine) {
-                    Sector e = (Mine) ss;
-                    out += e + "\n";
-                }
-            }
+        // génération affichage mines
+        for(Mine m: mines){
+            out += m + "\n";{
         }
-        for(Sector[] s: grille){
-            for (Sector ss: s){
-                if (ss instanceof Entrepot){
-                    Sector e = (Entrepot) ss;
-                    out += e + "\n";
-                }
-            }
+        // génération affichage entrepots
+        for(Entrepot e: entrepots){
+            out += e + "\n";
         }
-        int tmp = 0;
-        for(Sector[] s: grille){
-            tmp +=1;
-            for (Sector ss: s) {
-                if ((!ss.getDisponible()) && (ss.getRobot() !=null)){
-                    out += ss.getRobot();
-                    out += "\n";
-                }
-            }
+        // génération affichage robots
+        for (Robots r : robots) {
+            out += r + "\n";
         }
 
         out += "|-------------------------|";
