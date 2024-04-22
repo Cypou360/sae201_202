@@ -28,10 +28,10 @@ public class Entrepot extends Sector {
     /* Avoir toutes les infos sur les entrepots */
     public String toString() {
         if (type == Ore.gold) {
-            return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + "         |";
+            return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + "\t\t\t|";
         }
         else{
-            return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + "         |";
+            return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + "\t\t\t|";
         }
     }
 
@@ -50,8 +50,4 @@ public class Entrepot extends Sector {
         return Integer.toString(id);
     }
 
-    @Override
-    public Coordonnee getPosition() {
-        return super.getPosition();
-    }
 }

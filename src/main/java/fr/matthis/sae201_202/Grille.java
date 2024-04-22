@@ -12,6 +12,8 @@ public class Grille {
         this.nbColonne = 10;
         grille = new Sector[nbLigne][nbColonne];
         robots = new ArrayList<>();
+        entrepots = new ArrayList<>();
+        mines = new ArrayList<>();
     }
 
     private int nbLigne;
@@ -171,7 +173,7 @@ public class Grille {
 
     public String afficherRecap(){
         String out = "";
-        out += "|-------------------------|\n";
+        out += "|---------------------------|\n";
         // génération affichage mines
         for(Mine m: mines){
             out += m + "\n";
@@ -185,7 +187,7 @@ public class Grille {
             out += r + "\n";
         }
 
-        out += "|-------------------------|";
+        out += "|---------------------------|";
         return out;
     }
 }
