@@ -25,7 +25,8 @@ public class Game {
                 lstTrue[i] = true;
             }
 
-            while (!Arrays.equals(movedRobot, lstTrue)) {
+            boolean bool2 = true;
+            while (!Arrays.equals(movedRobot, lstTrue) && bool2) {
                 while (idRobots > grille.getNbRobot()) {
                     System.out.println("quel id de robots voulez vous déplacez : ");
                     Scanner nb1 = new Scanner(System.in);
@@ -82,7 +83,7 @@ public class Game {
                     }
                     else {
                         System.out.println("Fin du jeu");
-                        break;
+                        bool2 = false;
                     }
 
                 }
