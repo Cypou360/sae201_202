@@ -187,4 +187,8 @@ public class Grille {
         out.append("|---------------------------|");
         return out.toString();
     }
+
+    public Sector[][] getGrille() {
+        return grille;
+    }
 }
