@@ -1,4 +1,4 @@
-package fr.matthis.sae201_202;
+package fr.matthis.sae201_202.model;
 import java.util.Random;
 
 public class Robots {

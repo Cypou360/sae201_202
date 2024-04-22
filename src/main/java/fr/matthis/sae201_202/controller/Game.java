@@ -1,4 +1,8 @@
-package fr.matthis.sae201_202;
+package fr.matthis.sae201_202.controller;
+
+import fr.matthis.sae201_202.model.Entrepot;
+import fr.matthis.sae201_202.model.Grille;
+import fr.matthis.sae201_202.model.Mine;
 
 import java.util.Arrays;
 import java.util.Scanner;
