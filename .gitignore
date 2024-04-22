@@ -2,7 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-!**/src/main/java/fr/matthis/sae201_202/test.java
+./src/main/java/fr/matthis/sae201_202/test.java
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
