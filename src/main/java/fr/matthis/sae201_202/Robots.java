@@ -43,8 +43,7 @@ public class Robots {
     /* Permet d'extraire un minerai si la mine possède le minerai adéquat */
     public void extraction(Sector s) {
         if (!s.getDisponible()){
-            if (s instanceof Mine){
-                Mine m = (Mine) s;
+            if (s instanceof Mine m){
                 if (m.getMinerai() == type){
                     if (m.capacity > 0){
                         Random r = new Random();
@@ -103,8 +102,7 @@ public class Robots {
     /* Permet de déposer les minerais que possède le robot dans l'entrepot approprié */
     public void deposer(Sector s){
         if (!s.getDisponible()){
-            if (s instanceof Entrepot){
-                Entrepot e = (Entrepot) s;
+            if (s instanceof Entrepot e){
                 if (e.getType() == type){
                     if (capacity != 0){
                         e.capacity += capacity;
