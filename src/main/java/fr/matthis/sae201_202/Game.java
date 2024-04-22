@@ -10,7 +10,7 @@ public class Game {
         grille.initialisation();
         boolean bool = true;
         int nombre = 0;
-        int idRobots = 0;
+        int idRobots = grille.getNbRobot()+1;
         int nbtour = 1;
         System.out.println(grille);
         while (bool) {
@@ -26,19 +26,17 @@ public class Game {
             }
 
             while (!Arrays.equals(movedRobot, lstTrue)) {
-                System.out.println("quel id de robots voulez vous déplacez : ");
-                Scanner nb1 = new Scanner(System.in);
-                idRobots = nb1.nextInt();
+                while (idRobots > grille.getNbRobot()) {
+                    System.out.println("quel id de robots voulez vous déplacez : ");
+                    Scanner nb1 = new Scanner(System.in);
+                    idRobots = nb1.nextInt();
+                }
 
-                System.out.println("Robot " + idRobots);
-                System.out.println(Arrays.toString(movedRobot));
                 System.out.println("Donnez une direction: Droite(1), Gauche(2), Haut(3), Bas(4), Extraire(5), deposer(6), Ne rien faire(7) :");
                 Scanner nb = new Scanner(System.in);
                 nombre = nb.nextInt();
 
-                System.out.println(movedRobot[idRobots - 1]);
-                if (!movedRobot[idRobots - 1] || idRobots < grille.getNbRobot()) {
-                    System.out.println("Robot non bouger");
+                if (!movedRobot[idRobots - 1]) {
                     if (nombre == 1) {
                         if (!grille.getRobot(idRobots).goTo("E", grille)) {
                             System.out.println("Déplacement Impossible");
@@ -87,13 +85,12 @@ public class Game {
                         break;
                     }
 
-                } else {
-                    System.out.println("Robot déjà bouger");
                 }
+                idRobots = grille.getNbRobot()+1;
                 System.out.println(grille);
             }
 
-            if (nombre > 8 || idRobots > grille.getNbRobot()) {
+            if (nombre > 8) {
                 break;
             } else {
                 System.out.println("Tour fini");
