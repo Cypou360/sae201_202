@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Game {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Grille grille = new Grille();
         grille.initialisation();
         boolean bool = true;
@@ -91,7 +91,7 @@ public class Game {
             }
 
             if (nombre > 8) {
-                break;
+                bool = false;
             } else {
                 System.out.println("Tour fini");
                 nbtour++;
