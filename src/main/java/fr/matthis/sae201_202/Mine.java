@@ -31,18 +31,11 @@ public class Mine extends Sector {
 
     /* affiche toutes les informations sur la mine */
     public String toString() {
-        if (capacity < 100) {
-            if (minerai == Ore.gold) {
-                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + "   |";
-            } else {
-                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + "   |";
-            }
-        }else{
-            if (minerai == Ore.gold) {
-                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + " |";
-            } else {
-                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + " |";
-            }
+        if (minerai == Ore.gold) {
+            return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + " \t|";
+        }
+        else {
+            return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + " / " + maxCapacity + " \t|";
         }
     }
 

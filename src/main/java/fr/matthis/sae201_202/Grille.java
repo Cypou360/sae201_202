@@ -12,60 +12,59 @@ public class Grille {
         this.nbColonne = 10;
         grille = new Sector[nbLigne][nbColonne];
         robots = new ArrayList<>();
+        entrepots = new ArrayList<>();
+        mines = new ArrayList<>();
     }
 
-    private int nbLigne;
-    private int nbColonne;
-    private ArrayList<Robots> robots;
-    private Sector[][] grille;
-    private ArrayList<Entrepot> entrepots;
-    private ArrayList<Mine> mines;
+    private final int nbLigne;
+    private final int nbColonne;
+    private final ArrayList<Robots> robots;
+    private final Sector[][] grille;
+    private final ArrayList<Entrepot> entrepots;
+    private final ArrayList<Mine> mines;
 
     /* Permet d'afficher la grille dans la console */
     public String toString() {
-        String out = "";
-        out += "    0       1       2       3       4       5       6       7       8       9" + "\n";
-        String tmp = "/";
+        StringBuilder out = new StringBuilder();
+        out.append("    0       1       2       3       4       5       6       7       8       9" + "\n");
+        StringBuilder tmp = new StringBuilder("/");
         for (Sector[] s : grille) {
-            out += "+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n/";
+            out.append("+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n/");
             for (Sector ss : s) {
-                if (ss instanceof Mine) {
-                    Mine m = (Mine) ss;
-                    out += " " + m.getType() + " | " + m.getId() + " /";
+                if (ss instanceof Mine m) {
+                    out.append(" ").append(m.getType()).append(" | ").append(m.getId()).append(" /");
                     if (!m.getDisponible()) {
-                        tmp += " R | " + m.getRobot().getId() + " /";
+                        tmp.append(" R | ").append(m.getRobot().getId()).append(" /");
                     }
                     else {
-                        tmp += "   |   /";
+                        tmp.append("   |   /");
                     }
                 } else if (ss instanceof Lac) {
-                    out += " X | X /";
-                    tmp += " X | X /";
-                } else if (ss instanceof Entrepot) {
-                    Entrepot e = (Entrepot) ss;
-                    out += " " + e.getNom() + " | " + e.getId() + " /";
+                    out.append(" X | X /");
+                    tmp.append(" X | X /");
+                } else if (ss instanceof Entrepot e) {
+                    out.append(" ").append(e.getNom()).append(" | ").append(e.getId()).append(" /");
                     if (!e.getDisponible()) {
-                        tmp += " R | " + e.getRobot().getId() + " /";
+                        tmp.append(" R | ").append(e.getRobot().getId()).append(" /");
                     }
                     else {
-                        tmp += "   |   /";
+                        tmp.append("   |   /");
                     }
-                } else if (ss instanceof Vide) {
-                    out += "   |   /";
-                    Vide m = (Vide) ss;
+                } else if (ss instanceof Vide m) {
+                    out.append("   |   /");
                     if (!m.getDisponible()) {
-                        tmp += " R | " + m.getRobot().getId() + " /";
+                        tmp.append(" R | ").append(m.getRobot().getId()).append(" /");
                     }
                     else {
-                        tmp += "   |   /";
+                        tmp.append("   |   /");
                     }
                 }
             }
-            out += "\n" + tmp + "\n";
-            tmp = "/";
+            out.append("\n").append(tmp).append("\n");
+            tmp = new StringBuilder("/");
         }
-        out += "+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+";
-        return out;
+        out.append("+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+");
+        return out.toString();
     }
 
     /* Permet d'initialiser les différents secteurs */
@@ -170,22 +169,22 @@ public class Grille {
     }
 
     public String afficherRecap(){
-        String out = "";
-        out += "|-------------------------|\n";
+        StringBuilder out = new StringBuilder();
+        out.append("|---------------------------|\n");
         // génération affichage mines
         for(Mine m: mines){
-            out += m + "\n";
+            out.append(m).append("\n");
         }
         // génération affichage entrepots
         for(Entrepot e: entrepots){
-            out += e + "\n";
+            out.append(e).append("\n");
         }
         // génération affichage robots
         for (Robots r : robots) {
-            out += r + "\n";
+            out.append(r).append("\n");
         }
 
-        out += "|-------------------------|";
-        return out;
+        out.append("|---------------------------|");
+        return out.toString();
     }
 }
