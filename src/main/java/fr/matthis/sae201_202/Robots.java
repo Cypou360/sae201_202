@@ -45,17 +45,17 @@ public class Robots {
         if (!s.getDisponible()){
             if (s instanceof Mine m){
                 if (m.getMinerai() == type){
-                    if (m.capacity > 0){
+                    if (m.stockage > 0){
                         Random r = new Random();
                         int extraction = r.nextInt(1,4);
                         if (capacity <= maxCapacity - extraction){
-                            if (m.capacity >= extraction){
-                                m.capacity -= extraction;
+                            if (m.stockage >= extraction){
+                                m.stockage -= extraction;
                                 capacity += extraction;
                             }
                             else{
-                                capacity += m.capacity;
-                                m.capacity = 0;
+                                capacity += m.stockage;
+                                m.stockage = 0;
                             }
                         } else if (capacity == maxCapacity) {
                             System.out.println("Capcity trop elevée");
@@ -105,7 +105,7 @@ public class Robots {
             if (s instanceof Entrepot e){
                 if (e.getType() == type){
                     if (capacity != 0){
-                        e.capacity += capacity;
+                        e.stockage += capacity;
                         capacity = 0;
                     }
                 }

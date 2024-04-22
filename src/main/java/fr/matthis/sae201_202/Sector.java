@@ -3,22 +3,22 @@ package fr.matthis.sae201_202;
 public abstract class Sector {
 
     public Sector() {
-        this.maxCapacity = 0;
-        this.capacity = 0;
+        this.maxStockage = 0;
+        this.stockage = 0;
         this.robot = null;
         this.position = new Coordonnee(0, 0);
     }
 
     public Sector(int x, int y) {
-        this.maxCapacity = 0;
-        this.capacity = 0;
+        this.maxStockage = 0;
+        this.stockage = 0;
         this.robot = null;
         this.position = new Coordonnee(x, y);
     }
 
-    protected int maxCapacity;
+    protected int maxStockage;
 
-    protected int capacity;
+    protected int stockage;
 
     protected Robots robot;
 
@@ -50,7 +50,7 @@ public abstract class Sector {
         return this.position;
     }
 
-    public int getCapacity() {
-        return this.capacity;
+    public int getStockage() {
+        return this.stockage;
     }
 }

@@ -5,8 +5,8 @@ public class Entrepot extends Sector {
     public Entrepot() {
         this.type = null;
         this.position = new Coordonnee(0,0);
-        this.capacity = 0;
-        this.maxCapacity = 999999999;
+        this.stockage = 0;
+        this.maxStockage = 999999999;
         this.id = idCounter;
         idCounter++;
     }
@@ -14,8 +14,8 @@ public class Entrepot extends Sector {
         super();
         this.type = type;
         this.position = new Coordonnee(x,y);
-        this.capacity = 0;
-        this.maxCapacity = 999999999;
+        this.stockage = 0;
+        this.maxStockage = 999999999;
         this.id = idCounter;
         idCounter++;
     }
@@ -28,10 +28,10 @@ public class Entrepot extends Sector {
     /* Avoir toutes les infos sur les entrepots */
     public String toString() {
         if (type == Ore.gold) {
-            return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + "\t\t\t|";
+            return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + stockage + "\t\t\t|";
         }
         else{
-            return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + capacity + "\t\t\t|";
+            return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + stockage + "\t\t\t|";
         }
     }
 
