@@ -64,11 +64,20 @@ public class Game {
                             movedRobot[idRobots - 1] = true;
                         }
                     } else if (nombre == 5) {
-                        grille.getRobot(idRobots).extraction(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()));
-                        movedRobot[idRobots - 1] = true;
+                            if(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Mine){
+                                grille.getRobot(idRobots).extraction(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()));
+                                movedRobot[idRobots - 1] = true;
+                            }else{
+                                System.out.println("Pas possible car pas dans une mine");
+                            }
                     } else if(nombre == 6){
-                        grille.getRobot(idRobots).deposer(grille.getSector(grille.getRobot(idRobots).getPosition().getX(),grille.getRobot(idRobots).getPosition().getY()));
-                        movedRobot[idRobots - 1] = true;
+                        if(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Entrepot){
+                            grille.getRobot(idRobots).deposer(grille.getSector(grille.getRobot(idRobots).getPosition().getX(),grille.getRobot(idRobots).getPosition().getY()));
+                            movedRobot[idRobots - 1] = true;
+                        }else{
+                            System.out.println("Pas possible car pas sur un entrepôt");
+                        }
+
                     } else if (nombre == 7) {
                         System.out.println("Ne rien faire");
                         movedRobot[idRobots - 1] = true;
@@ -84,7 +93,7 @@ public class Game {
                 System.out.println(grille);
             }
 
-            if (nombre > 5 || idRobots > grille.getNbRobot()) {
+            if (nombre > 8 || idRobots > grille.getNbRobot()) {
                 break;
             } else {
                 System.out.println("Tour fini");
