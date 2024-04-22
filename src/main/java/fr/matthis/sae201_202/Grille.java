@@ -174,7 +174,7 @@ public class Grille {
         out += "|-------------------------|\n";
         // génération affichage mines
         for(Mine m: mines){
-            out += m + "\n";{
+            out += m + "\n";
         }
         // génération affichage entrepots
         for(Entrepot e: entrepots){
