@@ -3,6 +3,7 @@ package fr.matthis.sae201_202.controller;
 import fr.matthis.sae201_202.model.Entrepot;
 import fr.matthis.sae201_202.model.Grille;
 import fr.matthis.sae201_202.model.Mine;
+import fr.matthis.sae201_202.model.MovementException;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -43,10 +44,12 @@ public class Game {
 
                 if (!movedRobot[idRobots - 1]) {
                     if (nombre == 1) {
-                        if (!grille.getRobot(idRobots).goTo("E", grille)) {
-                            System.out.println("Déplacement Impossible");
-                        } else {
+                        try {
+                            grille.getRobot(idRobots).goTo("E",grille);
                             movedRobot[idRobots - 1] = true;
+                        }
+                        catch (MovementException) {
+                            System.out.println("Mouvement impossible");
                         }
                     } else if (nombre == 2) {
                         if (!grille.getRobot(idRobots).goTo("O", grille)) {
