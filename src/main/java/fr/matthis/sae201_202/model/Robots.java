@@ -69,33 +69,28 @@ public class Robots {
     }
 
     /* Permet au robot de se déplacer */
-    public boolean goTo(String orientation, Grille grille) {
+    public void goTo(String orientation, Grille grille) throws MovementException {
         if (orientation.equals("N") && position.getX() > 0 && grille.getSector(position.getX()-1, position.getY()).getDisponible()) {
             grille.getSector(position.getX(), position.getY()).setRobot(null);
             position.setX(position.getX()-1);
             grille.getSector(position.getX(), position.getY()).setRobot(this);
-            return true;
 
         } else if (orientation.equals("S") && position.getX() < grille.getNbLigne()-1 && grille.getSector(position.getX()+1, position.getY()).getDisponible()) {
             grille.getSector(position.getX(), position.getY()).setRobot(null);
             position.setX(position.getX()+1);
             grille.getSector(position.getX(), position.getY()).setRobot(this);
-            return true;
 
         } else if (orientation.equals("E") && position.getY() < grille.getNbColonne()-1 && grille.getSector(position.getX(), position.getY()+1).getDisponible()) {
             grille.getSector(position.getX(), position.getY()).setRobot(null);
             position.setY(position.getY()+1);
             grille.getSector(position.getX(), position.getY()).setRobot(this);
-            return true;
 
         } else if (orientation.equals("O") && position.getY() > 0 && grille.getSector(position.getX(), position.getY()-1).getDisponible()) {
             grille.getSector(position.getX(), position.getY()).setRobot(null);
             position.setY(position.getY()-1);
             grille.getSector(position.getX(), position.getY()).setRobot(this);
-            return true;
-
         } else {
-            return false;
+            throw new MovementException();
         }
     }
 
