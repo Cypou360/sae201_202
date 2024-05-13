@@ -1,9 +1,11 @@
 package fr.matthis.sae201_202.view;
 
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.Line;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class view1 extends Application {
@@ -13,14 +15,19 @@ public class view1 extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        Screen s= Screen.getPrimary();
+        Rectangle2D bounds = s.getVisualBounds();
+        double L = bounds.getWidth();
+        double H = bounds.getHeight() - 30;
+
         primaryStage.setTitle("Robot");
         Group root = new Group();
-        Scene scene = new Scene(root, 1920, 970);
+        Scene scene = new Scene(root, L, H);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         gridgen(root);
-
         primaryStage.show();
+
     }
 
     public void gridgen(Group g) {
