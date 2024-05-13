@@ -1,12 +1,8 @@
 package fr.matthis.sae201_202.controller;
 
-import fr.matthis.sae201_202.model.Entrepot;
-import fr.matthis.sae201_202.model.Grille;
-import fr.matthis.sae201_202.model.Mine;
-import fr.matthis.sae201_202.model.MovementException;
-
 import java.util.Arrays;
 import java.util.Scanner;
+import fr.matthis.sae201_202.model.*;
 
 public class Game {
 
@@ -42,48 +38,54 @@ public class Game {
                 Scanner nb = new Scanner(System.in);
                 nombre = nb.nextInt();
 
-                // choix de l'action
                 if (!movedRobot[idRobots - 1]) {
-                    try {
-                        if (nombre == 1) {
-                            grille.getRobot(idRobots).goTo("E", grille);
-                            movedRobot[idRobots - 1] = true;
-                        } else if (nombre == 2) {
-                            grille.getRobot(idRobots).goTo("O", grille);
-                            movedRobot[idRobots - 1] = true;
-                        } else if (nombre == 3) {
-                            grille.getRobot(idRobots).goTo("N", grille);
-                            movedRobot[idRobots - 1] = true;
-                        } else if (nombre == 4) {
-                            grille.getRobot(idRobots).goTo("S", grille);
-                            movedRobot[idRobots - 1] = true;
-                        } else if (nombre == 5) {
-                            if (grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Mine) {
-                                grille.getRobot(idRobots).extraction(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()));
-                                movedRobot[idRobots - 1] = true;
-                            } else {
-                                System.out.println("Pas possible car pas dans une mine");
-                            }
-                        } else if (nombre == 6) {
-                            if (grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Entrepot) {
-                                grille.getRobot(idRobots).deposer(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()));
-                                movedRobot[idRobots - 1] = true;
-                            } else {
-                                System.out.println("Pas possible car pas sur un entrepôt");
-                            }
-
-                        } else if (nombre == 7) {
-                            System.out.println("Ne rien faire");
-                            movedRobot[idRobots - 1] = true;
+                    if (nombre == 1) {
+                        if (!grille.getRobot(idRobots).goTo("E", grille)) {
+                            System.out.println("Déplacement Impossible");
                         } else {
-                            System.out.println("Fin du jeu");
-                            bool2 = false;
+                            movedRobot[idRobots - 1] = true;
                         }
-                    } catch(MovementException e){
-                            System.out.println("Mouvement impossible");
+                    } else if (nombre == 2) {
+                        if (!grille.getRobot(idRobots).goTo("O", grille)) {
+                            System.out.println("Déplacement Impossible");
+                        } else {
+                            movedRobot[idRobots - 1] = true;
                         }
-                    }
+                    } else if (nombre == 3) {
+                        if (!grille.getRobot(idRobots).goTo("N", grille)) {
+                            System.out.println("Déplacement Impossible");
+                        } else {
+                            movedRobot[idRobots - 1] = true;
+                        }
+                    } else if (nombre == 4) {
+                        if (!grille.getRobot(idRobots).goTo("S", grille)) {
+                            System.out.println("Déplacement Impossible");
+                        } else {
+                            movedRobot[idRobots - 1] = true;
+                        }
+                    } else if (nombre == 5) {
+                        if(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Mine){
+                            grille.getRobot(idRobots).extraction(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()));
+                            movedRobot[idRobots - 1] = true;
+                        }else{
+                            System.out.println("Pas possible car pas dans une mine");
+                        }
+                    } else if(nombre == 6){
+                        if(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Entrepot){
+                            grille.getRobot(idRobots).deposer(grille.getSector(grille.getRobot(idRobots).getPosition().getX(),grille.getRobot(idRobots).getPosition().getY()));
+                            movedRobot[idRobots - 1] = true;
+                        }else{
+                            System.out.println("Pas possible car pas sur un entrepôt");
+                        }
 
+                    } else if (nombre == 7) {
+                        System.out.println("Ne rien faire");
+                        movedRobot[idRobots - 1] = true;
+                    }
+                    else {
+                        System.out.println("Fin du jeu");
+                        bool2 = false;
+                    }
 
                 }
                 idRobots = grille.getNbRobot()+1;
@@ -98,6 +100,4 @@ public class Game {
             }
         }
     }
-
-
-
+}
