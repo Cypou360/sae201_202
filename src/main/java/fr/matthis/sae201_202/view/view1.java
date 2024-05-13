@@ -53,10 +53,15 @@ public class view1 extends Application {
         r.setFill(Color.WHITE);
         r.setStroke(Color.BLACK);
 
-        Line l = new Line(1150, 50, 1150, 760);
-        g.getChildren().addAll(r, l);
+        Line l = new Line(1150, 50, 1150, 200);
+        Line l2 = new Line(850, 200, 1450, 200);
+        Line l3 = new Line(850, 330, 1450, 330);
 
 
+
+
+
+        g.getChildren().addAll(r, l, l2, l3);
 
     }
 }
