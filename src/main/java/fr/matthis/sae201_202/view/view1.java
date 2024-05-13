@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -50,36 +51,61 @@ public class view1 extends Application {
                 if (ss instanceof Vide) {
                     Vide v = ((Vide) ss);
                     Coordonnee pos = v.getPosition();
-                    Rectangle r = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
                     r.setFill(Color.GREEN);
                     g.getChildren().add(r);
 
                 } else if (ss instanceof Entrepot) {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
-                    Rectangle r = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
                     r.setFill(Color.BROWN);
-                    String type = e.getType().toString();
-                    Text t = new Text(50 + pos.getX()*cellsize + 10, 50 + pos.getY()*cellsize + 10, type);
+
+                    String out = "E         " + e.getId();
+                    Text t1 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
+                    t1.setFont(new Font(20));
                     g.getChildren().add(r);
-                    g.getChildren().add(t);
+                    g.getChildren().add(t1);
 
                 } else if (ss instanceof Mine) {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
-                    Rectangle r = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
                     r.setFill(Color.GRAY);
+
+                    String out = "M         " + m.getId();
+                    Text t2 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
+                    t2.setFont(new Font(20));
                     g.getChildren().add(r);
+                    g.getChildren().add(t2);
 
                 } else if (ss instanceof Lac) {
                     Lac l = ((Lac) ss);
                     Coordonnee pos = l.getPosition();
-                    Rectangle r = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
                     r.setFill(Color.BLUE);
                     g.getChildren().add(r);
+                }else if(ss.getDisponible() ){
+                    //ajout des robots
+                    Robots r = ss.getRobot();
+                    Coordonnee pos = r.getPosition();
+                    Rectangle a = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    a.setFill(Color.BLACK);
+
+                    String out = "R         " + r.getId();
+                    Text t3 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
+                    t3.setFont(new Font(20));
+                    g.getChildren().add(a);
+                    g.getChildren().add(t3);
                 }
             }
+
         }
+
+
+
+
+
         // dessin de la grille
         for (int i = 0; i <= 10; i++) {
             Line l = new Line(prevX, 50, prevX, cellsize*10+50);
