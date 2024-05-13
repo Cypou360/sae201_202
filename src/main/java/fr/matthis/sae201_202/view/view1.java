@@ -18,20 +18,20 @@ public class view1 extends Application {
         Scene scene = new Scene(root, 1920, 970);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        gridgen(root);
+        gridgen(root, (int) scene.getWidth(), (int) scene.getHeight());
 
         primaryStage.show();
     }
 
-    public void gridgen(Group g) {
-        int prevX = 50;
-        int prevY = 50;
+    public void gridgen(Group g, int witdh, int height) {
+        int prevX = witdh - 1870;
+        int prevY = height - 920;
         for (int i = 0; i <= 10; i++) {
-            Line l = new Line(prevX, 50, prevX, 50+50*10);
+            Line l = new Line(prevX, 50, prevX, height-50);
             prevX += 50;
             g.getChildren().add(l);
 
-            Line l2 = new Line(50, prevY, 50+50*10, prevY);
+            Line l2 = new Line(50, prevY, witdh-50, prevY);
             prevY += 50;
             g.getChildren().add(l2);
         }
