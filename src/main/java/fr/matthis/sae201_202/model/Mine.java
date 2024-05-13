@@ -18,7 +18,7 @@ public class Mine extends Sector {
         super(x, y);
         Random r = new Random();
         this.maxStockage = r.nextInt(50,101);
-        this.stockage = this.maxStockage;
+        this.stockage = this.maxStockage - 4;
         this.minerai = m;
         this.id = idCounter;
         idCounter++;
@@ -32,10 +32,21 @@ public class Mine extends Sector {
     /* affiche toutes les informations sur la mine */
     public String toString() {
         if (minerai == Ore.gold) {
-            return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + stockage + " / " + maxStockage + " \t|";
+            if (this.stockage > 10){
+                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + stockage + " / " + maxStockage + " \t|";
+            }else{
+                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + stockage + " / " + maxStockage + " \t\t|";
+
+            }
         }
         else {
-            return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + stockage + " / " + maxStockage + " \t|";
+            if (this.stockage > 10){
+                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + stockage + " / " + maxStockage + " \t|";
+
+            }else{
+                return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + stockage + " / " + maxStockage + " \t\t|";
+
+            }
         }
     }
 
