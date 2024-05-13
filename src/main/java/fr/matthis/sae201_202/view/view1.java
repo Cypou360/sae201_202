@@ -4,10 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -17,22 +14,13 @@ import javafx.stage.Stage;
 
 import fr.matthis.sae201_202.model.*;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.text.Element;
-import javax.swing.text.html.ImageView;
-import java.awt.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.net.URL;
-
 public class view1 extends Application {
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws FileNotFoundException {
+    public void start(Stage primaryStage) {
 
         Grille grid = new Grille();
         grid.initialisation();
@@ -46,9 +34,6 @@ public class view1 extends Application {
         Scene scene = new Scene(root, width, height);
         primaryStage.setScene(scene);
         sideBar(root);
-        System.out.println(scene.getHeight());
-
-
         gridgen(root, (int) scene.getHeight(), grid);
 
         primaryStage.show();
@@ -67,31 +52,17 @@ public class view1 extends Application {
                     Vide v = ((Vide) ss);
                     Coordonnee pos = v.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-
-                    // Chargement de l'image
-                    Image image = new Image("file:///C:/Users/matthis/IdeaProjects/sae201_202/src/main/java/fr/matthis/sae201_202/view/img/herbe.jpg");
-
-
-                    // Utilisation de la texture d'image comme remplissage du rectangle
-                    ImagePattern pattern = new ImagePattern(image);
-                    r.setFill(pattern);
-
-
-
+                    r.setFill(Color.GREEN);
                     g.getChildren().add(r);
 
                 } else if (ss instanceof Entrepot) {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    r.setFill(Color.BROWN);
 
-                    Image image = new Image("file:///C:/Users/matthis/IdeaProjects/sae201_202/src/main/java/fr/matthis/sae201_202/view/img/Chest.png");
-
-                    ImagePattern pattern = new ImagePattern(image);
-                    r.setFill(pattern);
-
-                    //String out = "E    " + e.getId();
-                    Text t1 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25,"");
+                    String out = "E         " + e.getId();
+                    Text t1 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
                     t1.setFont(new Font(20));
                     g.getChildren().add(r);
                     g.getChildren().add(t1);
@@ -100,24 +71,10 @@ public class view1 extends Application {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    r.setFill(Color.GRAY);
 
-                    if (m.getType() == Ore.gold){
-                        Image image = new Image("file:///C:/Users/matthis/IdeaProjects/sae201_202/src/main/java/fr/matthis/sae201_202/view/img/Gold.jpg");
-
-
-                        ImagePattern pattern = new ImagePattern(image);
-                        r.setFill(pattern);
-                    }else{
-                        Image image = new Image("file:///C:/Users/matthis/IdeaProjects/sae201_202/src/main/java/fr/matthis/sae201_202/view/img/FEr.jpg");
-
-
-                        ImagePattern pattern = new ImagePattern(image);
-                        r.setFill(pattern);
-                    }
-
-
-                    //String out = "M   " + m.getId();
-                    Text t2 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, "");
+                    String out = "M         " + m.getId();
+                    Text t2 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
                     t2.setFont(new Font(20));
                     g.getChildren().add(r);
                     g.getChildren().add(t2);
@@ -126,13 +83,20 @@ public class view1 extends Application {
                     Lac l = ((Lac) ss);
                     Coordonnee pos = l.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-
-                    Image image = new Image("file:///C:/Users/matthis/IdeaProjects/sae201_202/src/main/java/fr/matthis/sae201_202/view/img/eau.jpg");
-
-
-                    ImagePattern pattern = new ImagePattern(image);
-                    r.setFill(pattern);
+                    r.setFill(Color.BLUE);
                     g.getChildren().add(r);
+                }else if(ss.getDisponible() ){
+                    //ajout des robots
+                    Robots r = ss.getRobot();
+                    Coordonnee pos = r.getPosition();
+                    Rectangle a = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    a.setFill(Color.BLACK);
+
+                    String out = "R         " + r.getId();
+                    Text t3 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
+                    t3.setFont(new Font(20));
+                    g.getChildren().add(a);
+                    g.getChildren().add(t3);
                 }
             }
         }
@@ -140,18 +104,9 @@ public class view1 extends Application {
         Robots[] robots = grille.getRobots();
         for (Robots r : robots) {
             Coordonnee pos = r.getPosition();
-            Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 80 + pos.getY()*cellsize, cellsize/2, cellsize/2);
-
-            Image image = new Image("file:///C:/Users/matthis/IdeaProjects/sae201_202/src/main/java/fr/matthis/sae201_202/view/img/Robot.jpg");
-
-
-            ImagePattern pattern = new ImagePattern(image);
-            ro.setFill(pattern);
-            //String out = "R    " + r.getId();
-            Text t3 = new Text(50 + pos.getX() * cellsize + 10, 80 + pos.getY() * cellsize + 25, "");
-            t3.setFont(new Font(20));
+            Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize, cellsize/2, cellsize/2);
+            ro.setFill(Color.RED);
             g.getChildren().add(ro);
-            g.getChildren().add(t3);
         }
         // dessin de la grille
         for (int i = 0; i <= 10; i++) {
