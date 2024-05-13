@@ -15,8 +15,9 @@ public class view1 extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Robot");
         Group root = new Group();
-        Scene scene = new Scene(root, 800, 800);
+        Scene scene = new Scene(root, 1920, 970);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         gridgen(root);
 
         primaryStage.show();
