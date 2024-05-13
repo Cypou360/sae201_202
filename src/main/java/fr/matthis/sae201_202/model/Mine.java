@@ -57,8 +57,8 @@ public class Mine extends Sector {
     }
 
     /* Permet de montrer le type de batiment (ici, une Mine) */
-    public String getType() {
-        return "M";
+    public Ore getType() {
+        return minerai;
     }
 
     /* Affiche l'ID de la Mine */
