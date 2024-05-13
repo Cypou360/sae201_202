@@ -4,9 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -27,7 +25,6 @@ public class view1 extends Application {
         Scene scene = new Scene(root, width, height);
         primaryStage.setScene(scene);
         gridgen(root, (int) scene.getHeight());
-        sideBar(root);
 
         primaryStage.show();
     }
@@ -46,17 +43,5 @@ public class view1 extends Application {
             prevY += cellsize;
             g.getChildren().add(l2);
         }
-    }
-
-    public void sideBar(Group g) {
-        Rectangle r = new Rectangle(850, 50, 600, 710);
-        r.setFill(Color.WHITE);
-        r.setStroke(Color.BLACK);
-
-        Line l = new Line(1150, 50, 1150, 760);
-        g.getChildren().addAll(r, l);
-
-
-
     }
 }
