@@ -43,55 +43,46 @@ public class Game {
                 nombre = nb.nextInt();
 
                 if (!movedRobot[idRobots - 1]) {
-                    if (nombre == 1) {
-                        try {
-                            grille.getRobot(idRobots).goTo("E",grille);
+                    try {
+                        if (nombre == 1) {
+                            grille.getRobot(idRobots).goTo("E", grille);
                             movedRobot[idRobots - 1] = true;
-                        }
-                        catch (MovementException) {
-                            System.out.println("Mouvement impossible");
-                        }
-                    } else if (nombre == 2) {
-                        if (!grille.getRobot(idRobots).goTo("O", grille)) {
-                            System.out.println("Déplacement Impossible");
-                        } else {
+                        } else if (nombre == 2) {
+                            grille.getRobot(idRobots).goTo("O", grille);
                             movedRobot[idRobots - 1] = true;
-                        }
-                    } else if (nombre == 3) {
-                        if (!grille.getRobot(idRobots).goTo("N", grille)) {
-                            System.out.println("Déplacement Impossible");
-                        } else {
+                        } else if (nombre == 3) {
+                            grille.getRobot(idRobots).goTo("N", grille);
                             movedRobot[idRobots - 1] = true;
-                        }
-                    } else if (nombre == 4) {
-                        if (!grille.getRobot(idRobots).goTo("S", grille)) {
-                            System.out.println("Déplacement Impossible");
-                        } else {
+                        } else if (nombre == 4) {
+                            grille.getRobot(idRobots).goTo("S", grille);
                             movedRobot[idRobots - 1] = true;
-                        }
-                    } else if (nombre == 5) {
-                            if(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Mine){
+                        } else if (nombre == 5) {
+                            if (grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Mine) {
                                 grille.getRobot(idRobots).extraction(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()));
                                 movedRobot[idRobots - 1] = true;
-                            }else{
+                            } else {
                                 System.out.println("Pas possible car pas dans une mine");
                             }
-                    } else if(nombre == 6){
-                        if(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Entrepot){
-                            grille.getRobot(idRobots).deposer(grille.getSector(grille.getRobot(idRobots).getPosition().getX(),grille.getRobot(idRobots).getPosition().getY()));
-                            movedRobot[idRobots - 1] = true;
-                        }else{
-                            System.out.println("Pas possible car pas sur un entrepôt");
-                        }
+                        } else if (nombre == 6) {
+                            if (grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Entrepot) {
+                                grille.getRobot(idRobots).deposer(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()));
+                                movedRobot[idRobots - 1] = true;
+                            } else {
+                                System.out.println("Pas possible car pas sur un entrepôt");
+                            }
 
-                    } else if (nombre == 7) {
-                        System.out.println("Ne rien faire");
-                        movedRobot[idRobots - 1] = true;
+                        } else if (nombre == 7) {
+                            System.out.println("Ne rien faire");
+                            movedRobot[idRobots - 1] = true;
+                        } else {
+                            System.out.println("Fin du jeu");
+                            bool2 = false;
+                        }
+                    } catch(MovementException e){
+                            System.out.println("Mouvement impossible");
+                        }
                     }
-                    else {
-                        System.out.println("Fin du jeu");
-                        bool2 = false;
-                    }
+
 
                 }
                 idRobots = grille.getNbRobot()+1;
@@ -106,6 +97,6 @@ public class Game {
             }
         }
     }
-}
+
 
 
