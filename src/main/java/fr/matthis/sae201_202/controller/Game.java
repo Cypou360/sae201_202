@@ -42,6 +42,7 @@ public class Game {
                 Scanner nb = new Scanner(System.in);
                 nombre = nb.nextInt();
 
+                // choix de l'action
                 if (!movedRobot[idRobots - 1]) {
                     try {
                         if (nombre == 1) {
