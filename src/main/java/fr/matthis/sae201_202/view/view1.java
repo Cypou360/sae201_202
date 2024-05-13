@@ -7,8 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import fr.matthis.sae201_202.model.*;
 
 public class view1 extends Application {
     public static void main(String[] args) {
@@ -18,6 +22,9 @@ public class view1 extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        Grille grid = new Grille();
+        grid.initialisation();
+
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
@@ -26,17 +33,82 @@ public class view1 extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, width, height);
         primaryStage.setScene(scene);
-        gridgen(root, (int) scene.getHeight());
         sideBar(root);
+        gridgen(root, (int) scene.getHeight(), grid);
 
         primaryStage.show();
     }
 
-    public void gridgen(Group g, int height) {
+    public void gridgen(Group g, int height, Grille grille) {
         int cellsize = (height-100)/10;
         int prevX = 50;
         int prevY = 50;
 
+        // dessin des Secteurs
+        Sector[][] grid = grille.getGrille();
+        for (Sector[] s : grid) {
+            for (Sector ss : s) {
+                if (ss instanceof Vide) {
+                    Vide v = ((Vide) ss);
+                    Coordonnee pos = v.getPosition();
+                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    r.setFill(Color.GREEN);
+                    g.getChildren().add(r);
+
+                } else if (ss instanceof Entrepot) {
+                    Entrepot e = ((Entrepot) ss);
+                    Coordonnee pos = e.getPosition();
+                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    r.setFill(Color.BROWN);
+
+                    String out = "E         " + e.getId();
+                    Text t1 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
+                    t1.setFont(new Font(20));
+                    g.getChildren().add(r);
+                    g.getChildren().add(t1);
+
+                } else if (ss instanceof Mine) {
+                    Mine m = ((Mine) ss);
+                    Coordonnee pos = m.getPosition();
+                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    r.setFill(Color.GRAY);
+
+                    String out = "M         " + m.getId();
+                    Text t2 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
+                    t2.setFont(new Font(20));
+                    g.getChildren().add(r);
+                    g.getChildren().add(t2);
+
+                } else if (ss instanceof Lac) {
+                    Lac l = ((Lac) ss);
+                    Coordonnee pos = l.getPosition();
+                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    r.setFill(Color.BLUE);
+                    g.getChildren().add(r);
+                }else if(ss.getDisponible() ){
+                    //ajout des robots
+                    Robots r = ss.getRobot();
+                    Coordonnee pos = r.getPosition();
+                    Rectangle a = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    a.setFill(Color.BLACK);
+
+                    String out = "R         " + r.getId();
+                    Text t3 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
+                    t3.setFont(new Font(20));
+                    g.getChildren().add(a);
+                    g.getChildren().add(t3);
+                }
+            }
+        }
+        // dessin des robots
+        Robots[] robots = grille.getRobots();
+        for (Robots r : robots) {
+            Coordonnee pos = r.getPosition();
+            Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize, cellsize/2, cellsize/2);
+            ro.setFill(Color.RED);
+            g.getChildren().add(ro);
+        }
+        // dessin de la grille
         for (int i = 0; i <= 10; i++) {
             Line l = new Line(prevX, 50, prevX, cellsize*10+50);
             prevX += cellsize;
