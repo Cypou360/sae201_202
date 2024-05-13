@@ -80,6 +80,14 @@ public class view1 extends Application {
                 }
             }
         }
+        // dessin des robots
+        Robots[] robots = grille.getRobots();
+        for (Robots r : robots) {
+            Coordonnee pos = r.getPosition();
+            Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize, cellsize/2, cellsize/2);
+            ro.setFill(Color.RED);
+            g.getChildren().add(ro);
+        }
         // dessin de la grille
         for (int i = 0; i <= 10; i++) {
             Line l = new Line(prevX, 50, prevX, cellsize*10+50);

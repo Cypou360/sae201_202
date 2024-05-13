@@ -191,4 +191,11 @@ public class Grille {
     public Sector[][] getGrille() {
         return grille;
     }
+    public Robots[] getRobots() {
+        Robots[] r = new Robots[robots.size()];
+        for (int i = 0; i < robots.size(); i++) {
+            r[i] = robots.get(i);
+        }
+        return r;
+    }
 }
