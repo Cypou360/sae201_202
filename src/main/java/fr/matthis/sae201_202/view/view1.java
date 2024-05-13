@@ -19,7 +19,17 @@ import javafx.scene.image.Image;
 
 import fr.matthis.sae201_202.model.*;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
 
 public class view1 extends Application {
     public static void main(String[] args) {
@@ -27,7 +37,7 @@ public class view1 extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
 
         Grille grid = new Grille();
         grid.initialisation();
@@ -46,7 +56,7 @@ public class view1 extends Application {
         primaryStage.show();
     }
 
-    public void gridgen(Group g, int height, Grille grille) {
+    public void gridgen(Group g, int height, Grille grille) throws MalformedURLException {
         int cellsize = (height-100)/10;
         int prevX = 50;
         int prevY = 50;
@@ -60,7 +70,7 @@ public class view1 extends Application {
                     Coordonnee pos = v.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
 
-                    Image image = new Image("file:///C:/Users/matthis/IdeaProjects/sae201_202/src/main/java/fr/matthis/sae201_202/view/herbe.jpg");
+                    Image image = new Image("file:///C:/../ressources/herbe.jpg");
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
                     g.getChildren().add(r);
@@ -69,9 +79,13 @@ public class view1 extends Application {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    Image image = new Image("file:///C:/Users/matthis/IdeaProjects/sae201_202/src/main/java/fr/matthis/sae201_202/view/Chest.png");
-                    ImagePattern pattern = new ImagePattern(image);
-                    r.setFill(pattern);
+
+
+                    URL imageUrl = new URL("https://github.com/Cypou360/sae201_202/blob/c73abf91b606d4497632ca16ec9a77f1aae83b30/src/main/resources/herbe.jpg");Image image = new Image("https://github.com/Cypou360/sae201_202/blob/c73abf91b606d4497632ca16ec9a77f1aae83b30/src/main/resources/herbe.jpg");
+                    System.out.println(imageUrl);
+                    image = new Image(imageUrl.toString());
+                    ImagePattern imagePattern = new ImagePattern(image);
+                    r.setFill(imagePattern);
 
                     String out = "E         " + e.getId();
                     Text t1 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
