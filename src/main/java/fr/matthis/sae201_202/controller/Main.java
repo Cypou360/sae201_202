@@ -1,6 +1,7 @@
 package fr.matthis.sae201_202.controller;
 
 import javafx.application.Application;
+import javafx.stage.Stage;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -8,7 +9,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(javafx.stage.Stage primaryStage) {
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("Robot");
         primaryStage.show();
     }

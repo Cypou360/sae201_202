@@ -11,4 +11,5 @@ module fr.matthis.sae201_202 {
     opens fr.matthis.sae201_202.model to javafx.fxml;
     exports fr.matthis.sae201_202.controller;
     opens fr.matthis.sae201_202.controller to javafx.fxml;
+    exports fr.matthis.sae201_202.view;
 }
