@@ -137,7 +137,7 @@ public class view1 extends Application {
         robot.setTranslateY(100);
         robot.setSpacing(10);
         ChoiceBox<String> cb = new ChoiceBox<>();
-        cb.getItems().addAll("Robot 1", "Robot 2", "Robot 3", "Robot 4", "Robot 5"
+        cb.getItems().addAll("Robot 1", "Robot 2", "Robot 3", "Robot 4", "Robot 5");
         cb.setValue("Selectionnez un robot");
         robot.getChildren().add(cb);
         
