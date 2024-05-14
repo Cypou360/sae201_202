@@ -116,15 +116,28 @@ public class view1 extends Application {
         for (Robots r : robots) {
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
+            Rectangle ro2 = new Rectangle(96 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
 
             if (r.getType() == Ore.gold){
                 Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
+                if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.gold)){
+                    Image image1 = new Image(view1.class.getResource("GoldPioche.jpg").openStream());
+                    ImagePattern pattern1 = new ImagePattern(image1);
+                    ro2.setFill(pattern1);
+                    g.getChildren().add(ro2);
+                }
             }else{
                 Image image = new Image(view1.class.getResource("alex.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
+                if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.nickel)){
+                    Image image1 = new Image(view1.class.getResource("FerPioche.jpg").openStream());
+                    ImagePattern pattern1 = new ImagePattern(image1);
+                    ro2.setFill(pattern1);
+                    g.getChildren().add(ro2);
+                }
             }
 
             String out = " " + r.getId();
