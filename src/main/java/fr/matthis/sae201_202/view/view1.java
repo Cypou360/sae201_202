@@ -140,7 +140,7 @@ public class view1 extends Application {
         cb.getItems().addAll("Robot 1", "Robot 2", "Robot 3", "Robot 4", "Robot 5");
         cb.setValue("Selectionnez un robot");
         robot.getChildren().add(cb);
-        
+
 
 
 
