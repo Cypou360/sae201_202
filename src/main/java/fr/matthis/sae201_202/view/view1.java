@@ -5,8 +5,10 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -54,7 +56,10 @@ public class view1 extends Application {
                     Vide v = ((Vide) ss);
                     Coordonnee pos = v.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    r.setFill(Color.GREEN);
+                    Image image = new Image(view1.class.getResource("herbe.jpg").openStream());
+                    ImagePattern pattern = new ImagePattern(image);
+                    r.setFill(pattern);
+                    g.getChildren().add(r);
                     g.getChildren().add(r);
 
                 } else if (ss instanceof Entrepot) {
