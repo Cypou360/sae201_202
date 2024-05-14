@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -125,10 +127,39 @@ public class view1 extends Application {
         r.setFill(Color.WHITE);
         r.setStroke(Color.BLACK);
 
-        Line l = new Line(1150, 50, 1150, 760);
-        g.getChildren().addAll(r, l);
+        VBox robot = new VBox();
+        robot.setTranslateX(860);
+        robot.setTranslateY(100);
+        robot.setSpacing(10);
+        ChoiceBox<String> cb = new ChoiceBox<>();
+        cb.getItems().addAll("Robot 1", "Robot 2", "Robot 3", "Robot 4", "Robot 5"
+        cb.setValue("Selectionnez un robot");
+        robot.getChildren().add(cb);
+        
 
 
+
+        Line l = new Line(1150, 50, 1150, 200);
+        Line l2 = new Line(850, 200, 1450, 200);
+        Line l3 = new Line(850, 330, 1450, 330);
+
+        Text t = new Text(860, 80, "Selectionnez un robot :");
+        t.setFont(new Font(20));
+
+        Text t2 = new Text(1160, 80, "Selectionnez une action :");
+        t2.setFont(new Font(20));
+
+        Text t3 = new Text(860, 230, "Selectionnez une direction :");
+        t3.setFont(new Font(20));
+
+        Text t4 = new Text(860, 360, "Récapitulatif :");
+        t4.setFont(new Font(20));
+
+
+        g.getChildren().addAll(r);
+        g.getChildren().addAll(t, t2, t3, t4);
+        g.getChildren().addAll(l, l2, l3);
+        g.getChildren().add(robot);
 
     }
 }
