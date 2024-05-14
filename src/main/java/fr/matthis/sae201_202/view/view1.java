@@ -115,7 +115,7 @@ public class view1 extends Application {
         Robots[] robots = grille.getRobots();
         for (Robots r : robots) {
             Coordonnee pos = r.getPosition();
-            Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 80 + pos.getY()*cellsize, cellsize/2, cellsize/2);
+            Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
 
             if (r.getType() == Ore.gold){
                 Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
