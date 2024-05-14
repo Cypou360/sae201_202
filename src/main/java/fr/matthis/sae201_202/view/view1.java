@@ -40,7 +40,7 @@ public class view1 extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, width, height);
         primaryStage.setScene(scene);
-        sideBar(root);
+        sideBar(root,(int) scene.getHeight(), (int) scene.getWidth());
         gridgen(root, (int) scene.getHeight(), grid);
 
         primaryStage.show();
@@ -148,8 +148,10 @@ public class view1 extends Application {
         }
     }
 
-    public void sideBar(Group g){
-        Rectangle r = new Rectangle(850, 50, 600, 710);
+    public void sideBar(Group g,int h,int w){
+        System.out.println(h);
+        System.out.println(w);
+        Rectangle r = new Rectangle(750, 50, w-800, h-110);
         r.setFill(Color.WHITE);
         r.setStroke(Color.BLACK);
 
