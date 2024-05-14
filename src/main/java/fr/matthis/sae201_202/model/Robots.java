@@ -128,4 +128,8 @@ public class Robots {
     public Coordonnee getPosition() {
         return position;
     }
+
+    public Ore getType() {
+        return type;
+    }
 }

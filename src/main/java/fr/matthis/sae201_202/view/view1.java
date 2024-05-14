@@ -68,15 +68,19 @@ public class view1 extends Application {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    Image image = new Image(view1.class.getResource("Chest.png").openStream());
-                    ImagePattern pattern = new ImagePattern(image);
-                    r.setFill(pattern);
 
-                    String out = "E   " + e.getId();
-                    Text t1 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
-                    t1.setFont(new Font(20));
+                    if (e.getType() == Ore.gold) {
+                        Image image = new Image(view1.class.getResource("ChestOr.png").openStream());
+                        ImagePattern pattern = new ImagePattern(image);
+                        r.setFill(pattern);
+                    }
+                    else{
+                        Image image = new Image(view1.class.getResource("ChestFer.png").openStream());
+                        ImagePattern pattern = new ImagePattern(image);
+                        r.setFill(pattern);
+                    }
+
                     g.getChildren().add(r);
-                    g.getChildren().add(t1);
 
                 } else if (ss instanceof Mine) {
                     Mine m = ((Mine) ss);
@@ -94,11 +98,7 @@ public class view1 extends Application {
                         r.setFill(pattern);
                     }
 
-                    String out = "M  " + m.getId();
-                    Text t2 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
-                    t2.setFont(new Font(20));
                     g.getChildren().add(r);
-                    g.getChildren().add(t2);
 
                 } else if (ss instanceof Lac) {
                     Lac l = ((Lac) ss);
@@ -116,10 +116,25 @@ public class view1 extends Application {
         for (Robots r : robots) {
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 80 + pos.getY()*cellsize, cellsize/2, cellsize/2);
-            Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
-            ImagePattern pattern = new ImagePattern(image);
-            ro.setFill(pattern);
+
+            if (r.getType() == Ore.gold){
+                Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
+                ImagePattern pattern = new ImagePattern(image);
+                ro.setFill(pattern);
+            }else{
+                Image image = new Image(view1.class.getResource("alex.jpg").openStream());
+                ImagePattern pattern = new ImagePattern(image);
+                ro.setFill(pattern);
+            }
+
+            String out = " " + r.getId();
+            Text t = new Text( 45 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
+            t.setFont(new Font(20));
+            t.setFill(Color.GOLD);
+
+
             g.getChildren().add(ro);
+            g.getChildren().add(t);
         }
         // dessin de la grille
         for (int i = 0; i <= 10; i++) {
