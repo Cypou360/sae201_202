@@ -18,13 +18,15 @@ import javafx.stage.Stage;
 
 import fr.matthis.sae201_202.model.*;
 
+import java.io.IOException;
+
 public class view1 extends Application {
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
 
         Grille grid = new Grille();
         grid.initialisation();
@@ -43,7 +45,7 @@ public class view1 extends Application {
         primaryStage.show();
     }
 
-    public void gridgen(Group g, int height, Grille grille) {
+    public void gridgen(Group g, int height, Grille grille) throws IOException {
         int cellsize = (height-100)/10;
         int prevX = 50;
         int prevY = 50;
@@ -60,15 +62,16 @@ public class view1 extends Application {
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
                     g.getChildren().add(r);
-                    g.getChildren().add(r);
 
                 } else if (ss instanceof Entrepot) {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    r.setFill(Color.BROWN);
+                    Image image = new Image(view1.class.getResource("Chest.png").openStream());
+                    ImagePattern pattern = new ImagePattern(image);
+                    r.setFill(pattern);
 
-                    String out = "E         " + e.getId();
+                    String out = "E   " + e.getId();
                     Text t1 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
                     t1.setFont(new Font(20));
                     g.getChildren().add(r);
@@ -78,9 +81,19 @@ public class view1 extends Application {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    r.setFill(Color.GRAY);
 
-                    String out = "M         " + m.getId();
+                    if (m.getMinerai() == Ore.gold) {
+                        Image image = new Image(view1.class.getResource("Gold.jpg").openStream());
+                        ImagePattern pattern = new ImagePattern(image);
+                        r.setFill(pattern);
+                    }
+                    else{
+                        Image image = new Image(view1.class.getResource("FEr.jpg").openStream());
+                        ImagePattern pattern = new ImagePattern(image);
+                        r.setFill(pattern);
+                    }
+
+                    String out = "M  " + m.getId();
                     Text t2 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
                     t2.setFont(new Font(20));
                     g.getChildren().add(r);
@@ -90,20 +103,10 @@ public class view1 extends Application {
                     Lac l = ((Lac) ss);
                     Coordonnee pos = l.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    r.setFill(Color.BLUE);
+                    Image image = new Image(view1.class.getResource("eau.jpg").openStream());
+                    ImagePattern pattern = new ImagePattern(image);
+                    r.setFill(pattern);
                     g.getChildren().add(r);
-                }else if(ss.getDisponible() ){
-                    //ajout des robots
-                    Robots r = ss.getRobot();
-                    Coordonnee pos = r.getPosition();
-                    Rectangle a = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    a.setFill(Color.BLACK);
-
-                    String out = "R         " + r.getId();
-                    Text t3 = new Text(50 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
-                    t3.setFont(new Font(20));
-                    g.getChildren().add(a);
-                    g.getChildren().add(t3);
                 }
             }
         }
@@ -111,8 +114,10 @@ public class view1 extends Application {
         Robots[] robots = grille.getRobots();
         for (Robots r : robots) {
             Coordonnee pos = r.getPosition();
-            Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize, cellsize/2, cellsize/2);
-            ro.setFill(Color.RED);
+            Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 80 + pos.getY()*cellsize, cellsize/2, cellsize/2);
+            Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
+            ImagePattern pattern = new ImagePattern(image);
+            ro.setFill(pattern);
             g.getChildren().add(ro);
         }
         // dessin de la grille
