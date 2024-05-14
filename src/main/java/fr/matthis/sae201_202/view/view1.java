@@ -40,7 +40,7 @@ public class view1 extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, width, height);
         primaryStage.setScene(scene);
-        sideBar(root,(int) scene.getHeight(), (int) scene.getWidth());
+        sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),grid);
         gridgen(root, (int) scene.getHeight(), grid);
 
         primaryStage.show();
@@ -161,7 +161,7 @@ public class view1 extends Application {
         }
     }
 
-    public void sideBar(Group g,int h,int w){
+    public void sideBar(Group g,int h,int w,Grille grille){
         System.out.println(h);
         System.out.println(w);
         Rectangle r = new Rectangle(750, 50, w-800, h-110);
@@ -178,7 +178,11 @@ public class view1 extends Application {
         ChoiceBox<String> cb = new ChoiceBox<>();
         cb.setPrefSize(200, 30);
         cb.setStyle("-fx-font: 15px \"None\";");
-        cb.getItems().addAll("Robot 1", "Robot 2", "Robot 3", "Robot 4", "Robot 5", "Robot 6");
+        Robots[] robots = grille.getRobots();
+        for (Robots ro: robots){
+            String out = "Robot " + ro.getId();
+            cb.getItems().add(out);
+        }
         cb.setValue("Selectionnez un robot");
         robot.getChildren().add(cb);
 
