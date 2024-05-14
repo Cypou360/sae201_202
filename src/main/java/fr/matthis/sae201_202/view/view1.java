@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
@@ -127,22 +128,61 @@ public class view1 extends Application {
         }
     }
 
-    public void sideBar(Group g) {
+    public void sideBar(Group g,Grille grille){
         Rectangle r = new Rectangle(850, 50, 600, 710);
         r.setFill(Color.WHITE);
         r.setStroke(Color.BLACK);
 
         VBox robot = new VBox();
         robot.setTranslateX(860);
-        robot.setTranslateY(100);
+        robot.setTranslateY(120);
         robot.setSpacing(10);
+
+
+
         ChoiceBox<String> cb = new ChoiceBox<>();
-        cb.getItems().addAll("Robot 1", "Robot 2", "Robot 3", "Robot 4", "Robot 5");
+        cb.setPrefSize(200, 30);
+        cb.setStyle("-fx-font: 15px \"None\";");
+        cb.getItems().addAll("Robot 1", "Robot 2", "Robot 3", "Robot 4", "Robot 5", "Robot 6");
         cb.setValue("Selectionnez un robot");
         robot.getChildren().add(cb);
 
+        Button b = new Button("Extraire");
+        b.setTranslateX(1160);
+        b.setTranslateY(120);
+        b.setPrefSize(90, 30);
+        b.setFont(new Font(15));
 
 
+        Button b2 = new Button("Déposer");
+        b2.setTranslateX(1300);
+        b2.setTranslateY(120);
+        b2.setPrefSize(90, 30);
+        b2.setFont(new Font(15));
+
+        Button d1 = new Button("Nord");
+        d1.setTranslateX(860);
+        d1.setTranslateY(260);
+        d1.setPrefSize(90, 30);
+        d1.setFont(new Font(15));
+
+        Button d2 = new Button("Sud");
+        d2.setTranslateX(980);
+        d2.setTranslateY(260);
+        d2.setPrefSize(90, 30);
+        d2.setFont(new Font(15));
+
+        Button d3 = new Button("Est");
+        d3.setTranslateX(1100);
+        d3.setTranslateY(260);
+        d3.setPrefSize(90, 30);
+        d3.setFont(new Font(15));
+
+        Button d4 = new Button("Ouest");
+        d4.setTranslateX(1220);
+        d4.setTranslateY(260);
+        d4.setPrefSize(90, 30);
+        d4.setFont(new Font(15));
 
         Line l = new Line(1150, 50, 1150, 200);
         Line l2 = new Line(850, 200, 1450, 200);
@@ -164,7 +204,8 @@ public class view1 extends Application {
         g.getChildren().addAll(r);
         g.getChildren().addAll(t, t2, t3, t4);
         g.getChildren().addAll(l, l2, l3);
-        g.getChildren().add(robot);
+        g.getChildren().addAll(robot,b,b2);
+        g.getChildren().addAll(d1,d2,d3,d4);
 
     }
 }
