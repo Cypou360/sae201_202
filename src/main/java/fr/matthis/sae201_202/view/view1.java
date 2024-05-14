@@ -22,10 +22,11 @@ import fr.matthis.sae201_202.model.*;
 import java.io.IOException;
 
 public class view1 extends Application {
+
+
     public static void main(String[] args) {
         launch(args);
     }
-
     @Override
     public void start(Stage primaryStage) throws IOException {
 
@@ -68,37 +69,57 @@ public class view1 extends Application {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r2 = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
 
                     if (e.getType() == Ore.gold) {
                         Image image = new Image(view1.class.getResource("ChestOr.png").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
+
+                        r2.setFill(pattern);
+                        eventManager ev=new eventManager();
+                        r2.setOnMouseClicked(ev);
                     }
                     else{
                         Image image = new Image(view1.class.getResource("ChestFer.png").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
+
+                        r2.setFill(pattern);
+                        eventManager ev=new eventManager();
+                        r2.setOnMouseClicked(ev);
                     }
 
                     g.getChildren().add(r);
+                    g.getChildren().add(r2);
 
                 } else if (ss instanceof Mine) {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r2 = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
 
                     if (m.getMinerai() == Ore.gold) {
                         Image image = new Image(view1.class.getResource("Gold.jpg").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
+
+                        r2.setFill(pattern);
+                        eventManager ev=new eventManager();
+                        r2.setOnMouseClicked(ev);
                     }
                     else{
                         Image image = new Image(view1.class.getResource("FEr.jpg").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
+
+                        r2.setFill(pattern);
+                        eventManager ev=new eventManager();
+                        r2.setOnMouseClicked(ev);
                     }
 
                     g.getChildren().add(r);
+                    g.getChildren().add(r2);
 
                 } else if (ss instanceof Lac) {
                     Lac l = ((Lac) ss);
@@ -119,7 +140,7 @@ public class view1 extends Application {
             Rectangle ro2 = new Rectangle(96 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
 
             if (r.getType() == Ore.gold){
-                Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
+                Image image = new Image(view1.class.getResource("Alex.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
                 if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.gold)){
@@ -129,7 +150,7 @@ public class view1 extends Application {
                     g.getChildren().add(ro2);
                 }
             }else{
-                Image image = new Image(view1.class.getResource("alex.jpg").openStream());
+                Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
                 if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.nickel)){
@@ -247,4 +268,6 @@ public class view1 extends Application {
         g.getChildren().addAll(d1,d2,d3,d4);
 
     }
+
+
 }
