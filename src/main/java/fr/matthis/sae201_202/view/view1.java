@@ -133,7 +133,7 @@ public class view1 extends Application {
         }
     }
 
-    public void sideBar(Group g,Grille grille){
+    public void sideBar(Group g){
         Rectangle r = new Rectangle(850, 50, 600, 710);
         r.setFill(Color.WHITE);
         r.setStroke(Color.BLACK);
