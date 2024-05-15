@@ -143,15 +143,16 @@ public class view1 extends Application {
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
             Rectangle ro2 = new Rectangle(96 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
-            Rectangle r2 = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
+            Rectangle r2 = new Rectangle(ro.getX(),ro.getY(),ro.getWidth(),ro.getHeight());
 
             if (r.getType() == Ore.gold){
                 Image image = new Image(view1.class.getResource("Alex.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
-                eventManager ev=new eventManager(grille);
+
+                r2.setFill(pattern);
+                EventRobot ev=new EventRobot(grille,r.getId());
                 r2.setOnMouseClicked(ev);
-                g.getChildren().add(r2);
                 if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.gold)){
                     Image image1 = new Image(view1.class.getResource("GoldPioche.jpg").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
@@ -163,9 +164,10 @@ public class view1 extends Application {
                 Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
-                eventManager ev=new eventManager(grille);
+
+                r2.setFill(pattern);
+                EventRobot ev=new EventRobot(grille,r.getId());
                 r2.setOnMouseClicked(ev);
-                g.getChildren().add(r2);
                 if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.nickel)){
                     Image image1 = new Image(view1.class.getResource("FerPioche.jpg").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
@@ -181,6 +183,7 @@ public class view1 extends Application {
 
 
             g.getChildren().add(ro);
+            g.getChildren().add(r2);
             g.getChildren().add(t);
         }
         // dessin de la grille

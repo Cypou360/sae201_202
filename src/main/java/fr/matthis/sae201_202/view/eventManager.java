@@ -59,22 +59,6 @@ public class eventManager implements EventHandler  {
 
         Sector ss = grid.getSector(x, y);
 
-        Robots[] robots = grid.getRobots();
-        for (Robots ro : robots) {
-            if (ro.getType() == Ore.gold) {
-                stage.setTitle("Robot d'or " + ro.getId());
-                Text lb = new Text("Minerai d'OR");
-                lb.setX(20);
-                lb.setY(20);
-                root.getChildren().add(lb);
-            } else {
-                stage.setTitle("Robot de Nickel " + ro.getId());
-                Text lb = new Text("Minerai de Nickel");
-                lb.setX(20);
-                lb.setY(20);
-                root.getChildren().add(lb);
-            }
-        }
 
 
         if (ss instanceof Mine) {
