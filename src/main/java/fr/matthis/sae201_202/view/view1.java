@@ -74,7 +74,7 @@ public class view1 extends Application {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    Rectangle r2 = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r2 = new Rectangle(r.getX(),r.getY(),r.getWidth(),r.getHeight());
 
                     if (e.getType() == Ore.gold) {
                         Image image = new Image(view1.class.getResource("ChestOr.png").openStream());
@@ -102,7 +102,7 @@ public class view1 extends Application {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    Rectangle r2 = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r2 = new Rectangle(r.getX(),r.getY(),r.getWidth(),r.getHeight());
 
                     if (m.getMinerai() == Ore.gold) {
                         Image image = new Image(view1.class.getResource("Gold.jpg").openStream());

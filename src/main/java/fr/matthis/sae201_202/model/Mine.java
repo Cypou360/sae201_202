@@ -18,7 +18,7 @@ public class Mine extends Sector {
         super(x, y);
         Random r = new Random();
         this.maxStockage = r.nextInt(50,101);
-        this.stockage = this.maxStockage - 4;
+        this.stockage = this.maxStockage;
         this.minerai = m;
         this.id = idCounter;
         idCounter++;
@@ -64,6 +64,10 @@ public class Mine extends Sector {
     /* Affiche l'ID de la Mine */
     public String getId() {
         return Integer.toString(id);
+    }
+
+    public String getmaxStockage(){
+        return Integer.toString(maxStockage);
     }
 
 }

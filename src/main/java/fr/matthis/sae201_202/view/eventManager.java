@@ -40,7 +40,7 @@ public class eventManager implements EventHandler  {
         Stage stage = new Stage();
 
         Group root = new Group();
-        Scene sc = new Scene(root, r.getX(), r.getY());
+        Scene sc = new Scene(root, r.getWidth()+300, r.getHeight()+10);
 
 
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
@@ -65,13 +65,17 @@ public class eventManager implements EventHandler  {
             // Ton code ici
             if (((Mine) ss).getType() == Ore.gold) {
                 stage.setTitle("Minerai d'or " + ((Mine) ss).getId());
-                Text lb = new Text("Minerai d'OR");
+                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + "/" + ((Mine) ss).getmaxStockage() + " Type: OR";
+                Text lb = new Text(out);
+                lb.setFont(new Font(20));
                 lb.setX(20);
                 lb.setY(20);
                 root.getChildren().add(lb);
             } else {
                 stage.setTitle("Minerai de Fer " + ((Mine) ss).getId());
-                Text lb = new Text("Minerai de Nickel");
+                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + "/" + ((Mine) ss).getmaxStockage() + " Type: NI";
+                Text lb = new Text(out);
+                lb.setFont(new Font(20));
                 lb.setX(20);
                 lb.setY(20);
                 root.getChildren().add(lb);
@@ -80,13 +84,17 @@ public class eventManager implements EventHandler  {
         } else if (ss instanceof Entrepot) {
             if (((Entrepot) ss).getType() == Ore.gold) {
                 stage.setTitle("Entrepot d'or " + ((Entrepot) ss).getId());
-                Text lb = new Text("Entrepot d'OR");
+                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + " Type: OR";
+                Text lb = new Text(out);
+                lb.setFont(new Font(20));
                 lb.setX(20);
                 lb.setY(20);
                 root.getChildren().add(lb);
             } else {
                 stage.setTitle("Entrepot de Fer " + ((Entrepot) ss).getId());
-                Text lb = new Text("Entrepot de Nickel");
+                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + " Type: NI";
+                Text lb = new Text(out);
+                lb.setFont(new Font(20));
                 lb.setX(20);
                 lb.setY(20);
                 root.getChildren().add(lb);
