@@ -35,11 +35,13 @@ public class eventManager implements EventHandler  {
     }
     @Override
     public void handle(Event e) {
+
         MouseEvent ev = ((MouseEvent) e);
         Rectangle r = (Rectangle) ev.getSource();
         Stage stage = new Stage();
-
+        stage.close();
         Group root = new Group();
+
         Scene sc = new Scene(root, r.getWidth()+300, r.getHeight()+10);
 
 
@@ -58,6 +60,9 @@ public class eventManager implements EventHandler  {
         System.out.println(y);
 
         Sector ss = grid.getSector(x, y);
+
+
+
 
 
 
@@ -105,6 +110,8 @@ public class eventManager implements EventHandler  {
         stage.setScene(sc);
         stage.setResizable(false);
         stage.show();
+
+        root.getChildren().removeAll();
 
         }
     }
