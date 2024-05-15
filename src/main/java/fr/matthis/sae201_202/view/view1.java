@@ -20,9 +20,11 @@ import javafx.stage.Stage;
 import fr.matthis.sae201_202.model.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class view1 extends Application {
 
+    private Sector[][] grid = new Grille().getGrille();
 
     public static void main(String[] args) {
         launch(args);
@@ -32,6 +34,9 @@ public class view1 extends Application {
 
         Grille grid = new Grille();
         grid.initialisation();
+
+
+
 
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
         double width = screenSize.getWidth();
@@ -77,7 +82,7 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev=new eventManager();
+                        eventManager ev=new eventManager(grille);
                         r2.setOnMouseClicked(ev);
                     }
                     else{
@@ -86,7 +91,7 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev=new eventManager();
+                        eventManager ev=new eventManager(grille);
                         r2.setOnMouseClicked(ev);
                     }
 
@@ -105,7 +110,7 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev=new eventManager();
+                        eventManager ev=new eventManager(grille);
                         r2.setOnMouseClicked(ev);
                     }
                     else{
@@ -114,7 +119,7 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev=new eventManager();
+                        eventManager ev=new eventManager(grille);
                         r2.setOnMouseClicked(ev);
                     }
 
@@ -138,21 +143,29 @@ public class view1 extends Application {
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
             Rectangle ro2 = new Rectangle(96 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
+            Rectangle r2 = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
 
             if (r.getType() == Ore.gold){
                 Image image = new Image(view1.class.getResource("Alex.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
+                eventManager ev=new eventManager(grille);
+                r2.setOnMouseClicked(ev);
+                g.getChildren().add(r2);
                 if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.gold)){
                     Image image1 = new Image(view1.class.getResource("GoldPioche.jpg").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
                     g.getChildren().add(ro2);
+
                 }
             }else{
                 Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
+                eventManager ev=new eventManager(grille);
+                r2.setOnMouseClicked(ev);
+                g.getChildren().add(r2);
                 if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.nickel)){
                     Image image1 = new Image(view1.class.getResource("FerPioche.jpg").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
