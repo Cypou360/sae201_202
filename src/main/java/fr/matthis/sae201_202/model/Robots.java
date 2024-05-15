@@ -132,4 +132,12 @@ public class Robots {
     public Ore getType() {
         return type;
     }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
 }
