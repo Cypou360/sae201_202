@@ -32,7 +32,7 @@ public class Grille {
             out.append("+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n/");
             for (Sector ss : s) {
                 if (ss instanceof Mine m) {
-                    out.append(" ").append(m.getType()).append(" | ").append(m.getId()).append(" /");
+                    out.append(" ").append("M").append(" | ").append(m.getId()).append(" /");
                     if (!m.getDisponible()) {
                         tmp.append(" R | ").append(m.getRobot().getId()).append(" /");
                     }
