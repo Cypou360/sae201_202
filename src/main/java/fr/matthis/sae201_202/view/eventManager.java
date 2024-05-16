@@ -59,7 +59,7 @@ public class eventManager implements EventHandler  {
         if (ss instanceof Mine) {
             // Ton code ici
             if (((Mine) ss).getType() == Ore.gold) {
-                stage.setTitle("Minerai d'or " + ((Mine) ss).getId());
+                stage.setTitle("Minerai d'Or " + ((Mine) ss).getId());
                 String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + "/" + ((Mine) ss).getmaxStockage() + " Type: OR";
                 Text lb = new Text(out);
                 lb.setFont(new Font(20));
@@ -67,7 +67,7 @@ public class eventManager implements EventHandler  {
                 lb.setY(20);
                 root.getChildren().add(lb);
             } else {
-                stage.setTitle("Minerai de Fer " + ((Mine) ss).getId());
+                stage.setTitle("Minerai de Nickel " + ((Mine) ss).getId());
                 String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + "/" + ((Mine) ss).getmaxStockage() + " Type: NI";
                 Text lb = new Text(out);
                 lb.setFont(new Font(20));
@@ -78,7 +78,7 @@ public class eventManager implements EventHandler  {
 
         } else if (ss instanceof Entrepot) {
             if (((Entrepot) ss).getType() == Ore.gold) {
-                stage.setTitle("Entrepot d'or " + ((Entrepot) ss).getId());
+                stage.setTitle("Entrepot d'Or " + ((Entrepot) ss).getId());
                 String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + " Type: OR";
                 Text lb = new Text(out);
                 lb.setFont(new Font(20));
@@ -86,7 +86,7 @@ public class eventManager implements EventHandler  {
                 lb.setY(20);
                 root.getChildren().add(lb);
             } else {
-                stage.setTitle("Entrepot de Fer " + ((Entrepot) ss).getId());
+                stage.setTitle("Entrepot de Nickel " + ((Entrepot) ss).getId());
                 String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + " Type: NI";
                 Text lb = new Text(out);
                 lb.setFont(new Font(20));
