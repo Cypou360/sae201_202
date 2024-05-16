@@ -12,7 +12,6 @@ public abstract class Info extends Stage {
     public Info() {
         super();
         this.setResizable(false);
-        this.setTitle(genTitle());
 
         this.root = new VBox();
         this.coord = new HBox();

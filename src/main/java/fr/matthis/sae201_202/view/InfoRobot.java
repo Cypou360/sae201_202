@@ -8,9 +8,11 @@ import javafx.scene.control.Label;
 public class InfoRobot extends Info {
     private Robots r;
 
-    public InfoRobot(Robots r) {
+    public InfoRobot(Robots ro) {
         super();
-        this.r = r;
+        this.setTitle(genTitle());
+        this.r = ro;
+        System.out.println(this.r);
         graphical();
         this.show();
     }
@@ -18,7 +20,7 @@ public class InfoRobot extends Info {
     private void graphical() {
         this.coord.getChildren().add(new Label(this.r.getPosition().toString()));
         Label type = new Label(genType());
-        String capT = "" + r.getCapacity() + " / " + r.getMaxCapacity();
+        String capT = "" + this.r.getCapacity() + " / " + this.r.getMaxCapacity();
         Label cap = new Label(capT);
 
         Button fermer = new Button("Fermer");
@@ -29,10 +31,10 @@ public class InfoRobot extends Info {
 
     @Override
     protected String genTitle() {
-        if (r.getType().equals(Ore.gold)) {
-            return "Robot d'or" + r.getId();
+        if (this.r.getType() == Ore.gold) {
+            return "Robot d'or" + this.r.getId();
         } else {
-            return "Robot de nickel" + r.getId();
+            return "Robot de nickel" + this.r.getId();
         }
     }
 

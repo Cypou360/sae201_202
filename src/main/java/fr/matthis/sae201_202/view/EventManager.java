@@ -46,8 +46,12 @@ public class EventManager implements EventHandler  {
                 int x = (int) ((v.getLayoutX())/p.getCellSize());
                 int y = (int) ((v.getLayoutY())/p.getCellSize());
                 Robots r = p.getGrid().getSector(x,y).getRobot();
-                System.out.println();
-                //new InfoRobot(r);
+
+                System.out.println("" + x + " " + y);
+
+                System.out.println(p.getGrid().getSector(x,y).getDisponible());
+                System.out.println(r);
+                new InfoRobot(r);
             }
         }
 
