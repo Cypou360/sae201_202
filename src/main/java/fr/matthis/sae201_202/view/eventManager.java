@@ -27,7 +27,6 @@ import java.nio.file.Paths;
 
 public class eventManager implements EventHandler  {
 
-
     private Grille grid;
 
     public eventManager(Grille grille) {
@@ -35,7 +34,6 @@ public class eventManager implements EventHandler  {
     }
     @Override
     public void handle(Event e) {
-
         MouseEvent ev = ((MouseEvent) e);
         Rectangle r = (Rectangle) ev.getSource();
         Stage stage = new Stage();
@@ -44,10 +42,8 @@ public class eventManager implements EventHandler  {
 
         Scene sc = new Scene(root, r.getWidth()+300, r.getHeight()+10);
 
-
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
         double height = screenSize.getHeight();
-
 
         int cellsize = (int) ((height - 100) / 10);
 
@@ -55,16 +51,10 @@ public class eventManager implements EventHandler  {
 
         int y = (int) (r.getY() / cellsize);
 
-
         System.out.println(x);
         System.out.println(y);
 
         Sector ss = grid.getSector(x, y);
-
-
-
-
-
 
         if (ss instanceof Mine) {
             // Ton code ici
