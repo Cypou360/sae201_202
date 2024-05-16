@@ -56,7 +56,7 @@ public class Main extends Stage {
         Scene scene = new Scene(root, width, height);
         this.setScene(scene);
 
-        gridgen(root, (int) scene.getHeight(), this.grid);
+        gridgen(root, this.grid);
         Rectangle espace = new Rectangle(50, height);
         espace.setFill(Color.WHITE);
         root.getChildren().add(espace);
@@ -69,7 +69,7 @@ public class Main extends Stage {
         this.getIcons().add(image);
     }
 
-    public void gridgen(HBox g, int height, Grille grille) throws IOException {
+    public void gridgen(HBox g, Grille grille) throws IOException {
         Group generalGrille = new Group();
         Group groupGrille = new Group();
         EventManager emgr = new EventManager(this);
