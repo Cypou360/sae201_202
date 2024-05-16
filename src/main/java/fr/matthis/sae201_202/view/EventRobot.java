@@ -13,6 +13,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 public class EventRobot implements EventHandler {
     private Grille grid;
     private int id;
@@ -28,7 +30,8 @@ public class EventRobot implements EventHandler {
         Stage stage = new Stage();
 
         Group root = new Group();
-        Scene sc = new Scene(root, r.getWidth()+300, r.getHeight()+20);
+        Scene sc = new Scene(root, r.getWidth()+300, r.getHeight()+70);
+
 
         Robots rob = grid.getRobot(id);
 
@@ -49,6 +52,8 @@ public class EventRobot implements EventHandler {
             lb.setY(20);
             root.getChildren().add(lb);
         }
+
+
         stage.setScene(sc);
         stage.setResizable(false);
         stage.show();
