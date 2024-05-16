@@ -34,7 +34,7 @@ public class infoCellule extends Stage {
 
         root.getChildren().addAll(coord, type, cap, fermer);
 
-        Scene s = new Scene(root);
+        Scene s = new Scene(root,200, 100);
         this.setScene(s);
     }
 

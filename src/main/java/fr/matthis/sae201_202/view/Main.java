@@ -22,18 +22,32 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Stage {
+
+    private int cellSize;
+    private Grille grid;
+
+    public int getCellSize() {
+        return cellSize;
+    }
+
+    public Grille getGrid() {
+        return grid;
+    }
+
     public Main() throws IOException {
         super();
         graphical();
         this.show();
     }
     private void graphical() throws IOException {
-        Grille grid = new Grille();
-        grid.initialisation();
+        this.grid = new Grille();
+        this.grid.initialisation();
 
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
+
+        this.cellSize = (int) ((height-100)/10);
 
         this.setTitle("Robot");
         this.setMaximized(true);
@@ -41,11 +55,11 @@ public class Main extends Stage {
         Scene scene = new Scene(root, width, height);
         this.setScene(scene);
 
-        gridgen(root, (int) scene.getHeight(), grid);
+        gridgen(root, (int) scene.getHeight(), this.grid);
         Rectangle espace = new Rectangle(50,height);
         espace.setFill(Color.WHITE);
         root.getChildren().add(espace);
-        sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),grid);
+        sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),this.grid);
 
         root.setLayoutY(50);
         root.setLayoutX(50);
@@ -56,7 +70,8 @@ public class Main extends Stage {
         Group groupGrille = new Group();
         eventManager emgr = new eventManager(this);
 
-        int cellsize = (height-100)/10;
+        groupGrille.setId("grille");
+
         int prevX = 0;
         int prevY = 0;
 
@@ -67,16 +82,17 @@ public class Main extends Stage {
                 if (ss instanceof Vide) {
                     Vide v = ((Vide) ss);
                     Coordonnee pos = v.getPosition();
-                    Rectangle r = new Rectangle(pos.getX() * cellsize, pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
                     Image image = new Image(launcher.class.getResource("herbe.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
                     groupGrille.getChildren().add(r);
+                    r.setOnMouseClicked(emgr);
 
                 } else if (ss instanceof Entrepot) {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
-                    Rectangle r = new Rectangle(pos.getX() * cellsize, pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
                     Rectangle r2 = new Rectangle(r.getX(),r.getY(),r.getWidth(),r.getHeight());
 
                     if (e.getType() == Ore.gold) {
@@ -102,7 +118,7 @@ public class Main extends Stage {
                 } else if (ss instanceof Mine) {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
-                    Rectangle r = new Rectangle(pos.getX() * cellsize,  pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle(pos.getX() * this.cellSize,  pos.getY() * this.cellSize, this.cellSize, this.cellSize);
                     Rectangle r2 = new Rectangle(r.getX(),r.getY(),r.getWidth(),r.getHeight());
 
                     if (m.getMinerai() == Ore.gold) {
@@ -128,11 +144,12 @@ public class Main extends Stage {
                 } else if (ss instanceof Lac) {
                     Lac l = ((Lac) ss);
                     Coordonnee pos = l.getPosition();
-                    Rectangle r = new Rectangle( pos.getX() * cellsize,  pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle( pos.getX() * this.cellSize,  pos.getY() * this.cellSize, this.cellSize, this.cellSize);
                     Image image = new Image(launcher.class.getResource("eau.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
                     groupGrille.getChildren().add(r);
+                    r.setOnMouseClicked(emgr);
                 }
             }
         }
@@ -143,8 +160,8 @@ public class Main extends Stage {
         for (Robots r : robots) {
             EventRobot ev=new EventRobot(grille,r,this);
             Coordonnee pos = r.getPosition();
-            Rectangle ro = new Rectangle(cellsize/2, cellsize/2); // steve ou alex
-            Rectangle ro2 = new Rectangle(cellsize/2, cellsize/2); // pioche
+            Rectangle ro = new Rectangle(this.cellSize/2, this.cellSize/2); // steve ou alex
+            Rectangle ro2 = new Rectangle(this.cellSize/2, this.cellSize/2); // pioche
 
             VBox robot = new VBox();
             HBox hRobot = new HBox();
@@ -176,24 +193,24 @@ public class Main extends Stage {
 
             String out = " " + r.getId();
             Text t = new Text(out);
-            t.setFont(new Font(cellsize/3+3));
+            t.setFont(new Font(this.cellSize/3+3));
             t.setFill(Color.GOLD);
 
-            hRobot.setLayoutY(cellsize/2);
+            hRobot.setLayoutY(this.cellSize/2);
             robot.getChildren().addAll(t,hRobot);
-            robot.setLayoutX(pos.getX()*cellsize);
-            robot.setLayoutY(pos.getY()*cellsize);
+            robot.setLayoutX(pos.getX()*this.cellSize);
+            robot.setLayoutY(pos.getY()*this.cellSize);
             groupRobot.getChildren().add(robot);
 
         }
         // dessin de la grille
         for (int i = 0; i <= 10; i++) {
-            Line l = new Line(prevX, 0, prevX, cellsize*10);
-            prevX += cellsize;
+            Line l = new Line(prevX, 0, prevX, this.cellSize*10);
+            prevX += this.cellSize;
             groupGrille.getChildren().add(l);
 
-            Line l2 = new Line(0, prevY, cellsize*10, prevY);
-            prevY += cellsize;
+            Line l2 = new Line(0, prevY, this.cellSize*10, prevY);
+            prevY += this.cellSize;
             groupGrille.getChildren().add(l2);
         }
 
