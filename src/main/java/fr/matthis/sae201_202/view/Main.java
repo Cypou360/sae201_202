@@ -336,17 +336,23 @@ public class Main extends Stage {
         Robots [] robots = grid.getRobots();
         for (Robots r : robots){
             HBox robotInfo = new HBox();
-            Rectangle r3 = new Rectangle();
-            Image image = new Image(Main.class.getResource("Steve.jpg").openStream());
-            Label robotId = new Label("Robot ID: " + r.getId() + " | ");
-            Label position = new Label(" X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY()+ "\t| ");
-            Label capacity = new Label(" Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity()+ "\t| ");
-            Label type = new Label(" Type: " + r.getType());
-            ImagePattern pattern = new ImagePattern(image);
-            r3.setFill(pattern);
+            Rectangle r3 = new Rectangle(20, 20);
+            if(r.getType() == Ore.gold) {
+                Image image = new Image(Main.class.getResource("Steve.jpg").openStream());
+                Label position = new Label(" Robot ID: " + r.getId() + " | "+" X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "OR");
+                ImagePattern pattern = new ImagePattern(image);
+                r3.setFill(pattern);
+                robotInfo.getChildren().addAll(r3 ,position);
+                recap.getChildren().add(robotInfo);
+            }else{
+                Image image = new Image(Main.class.getResource("Alex.jpg").openStream());
+                Label position = new Label(" Robot ID: " + r.getId() + " | "+" X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "NI");
+                ImagePattern pattern = new ImagePattern(image);
+                r3.setFill(pattern);
+                robotInfo.getChildren().addAll(r3 ,position);
+                recap.getChildren().add(robotInfo);
+            }
 
-            robotInfo.getChildren().addAll(r3 ,robotId, position, capacity, type);
-            recap.getChildren().add(robotInfo);
         }
         return recap;
     }

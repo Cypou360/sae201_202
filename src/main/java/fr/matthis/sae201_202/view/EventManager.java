@@ -26,7 +26,6 @@ public class EventManager implements EventHandler  {
                 new infoCellule(s);
             }
         }
-
     }
 }
 
