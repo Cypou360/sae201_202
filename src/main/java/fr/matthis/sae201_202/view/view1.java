@@ -48,12 +48,15 @@ public class view1 extends Application {
         Scene scene = new Scene(root, width, height);
         primaryStage.setScene(scene);
         sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),grid);
-        gridgen(root, (int) scene.getHeight(), grid);
+        Stage stageRobot = new Stage();
+        gridgen(root, (int) scene.getHeight(), grid, stageRobot);
 
         primaryStage.show();
     }
 
-    public void gridgen(Group g, int height, Grille grille) throws IOException {
+    public void gridgen(Group g, int height, Grille grille, Stage stage) throws IOException {
+        Group groupGrille = new Group();
+        eventManager evGrille = new eventManager(grille);
         int cellsize = (height-100)/10;
         int prevX = 50;
         int prevY = 50;
@@ -69,7 +72,7 @@ public class view1 extends Application {
                     Image image = new Image(view1.class.getResource("herbe.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
-                    g.getChildren().add(r);
+                    groupGrille.getChildren().add(r);
 
                 } else if (ss instanceof Entrepot) {
                     Entrepot e = ((Entrepot) ss);
@@ -83,8 +86,7 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev=new eventManager(grille);
-                        r2.setOnMouseClicked(ev);
+                        r2.setOnMouseClicked(evGrille);
                     }
                     else{
                         Image image = new Image(view1.class.getResource("ChestFer.png").openStream());
@@ -92,12 +94,11 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev=new eventManager(grille);
-                        r2.setOnMouseClicked(ev);
+                        r2.setOnMouseClicked(evGrille);
                     }
 
-                    g.getChildren().add(r);
-                    g.getChildren().add(r2);
+                    groupGrille.getChildren().add(r);
+                    groupGrille.getChildren().add(r2);
 
                 } else if (ss instanceof Mine) {
                     Mine m = ((Mine) ss);
@@ -111,8 +112,7 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev=new eventManager(grille);
-                        r2.setOnMouseClicked(ev);
+                        r2.setOnMouseClicked(evGrille);
                     }
                     else{
                         Image image = new Image(view1.class.getResource("FEr.jpg").openStream());
@@ -120,12 +120,11 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev=new eventManager(grille);
-                        r2.setOnMouseClicked(ev);
+                        r2.setOnMouseClicked(evGrille);
                     }
 
-                    g.getChildren().add(r);
-                    g.getChildren().add(r2);
+                    groupGrille.getChildren().add(r);
+                    groupGrille.getChildren().add(r2);
 
                 } else if (ss instanceof Lac) {
                     Lac l = ((Lac) ss);
@@ -134,13 +133,15 @@ public class view1 extends Application {
                     Image image = new Image(view1.class.getResource("eau.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
-                    g.getChildren().add(r);
+                    groupGrille.getChildren().add(r);
                 }
             }
         }
+        Group groupRobot = new Group();
         // dessin des robots
         Robots[] robots = grille.getRobots();
         for (Robots r : robots) {
+            EventRobot ev=new EventRobot(grille,r,stage,groupRobot);
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
             Rectangle ro2 = new Rectangle(96 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
@@ -152,7 +153,6 @@ public class view1 extends Application {
                 ro.setFill(pattern);
 
                 r2.setFill(pattern);
-                EventRobot ev=new EventRobot(grille,r.getId());
                 r2.setOnMouseClicked(ev);
                 if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.gold)){
                     Image image1 = new Image(view1.class.getResource("GoldPioche.jpg").openStream());
@@ -167,7 +167,6 @@ public class view1 extends Application {
                 ro.setFill(pattern);
 
                 r2.setFill(pattern);
-                EventRobot ev=new EventRobot(grille,r.getId());
                 r2.setOnMouseClicked(ev);
                 if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.nickel)){
                     Image image1 = new Image(view1.class.getResource("FerPioche.jpg").openStream());
@@ -181,22 +180,24 @@ public class view1 extends Application {
             Text t = new Text( 45 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
             t.setFont(new Font(20));
             t.setFill(Color.GOLD);
+            groupRobot.getChildren().add(ro);
+            groupRobot.getChildren().add(r2);
+            groupRobot.getChildren().add(t);
+}
+        g.getChildren().add(groupRobot);
 
 
-            g.getChildren().add(ro);
-            g.getChildren().add(r2);
-            g.getChildren().add(t);
-        }
         // dessin de la grille
         for (int i = 0; i <= 10; i++) {
             Line l = new Line(prevX, 50, prevX, cellsize*10+50);
             prevX += cellsize;
-            g.getChildren().add(l);
+            groupGrille.getChildren().add(l);
 
             Line l2 = new Line(50, prevY, cellsize*10+50, prevY);
             prevY += cellsize;
-            g.getChildren().add(l2);
+            groupGrille.getChildren().add(l2);
         }
+        g.getChildren().add(groupGrille);
     }
 
     public void sideBar(Group g,int h,int w,Grille grille){
