@@ -83,7 +83,7 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev=new eventManager(grille);
+                        eventManager ev =new eventManager(grille);
                         r2.setOnMouseClicked(ev);
                     }
                     else{
@@ -115,7 +115,7 @@ public class view1 extends Application {
                         r2.setOnMouseClicked(ev);
                     }
                     else{
-                        Image image = new Image(view1.class.getResource("FEr.jpg").openStream());
+                        Image image = new Image(view1.class.getResource("Fer.jpg").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
 
@@ -200,9 +200,11 @@ public class view1 extends Application {
     }
 
     public void sideBar(Group g,int h,int w,Grille grille){
-        System.out.println(h);
-        System.out.println(w);
-        Rectangle r = new Rectangle(750, 50, w-800, h-110);
+        Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+        double sidebarWidth = screenSize.getWidth() * 0.4;
+        double sidebarHeight = screenSize.getHeight();
+
+        Rectangle r = new Rectangle(850, 50, sidebarWidth, sidebarHeight-110);
         r.setFill(Color.WHITE);
         r.setStroke(Color.BLACK);
 
@@ -210,8 +212,6 @@ public class view1 extends Application {
         robot.setTranslateX(860);
         robot.setTranslateY(120);
         robot.setSpacing(10);
-
-
 
         ChoiceBox<String> cb = new ChoiceBox<>();
         cb.setPrefSize(200, 30);
@@ -229,7 +229,6 @@ public class view1 extends Application {
         b.setTranslateY(120);
         b.setPrefSize(90, 30);
         b.setFont(new Font(15));
-
 
         Button b2 = new Button("Déposer");
         b2.setTranslateX(1300);
@@ -277,13 +276,11 @@ public class view1 extends Application {
         Text t4 = new Text(860, 360, "Récapitulatif :");
         t4.setFont(new Font(20));
 
-
         g.getChildren().addAll(r);
         g.getChildren().addAll(t, t2, t3, t4);
         g.getChildren().addAll(l, l2, l3);
         g.getChildren().addAll(robot,b,b2);
         g.getChildren().addAll(d1,d2,d3,d4);
-
     }
 
 
