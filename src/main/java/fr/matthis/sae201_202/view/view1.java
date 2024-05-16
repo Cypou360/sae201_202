@@ -51,6 +51,9 @@ public class view1 extends Application {
         primaryStage.setScene(scene);
         Stage stageRobot = new Stage();
         gridgen(root, (int) scene.getHeight(), grid, stageRobot);
+        Rectangle espace = new Rectangle(50,height);
+        espace.setFill(Color.WHITE);
+        root.getChildren().add(espace);
         sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),grid);
 
         root.setLayoutY(50);
