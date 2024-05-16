@@ -214,12 +214,15 @@ public class view1 extends Application {
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
+        Group line = new Group();
+        Line l = new Line(1150, 50, 1150, 200);
+        Line l2 = new Line(850, 200, 1450, 200);
+        Line l3 = new Line(850, 330, 1450, 330);
+        line.getChildren().addAll(l,l2,l3);
 
-
-       Group robot = new Group();
-       robot.setTranslateX(860);
-       robot.setTranslateY(120);
-
+        Group robot = new Group();
+        robot.setTranslateX(860);
+        robot.setTranslateY(120);
 
         ChoiceBox<String> cb = new ChoiceBox<>();
         cb.setPrefSize(200, 30);
@@ -228,71 +231,74 @@ public class view1 extends Application {
         for (Robots ro: robots){
             String out = "Robot " + ro.getId();
             cb.getItems().add(out);
-        }
+            }
         cb.setValue("Selectionnez un robot");
         robot.getChildren().add(cb);
 
         Label label = new Label("Selectionnez un robot");
         label.setFont(new Font(20));
         label.setTranslateX(0);
-        label.setTranslateY(-50);
+        label.setTranslateY(-60);
         robot.getChildren().add(label);
 
-        /*Button b = new Button("Extraire");
-        b.setTranslateX(1160);
-        b.setTranslateY(120);
-        b.setPrefSize(90, 30);
-        b.setFont(new Font(15));
-
+        Group action = new Group();
+        Button b = new Button("Extraire");
         Button b2 = new Button("Déposer");
-        b2.setTranslateX(1300);
-        b2.setTranslateY(120);
+        b.setStyle("-fx-font: 15px \"None\";");
+        b.setPrefSize(90, 30);
+        b2.setStyle("-fx-font: 15px \"None\";");
         b2.setPrefSize(90, 30);
-        b2.setFont(new Font(15));
+        Label text = new Label("Selectionnez une action :");
+        text.setFont(new Font(20));
+        action.setTranslateX(1160);
+        action.setTranslateY(60);
+        b.setTranslateY(60);
+        b2.setTranslateY(60);
+        b2.setTranslateX(150);
+
+        action.getChildren().addAll(b,b2,text);
+
+
+        Group direction = new Group();
+        Label text2 = new Label("Selectionnez une direction :");
+        text2.setFont(new Font(20));
+        text2.setTranslateX(860);
+        text2.setTranslateY(210);
+
 
         Button d1 = new Button("Nord");
-        d1.setTranslateX(860);
-        d1.setTranslateY(260);
         d1.setPrefSize(90, 30);
         d1.setFont(new Font(15));
+        d1.setTranslateX(860);
+        d1.setTranslateY(250);
 
         Button d2 = new Button("Sud");
-        d2.setTranslateX(980);
-        d2.setTranslateY(260);
         d2.setPrefSize(90, 30);
         d2.setFont(new Font(15));
+        d2.setTranslateX(960);
+        d2.setTranslateY(250);
 
         Button d3 = new Button("Est");
-        d3.setTranslateX(1100);
-        d3.setTranslateY(260);
         d3.setPrefSize(90, 30);
         d3.setFont(new Font(15));
+        d3.setTranslateX(1060);
+        d3.setTranslateY(250);
 
         Button d4 = new Button("Ouest");
-        d4.setTranslateX(1220);
-        d4.setTranslateY(260);
         d4.setPrefSize(90, 30);
         d4.setFont(new Font(15));
+        d4.setTranslateX(1160);
+        d4.setTranslateY(250);
+        direction.getChildren().addAll(text2,d1,d2,d3,d4);
 
-        Line l = new Line(1150, 50, 1150, 200);
-        Line l2 = new Line(850, 200, 1450, 200);
-        Line l3 = new Line(850, 330, 1450, 330);
 
-        Text t = new Text(860, 80, "Selectionnez un robot :");
-        t.setFont(new Font(20));
-
-        Text t2 = new Text(1160, 80, "Selectionnez une action :");
-        t2.setFont(new Font(20));
-
-        Text t3 = new Text(860, 230, "Selectionnez une direction :");
-        t3.setFont(new Font(20));
-
-        Text t4 = new Text(860, 360, "Récapitulatif :");
-        t4.setFont(new Font(20));*/
 
         g.getChildren().add(sidebar);
-        sidebar.getChildren().addAll(rectangle);
-        sidebar.getChildren().addAll(robot);
+        sidebar.getChildren().add(rectangle);
+        sidebar.getChildren().add(robot);
+        sidebar.getChildren().add(line);
+        sidebar.getChildren().add(action);
+        sidebar.getChildren().add(direction);
     }
 
 
