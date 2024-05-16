@@ -79,7 +79,7 @@ public class eventManager implements EventHandler  {
         } else if (ss instanceof Entrepot) {
             if (((Entrepot) ss).getType() == Ore.gold) {
                 stage.setTitle("Entrepot d'or " + ((Entrepot) ss).getId());
-                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + " Type: OR";
+                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + " Type: NI";
                 Text lb = new Text(out);
                 lb.setFont(new Font(20));
                 lb.setX(20);
@@ -87,7 +87,7 @@ public class eventManager implements EventHandler  {
                 root.getChildren().add(lb);
             } else {
                 stage.setTitle("Entrepot de Fer " + ((Entrepot) ss).getId());
-                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + " Type: NI";
+                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + " Type: OR";
                 Text lb = new Text(out);
                 lb.setFont(new Font(20));
                 lb.setX(20);
