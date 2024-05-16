@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -201,18 +202,18 @@ public class view1 extends Application {
     }
 
     public void sideBar(Group g,int h,int w,Grille grille){
-        Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-        double sidebarWidth = screenSize.getWidth() * 0.4;
-        double sidebarHeight = screenSize.getHeight();
 
-        Rectangle r = new Rectangle(850, 50, sidebarWidth, sidebarHeight-110);
-        r.setFill(Color.WHITE);
-        r.setStroke(Color.BLACK);
+        Group sidebar = new Group();
+        Rectangle rectangle = new Rectangle(850,50,600,720);
+        rectangle.setFill(Color.WHITE);
+        rectangle.setStroke(Color.BLACK);
 
-        VBox robot = new VBox();
-        robot.setTranslateX(860);
-        robot.setTranslateY(120);
-        robot.setSpacing(10);
+
+
+       Group robot = new Group();
+       robot.setTranslateX(860);
+       robot.setTranslateY(120);
+
 
         ChoiceBox<String> cb = new ChoiceBox<>();
         cb.setPrefSize(200, 30);
@@ -225,7 +226,13 @@ public class view1 extends Application {
         cb.setValue("Selectionnez un robot");
         robot.getChildren().add(cb);
 
-        Button b = new Button("Extraire");
+        Label label = new Label("Selectionnez un robot");
+        label.setFont(new Font(20));
+        label.setTranslateX(0);
+        label.setTranslateY(-50);
+        robot.getChildren().add(label);
+
+        /*Button b = new Button("Extraire");
         b.setTranslateX(1160);
         b.setTranslateY(120);
         b.setPrefSize(90, 30);
@@ -275,13 +282,11 @@ public class view1 extends Application {
         t3.setFont(new Font(20));
 
         Text t4 = new Text(860, 360, "Récapitulatif :");
-        t4.setFont(new Font(20));
+        t4.setFont(new Font(20));*/
 
-        g.getChildren().addAll(r);
-        g.getChildren().addAll(t, t2, t3, t4);
-        g.getChildren().addAll(l, l2, l3);
-        g.getChildren().addAll(robot,b,b2);
-        g.getChildren().addAll(d1,d2,d3,d4);
+        g.getChildren().add(sidebar);
+        sidebar.getChildren().addAll(rectangle);
+        sidebar.getChildren().addAll(robot);
     }
 
 
