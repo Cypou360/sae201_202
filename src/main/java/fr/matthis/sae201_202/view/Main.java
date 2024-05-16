@@ -39,6 +39,7 @@ public class Main extends Stage {
         graphical();
         this.show();
     }
+
     private void graphical() throws IOException {
         this.grid = new Grille();
         this.grid.initialisation();
@@ -47,7 +48,7 @@ public class Main extends Stage {
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
 
-        this.cellSize = (int) ((height-100)/10);
+        this.cellSize = (int) ((height - 100) / 10);
 
         this.setTitle("Robot");
         this.setMaximized(true);
@@ -56,10 +57,10 @@ public class Main extends Stage {
         this.setScene(scene);
 
         gridgen(root, (int) scene.getHeight(), this.grid);
-        Rectangle espace = new Rectangle(50,height);
+        Rectangle espace = new Rectangle(50, height);
         espace.setFill(Color.WHITE);
         root.getChildren().add(espace);
-        sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),this.grid);
+        sideBar(root, (int) scene.getHeight(), (int) scene.getWidth(), this.grid);
 
         root.setLayoutY(50);
         root.setLayoutX(50);
@@ -93,7 +94,7 @@ public class Main extends Stage {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
                     Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
-                    Rectangle r2 = new Rectangle(r.getX(),r.getY(),r.getWidth(),r.getHeight());
+                    Rectangle r2 = new Rectangle(r.getX(), r.getY(), r.getWidth(), r.getHeight());
 
                     if (e.getType() == Ore.gold) {
                         Image image = new Image(launcher.class.getResource("ChestOr.png").openStream());
@@ -102,8 +103,7 @@ public class Main extends Stage {
 
                         r2.setFill(pattern);
                         r2.setOnMouseClicked(emgr);
-                    }
-                    else{
+                    } else {
                         Image image = new Image(launcher.class.getResource("ChestNickel.png").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
@@ -118,8 +118,8 @@ public class Main extends Stage {
                 } else if (ss instanceof Mine) {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
-                    Rectangle r = new Rectangle(pos.getX() * this.cellSize,  pos.getY() * this.cellSize, this.cellSize, this.cellSize);
-                    Rectangle r2 = new Rectangle(r.getX(),r.getY(),r.getWidth(),r.getHeight());
+                    Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
+                    Rectangle r2 = new Rectangle(r.getX(), r.getY(), r.getWidth(), r.getHeight());
 
                     if (m.getMinerai() == Ore.gold) {
                         Image image = new Image(launcher.class.getResource("Gold.jpg").openStream());
@@ -128,8 +128,7 @@ public class Main extends Stage {
 
                         r2.setFill(pattern);
                         r2.setOnMouseClicked(emgr);
-                    }
-                    else{
+                    } else {
                         Image image = new Image(launcher.class.getResource("Nickel.jpg").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
@@ -144,7 +143,7 @@ public class Main extends Stage {
                 } else if (ss instanceof Lac) {
                     Lac l = ((Lac) ss);
                     Coordonnee pos = l.getPosition();
-                    Rectangle r = new Rectangle( pos.getX() * this.cellSize,  pos.getY() * this.cellSize, this.cellSize, this.cellSize);
+                    Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
                     Image image = new Image(launcher.class.getResource("eau.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
@@ -158,10 +157,10 @@ public class Main extends Stage {
         // dessin des robots
         Robots[] robots = grille.getRobots();
         for (Robots r : robots) {
-            EventRobot ev=new EventRobot(grille,r,this);
+            EventRobot ev = new EventRobot(grille, r, this);
             Coordonnee pos = r.getPosition();
-            Rectangle ro = new Rectangle(this.cellSize/2, this.cellSize/2); // steve ou alex
-            Rectangle ro2 = new Rectangle(this.cellSize/2, this.cellSize/2); // pioche
+            Rectangle ro = new Rectangle(this.cellSize / 2, this.cellSize / 2); // steve ou alex
+            Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
 
             VBox robot = new VBox();
             HBox hRobot = new HBox();
@@ -169,21 +168,21 @@ public class Main extends Stage {
 
             hRobot.getChildren().add(ro);
 
-            if (r.getType() == Ore.gold){
+            if (r.getType() == Ore.gold) {
                 Image image = new Image(launcher.class.getResource("Steve.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
-                if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.gold)){
+                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.gold)) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
                     hRobot.getChildren().add(ro2);
                 }
-            }else{
+            } else {
                 Image image = new Image(launcher.class.getResource("Alex.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
-                if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.nickel)){
+                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.nickel)) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
@@ -193,23 +192,23 @@ public class Main extends Stage {
 
             String out = " " + r.getId();
             Text t = new Text(out);
-            t.setFont(new Font(this.cellSize/3+3));
+            t.setFont(new Font(this.cellSize / 3 + 3));
             t.setFill(Color.GOLD);
 
-            hRobot.setLayoutY(this.cellSize/2);
-            robot.getChildren().addAll(t,hRobot);
-            robot.setLayoutX(pos.getX()*this.cellSize);
-            robot.setLayoutY(pos.getY()*this.cellSize);
+            hRobot.setLayoutY(this.cellSize / 2);
+            robot.getChildren().addAll(t, hRobot);
+            robot.setLayoutX(pos.getX() * this.cellSize);
+            robot.setLayoutY(pos.getY() * this.cellSize);
             groupRobot.getChildren().add(robot);
 
         }
         // dessin de la grille
         for (int i = 0; i <= 10; i++) {
-            Line l = new Line(prevX, 0, prevX, this.cellSize*10);
+            Line l = new Line(prevX, 0, prevX, this.cellSize * 10);
             prevX += this.cellSize;
             groupGrille.getChildren().add(l);
 
-            Line l2 = new Line(0, prevY, this.cellSize*10, prevY);
+            Line l2 = new Line(0, prevY, this.cellSize * 10, prevY);
             prevY += this.cellSize;
             groupGrille.getChildren().add(l2);
         }
@@ -220,10 +219,10 @@ public class Main extends Stage {
         g.getChildren().add(generalGrille);
     }
 
-    public void sideBar(HBox g,int h,int w,Grille grille) throws IOException{
+    public void sideBar(HBox g, int h, int w, Grille grille) throws IOException {
 
         Group sidebar = new Group();
-        Rectangle rectangle = new Rectangle(850,50,600,710);
+        Rectangle rectangle = new Rectangle(850, 50, 600, 710);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
@@ -231,7 +230,7 @@ public class Main extends Stage {
         Line l = new Line(1150, 50, 1150, 200);
         Line l2 = new Line(850, 200, 1450, 200);
         Line l3 = new Line(850, 310, 1450, 310);
-        line.getChildren().addAll(l,l2,l3);
+        line.getChildren().addAll(l, l2, l3);
 
         Group robot = new Group();
         robot.setTranslateX(860);
@@ -242,7 +241,7 @@ public class Main extends Stage {
         cb.setStyle("-fx-font: 15px \"None\";");
         Robots[] robots = grille.getRobots();
 
-        for (Robots ro: robots){
+        for (Robots ro : robots) {
             String out = "Robot " + ro.getId();
             cb.getItems().add(out);
         }
@@ -271,8 +270,8 @@ public class Main extends Stage {
         b2.setTranslateY(60);
         b2.setTranslateX(150);
 
-        boutonAct.getChildren().addAll(b,b2);
-        action.getChildren().addAll(text,boutonAct);
+        boutonAct.getChildren().addAll(b, b2);
+        action.getChildren().addAll(text, boutonAct);
 
 
         Group direction = new Group();
@@ -305,8 +304,8 @@ public class Main extends Stage {
         d4.setFont(new Font(15));
         d4.setTranslateX(1160);
         d4.setTranslateY(250);
-        boutonDir.getChildren().addAll(d1,d2,d3,d4);
-        direction.getChildren().addAll(text2,boutonDir);
+        boutonDir.getChildren().addAll(d1, d2, d3, d4);
+        direction.getChildren().addAll(text2, boutonDir);
 
         Group recap = new Group();
         Label text3 = new Label("Recapitulatif :");
@@ -316,7 +315,8 @@ public class Main extends Stage {
         recap.getChildren().add(text3);
 
         VBox recapText = generateRecap(grille);
-        recapText.setStyle("-fx-font: 15px \"None\";");;
+        recapText.setStyle("-fx-font: 15px \"None\";");
+        ;
         recapText.setTranslateX(860);
         recapText.setTranslateY(360);
         recap.getChildren().add(recapText);
@@ -333,26 +333,71 @@ public class Main extends Stage {
 
     public VBox generateRecap(Grille grid) throws IOException {
         VBox recap = new VBox();
-        Robots [] robots = grid.getRobots();
-        for (Robots r : robots){
+        Robots[] robots = grid.getRobots();
+        for (Robots r : robots) {
             HBox robotInfo = new HBox();
+
             Rectangle r3 = new Rectangle(20, 20);
-            if(r.getType() == Ore.gold) {
+            if (r.getType() == Ore.gold) {
                 Image image = new Image(Main.class.getResource("Steve.jpg").openStream());
-                Label position = new Label(" Robot ID: " + r.getId() + " | "+" X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "OR");
+                Label position = new Label(" Robot ID: " + r.getId() + " | " + " X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r3.setFill(pattern);
-                robotInfo.getChildren().addAll(r3 ,position);
+                robotInfo.getChildren().addAll(r3, position);
                 recap.getChildren().add(robotInfo);
-            }else{
+            } else {
                 Image image = new Image(Main.class.getResource("Alex.jpg").openStream());
-                Label position = new Label(" Robot ID: " + r.getId() + " | "+" X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "NI");
+                Label position = new Label(" Robot ID: " + r.getId() + " | " + " X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r3.setFill(pattern);
-                robotInfo.getChildren().addAll(r3 ,position);
+                robotInfo.getChildren().addAll(r3, position);
                 recap.getChildren().add(robotInfo);
             }
 
+        }
+        Sector[][] sectors = grid.getGrille();
+        for (Sector[] sectorRow : sectors) {
+            for (Sector sector : sectorRow) {
+                if (sector instanceof Entrepot) {
+                    HBox entrepotInfo = new HBox();
+                    Rectangle r4 = new Rectangle(20,20);
+
+                    if (((Entrepot) sector).getType() == Ore.gold) {
+
+                        Image image = new Image(Main.class.getResource("ChestOr.png").openStream());
+                        Label entrepot  = new Label(" Entrepot ID: " + ((Entrepot) sector).getId() + " | " + " X: " + ((Entrepot) sector).getPosition().getX() + " Y: " + ((Entrepot) sector).getPosition().getY() + " | " + " Capacity: " + ((Entrepot) sector).getStockage() +  " | " + " Type: " + "OR");
+                        ImagePattern pattern = new ImagePattern(image);
+                        r4.setFill(pattern);
+                        entrepotInfo.getChildren().addAll(r4, entrepot);
+                        recap.getChildren().add(entrepotInfo);
+                    } else if (((Entrepot) sector).getType() == Ore.nickel){
+                        Image image = new Image(Main.class.getResource("ChestNickel.png").openStream());
+                        Label entrepot  = new Label(" Entrepot ID: " + ((Entrepot) sector).getId() + " | " + " X: " + ((Entrepot) sector).getPosition().getX() + " Y: " + ((Entrepot) sector).getPosition().getY() + " | " + " Capacity: " + ((Entrepot) sector).getStockage() +  " | " + " Type: " + "NI");
+                        ImagePattern pattern = new ImagePattern(image);
+                        r4.setFill(pattern);
+                        entrepotInfo.getChildren().addAll(r4, entrepot);
+                        recap.getChildren().add(entrepotInfo);
+                    }
+                } else if (sector instanceof Mine) {
+                    HBox mineInfo = new HBox();
+                    Rectangle r5 = new Rectangle(20,20);
+                    if (((Mine) sector).getMinerai() == Ore.gold) {
+                        Image image = new Image(Main.class.getResource("Gold.jpg").openStream());
+                        Label mine  = new Label(" Mine ID: " + ((Mine) sector).getId() + " | " + " X: " + ((Mine) sector).getPosition().getX() + " Y: " + ((Mine) sector).getPosition().getY() + " | " + " Type: " + "OR");
+                        ImagePattern pattern = new ImagePattern(image);
+                        r5.setFill(pattern);
+                        mineInfo.getChildren().addAll(r5, mine);
+                        recap.getChildren().add(mineInfo);
+                    } else if (((Mine) sector).getMinerai() == Ore.nickel){
+                        Image image = new Image(Main.class.getResource("Nickel.jpg").openStream());
+                        Label mine  = new Label(" Mine ID: " + ((Mine) sector).getId() + " | " + " X: " + ((Mine) sector).getPosition().getX() + " Y: " + ((Mine) sector).getPosition().getY() + " | " + " Type: " + "NI");
+                        ImagePattern pattern = new ImagePattern(image);
+                        r5.setFill(pattern);
+                        mineInfo.getChildren().addAll(r5, mine);
+                        recap.getChildren().add(mineInfo);
+                    }
+                }
+            }
         }
         return recap;
     }
