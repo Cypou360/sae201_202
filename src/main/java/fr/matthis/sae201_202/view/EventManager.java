@@ -34,8 +34,10 @@ public class EventManager implements EventHandler  {
                 new InfoCellule(s);
             }
         } else if (ev.getSource() instanceof Button) {
+            System.out.println("1");
             Button b = (Button) ev.getSource();
-            if (b.getText().equals("Fermer") && info != null) {
+            if (b.getText().equals("Fermer")) {
+                System.out.println("2");
                 info.close();
             }
         } else if (ev.getSource()instanceof VBox) {

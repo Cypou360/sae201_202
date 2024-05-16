@@ -9,10 +9,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class infoCellule extends Stage {
+public class InfoCellule extends Stage {
     private Sector s;
 
-    public infoCellule(Sector s) {
+    public InfoCellule(Sector s) {
         super();
         this.s = s;
         graphical();

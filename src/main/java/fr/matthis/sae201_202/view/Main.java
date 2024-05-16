@@ -161,7 +161,6 @@ public class Main extends Stage {
         // dessin des robots
         Robots[] robots = grille.getRobots();
         for (Robots r : robots) {
-            EventRobot ev = new EventRobot(grille, r, this);
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(this.cellSize / 2, this.cellSize / 2); // steve ou alex
             Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
