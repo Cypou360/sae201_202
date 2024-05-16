@@ -64,6 +64,9 @@ public class Main extends Stage {
 
         root.setLayoutY(50);
         root.setLayoutX(50);
+
+        Image image = new Image(Main.class.getResource("icon.png").openStream());
+        this.getIcons().add(image);
     }
 
     public void gridgen(HBox g, int height, Grille grille) throws IOException {
@@ -321,6 +324,21 @@ public class Main extends Stage {
         recapText.setTranslateY(360);
         recap.getChildren().add(recapText);
 
+        Group exit = new Group();
+        Button e1 = new Button("Quitter");
+        e1.setPrefSize(90, 30);
+        e1.setFont(new Font(15));
+        e1.setTranslateX(1230);
+        e1.setTranslateY(700);
+        exit.getChildren().add(e1);
+
+        Group reset = new Group();
+        Button r1 = new Button("Reset");
+        r1.setPrefSize(90, 30);
+        r1.setFont(new Font(15));
+        r1.setTranslateX(950);
+        r1.setTranslateY(700);
+        reset.getChildren().add(r1);
 
         g.getChildren().add(sidebar);
         sidebar.getChildren().add(rectangle);
@@ -329,6 +347,8 @@ public class Main extends Stage {
         sidebar.getChildren().add(action);
         sidebar.getChildren().add(direction);
         sidebar.getChildren().add(recap);
+        sidebar.getChildren().add(exit);
+        sidebar.getChildren().add(reset);
     }
 
     public VBox generateRecap(Grille grid) throws IOException {
