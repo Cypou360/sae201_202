@@ -65,14 +65,14 @@ public class Game {
                         }
                     } else if (nombre == 5) {
                         if(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Mine){
-                            grille.getRobot(idRobots).extraction(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()));
+                            grille.getRobot(idRobots).extraction(grille);
                             movedRobot[idRobots - 1] = true;
                         }else{
                             System.out.println("Pas possible car pas dans une mine");
                         }
                     } else if(nombre == 6){
                         if(grille.getSector(grille.getRobot(idRobots).getPosition().getX(), grille.getRobot(idRobots).getPosition().getY()) instanceof Entrepot){
-                            grille.getRobot(idRobots).deposer(grille.getSector(grille.getRobot(idRobots).getPosition().getX(),grille.getRobot(idRobots).getPosition().getY()));
+                            grille.getRobot(idRobots).deposer(grille);
                             movedRobot[idRobots - 1] = true;
                         }else{
                             System.out.println("Pas possible car pas sur un entrepôt");

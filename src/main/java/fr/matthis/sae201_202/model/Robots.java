@@ -16,7 +16,7 @@ public class Robots {
     public Robots(int x, int y, Ore type){
         Random r = new Random();
         this.maxCapacity = r.nextInt(5,10);
-        this.capacity = 0;
+        this.capacity = 3;
         this.type = type;
         this.id = idCounter;
         this.position = new Coordonnee(x, y);
@@ -41,32 +41,32 @@ public class Robots {
     }
 
     /* Permet d'extraire un minerai si la mine possède le minerai adéquat */
-    public void extraction(Sector s) {
-        if (!s.getDisponible()){
-            if (s instanceof Mine m){
-                if (m.getMinerai() == type){
-                    if (m.stockage > 0){
-                        Random r = new Random();
-                        int extraction = r.nextInt(1,4);
-                        if (capacity <= maxCapacity - extraction){
-                            if (m.stockage >= extraction){
-                                m.stockage -= extraction;
-                                capacity += extraction;
-                            }
-                            else{
-                                capacity += m.stockage;
-                                m.stockage = 0;
-                            }
-                        } else if (capacity == maxCapacity) {
-                            System.out.println("Capcity trop elevée");
-                        } else{
-                            capacity += (maxCapacity - capacity);
+    public Boolean extraction(Grille grille) {
+        if (grille.getSector(getPosition().getX(),getPosition().getY()) instanceof Mine m){
+            if (m.getMinerai() == type){
+                if (m.stockage > 0){
+                    Random r = new Random();
+                    int extraction = r.nextInt(1,4);
+                    if (capacity <= maxCapacity - extraction){
+                        if (m.stockage >= extraction){
+                            m.stockage -= extraction;
+                            capacity += extraction;
                         }
+                        else{
+                            capacity += m.stockage;
+                            m.stockage = 0;
+                        }
+                    } else if (capacity == maxCapacity) {
+                        System.out.println("Capcity trop elevée");
+                    } else{
+                        capacity += (maxCapacity - capacity);
                     }
                 }
             }
         }
+        return false;
     }
+
 
     /* Permet au robot de se déplacer */
     public boolean goTo(String orientation, Grille grille) {
@@ -107,18 +107,18 @@ public class Robots {
     }
 
     /* Permet de déposer les minerais que possède le robot dans l'entrepot approprié */
-    public void deposer(Sector s){
-        if (!s.getDisponible()){
-            if (s instanceof Entrepot e){
-                if (e.getType() == type){
-                    if (capacity != 0){
-                        e.stockage += capacity;
-                        capacity = 0;
-                    }
+    public Boolean deposer(Grille grille){
+        if (grille.getSector(getPosition().getX(),getPosition().getY()) instanceof Entrepot e){
+            if (e.getType() == type){
+                if (capacity != 0){
+                    e.stockage += capacity;
+                    capacity = 0;
                 }
             }
         }
+        return false;
     }
+
 
     /* Permet de récupérer l'ID du robot */
     public int getId(){

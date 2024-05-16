@@ -97,8 +97,8 @@ public class TestRobot {
         Mine mO = new Mine(5, 5, Ore.gold);
         Robots rbts2 = new Robots(5,6,Ore.nickel);
         Mine mN = new Mine(5,6,Ore.nickel);
-        assertTrue(rbts.extraction());
-        assertTrue(rbts2.extraction());
+        assertTrue(rbts.extraction(grille));
+        assertTrue(rbts2.extraction(grille));
     }
 
     /** Teste si un robot peut déposer des minerais **/
@@ -107,8 +107,8 @@ public class TestRobot {
         Entrepot mO = new Entrepot(Ore.gold, 5, 5);
         Robots rbts2 = new Robots(5,6,Ore.nickel);
         Entrepot mN = new Entrepot(Ore.nickel, 5,6);
-        assertTrue(rbts.deposer());
-        assertTrue(rbts2.deposer());
+        assertTrue(rbts.deposer(grille));
+        assertTrue(rbts2.deposer(grille));
     }
 
     /** Nettoie **/
