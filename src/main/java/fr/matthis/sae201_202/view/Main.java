@@ -337,13 +337,11 @@ public class Main extends Stage {
         for (Robots r : robots){
             HBox robotInfo = new HBox();
             Rectangle r3 = new Rectangle();
-            Image image = new Image(view1.class.getResource("Steve.jpg").openStream());
+            Image image = new Image(Main.class.getResource("Steve.jpg").openStream());
             Label robotId = new Label("Robot ID: " + r.getId() + " | ");
             Label position = new Label(" X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY()+ "\t| ");
             Label capacity = new Label(" Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity()+ "\t| ");
             Label type = new Label(" Type: " + r.getType());
-}
-
             ImagePattern pattern = new ImagePattern(image);
             r3.setFill(pattern);
 
