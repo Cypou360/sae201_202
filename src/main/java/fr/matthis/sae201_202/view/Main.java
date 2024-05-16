@@ -118,8 +118,8 @@ public class Main extends Stage {
                     groupGrille.getChildren().add(r);
                     groupGrille.getChildren().add(r2);
 
-                } else if (ss instanceof Mine) {
-                    Mine m = ((Mine) ss);
+                } else if (ss instanceof ) {
+                     m = (() ss);
                     Coordonnee pos = m.getPosition();
                     Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
                     Rectangle r2 = new Rectangle(r.getX(), r.getY(), r.getWidth(), r.getHeight());
@@ -175,7 +175,7 @@ public class Main extends Stage {
                 Image image = new Image(launcher.class.getResource("Steve.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
-                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.gold)) {
+                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof ) && ((() grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.gold)) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
@@ -185,7 +185,7 @@ public class Main extends Stage {
                 Image image = new Image(launcher.class.getResource("Alex.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
-                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.nickel)) {
+                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof ) && ((() grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.nickel)) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
@@ -385,16 +385,16 @@ public class Main extends Stage {
             HBox mineInfo = new HBox();
 
             Rectangle r4 = new Rectangle(20,20);
-            if (((Mine) mine).getMinerai() == Ore.gold) {
+            if (mine.getMinerai() == Ore.gold) {
                 Image image = new Image(Main.class.getResource("Gold.jpg").openStream());
-                Label mines  = new Label(" Mine ID: " + ((Mine) mine).getId() + " | " + " X: " + ((Mine) mine).getPosition().getX() + " Y: " + ((Mine) mine).getPosition().getY() + " | " + " Type: " + "OR");
+                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
                 mineInfo.getChildren().addAll(r4, mines);
                 recap.getChildren().add(mineInfo);
-            } else if (((Mine) mine).getMinerai() == Ore.nickel){
+            } else if (mine.getMinerai() == Ore.nickel){
                 Image image = new Image(Main.class.getResource("Nickel.jpg").openStream());
-                Label mines  = new Label(" Mine ID: " + ((Mine) mine).getId() + " | " + " X: " + ((Mine) mine).getPosition().getX() + " Y: " + ((Mine) mine).getPosition().getY() + " | " + " Type: " + "NI");
+                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
                 mineInfo.getChildren().addAll(r4, mines);
@@ -406,17 +406,17 @@ public class Main extends Stage {
         for (Entrepot entrepot: grid.getEntrepots()) {
             Rectangle r4 = new Rectangle(20,20);
             HBox entrepotInfo = new HBox();
-            if (((Entrepot) entrepot).getType() == Ore.gold) {
+            if (entrepot.getType() == Ore.gold) {
 
                 Image image = new Image(Main.class.getResource("ChestOr.png").openStream());
-                Label entrepots = new Label(" Entrepot ID: " + ((Entrepot) entrepot).getId() + " | " + " X: " + ((Entrepot) entrepot).getPosition().getX() + " Y: " + ((Entrepot) entrepot).getPosition().getY() + " | " + " Capacity: " + ((Entrepot) entrepot).getStockage() + " | " + " Type: " + "OR");
+                Label entrepots = new Label(" Entrepot ID: " + entrepot.getId() + " | " + " X: " + entrepot.getPosition().getX() + " Y: " + entrepot.getPosition().getY() + " | " + " Capacity: " + entrepot.getStockage() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
                 entrepotInfo.getChildren().addAll(r4, entrepots);
                 recap.getChildren().add(entrepotInfo);
             } else {
                 Image image = new Image(Main.class.getResource("ChestNickel.png").openStream());
-                Label entrepots = new Label(" Entrepot ID: " + ((Entrepot) entrepot).getId() + " | " + " X: " + ((Entrepot) entrepot).getPosition().getX() + " Y: " + ((Entrepot) entrepot).getPosition().getY() + " | " + " Capacity: " + ((Entrepot) entrepot).getStockage() + " | " + " Type: " + "NI");
+                Label entrepots = new Label(" Entrepot ID: " + entrepot.getId() + " | " + " X: " + entrepot.getPosition().getX() + " Y: " + entrepot.getPosition().getY() + " | " + " Capacity: " + entrepot.getStockage() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
                 entrepotInfo.getChildren().addAll(r4, entrepots);
