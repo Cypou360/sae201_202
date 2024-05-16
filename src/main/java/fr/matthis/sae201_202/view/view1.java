@@ -211,7 +211,7 @@ public class view1 extends Application {
         g.getChildren().add(generalGrille);
     }
 
-    public void sideBar(HBox g,int h,int w,Grille grille){
+    public void sideBar(HBox g,int h,int w,Grille grille) throws IOException{
 
         Group sidebar = new Group();
         Rectangle rectangle = new Rectangle(850,50,600,710);
@@ -306,6 +306,13 @@ public class view1 extends Application {
         text3.setTranslateY(330);
         recap.getChildren().add(text3);
 
+        VBox recapText = generateRecap(grille);
+        recapText.setStyle("-fx-font: 15px \"None\";");;
+        recapText.setTranslateX(860);
+        recapText.setTranslateY(360);
+        recap.getChildren().add(recapText);
+
+
         g.getChildren().add(sidebar);
         sidebar.getChildren().add(rectangle);
         sidebar.getChildren().add(robot);
@@ -315,5 +322,24 @@ public class view1 extends Application {
         sidebar.getChildren().add(recap);
     }
 
+    public VBox generateRecap(Grille grid) throws IOException {
+        VBox recap = new VBox();
+        Robots [] robots = grid.getRobots();
+        for (Robots r : robots){
+            HBox robotInfo = new HBox();
+            Rectangle r3 = new Rectangle();
+            Image image = new Image(view1.class.getResource("Steve.jpg").openStream());
+            Label robotId = new Label("Robot ID: " + r.getId() + " | ");
+            Label position = new Label(" X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY()+ "\t| ");
+            Label capacity = new Label(" Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity()+ "\t| ");
+            Label type = new Label(" Type: " + r.getType());
 
+            ImagePattern pattern = new ImagePattern(image);
+            r3.setFill(pattern);
+
+            robotInfo.getChildren().addAll(r3 ,robotId, position, capacity, type);
+            recap.getChildren().add(robotInfo);
+        }
+        return recap;
+    }
 }
