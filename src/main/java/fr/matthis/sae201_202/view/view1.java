@@ -241,6 +241,7 @@ public class view1 extends Application {
         robot.getChildren().add(label);
 
         Group action = new Group();
+        Group boutonAct = new Group();
         Button b = new Button("Extraire");
         Button b2 = new Button("Déposer");
         b.setStyle("-fx-font: 15px \"None\";");
@@ -255,7 +256,8 @@ public class view1 extends Application {
         b2.setTranslateY(60);
         b2.setTranslateX(150);
 
-        action.getChildren().addAll(b,b2,text);
+        boutonAct.getChildren().addAll(b,b2);
+        action.getChildren().addAll(text,boutonAct);
 
 
         Group direction = new Group();
@@ -264,7 +266,7 @@ public class view1 extends Application {
         text2.setTranslateX(860);
         text2.setTranslateY(210);
 
-
+        Group boutonDir = new Group();
         Button d1 = new Button("Nord");
         d1.setPrefSize(90, 30);
         d1.setFont(new Font(15));
@@ -288,7 +290,8 @@ public class view1 extends Application {
         d4.setFont(new Font(15));
         d4.setTranslateX(1160);
         d4.setTranslateY(250);
-        direction.getChildren().addAll(text2,d1,d2,d3,d4);
+        boutonDir.getChildren().addAll(d1,d2,d3,d4);
+        direction.getChildren().addAll(text2,boutonDir);
 
 
 
