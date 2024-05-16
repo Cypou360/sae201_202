@@ -43,6 +43,7 @@ public class view1 extends Application {
         double height = screenSize.getHeight();
 
         primaryStage.setTitle("Robot");
+        primaryStage.setMaximized(true);
         Group root = new Group();
         Scene scene = new Scene(root, width, height);
         primaryStage.setScene(scene);
