@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -30,10 +31,9 @@ public class EventRobot implements EventHandler {
     @Override
     public void handle(Event e) {
         MouseEvent ev = ((MouseEvent) e);
-        Rectangle r = (Rectangle) ev.getSource();
+        VBox r = (VBox) ev.getSource();
         Group root = new Group();
         Scene sc = new Scene(root, r.getWidth()+300, r.getHeight()+70);
-
 
         if (robots.getType() == Ore.gold) {
             stage.setTitle("Robot d'or " + robots.getId());
@@ -52,7 +52,6 @@ public class EventRobot implements EventHandler {
             lb.setY(20);
             root.getChildren().add(lb);
         }
-
 
         stage.setScene(sc);
         stage.setResizable(false);
