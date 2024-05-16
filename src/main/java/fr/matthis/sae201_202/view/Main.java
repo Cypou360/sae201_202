@@ -68,7 +68,7 @@ public class Main extends Stage {
     public void gridgen(HBox g, int height, Grille grille) throws IOException {
         Group generalGrille = new Group();
         Group groupGrille = new Group();
-        eventManager emgr = new eventManager(this);
+        EventManager emgr = new EventManager(this);
 
         groupGrille.setId("grille");
 
