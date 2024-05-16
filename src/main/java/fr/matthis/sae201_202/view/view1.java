@@ -59,8 +59,8 @@ public class view1 extends Application {
         Group groupGrille = new Group();
         eventManager evGrille = new eventManager(grille);
         int cellsize = (height-100)/10;
-        int prevX = 50;
-        int prevY = 50;
+        int prevX = 0;
+        int prevY = 0;
 
         // dessin des Secteurs
         Sector[][] grid = grille.getGrille();
@@ -69,7 +69,7 @@ public class view1 extends Application {
                 if (ss instanceof Vide) {
                     Vide v = ((Vide) ss);
                     Coordonnee pos = v.getPosition();
-                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle(pos.getX() * cellsize, pos.getY() * cellsize, cellsize, cellsize);
                     Image image = new Image(view1.class.getResource("herbe.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
@@ -78,7 +78,7 @@ public class view1 extends Application {
                 } else if (ss instanceof Entrepot) {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
-                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle(pos.getX() * cellsize, pos.getY() * cellsize, cellsize, cellsize);
                     Rectangle r2 = new Rectangle(r.getX(),r.getY(),r.getWidth(),r.getHeight());
 
                     if (e.getType() == Ore.gold) {
@@ -104,7 +104,7 @@ public class view1 extends Application {
                 } else if (ss instanceof Mine) {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
-                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle(pos.getX() * cellsize,  pos.getY() * cellsize, cellsize, cellsize);
                     Rectangle r2 = new Rectangle(r.getX(),r.getY(),r.getWidth(),r.getHeight());
 
                     if (m.getMinerai() == Ore.gold) {
@@ -130,7 +130,7 @@ public class view1 extends Application {
                 } else if (ss instanceof Lac) {
                     Lac l = ((Lac) ss);
                     Coordonnee pos = l.getPosition();
-                    Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
+                    Rectangle r = new Rectangle( pos.getX() * cellsize,  pos.getY() * cellsize, cellsize, cellsize);
                     Image image = new Image(view1.class.getResource("eau.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
@@ -142,7 +142,7 @@ public class view1 extends Application {
         // dessin des robots
         Robots[] robots = grille.getRobots();
         for (Robots r : robots) {
-            EventRobot ev=new EventRobot(grille,r,stage,groupRobot);
+            EventRobot ev=new EventRobot(grille,r,stage);
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
             Rectangle ro2 = new Rectangle(96 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
@@ -184,21 +184,26 @@ public class view1 extends Application {
             groupRobot.getChildren().add(ro);
             groupRobot.getChildren().add(r2);
             groupRobot.getChildren().add(t);
+
 }
-        g.getChildren().add(groupRobot);
+
 
 
         // dessin de la grille
         for (int i = 0; i <= 10; i++) {
-            Line l = new Line(prevX, 50, prevX, cellsize*10+50);
+            Line l = new Line(prevX, 0, prevX, cellsize*10);
             prevX += cellsize;
             groupGrille.getChildren().add(l);
 
-            Line l2 = new Line(50, prevY, cellsize*10+50, prevY);
+            Line l2 = new Line(0, prevY, cellsize*10, prevY);
             prevY += cellsize;
             groupGrille.getChildren().add(l2);
         }
+
+        groupGrille.setLayoutX(50);
+        groupGrille.setLayoutY(50);
         g.getChildren().add(groupGrille);
+        g.getChildren().add(groupRobot);
     }
 
     public void sideBar(Group g,int h,int w,Grille grille){

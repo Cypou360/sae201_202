@@ -20,18 +20,18 @@ public class EventRobot implements EventHandler {
     private Robots robots;
 
     private Stage stage;
-    private Group root;
 
-    public EventRobot(Grille grille,Robots robots, Stage stage,Group root) {
+
+    public EventRobot(Grille grille,Robots robots, Stage stage) {
         this.grid = grille;
         this.robots = robots;
         this.stage = stage;
-        this.root = root;
     }
     @Override
     public void handle(Event e) {
         MouseEvent ev = ((MouseEvent) e);
         Rectangle r = (Rectangle) ev.getSource();
+        Group root = new Group();
         Scene sc = new Scene(root, r.getWidth()+300, r.getHeight()+70);
 
 
