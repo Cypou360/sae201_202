@@ -213,12 +213,15 @@ public class view1 extends Application {
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
+        Group line = new Group();
+        Line l = new Line(1150, 50, 1150, 200);
+        Line l2 = new Line(850, 200, 1450, 200);
+        Line l3 = new Line(850, 330, 1450, 330);
+        line.getChildren().addAll(l,l2,l3);
 
-
-       Group robot = new Group();
-       robot.setTranslateX(860);
-       robot.setTranslateY(120);
-
+        Group robot = new Group();
+        robot.setTranslateX(860);
+        robot.setTranslateY(120);
 
         ChoiceBox<String> cb = new ChoiceBox<>();
         cb.setPrefSize(200, 30);
@@ -227,29 +230,29 @@ public class view1 extends Application {
         for (Robots ro: robots){
             String out = "Robot " + ro.getId();
             cb.getItems().add(out);
-        }
+            }
         cb.setValue("Selectionnez un robot");
         robot.getChildren().add(cb);
 
         Label label = new Label("Selectionnez un robot");
         label.setFont(new Font(20));
         label.setTranslateX(0);
-        label.setTranslateY(-50);
+        label.setTranslateY(-60);
         robot.getChildren().add(label);
 
-        /*Button b = new Button("Extraire");
-        b.setTranslateX(1160);
-        b.setTranslateY(120);
-        b.setPrefSize(90, 30);
-        b.setFont(new Font(15));
-
+        Group action = new Group();
+        Button b = new Button("Extraire");
         Button b2 = new Button("Déposer");
-        b2.setTranslateX(1300);
-        b2.setTranslateY(120);
-        b2.setPrefSize(90, 30);
-        b2.setFont(new Font(15));
+        Label text = new Label("Selectionnez une action :");
+        text.setFont(new Font(20));
+        action.setTranslateX(1160);
+        action.setTranslateY(60);
 
-        Button d1 = new Button("Nord");
+        action.getChildren().addAll(b,b2,text);
+
+
+
+        /*Button d1 = new Button("Nord");
         d1.setTranslateX(860);
         d1.setTranslateY(260);
         d1.setPrefSize(90, 30);
@@ -273,15 +276,11 @@ public class view1 extends Application {
         d4.setPrefSize(90, 30);
         d4.setFont(new Font(15));
 
-        Line l = new Line(1150, 50, 1150, 200);
-        Line l2 = new Line(850, 200, 1450, 200);
-        Line l3 = new Line(850, 330, 1450, 330);
 
-        Text t = new Text(860, 80, "Selectionnez un robot :");
-        t.setFont(new Font(20));
 
-        Text t2 = new Text(1160, 80, "Selectionnez une action :");
-        t2.setFont(new Font(20));
+
+
+
 
         Text t3 = new Text(860, 230, "Selectionnez une direction :");
         t3.setFont(new Font(20));
@@ -292,6 +291,8 @@ public class view1 extends Application {
         g.getChildren().add(sidebar);
         sidebar.getChildren().addAll(rectangle);
         sidebar.getChildren().addAll(robot);
+        sidebar.getChildren().addAll(line);
+        sidebar.getChildren().addAll(action);
     }
 
 
