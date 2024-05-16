@@ -118,8 +118,8 @@ public class Main extends Stage {
                     groupGrille.getChildren().add(r);
                     groupGrille.getChildren().add(r2);
 
-                } else if (ss instanceof ) {
-                     m = (() ss);
+                } else if (ss instanceof Mine) {
+                    Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
                     Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
                     Rectangle r2 = new Rectangle(r.getX(), r.getY(), r.getWidth(), r.getHeight());
@@ -175,7 +175,7 @@ public class Main extends Stage {
                 Image image = new Image(launcher.class.getResource("Steve.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
-                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof ) && ((() grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.gold)) {
+                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.gold)) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
@@ -185,7 +185,7 @@ public class Main extends Stage {
                 Image image = new Image(launcher.class.getResource("Alex.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
-                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof ) && ((() grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.nickel)) {
+                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.nickel)) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
