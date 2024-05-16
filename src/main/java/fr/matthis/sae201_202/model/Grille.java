@@ -198,4 +198,12 @@ public class Grille {
         }
         return r;
     }
+
+    public ArrayList<Entrepot> getEntrepots() {
+        return entrepots;
+    }
+
+    public ArrayList<Mine> getMines() {
+        return mines;
+    }
 }

@@ -333,6 +333,8 @@ public class Main extends Stage {
 
     public VBox generateRecap(Grille grid) throws IOException {
         VBox recap = new VBox();
+        Label espace = new Label("\n");
+        Label espace2 = new Label("\n");
         Robots[] robots = grid.getRobots();
         for (Robots r : robots) {
             HBox robotInfo = new HBox();
@@ -355,48 +357,47 @@ public class Main extends Stage {
             }
 
         }
-        Sector[][] sectors = grid.getGrille();
-        for (Sector[] sectorRow : sectors) {
-            for (Sector sector : sectorRow) {
-                if (sector instanceof Entrepot) {
-                    HBox entrepotInfo = new HBox();
-                    Rectangle r4 = new Rectangle(20,20);
+        recap.getChildren().add(espace);
+        for (Mine mine : grid.getMines()) {
+            HBox mineInfo = new HBox();
 
-                    if (((Entrepot) sector).getType() == Ore.gold) {
+            Rectangle r4 = new Rectangle(20,20);
+            if (((Mine) mine).getMinerai() == Ore.gold) {
+                Image image = new Image(Main.class.getResource("Gold.jpg").openStream());
+                Label mines  = new Label(" Mine ID: " + ((Mine) mine).getId() + " | " + " X: " + ((Mine) mine).getPosition().getX() + " Y: " + ((Mine) mine).getPosition().getY() + " | " + " Type: " + "OR");
+                ImagePattern pattern = new ImagePattern(image);
+                r4.setFill(pattern);
+                mineInfo.getChildren().addAll(r4, mines);
+                recap.getChildren().add(mineInfo);
+            } else if (((Mine) mine).getMinerai() == Ore.nickel){
+                Image image = new Image(Main.class.getResource("Nickel.jpg").openStream());
+                Label mines  = new Label(" Mine ID: " + ((Mine) mine).getId() + " | " + " X: " + ((Mine) mine).getPosition().getX() + " Y: " + ((Mine) mine).getPosition().getY() + " | " + " Type: " + "NI");
+                ImagePattern pattern = new ImagePattern(image);
+                r4.setFill(pattern);
+                mineInfo.getChildren().addAll(r4, mines);
+                recap.getChildren().add(mineInfo);
+            }
+        }
+        recap.getChildren().add(espace2);
 
-                        Image image = new Image(Main.class.getResource("ChestOr.png").openStream());
-                        Label entrepot  = new Label(" Entrepot ID: " + ((Entrepot) sector).getId() + " | " + " X: " + ((Entrepot) sector).getPosition().getX() + " Y: " + ((Entrepot) sector).getPosition().getY() + " | " + " Capacity: " + ((Entrepot) sector).getStockage() +  " | " + " Type: " + "OR");
-                        ImagePattern pattern = new ImagePattern(image);
-                        r4.setFill(pattern);
-                        entrepotInfo.getChildren().addAll(r4, entrepot);
-                        recap.getChildren().add(entrepotInfo);
-                    } else if (((Entrepot) sector).getType() == Ore.nickel){
-                        Image image = new Image(Main.class.getResource("ChestNickel.png").openStream());
-                        Label entrepot  = new Label(" Entrepot ID: " + ((Entrepot) sector).getId() + " | " + " X: " + ((Entrepot) sector).getPosition().getX() + " Y: " + ((Entrepot) sector).getPosition().getY() + " | " + " Capacity: " + ((Entrepot) sector).getStockage() +  " | " + " Type: " + "NI");
-                        ImagePattern pattern = new ImagePattern(image);
-                        r4.setFill(pattern);
-                        entrepotInfo.getChildren().addAll(r4, entrepot);
-                        recap.getChildren().add(entrepotInfo);
-                    }
-                } else if (sector instanceof Mine) {
-                    HBox mineInfo = new HBox();
-                    Rectangle r5 = new Rectangle(20,20);
-                    if (((Mine) sector).getMinerai() == Ore.gold) {
-                        Image image = new Image(Main.class.getResource("Gold.jpg").openStream());
-                        Label mine  = new Label(" Mine ID: " + ((Mine) sector).getId() + " | " + " X: " + ((Mine) sector).getPosition().getX() + " Y: " + ((Mine) sector).getPosition().getY() + " | " + " Type: " + "OR");
-                        ImagePattern pattern = new ImagePattern(image);
-                        r5.setFill(pattern);
-                        mineInfo.getChildren().addAll(r5, mine);
-                        recap.getChildren().add(mineInfo);
-                    } else if (((Mine) sector).getMinerai() == Ore.nickel){
-                        Image image = new Image(Main.class.getResource("Nickel.jpg").openStream());
-                        Label mine  = new Label(" Mine ID: " + ((Mine) sector).getId() + " | " + " X: " + ((Mine) sector).getPosition().getX() + " Y: " + ((Mine) sector).getPosition().getY() + " | " + " Type: " + "NI");
-                        ImagePattern pattern = new ImagePattern(image);
-                        r5.setFill(pattern);
-                        mineInfo.getChildren().addAll(r5, mine);
-                        recap.getChildren().add(mineInfo);
-                    }
-                }
+        for (Entrepot entrepot: grid.getEntrepots()) {
+            Rectangle r4 = new Rectangle(20,20);
+            HBox entrepotInfo = new HBox();
+            if (((Entrepot) entrepot).getType() == Ore.gold) {
+
+                Image image = new Image(Main.class.getResource("ChestOr.png").openStream());
+                Label entrepots = new Label(" Entrepot ID: " + ((Entrepot) entrepot).getId() + " | " + " X: " + ((Entrepot) entrepot).getPosition().getX() + " Y: " + ((Entrepot) entrepot).getPosition().getY() + " | " + " Capacity: " + ((Entrepot) entrepot).getStockage() + " | " + " Type: " + "OR");
+                ImagePattern pattern = new ImagePattern(image);
+                r4.setFill(pattern);
+                entrepotInfo.getChildren().addAll(r4, entrepots);
+                recap.getChildren().add(entrepotInfo);
+            } else {
+                Image image = new Image(Main.class.getResource("ChestNickel.png").openStream());
+                Label entrepots = new Label(" Entrepot ID: " + ((Entrepot) entrepot).getId() + " | " + " X: " + ((Entrepot) entrepot).getPosition().getX() + " Y: " + ((Entrepot) entrepot).getPosition().getY() + " | " + " Capacity: " + ((Entrepot) entrepot).getStockage() + " | " + " Type: " + "NI");
+                ImagePattern pattern = new ImagePattern(image);
+                r4.setFill(pattern);
+                entrepotInfo.getChildren().addAll(r4, entrepots);
+                recap.getChildren().add(entrepotInfo);
             }
         }
         return recap;
