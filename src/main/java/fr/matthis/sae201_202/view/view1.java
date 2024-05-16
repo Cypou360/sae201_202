@@ -58,6 +58,7 @@ public class view1 extends Application {
     public void gridgen(Group g, int height, Grille grille, Stage stage) throws IOException {
         Group groupGrille = new Group();
         eventManager evGrille = new eventManager(grille);
+
         int cellsize = (height-100)/10;
         int prevX = 0;
         int prevY = 0;
@@ -145,11 +146,11 @@ public class view1 extends Application {
             EventRobot ev=new EventRobot(grille,r,stage);
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
-            Rectangle ro2 = new Rectangle(96 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
+            Rectangle ro2 = new Rectangle(80 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
             Rectangle r2 = new Rectangle(ro.getX(),ro.getY(),ro.getWidth(),ro.getHeight());
 
             if (r.getType() == Ore.gold){
-                Image image = new Image(view1.class.getResource("Alex.jpg").openStream());
+                Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
 
@@ -159,11 +160,11 @@ public class view1 extends Application {
                     Image image1 = new Image(view1.class.getResource("GoldPioche.jpg").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
-                    g.getChildren().add(ro2);
+                    groupRobot.getChildren().add(ro2);
 
                 }
             }else{
-                Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
+                Image image = new Image(view1.class.getResource("Alex.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
 
@@ -173,7 +174,7 @@ public class view1 extends Application {
                     Image image1 = new Image(view1.class.getResource("FerPioche.jpg").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
-                    g.getChildren().add(ro2);
+                    groupRobot.getChildren().add(ro2);
                 }
             }
 
