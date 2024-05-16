@@ -64,6 +64,9 @@ public class Main extends Stage {
 
         root.setLayoutY(50);
         root.setLayoutX(50);
+
+        Image image = new Image(Main.class.getResource("icon.png").openStream());
+        this.getIcons().add(image);
     }
 
     public void gridgen(HBox g, int height, Grille grille) throws IOException {
