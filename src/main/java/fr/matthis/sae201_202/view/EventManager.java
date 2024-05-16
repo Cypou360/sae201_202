@@ -1,21 +1,25 @@
 package fr.matthis.sae201_202.view;
 
+import fr.matthis.sae201_202.model.Robots;
 import fr.matthis.sae201_202.model.Sector;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 public class EventManager implements EventHandler  {
 
     private Main p;
-
+    private Info info;
 
     public EventManager(Main p) {
         this.p = p;
+    }
 
+    public EventManager(Info info) {
+        this.info = info;
     }
 
     @Override
@@ -27,7 +31,20 @@ public class EventManager implements EventHandler  {
                 int x= (int) r.getX()/p.getCellSize();
                 int y= (int) r.getY()/p.getCellSize();
                 Sector s = p.getGrid().getSector(x, y);
-                new infoCellule(s);
+                new InfoCellule(s);
+            }
+        } else if (ev.getSource() instanceof Button) {
+            Button b = (Button) ev.getSource();
+            if (b.getText().equals("Fermer") && info != null) {
+                info.close();
+            }
+        } else if (ev.getSource()instanceof VBox) {
+            VBox v = (VBox) ev.getSource();
+            if (v.getParent().getId().equals("robot")) {
+                int x = (int) ((v.getLayoutX())/p.getCellSize());
+                int y = (int) ((v.getLayoutY())/p.getCellSize());
+                Robots r = p.getGrid().getSector(x,y).getRobot();
+                //new InfoRobot(r);
             }
         }
 

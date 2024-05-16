@@ -157,6 +157,7 @@ public class Main extends Stage {
         }
 
         Group groupRobot = new Group();
+        groupRobot.setId("robot");
         // dessin des robots
         Robots[] robots = grille.getRobots();
         for (Robots r : robots) {
@@ -167,7 +168,7 @@ public class Main extends Stage {
 
             VBox robot = new VBox();
             HBox hRobot = new HBox();
-            robot.setOnMouseClicked(ev);
+            robot.setOnMouseClicked(emgr);
 
             hRobot.getChildren().add(ro);
 
