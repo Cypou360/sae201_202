@@ -93,7 +93,7 @@ public class view1 extends Application {
                         r2.setOnMouseClicked(evGrille);
                     }
                     else{
-                        Image image = new Image(view1.class.getResource("ChestFer.png").openStream());
+                        Image image = new Image(view1.class.getResource("ChestNickel.png").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
 
@@ -119,7 +119,7 @@ public class view1 extends Application {
                         r2.setOnMouseClicked(evGrille);
                     }
                     else{
-                        Image image = new Image(view1.class.getResource("Fer.jpg").openStream());
+                        Image image = new Image(view1.class.getResource("Nickel.jpg").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
 
