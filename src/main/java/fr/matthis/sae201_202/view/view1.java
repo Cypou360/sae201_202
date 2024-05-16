@@ -48,7 +48,7 @@ public class view1 extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, width, height);
         primaryStage.setScene(scene);
-        sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),grid);
+        sideBar(root,grid);
         Stage stageRobot = new Stage();
         gridgen(root, (int) scene.getHeight(), grid, stageRobot);
 
@@ -207,17 +207,19 @@ public class view1 extends Application {
         g.getChildren().add(groupRobot);
     }
 
-    public void sideBar(Group g,int h,int w,Grille grille){
+    public void sideBar(Group g,Grille grille){
+
+
 
         Group sidebar = new Group();
-        Rectangle rectangle = new Rectangle(850,50,600,720);
+        Rectangle rectangle = new Rectangle(850,50,600,710);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
         Group line = new Group();
         Line l = new Line(1150, 50, 1150, 200);
         Line l2 = new Line(850, 200, 1450, 200);
-        Line l3 = new Line(850, 330, 1450, 330);
+        Line l3 = new Line(850, 310, 1450, 310);
         line.getChildren().addAll(l,l2,l3);
 
         Group robot = new Group();
@@ -294,7 +296,12 @@ public class view1 extends Application {
         boutonDir.getChildren().addAll(d1,d2,d3,d4);
         direction.getChildren().addAll(text2,boutonDir);
 
-
+        Group recap = new Group();
+        Label text3 = new Label("Recapitulatif :");
+        text3.setFont(new Font(20));
+        text3.setTranslateX(860);
+        text3.setTranslateY(330);
+        recap.getChildren().add(text3);
 
         g.getChildren().add(sidebar);
         sidebar.getChildren().add(rectangle);
@@ -302,6 +309,7 @@ public class view1 extends Application {
         sidebar.getChildren().add(line);
         sidebar.getChildren().add(action);
         sidebar.getChildren().add(direction);
+        sidebar.getChildren().add(recap);
     }
 
 
