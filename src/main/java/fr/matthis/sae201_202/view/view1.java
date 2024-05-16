@@ -50,6 +50,9 @@ public class view1 extends Application {
         gridgen(root, (int) scene.getHeight(), grid, stageRobot);
         sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),grid);
 
+        root.setLayoutY(50);
+        root.setLayoutX(50);
+
         primaryStage.show();
     }
 
