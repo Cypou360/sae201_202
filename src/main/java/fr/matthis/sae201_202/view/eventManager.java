@@ -16,93 +16,25 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
-import java.nio.file.Paths;
-
+import java.security.Principal;
 
 public class eventManager implements EventHandler  {
 
-    private Grille grid;
+    private Main p;
 
-    public eventManager(Grille grille) {
-        this.grid = grille;
+    public eventManager(Main p) {
+        this.p = p;
     }
+
     @Override
     public void handle(Event e) {
-        MouseEvent ev = ((MouseEvent) e);
-        Rectangle r = (Rectangle) ev.getSource();
-        Stage stage = new Stage();
-        stage.close();
-        Group root = new Group();
+        if (e.getSource() instanceof MouseEvent) {
+            MouseEvent ev = ((MouseEvent) e);
+            if (ev.getTarget() instanceof Rectangle) {
+                Rectangle r = (Rectangle) ev.getTarget();
 
-        Scene sc = new Scene(root, r.getWidth()+300, r.getHeight()+10);
-
-        Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-        double height = screenSize.getHeight();
-
-        int cellsize = (int) ((height - 100) / 10);
-
-        int x = (int) (r.getX() / cellsize);
-
-        int y = (int) (r.getY() / cellsize);
-
-        System.out.println(x);
-        System.out.println(y);
-
-        Sector ss = grid.getSector(x, y);
-
-        if (ss instanceof Mine) {
-            // Ton code ici
-            if (((Mine) ss).getType() == Ore.gold) {
-                stage.setTitle("Minerai d'Or " + ((Mine) ss).getId());
-                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + "/" + ((Mine) ss).getmaxStockage() + " Type: OR";
-                Text lb = new Text(out);
-                lb.setFont(new Font(20));
-                lb.setX(20);
-                lb.setY(20);
-                root.getChildren().add(lb);
-            } else {
-                stage.setTitle("Minerai de Nickel " + ((Mine) ss).getId());
-                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + "/" + ((Mine) ss).getmaxStockage() + " Type: NI";
-                Text lb = new Text(out);
-                lb.setFont(new Font(20));
-                lb.setX(20);
-                lb.setY(20);
-                root.getChildren().add(lb);
-            }
-
-        } else if (ss instanceof Entrepot) {
-            if (((Entrepot) ss).getType() == Ore.gold) {
-                stage.setTitle("Entrepot d'Or " + ((Entrepot) ss).getId());
-                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + " Type: OR";
-                Text lb = new Text(out);
-                lb.setFont(new Font(20));
-                lb.setX(20);
-                lb.setY(20);
-                root.getChildren().add(lb);
-            } else {
-                stage.setTitle("Entrepot de Nickel " + ((Entrepot) ss).getId());
-                String out = "X: " + ss.getPosition().getX() + " Y: " + ss.getPosition().getY() + " Capacity: " + ss.getStockage() + " Type: NI";
-                Text lb = new Text(out);
-                lb.setFont(new Font(20));
-                lb.setX(20);
-                lb.setY(20);
-                root.getChildren().add(lb);
             }
         }
-
-
-        stage.setScene(sc);
-        stage.setResizable(false);
-        stage.show();
-
-        root.getChildren().removeAll();
-
         }
     }
 
