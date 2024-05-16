@@ -7,9 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-public class InfoCellule extends Stage {
+public class InfoCellule extends Info {
     private Sector s;
 
     public InfoCellule(Sector s) {
@@ -28,7 +27,7 @@ public class InfoCellule extends Stage {
 
         coord.getChildren().add(new Text(this.s.getPosition().toString()));
         Label type = new Label(genType());
-        Label cap = new Label(String.valueOf(this.s.getStockage()));
+        Label cap = new Label(genCapacity());
 
         Button fermer = new Button("Fermer");
 
@@ -38,7 +37,8 @@ public class InfoCellule extends Stage {
         this.setScene(s);
     }
 
-    private String genTitle() {
+    @Override
+    protected String genTitle() {
         if (this.s instanceof Mine) {
             if (((Mine) this.s).getType() == Ore.gold) {
                 return "Minerai d'Or " + ((Mine) this.s).getId();
@@ -58,7 +58,8 @@ public class InfoCellule extends Stage {
         }
     }
 
-    private String genType() {
+    @Override
+    protected String genType() {
         if (this.s instanceof Mine) {
             if (((Mine) this.s).getType() == Ore.gold) {
                 return "Type : OR";
@@ -71,6 +72,17 @@ public class InfoCellule extends Stage {
             } else {
                 return "Type : NI";
             }
+        } else {
+            return "";
+        }
+    }
+    private String genCapacity() {
+        if (this.s instanceof Mine) {
+            Mine m = (Mine) this.s;
+            return "Capacite : " + m.getStockage() + " / " + m.getmaxStockage();
+        } else if (this.s instanceof Entrepot) {
+            Entrepot e = (Entrepot) this.s;
+            return "Capacite : " + e.getStockage();
         } else {
             return "";
         }
