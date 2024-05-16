@@ -37,7 +37,7 @@ public class EventRobot implements EventHandler {
 
         if (robots.getType() == Ore.gold) {
             stage.setTitle("Robot d'or " + robots.getId());
-            String out = "X: " + robots.getPosition().getX() + " Y: " + robots.getPosition().getY() + " Capacity: " + robots.getCapacity() + "/" + robots.getMaxCapacity() + " Type: NI";
+            String out = "X: " + robots.getPosition().getX() + " Y: " + robots.getPosition().getY() + " Capacity: " + robots.getCapacity() + "/" + robots.getMaxCapacity() + " Type: OR";
             Text lb = new Text(out);
             lb.setFont(new Font(20));
             lb.setX(20);
@@ -45,7 +45,7 @@ public class EventRobot implements EventHandler {
             root.getChildren().add(lb);
         } else {
             stage.setTitle("Robot de Nickel " + (robots.getId()));
-            String out = "X: " + robots.getPosition().getX() + " Y: " + robots.getPosition().getY() + " Capacity: " + robots.getCapacity() + "/" + robots.getMaxCapacity() + " Type: OR";
+            String out = "X: " + robots.getPosition().getX() + " Y: " + robots.getPosition().getY() + " Capacity: " + robots.getCapacity() + "/" + robots.getMaxCapacity() + " Type: Ni";
             Text lb = new Text(out);
             lb.setFont(new Font(20));
             lb.setX(20);
