@@ -332,8 +332,13 @@ public class Main extends Stage {
         e1.setTranslateY(700);
         exit.getChildren().add(e1);
 
-
-
+        Group reset = new Group();
+        Button r1 = new Button("Reset");
+        r1.setPrefSize(90, 30);
+        r1.setFont(new Font(15));
+        r1.setTranslateX(950);
+        r1.setTranslateY(700);
+        reset.getChildren().add(r1);
 
         g.getChildren().add(sidebar);
         sidebar.getChildren().add(rectangle);
@@ -343,7 +348,7 @@ public class Main extends Stage {
         sidebar.getChildren().add(direction);
         sidebar.getChildren().add(recap);
         sidebar.getChildren().add(exit);
-
+        sidebar.getChildren().add(reset);
     }
 
     public VBox generateRecap(Grille grid) throws IOException {
