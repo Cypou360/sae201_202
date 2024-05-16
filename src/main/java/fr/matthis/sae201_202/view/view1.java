@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -36,26 +37,24 @@ public class view1 extends Application {
         Grille grid = new Grille();
         grid.initialisation();
 
-
-
-
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
 
         primaryStage.setTitle("Robot");
         primaryStage.setMaximized(true);
-        Group root = new Group();
+        HBox root = new HBox();
         Scene scene = new Scene(root, width, height);
         primaryStage.setScene(scene);
-        sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),grid);
         Stage stageRobot = new Stage();
         gridgen(root, (int) scene.getHeight(), grid, stageRobot);
+        sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),grid);
 
         primaryStage.show();
     }
 
-    public void gridgen(Group g, int height, Grille grille, Stage stage) throws IOException {
+    public void gridgen(HBox g, int height, Grille grille, Stage stage) throws IOException {
+        Group generalGrille = new Group();
         Group groupGrille = new Group();
         eventManager evGrille = new eventManager(grille);
         int cellsize = (height-100)/10;
@@ -138,57 +137,56 @@ public class view1 extends Application {
                 }
             }
         }
+
         Group groupRobot = new Group();
         // dessin des robots
         Robots[] robots = grille.getRobots();
         for (Robots r : robots) {
             EventRobot ev=new EventRobot(grille,r,stage);
             Coordonnee pos = r.getPosition();
-            Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
-            Rectangle ro2 = new Rectangle(96 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
-            Rectangle r2 = new Rectangle(ro.getX(),ro.getY(),ro.getWidth(),ro.getHeight());
+            Rectangle ro = new Rectangle(cellsize/2, cellsize/2); // steve ou alex
+            Rectangle ro2 = new Rectangle(cellsize/2, cellsize/2); // pioche
+
+            VBox robot = new VBox();
+            HBox hRobot = new HBox();
+            robot.setOnMouseClicked(ev);
+
+            hRobot.getChildren().add(ro);
 
             if (r.getType() == Ore.gold){
+                Image image = new Image(view1.class.getResource("Steve.jpg").openStream());
+                ImagePattern pattern = new ImagePattern(image);
+                ro.setFill(pattern);
+                if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.gold)){
+                    Image image1 = new Image(view1.class.getResource("pioche.png").openStream());
+                    ImagePattern pattern1 = new ImagePattern(image1);
+                    ro2.setFill(pattern1);
+                    hRobot.getChildren().add(ro2);
+                }
+            }else{
                 Image image = new Image(view1.class.getResource("Alex.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
-
-                r2.setFill(pattern);
-                r2.setOnMouseClicked(ev);
-                if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.gold)){
-                    Image image1 = new Image(view1.class.getResource("GoldPioche.jpg").openStream());
-                    ImagePattern pattern1 = new ImagePattern(image1);
-                    ro2.setFill(pattern1);
-                    g.getChildren().add(ro2);
-
-                }
-            }else{
-                Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
-                ImagePattern pattern = new ImagePattern(image);
-                ro.setFill(pattern);
-
-                r2.setFill(pattern);
-                r2.setOnMouseClicked(ev);
                 if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.nickel)){
-                    Image image1 = new Image(view1.class.getResource("FerPioche.jpg").openStream());
+                    Image image1 = new Image(view1.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
-                    g.getChildren().add(ro2);
+                    hRobot.getChildren().add(ro2);
                 }
             }
 
             String out = " " + r.getId();
-            Text t = new Text( 45 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
-            t.setFont(new Font(20));
+            Text t = new Text(out);
+            t.setFont(new Font(cellsize/3+3));
             t.setFill(Color.GOLD);
-            groupRobot.getChildren().add(ro);
-            groupRobot.getChildren().add(r2);
-            groupRobot.getChildren().add(t);
+
+            hRobot.setLayoutY(cellsize/2);
+            robot.getChildren().addAll(t,hRobot);
+            robot.setLayoutX(pos.getX()*cellsize);
+            robot.setLayoutY(pos.getY()*cellsize);
+            groupRobot.getChildren().add(robot);
 
 }
-
-
-
         // dessin de la grille
         for (int i = 0; i <= 10; i++) {
             Line l = new Line(prevX, 0, prevX, cellsize*10);
@@ -200,16 +198,16 @@ public class view1 extends Application {
             groupGrille.getChildren().add(l2);
         }
 
-        groupGrille.setLayoutX(50);
-        groupGrille.setLayoutY(50);
-        g.getChildren().add(groupGrille);
-        g.getChildren().add(groupRobot);
+        generalGrille.getChildren().add(groupGrille);
+        generalGrille.getChildren().add(groupRobot);
+
+        g.getChildren().add(generalGrille);
     }
 
-    public void sideBar(Group g,int h,int w,Grille grille){
+    public void sideBar(HBox g,int h,int w,Grille grille){
 
         Group sidebar = new Group();
-        Rectangle rectangle = new Rectangle(850,50,600,720);
+        Rectangle rectangle = new Rectangle(850,50,w/2 + 100,h/2);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
@@ -227,6 +225,7 @@ public class view1 extends Application {
         cb.setPrefSize(200, 30);
         cb.setStyle("-fx-font: 15px \"None\";");
         Robots[] robots = grille.getRobots();
+
         for (Robots ro: robots){
             String out = "Robot " + ro.getId();
             cb.getItems().add(out);
