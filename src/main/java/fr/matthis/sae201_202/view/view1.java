@@ -43,18 +43,18 @@ public class view1 extends Application {
         double height = screenSize.getHeight();
 
         primaryStage.setTitle("Robot");
-        Group grille = new Group();
-        Scene scene = new Scene(grille, width, height);
+        primaryStage.setMaximized(true);
+        Group root = new Group();
+        Scene scene = new Scene(root, width, height);
         primaryStage.setScene(scene);
-        sideBar(grille,(int) scene.getHeight(), (int) scene.getWidth(),grid);
-        gridgen(grille, (int) scene.getHeight(), grid);
+        sideBar(root,(int) scene.getHeight(), (int) scene.getWidth(),grid);
+        gridgen(root, (int) scene.getHeight(), grid);
 
         primaryStage.show();
     }
 
     public void gridgen(Group g, int height, Grille grille) throws IOException {
-        Group grilles = new Group();
-        int cellsize = (height - 100) / 10;
+        int cellsize = (height-100)/10;
         int prevX = 50;
         int prevY = 50;
 
@@ -69,13 +69,13 @@ public class view1 extends Application {
                     Image image = new Image(view1.class.getResource("herbe.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
-                    grilles.getChildren().add(r);
+                    g.getChildren().add(r);
 
                 } else if (ss instanceof Entrepot) {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    Rectangle r2 = new Rectangle(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+                    Rectangle r2 = new Rectangle(r.getX(),r.getY(),r.getWidth(),r.getHeight());
 
                     if (e.getType() == Ore.gold) {
                         Image image = new Image(view1.class.getResource("ChestOr.png").openStream());
@@ -83,26 +83,27 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev = new eventManager(grille);
+                        eventManager ev=new eventManager(grille);
                         r2.setOnMouseClicked(ev);
-                    } else {
+                    }
+                    else{
                         Image image = new Image(view1.class.getResource("ChestFer.png").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev = new eventManager(grille);
+                        eventManager ev=new eventManager(grille);
                         r2.setOnMouseClicked(ev);
                     }
 
-                    grilles.getChildren().add(r);
-                    grilles.getChildren().add(r2);
+                    g.getChildren().add(r);
+                    g.getChildren().add(r2);
 
                 } else if (ss instanceof Mine) {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
                     Rectangle r = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize, cellsize, cellsize);
-                    Rectangle r2 = new Rectangle(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+                    Rectangle r2 = new Rectangle(r.getX(),r.getY(),r.getWidth(),r.getHeight());
 
                     if (m.getMinerai() == Ore.gold) {
                         Image image = new Image(view1.class.getResource("Gold.jpg").openStream());
@@ -110,20 +111,21 @@ public class view1 extends Application {
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev = new eventManager(grille);
+                        eventManager ev=new eventManager(grille);
                         r2.setOnMouseClicked(ev);
-                    } else {
+                    }
+                    else{
                         Image image = new Image(view1.class.getResource("FEr.jpg").openStream());
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
-                        eventManager ev = new eventManager(grille);
+                        eventManager ev=new eventManager(grille);
                         r2.setOnMouseClicked(ev);
                     }
 
-                    grilles.getChildren().add(r);
-                    grilles.getChildren().add(r2);
+                    g.getChildren().add(r);
+                    g.getChildren().add(r2);
 
                 } else if (ss instanceof Lac) {
                     Lac l = ((Lac) ss);
@@ -132,62 +134,59 @@ public class view1 extends Application {
                     Image image = new Image(view1.class.getResource("eau.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
-                    grilles.getChildren().add(r);
+                    g.getChildren().add(r);
                 }
             }
         }
-
-        Group robot = new Group();
         // dessin des robots
         Robots[] robots = grille.getRobots();
         for (Robots r : robots) {
             Coordonnee pos = r.getPosition();
-            Rectangle ro = new Rectangle(50 + pos.getX() * cellsize, 50 + pos.getY() * cellsize + cellsize / 2, cellsize / 2, cellsize / 2);
-            Rectangle ro2 = new Rectangle(96 + pos.getX() * cellsize, 50 + pos.getY() * cellsize + cellsize / 2, cellsize / 2, cellsize / 2);
-            Rectangle r2 = new Rectangle(ro.getX(), ro.getY(), ro.getWidth(), ro.getHeight());
+            Rectangle ro = new Rectangle(50 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
+            Rectangle ro2 = new Rectangle(96 + pos.getX()*cellsize, 50 + pos.getY()*cellsize + cellsize/2, cellsize/2, cellsize/2);
+            Rectangle r2 = new Rectangle(ro.getX(),ro.getY(),ro.getWidth(),ro.getHeight());
 
-            if (r.getType() == Ore.gold) {
+            if (r.getType() == Ore.gold){
                 Image image = new Image(view1.class.getResource("Alex.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
 
                 r2.setFill(pattern);
-                EventRobot ev = new EventRobot(grille, r.getId());
+                EventRobot ev=new EventRobot(grille,r.getId());
                 r2.setOnMouseClicked(ev);
-                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.gold)) {
+                if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.gold)){
                     Image image1 = new Image(view1.class.getResource("GoldPioche.jpg").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
-                    robot.getChildren().add(ro2);
+                    g.getChildren().add(ro2);
 
                 }
-            } else {
+            }else{
                 Image image = new Image(view1.class.getResource("Robot.jpg").openStream());
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
 
                 r2.setFill(pattern);
-                EventRobot ev = new EventRobot(grille, r.getId());
+                EventRobot ev=new EventRobot(grille,r.getId());
                 r2.setOnMouseClicked(ev);
-                if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.nickel)) {
+                if ((grille.getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == Ore.nickel)){
                     Image image1 = new Image(view1.class.getResource("FerPioche.jpg").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
                     ro2.setFill(pattern1);
-                    robot.getChildren().add(ro2);
+                    g.getChildren().add(ro2);
                 }
             }
 
-
             String out = " " + r.getId();
-            Text t = new Text(45 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
+            Text t = new Text( 45 + pos.getX() * cellsize + 10, 50 + pos.getY() * cellsize + 25, out);
             t.setFont(new Font(20));
             t.setFill(Color.GOLD);
-            robot.getChildren().add(ro);
-            robot.getChildren().add(r2);
-            robot.getChildren().add(t);
+
+
+            g.getChildren().add(ro);
+            g.getChildren().add(r2);
+            g.getChildren().add(t);
         }
-        g.getChildren().add(grilles);
-        g.getChildren().add(robot);
         // dessin de la grille
         for (int i = 0; i <= 10; i++) {
             Line l = new Line(prevX, 50, prevX, cellsize*10+50);
