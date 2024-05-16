@@ -331,6 +331,7 @@ public class Main extends Stage {
         e1.setTranslateX(1230);
         e1.setTranslateY(700);
         exit.getChildren().add(e1);
+        e1.setOnMouseClicked(new EventManager(this));
 
         Group reset = new Group();
         Button r1 = new Button("Reset");
@@ -339,6 +340,8 @@ public class Main extends Stage {
         r1.setTranslateX(950);
         r1.setTranslateY(700);
         reset.getChildren().add(r1);
+        //r1.setOnMouseClicked(new EventManager(this));
+
 
         g.getChildren().add(sidebar);
         sidebar.getChildren().add(rectangle);
