@@ -340,7 +340,7 @@ public class Main extends Stage {
         r1.setTranslateX(950);
         r1.setTranslateY(700);
         reset.getChildren().add(r1);
-        //r1.setOnMouseClicked(new EventManager(this));
+        r1.setOnMouseClicked(new EventManager(this));
 
 
         g.getChildren().add(sidebar);
@@ -425,4 +425,14 @@ public class Main extends Stage {
         }
         return recap;
     }
+    /*public void reset() throws IOException {
+        this.close();
+        this.grid = new Grille();
+        this.grid.initialisation();
+        HBox root = (HBox) this.getScene().getRoot();
+        root.getChildren().remove(0);
+        root.getChildren().remove(1);
+        gridgen(root, (int) this.getHeight(), this.grid);
+        sideBar(root, (int) this.getHeight(), (int) this.getWidth(), this.grid);
+    }*/
 }

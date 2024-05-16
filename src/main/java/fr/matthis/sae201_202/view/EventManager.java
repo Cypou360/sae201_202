@@ -9,6 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
+import java.io.IOException;
+
 public class EventManager implements EventHandler  {
 
     private Main p;
@@ -61,6 +63,18 @@ public class EventManager implements EventHandler  {
                 p.close();
             }
         }
+        /*if (e.getSource() instanceof Button) {
+            Button clickedButton = (Button) e.getSource();
+            if (("Reset").equals(clickedButton.getText())) {
+                try {
+                    p.reset();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+
+            }
+        }*/
     }
 }
 
