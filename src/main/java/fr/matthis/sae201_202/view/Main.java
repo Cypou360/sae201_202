@@ -332,13 +332,13 @@ public class Main extends Stage {
         Button d3 = new Button("Est");
         d3.setPrefSize(90, 30);
         d3.setFont(new Font(15));
-        d3.setTranslateX(1060);
+        d3.setTranslateX(1160);
         d3.setTranslateY(250);
 
         Button d4 = new Button("Ouest");
         d4.setPrefSize(90, 30);
         d4.setFont(new Font(15));
-        d4.setTranslateX(1160);
+        d4.setTranslateX(1060);
         d4.setTranslateY(250);
 
         // Ajout des boutons dans le groupe direction
