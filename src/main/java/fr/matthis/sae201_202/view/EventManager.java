@@ -34,6 +34,7 @@ public class EventManager implements EventHandler {
         MouseEvent ev = ((MouseEvent) e);
         if (ev.getSource() instanceof Rectangle) {
             Rectangle r = (Rectangle) ev.getTarget();
+            // detection cellule cliquer
             if (r.getParent().getId().equals("grille")) {
                 int x = (int) r.getX() / p.getCellSize();
                 int y = (int) r.getY() / p.getCellSize();
@@ -102,6 +103,7 @@ public class EventManager implements EventHandler {
             } else {
                 System.out.println(e);
             }
+        p.update();
         }
     }
 

@@ -464,4 +464,15 @@ public class Main extends Stage {
         }
         return recap;
     }
+
+    public void update() {
+        Group rg = (Group) ((Group) ((HBox) this.getScene().getRoot()).getChildren().getFirst()).getChildren().get(1);
+        for (int i = 0 ; i < this.grid.getRobots().size() ; i++) {
+            Robots r = this.grid.getRobots().get(i);
+            VBox rb = (VBox) rg.getChildren().get(i);
+            Coordonnee pos = r.getPosition();
+            rb.setLayoutX(pos.getX() * this.cellSize);
+            rb.setLayoutY(pos.getY() * this.cellSize);
+        }
+    }
 }
