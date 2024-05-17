@@ -88,6 +88,11 @@ public class EventManager implements EventHandler {
                         r.goTo("N",p.getGrid());
                     }
                 }
+                try {
+                    p.update();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
 
             } else if (ev.getSource() instanceof VBox) {
@@ -105,7 +110,6 @@ public class EventManager implements EventHandler {
             } else {
                 System.out.println(e);
             }
-        p.update();
         }
     }
 

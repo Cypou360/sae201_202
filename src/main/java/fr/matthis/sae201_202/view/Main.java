@@ -167,7 +167,6 @@ public class Main extends Stage {
         for (Robots r : robots) {
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(this.cellSize / 2, this.cellSize / 2); // steve ou alex
-            Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
 
             VBox robot = new VBox();
             HBox hRobot = new HBox();
@@ -182,8 +181,10 @@ public class Main extends Stage {
                 if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.gold)) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
+                    Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
                     ro2.setFill(pattern1);
                     hRobot.getChildren().add(ro2);
+                    r.setPioche(true);
                 }
             } else {
                 Image image = new Image(launcher.class.getResource("Alex.jpg").openStream());
@@ -192,8 +193,10 @@ public class Main extends Stage {
                 if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.nickel)) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
+                    Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
                     ro2.setFill(pattern1);
                     hRobot.getChildren().add(ro2);
+                    r.setPioche(true);
                 }
             }
 
@@ -465,7 +468,7 @@ public class Main extends Stage {
         return recap;
     }
 
-    public void update() {
+    public void update() throws IOException {
         Group rg = (Group) ((Group) ((HBox) this.getScene().getRoot()).getChildren().getFirst()).getChildren().get(1);
         for (int i = 0 ; i < this.grid.getRobots().size() ; i++) {
             Robots r = this.grid.getRobots().get(i);
@@ -473,6 +476,26 @@ public class Main extends Stage {
             Coordonnee pos = r.getPosition();
             rb.setLayoutX(pos.getX() * this.cellSize);
             rb.setLayoutY(pos.getY() * this.cellSize);
+
+            HBox hRobot = (HBox) rb.getChildren().getLast();
+
+            Sector s = this.getGrid().getSector(pos.getX(),pos.getY());
+
+            if (s instanceof Mine && r.getCapacity() < r.getMaxCapacity()) {
+                if (((Mine) s).getType() == r.getType() && !r.isPioche()) {
+                    Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
+                    ImagePattern pattern1 = new ImagePattern(image1);
+                    Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
+                    ro2.setFill(pattern1);
+                    hRobot.getChildren().add(ro2);
+                    r.setPioche(true);
+                }
+            } else {
+                if (hRobot.getChildren().size() != 1) {
+                    hRobot.getChildren().remove(1);
+                    r.setPioche(false);
+                }
+            }
         }
     }
 }

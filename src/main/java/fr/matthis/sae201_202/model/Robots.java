@@ -11,6 +11,7 @@ public class Robots {
         this.id = idCounter;
         this.position = new Coordonnee(0, 0);
         idCounter++;
+        this.pioche = false;
     }
 
     public Robots(int x, int y, Ore type){
@@ -21,6 +22,7 @@ public class Robots {
         this.id = idCounter;
         this.position = new Coordonnee(x, y);
         idCounter++;
+        this.pioche = false;
     }
 
     private int maxCapacity;
@@ -29,6 +31,7 @@ public class Robots {
     private int id;
     private Coordonnee position;
     private static int idCounter = 1;
+    private boolean pioche;
 
     /* Permet de récupérer toutes les informations sur le robot */
     public String toString() {
@@ -143,5 +146,13 @@ public class Robots {
 
     public void setIdCounter(int idCounter) {
         Robots.idCounter = idCounter;
+    }
+
+    public boolean isPioche() {
+        return pioche;
+    }
+
+    public void setPioche(boolean pioche) {
+        this.pioche = pioche;
     }
 }
