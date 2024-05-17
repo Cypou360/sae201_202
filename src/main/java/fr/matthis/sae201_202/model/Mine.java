@@ -70,4 +70,7 @@ public class Mine extends Sector {
         return Integer.toString(maxStockage);
     }
 
+    public void setIdCounter(int idCounter) {
+        Mine.idCounter = idCounter;
+    }
 }
