@@ -492,7 +492,7 @@ public class Main extends Stage {
 
             Sector s = this.getGrid().getSector(pos.getX(),pos.getY());
 
-            if (s instanceof Mine && r.getCapacity() < r.getMaxCapacity()) {
+            if (s instanceof Mine && r.getCapacity() < r.getMaxCapacity() && (((Mine) s).getMinerai() ==r.getType())) {
                 if (((Mine) s).getType() == r.getType() && !r.isPioche()) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
