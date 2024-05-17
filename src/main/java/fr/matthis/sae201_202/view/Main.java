@@ -59,7 +59,7 @@ public class Main extends Stage {
 
         gridgen(root, this.grid);
         Rectangle espace = new Rectangle(50, height);
-        espace.setFill(Color.WHITE);
+        espace.setFill(Color.TRANSPARENT);
         root.getChildren().add(espace);
         sideBar(root, (int) scene.getHeight(), (int) scene.getWidth(), this.grid);
 
@@ -68,6 +68,9 @@ public class Main extends Stage {
 
         Image image = new Image(Main.class.getResource("icon.png").openStream());
         this.getIcons().add(image);
+
+        Image image2 = new Image(Main.class.getResource("MinecraftTexture.jpg").openStream());
+        scene.setFill(new ImagePattern(image2));
     }
 
     public void gridgen(HBox g, Grille grille) throws IOException {
@@ -224,29 +227,35 @@ public class Main extends Stage {
     }
 
     public void sideBar(HBox g, int h, int w, Grille grille) throws IOException {
+
         EventManager emgr = new EventManager(this);
 
+        // Création du groupe pour la sideBar et du rectangle pour mettre les actions.
         Group sidebar = new Group();
         Rectangle rectangle = new Rectangle(850, 50, 600, h - 105);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
+        // Création des lignes pour séparer les différentes actions.
         Group line = new Group();
         Line l = new Line(1150, 50, 1150, 200);
         Line l2 = new Line(850, 200, 1450, 200);
         Line l3 = new Line(850, 310, 1450, 310);
         line.getChildren().addAll(l, l2, l3);
 
+        // Création du groupe pour le choix du robot.
         Group robot = new Group();
         robot.setTranslateX(860);
         robot.setTranslateY(120);
 
+        //Création du choiceBox pour choisir le robot.
         ChoiceBox<String> cb = new ChoiceBox<>();
         cb.setId("idRobot");
         cb.setPrefSize(200, 30);
         cb.setStyle("-fx-font: 15px \"None\";");
-        ArrayList<Robots> robots = grille.getRobots();
 
+        // Ajout des robots dans le choiceBox.
+        ArrayList<Robots> robots = grille.getRobots();
         for (Robots ro : robots) {
             String out = "Robot " + ro.getId();
             cb.getItems().add(out);
@@ -255,12 +264,14 @@ public class Main extends Stage {
         robot.getChildren().add(cb);
         robot.setId("GroupeCb");
 
+        // Ajout du label pour le choix du robot.
         Label label = new Label("Selectionnez un robot");
         label.setFont(new Font(20));
         label.setTranslateX(0);
         label.setTranslateY(-60);
         robot.getChildren().add(label);
 
+        // Création du groupe pour les actions extraire et déposer
         Group action = new Group();
         Group boutonAct = new Group();
         boutonAct.setId("action");
@@ -270,6 +281,8 @@ public class Main extends Stage {
         b.setPrefSize(90, 30);
         b2.setStyle("-fx-font: 15px \"None\";");
         b2.setPrefSize(90, 30);
+
+        // Positionnement des boutons et création du label
         Label text = new Label("Selectionnez une action :");
         text.setFont(new Font(20));
         action.setTranslateX(1160);
@@ -278,17 +291,22 @@ public class Main extends Stage {
         b2.setTranslateY(60);
         b2.setTranslateX(150);
 
+        // Ajout des boutons dans le groupe action
         boutonAct.getChildren().addAll(b, b2);
         action.getChildren().addAll(text, boutonAct);
+
+        // Ajout des événements sur les boutons extraire et déposer
         b.setOnMouseClicked(emgr);
         b2.setOnMouseClicked(emgr);
 
+        // Création du groupe pour la direction
         Group direction = new Group();
         Label text2 = new Label("Selectionnez une direction :");
         text2.setFont(new Font(20));
         text2.setTranslateX(860);
         text2.setTranslateY(210);
 
+        // Création des boutons pour les directions
         Group boutonDir = new Group();
         boutonDir.setId("action");
         Button d1 = new Button("Nord");
@@ -314,13 +332,18 @@ public class Main extends Stage {
         d4.setFont(new Font(15));
         d4.setTranslateX(1160);
         d4.setTranslateY(250);
+
+        // Ajout des boutons dans le groupe direction
         boutonDir.getChildren().addAll(d1, d2, d3, d4);
         direction.getChildren().addAll(text2, boutonDir);
+
+        // Ajout des événements sur les boutons de direction
         d1.setOnMouseClicked(emgr);
         d2.setOnMouseClicked(emgr);
         d3.setOnMouseClicked(emgr);
         d4.setOnMouseClicked(emgr);
 
+        // Création du groupe pour le récapitulatif
         Group recap = new Group();
         Label text3 = new Label("Recapitulatif :");
         text3.setFont(new Font(20));
@@ -328,42 +351,46 @@ public class Main extends Stage {
         text3.setTranslateY(330);
         recap.getChildren().add(text3);
 
+
         VBox recapText = generateRecap(grille);
         recapText.setStyle("-fx-font: 15px \"None\";");
-        ;
         recapText.setTranslateX(860);
         recapText.setTranslateY(360);
+
+        // Ajout du récapitulatif dans le groupe recap
         recap.getChildren().add(recapText);
 
+        // Création du groupe pour le bouton quitter
         Group exit = new Group();
         Button e1 = new Button("Quitter");
         e1.setPrefSize(90, 30);
         e1.setFont(new Font(15));
         e1.setTranslateX(1230);
         e1.setTranslateY(h - 120);
+
+        // Ajout du bouton quitter dans le groupe exit
         exit.getChildren().add(e1);
+
+        // Ajout de l'événement sur le bouton quitter
         e1.setOnMouseClicked(emgr);
 
+        // Création du groupe pour le bouton reset
         Group reset = new Group();
         Button r1 = new Button("Reset");
         r1.setPrefSize(90, 30);
         r1.setFont(new Font(15));
         r1.setTranslateX(950);
         r1.setTranslateY(h - 120);
-        r1.setOnMouseClicked(emgr);
+
+        // Ajout du bouton reset dans le groupe reset
         reset.getChildren().add(r1);
 
+        // Ajout de l'événement sur le bouton reset
+        r1.setOnMouseClicked(emgr);
 
-
+        // Ajout des groupes dans le groupe sidebar
         g.getChildren().add(sidebar);
-        sidebar.getChildren().add(rectangle);
-        sidebar.getChildren().add(robot);
-        sidebar.getChildren().add(line);
-        sidebar.getChildren().add(action);
-        sidebar.getChildren().add(direction);
-        sidebar.getChildren().add(recap);
-        sidebar.getChildren().add(exit);
-        sidebar.getChildren().add(reset);
+        sidebar.getChildren().addAll(rectangle, robot, line, action, direction, recap, exit, reset);
     }
 
     public VBox generateRecap(Grille grid) throws IOException {
