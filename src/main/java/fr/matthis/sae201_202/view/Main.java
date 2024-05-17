@@ -292,10 +292,13 @@ public class Main extends Stage {
         boutonAct.setId("action");
         Button b = new Button("Extraire");
         Button b2 = new Button("Déposer");
+        Button b3 = new Button("Ne rien faire");
         b.setStyle("-fx-font: 15px \"None\";");
         b.setPrefSize(90, 30);
         b2.setStyle("-fx-font: 15px \"None\";");
         b2.setPrefSize(90, 30);
+        b3.setStyle("-fx-font: 15px \"None\";");
+
 
         // Positionnement des boutons et création du label
         Label text = new Label("Selectionnez une action :");
@@ -305,14 +308,17 @@ public class Main extends Stage {
         b.setTranslateY(60);
         b2.setTranslateY(60);
         b2.setTranslateX(150);
+        b3.setTranslateY(100);
+        b3.setTranslateX(75);
 
         // Ajout des boutons dans le groupe action
-        boutonAct.getChildren().addAll(b, b2);
+        boutonAct.getChildren().addAll(b, b2, b3);
         action.getChildren().addAll(text, boutonAct);
 
         // Ajout des événements sur les boutons extraire et déposer
         b.setOnMouseClicked(emgr);
         b2.setOnMouseClicked(emgr);
+        b3.setOnMouseClicked(emgr);
 
         // Création du groupe pour la direction
         Group direction = new Group();
@@ -401,17 +407,6 @@ public class Main extends Stage {
 
         // Ajout de l'événement sur le bouton reset
         r1.setOnMouseClicked(emgr);
-
-        // Création du groupe pour le bouton ne rien faire
-        Group rienFaire = new Group();
-        Button rF = new Button("Ne rien faire");
-        rF.setPrefSize(150, 30);
-        rF.setFont(new Font(15));
-        rF.setTranslateX(1080);
-        rF.setTranslateY(h - 120);
-
-        // Ajout du bouton ne rien faire dans le groupe ne rien faire
-        rienFaire.getChildren().add(rF);
 
         // Ajout des groupes dans le groupe sidebar
         sidebar.getChildren().addAll(rectangle, robot, line, action, direction, recap, exit, reset);
