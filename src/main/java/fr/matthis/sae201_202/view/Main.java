@@ -485,7 +485,8 @@ public class Main extends Stage {
 
         VBox vEntre = new VBox();
         vEntre.setId("boxEntre");
-        for (Entrepot entrepot : grid.getEntrepots()) {
+        //Ajout entrepots recap
+        for (Entrepot entrepot: grid.getEntrepots()) {
             Rectangle r4 = new Rectangle(20,20);
             HBox entrepotInfo = new HBox();
             if (entrepot.getType() == Ore.gold) {
@@ -540,6 +541,7 @@ public class Main extends Stage {
                     r.setPioche(false);
                 }
             }
+
         }
 
         //update recap
@@ -548,3 +550,5 @@ public class Main extends Stage {
 
     }
 }
+
+
