@@ -1,5 +1,6 @@
 package fr.matthis.sae201_202.view;
 
+import fr.matthis.sae201_202.model.Grille;
 import fr.matthis.sae201_202.model.Robots;
 import fr.matthis.sae201_202.model.Sector;
 import javafx.event.Event;
@@ -11,6 +12,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -19,6 +21,10 @@ public class EventManager implements EventHandler {
     private Main p;
     private Info info;
 
+    private Grille grille;
+
+    public EventManager(Main p) {
+        this.grille = grille;
 
     public EventManager(Main p) {
         this.p = p;
@@ -48,6 +54,7 @@ public class EventManager implements EventHandler {
             if (b.getText().equals("Fermer")) {
                 info.close();
             } else if (b.getText().equals("Quitter")) {
+            } else if (b.getText().equals("Reset")) {
                 p.close();
             } else if (b.getParent().getId().equals("action")){
                 Group sideBar = (Group) b.getParent().getParent().getParent();
@@ -70,7 +77,35 @@ public class EventManager implements EventHandler {
                         System.out.println(dir);
                     }
                 }
+                grille.getRobots().clear();
+                grille.getEntrepots().clear();
+                grille.getMines().clear();
+                launcher launcher = new launcher();
+                try {
+                    launcher.start(new Stage());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
+
+
+            } else if (ev.getSource() instanceof VBox) {
+                VBox v = (VBox) ev.getSource();
+                if (v.getParent().getId().equals("robot")) {
+                    int x = (int) ((v.getLayoutX()) / p.getCellSize());
+                    int y = (int) ((v.getLayoutY()) / p.getCellSize());
+                    Robots r = p.getGrid().getSector(x, y).getRobot();
+                    try {
+                        new InfoRobot(r);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            } else {
+                System.out.println(e);
+            }
+        }
+    }
         } else if (ev.getSource() instanceof VBox) {
                 VBox v = (VBox) ev.getSource();
                 if (v.getParent().getId().equals("robot")) {
@@ -88,6 +123,7 @@ public class EventManager implements EventHandler {
             }
         }
     }
+
 
 
 

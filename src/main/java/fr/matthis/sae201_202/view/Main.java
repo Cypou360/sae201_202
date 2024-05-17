@@ -20,9 +20,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main extends Stage {
-
 
     private int cellSize;
     private Grille grid;
@@ -73,7 +73,7 @@ public class Main extends Stage {
     public void gridgen(HBox g, Grille grille) throws IOException {
         Group generalGrille = new Group();
         Group groupGrille = new Group();
-        EventManager emgr = new EventManager(this);
+        EventManager emgr = new EventManager(this,grille);
 
         groupGrille.setId("grille");
 
@@ -160,7 +160,7 @@ public class Main extends Stage {
         Group groupRobot = new Group();
         groupRobot.setId("robot");
         // dessin des robots
-        Robots[] robots = grille.getRobots();
+        ArrayList<Robots> robots = grille.getRobots();
         for (Robots r : robots) {
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(this.cellSize / 2, this.cellSize / 2); // steve ou alex
@@ -245,7 +245,7 @@ public class Main extends Stage {
         cb.setId("idRobot");
         cb.setPrefSize(200, 30);
         cb.setStyle("-fx-font: 15px \"None\";");
-        Robots[] robots = grille.getRobots();
+        ArrayList<Robots> robots = grille.getRobots();
 
         for (Robots ro : robots) {
             String out = "Robot " + ro.getId();
@@ -282,8 +282,6 @@ public class Main extends Stage {
         action.getChildren().addAll(text, boutonAct);
         b.setOnMouseClicked(emgr);
         b2.setOnMouseClicked(emgr);
-
-
 
         Group direction = new Group();
         Label text2 = new Label("Selectionnez une direction :");
@@ -371,7 +369,7 @@ public class Main extends Stage {
         VBox recap = new VBox();
         Label espace = new Label("\n");
         Label espace2 = new Label("\n");
-        Robots[] robots = grid.getRobots();
+        ArrayList<Robots> robots = grid.getRobots();
         for (Robots r : robots) {
             HBox robotInfo = new HBox();
 
@@ -438,8 +436,4 @@ public class Main extends Stage {
         }
         return recap;
     }
-
-
-
-
 }
