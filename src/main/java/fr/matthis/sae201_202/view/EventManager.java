@@ -75,15 +75,17 @@ public class EventManager implements EventHandler {
                     Robots r = p.getGrid().getRobot(id);
                     if(b.getText().equals("Extraire")){
                         r.extraction(p.getGrid());
-                        System.out.println("extraction");
                     }
                     else if (b.getText().equals("Déposer")){
                         r.deposer(p.getGrid());
-                        System.out.println("déposer");
-                    }else {
-                        String dir = String.valueOf(((String) b.getText()).charAt(0));
-                        r.goTo(dir, p.getGrid());
-                        System.out.println(dir);
+                    } else if (b.getText().equals("Nord")) {
+                        r.goTo("O",p.getGrid());
+                    } else if (b.getText().equals("Sud")) {
+                        r.goTo("E",p.getGrid());
+                    } else if (b.getText().equals("Est")) {
+                        r.goTo("S",p.getGrid());
+                    } else if (b.getText().equals("Ouest")) {
+                        r.goTo("N",p.getGrid());
                     }
                 }
             }
