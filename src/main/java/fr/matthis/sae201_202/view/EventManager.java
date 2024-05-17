@@ -77,6 +77,9 @@ public class EventManager implements EventHandler {
                         r.extraction(p.getGrid());
                         cb.getItems().remove(r.getId()-1);
                     }
+                    else if (b.getText().equals("Ne rien faire")){
+                        cb.getItems().remove(r.getId()-1);
+                    }
                     else if (b.getText().equals("Déposer")){
                         r.deposer(p.getGrid());
                         cb.getItems().remove(r.getId()-1);
