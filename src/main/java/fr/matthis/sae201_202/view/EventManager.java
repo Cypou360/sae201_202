@@ -42,7 +42,10 @@ public class EventManager implements EventHandler  {
                 System.out.println("2");
                 info.close();
             }
-        } else if (ev.getSource() instanceof VBox) {
+            else if (ev.getSource() instanceof Button) {
+                p.close();
+            }
+        } else if (ev.getSource()instanceof VBox) {
             VBox v = (VBox) ev.getSource();
             if (v.getParent().getId().equals("robot")) {
                 int x = (int) ((v.getLayoutX())/p.getCellSize());
@@ -52,11 +55,7 @@ public class EventManager implements EventHandler  {
             }
         }
 
-        if (e.getSource() instanceof Button) {
-            Button clickedButton = (Button) e.getSource();
-            if ("Quitter".equals(clickedButton.getText())) {
-                p.close();
-            }
+
         }
         /*if (e.getSource() instanceof Button) {
             Button clickedButton = (Button) e.getSource();
@@ -71,7 +70,6 @@ public class EventManager implements EventHandler  {
             }
         }*/
     }
-}
 
 
 
