@@ -375,7 +375,7 @@ public class Main extends Stage {
         Button e1 = new Button("Quitter");
         e1.setPrefSize(90, 30);
         e1.setFont(new Font(15));
-        e1.setTranslateX(1230);
+        e1.setTranslateX(1330);
         e1.setTranslateY(h - 120);
 
         // Ajout du bouton quitter dans le groupe exit
@@ -389,7 +389,7 @@ public class Main extends Stage {
         Button r1 = new Button("Reset");
         r1.setPrefSize(90, 30);
         r1.setFont(new Font(15));
-        r1.setTranslateX(950);
+        r1.setTranslateX(900);
         r1.setTranslateY(h - 120);
 
         // Ajout du bouton reset dans le groupe reset
@@ -398,9 +398,20 @@ public class Main extends Stage {
         // Ajout de l'événement sur le bouton reset
         r1.setOnMouseClicked(emgr);
 
+        // Création du groupe pour le bouton ne rien faire
+        Group rienFaire = new Group();
+        Button rF = new Button("Ne rien faire");
+        rF.setPrefSize(150, 30);
+        rF.setFont(new Font(15));
+        rF.setTranslateX(1080);
+        rF.setTranslateY(h - 120);
+
+        // Ajout du bouton ne rien faire dans le groupe ne rien faire
+        rienFaire.getChildren().add(rF);
+
         // Ajout des groupes dans le groupe sidebar
         g.getChildren().add(sidebar);
-        sidebar.getChildren().addAll(rectangle, robot, line, action, direction, recap, exit, reset);
+        sidebar.getChildren().addAll(rectangle, robot, line, action, direction, recap, exit, reset, rienFaire);
     }
 
     public VBox generateRecap(Grille grid) throws IOException {
@@ -411,9 +422,9 @@ public class Main extends Stage {
         Label espace1 = new Label("\n");
         Label espace2 = new Label("\n");
 
-        espace.setFont(new Font(cellSize/10));
-        espace1.setFont(new Font(cellSize/10));
-        espace2.setFont(new Font(cellSize/10));
+        espace.setFont(new Font(cellSize / 10));
+        espace1.setFont(new Font(cellSize / 10));
+        espace2.setFont(new Font(cellSize / 10));
 
         VBox vRobot = new VBox();
         vRobot.setId("boxRobot");
@@ -425,7 +436,7 @@ public class Main extends Stage {
                 Label position = new Label(" Robot ID: " + r.getId() + " | " + " X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r3.setFill(pattern);
-                position.setFont(new Font(cellSize/6));
+                position.setFont(new Font(cellSize / 6));
                 robotInfo.getChildren().addAll(r3, position);
                 vRobot.getChildren().add(robotInfo);
             } else {
@@ -433,43 +444,43 @@ public class Main extends Stage {
                 Label position = new Label(" Robot ID: " + r.getId() + " | " + " X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r3.setFill(pattern);
-                position.setFont(new Font(cellSize/6));
+                position.setFont(new Font(cellSize / 6));
                 robotInfo.getChildren().addAll(r3, position);
                 vRobot.getChildren().add(robotInfo);
             }
         }
-        recap.getChildren().addAll(espace2,vRobot,espace);
+        recap.getChildren().addAll(espace2, vRobot, espace);
 
         VBox vMine = new VBox();
         vMine.setId("boxMine");
         for (Mine mine : grid.getMines()) {
             HBox mineInfo = new HBox();
 
-            Rectangle r4 = new Rectangle(20,20);
+            Rectangle r4 = new Rectangle(20, 20);
             if (mine.getMinerai() == Ore.gold) {
                 Image image = new Image(Main.class.getResource("Gold.jpg").openStream());
-                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " + mine.getStockage() + "/" + mine.getmaxStockage() + " | " + " Type: " + "OR");
+                Label mines = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " + mine.getStockage() + "/" + mine.getmaxStockage() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
-                mines.setFont(new Font(cellSize/6));
+                mines.setFont(new Font(cellSize / 6));
                 mineInfo.getChildren().addAll(r4, mines);
                 vMine.getChildren().add(mineInfo);
-            } else if (mine.getMinerai() == Ore.nickel){
+            } else if (mine.getMinerai() == Ore.nickel) {
                 Image image = new Image(Main.class.getResource("Nickel.jpg").openStream());
-                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " +mine.getStockage() + "/" + mine.getmaxStockage() + " | "+ " Type: " + "NI");
+                Label mines = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " + mine.getStockage() + "/" + mine.getmaxStockage() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
-                mines.setFont(new Font(cellSize/6));
+                mines.setFont(new Font(cellSize / 6));
                 mineInfo.getChildren().addAll(r4, mines);
                 vMine.getChildren().add(mineInfo);
             }
         }
-        recap.getChildren().addAll(vMine,espace1);
+        recap.getChildren().addAll(vMine, espace1);
 
         VBox vEntre = new VBox();
         vEntre.setId("boxEntre");
-        for (Entrepot entrepot: grid.getEntrepots()) {
-            Rectangle r4 = new Rectangle(20,20);
+        for (Entrepot entrepot : grid.getEntrepots()) {
+            Rectangle r4 = new Rectangle(20, 20);
             HBox entrepotInfo = new HBox();
             if (entrepot.getType() == Ore.gold) {
 
@@ -477,7 +488,7 @@ public class Main extends Stage {
                 Label entrepots = new Label(" Entrepot ID: " + entrepot.getId() + " | " + " X: " + entrepot.getPosition().getX() + " Y: " + entrepot.getPosition().getY() + " | " + " Capacity: " + entrepot.getStockage() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
-                entrepots.setFont(new Font(cellSize/6));
+                entrepots.setFont(new Font(cellSize / 6));
                 entrepotInfo.getChildren().addAll(r4, entrepots);
                 vEntre.getChildren().add(entrepotInfo);
             } else {
@@ -485,7 +496,7 @@ public class Main extends Stage {
                 Label entrepots = new Label(" Entrepot ID: " + entrepot.getId() + " | " + " X: " + entrepot.getPosition().getX() + " Y: " + entrepot.getPosition().getY() + " | " + " Capacity: " + entrepot.getStockage() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
-                entrepots.setFont(new Font(cellSize/6));
+                entrepots.setFont(new Font(cellSize / 6));
                 entrepotInfo.getChildren().addAll(r4, entrepots);
                 vEntre.getChildren().add(entrepotInfo);
             }
@@ -497,7 +508,7 @@ public class Main extends Stage {
     public void update() throws IOException {
         // update affichage robot
         Group rg = (Group) ((Group) ((HBox) this.getScene().getRoot()).getChildren().getFirst()).getChildren().get(1);
-        for (int i = 0 ; i < this.grid.getRobots().size() ; i++) {
+        for (int i = 0; i < this.grid.getRobots().size(); i++) {
             Robots r = this.grid.getRobots().get(i);
             VBox rb = (VBox) rg.getChildren().get(i);
             Coordonnee pos = r.getPosition();
@@ -506,9 +517,9 @@ public class Main extends Stage {
 
             HBox hRobot = (HBox) rb.getChildren().getLast();
 
-            Sector s = this.getGrid().getSector(pos.getX(),pos.getY());
+            Sector s = this.getGrid().getSector(pos.getX(), pos.getY());
 
-            if (s instanceof Mine && r.getCapacity() < r.getMaxCapacity() && (((Mine) s).getMinerai() ==r.getType())) {
+            if (s instanceof Mine && r.getCapacity() < r.getMaxCapacity() && (((Mine) s).getMinerai() == r.getType())) {
                 if (((Mine) s).getType() == r.getType() && !r.isPioche()) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
@@ -523,9 +534,12 @@ public class Main extends Stage {
                     r.setPioche(false);
                 }
             }
+
         }
 
         //update recap
         ObservableList<Node> rtg = (ObservableList<Node>) ((VBox) ((Group) ((Group) ((HBox) this.getScene().getRoot()).getChildren().getLast()).getChildren().get(5)).getChildren().getLast()).getChildren();
-    }
+        }
 }
+
+
