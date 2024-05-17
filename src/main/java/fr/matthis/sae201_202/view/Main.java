@@ -227,7 +227,7 @@ public class Main extends Stage {
         EventManager emgr = new EventManager(this);
 
         Group sidebar = new Group();
-        Rectangle rectangle = new Rectangle(850, 50, 600, 710);
+        Rectangle rectangle = new Rectangle(850, 50, 600, h - 105);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
@@ -251,7 +251,7 @@ public class Main extends Stage {
             String out = "Robot " + ro.getId();
             cb.getItems().add(out);
         }
-        cb.setValue("Selectionnez un robot");
+        cb.setValue("Selectionnez un robot ");
         robot.getChildren().add(cb);
         robot.setId("GroupeCb");
 
