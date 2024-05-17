@@ -10,8 +10,8 @@ public class InfoRobot extends Info {
 
     public InfoRobot(Robots ro) {
         super();
-        this.setTitle(genTitle());
         this.r = ro;
+        this.setTitle(genTitle());
         System.out.println(this.r);
         graphical();
         this.show();

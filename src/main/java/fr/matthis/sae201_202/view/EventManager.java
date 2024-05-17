@@ -42,17 +42,12 @@ public class EventManager implements EventHandler  {
                 System.out.println("2");
                 info.close();
             }
-        } else if (ev.getSource()instanceof VBox) {
+        } else if (ev.getSource() instanceof VBox) {
             VBox v = (VBox) ev.getSource();
             if (v.getParent().getId().equals("robot")) {
                 int x = (int) ((v.getLayoutX())/p.getCellSize());
                 int y = (int) ((v.getLayoutY())/p.getCellSize());
                 Robots r = p.getGrid().getSector(x,y).getRobot();
-
-                System.out.println("" + x + " " + y);
-
-                System.out.println(p.getGrid().getSector(x,y).getDisponible());
-                System.out.println(r);
                 new InfoRobot(r);
             }
         }
