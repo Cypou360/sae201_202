@@ -264,10 +264,13 @@ public class Main extends Stage {
 
         // Ajout des robots dans le choiceBox.
         ArrayList<Robots> robots = grille.getRobots();
-        for (Robots ro : robots) {
-            String out = "Robot " + ro.getId();
-            cb.getItems().add(out);
+        if (!(robots.size() < grille.getNbRobot())) {
+            for (Robots ro : robots) {
+                String out = "Robot " + ro.getId();
+                cb.getItems().add(out);
+            }
         }
+
         cb.setValue("Selectionnez un robot ");
         robot.getChildren().add(cb);
         robot.setId("GroupeCb");
@@ -499,7 +502,7 @@ public class Main extends Stage {
 
             Sector s = this.getGrid().getSector(pos.getX(),pos.getY());
 
-            if (s instanceof Mine && r.getCapacity() < r.getMaxCapacity()) {
+            if (s instanceof Mine && r.getCapacity() < r.getMaxCapacity() && (((Mine) s).getMinerai() ==r.getType())) {
                 if (((Mine) s).getType() == r.getType() && !r.isPioche()) {
                     Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
                     ImagePattern pattern1 = new ImagePattern(image1);
