@@ -425,6 +425,7 @@ public class Main extends Stage {
                 Label position = new Label(" Robot ID: " + r.getId() + " | " + " X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r3.setFill(pattern);
+                position.setFont(new Font(cellSize/6));
                 robotInfo.getChildren().addAll(r3, position);
                 vRobot.getChildren().add(robotInfo);
             } else {
@@ -432,6 +433,7 @@ public class Main extends Stage {
                 Label position = new Label(" Robot ID: " + r.getId() + " | " + " X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r3.setFill(pattern);
+                position.setFont(new Font(cellSize/6));
                 robotInfo.getChildren().addAll(r3, position);
                 vRobot.getChildren().add(robotInfo);
             }
@@ -449,6 +451,7 @@ public class Main extends Stage {
                 Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " + mine.getStockage() + "/" + mine.getmaxStockage() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
+                mines.setFont(new Font(cellSize/6));
                 mineInfo.getChildren().addAll(r4, mines);
                 vMine.getChildren().add(mineInfo);
             } else if (mine.getMinerai() == Ore.nickel){
@@ -456,6 +459,7 @@ public class Main extends Stage {
                 Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " +mine.getStockage() + "/" + mine.getmaxStockage() + " | "+ " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
+                mines.setFont(new Font(cellSize/6));
                 mineInfo.getChildren().addAll(r4, mines);
                 vMine.getChildren().add(mineInfo);
             }
@@ -473,6 +477,7 @@ public class Main extends Stage {
                 Label entrepots = new Label(" Entrepot ID: " + entrepot.getId() + " | " + " X: " + entrepot.getPosition().getX() + " Y: " + entrepot.getPosition().getY() + " | " + " Capacity: " + entrepot.getStockage() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
+                entrepots.setFont(new Font(cellSize/6));
                 entrepotInfo.getChildren().addAll(r4, entrepots);
                 vEntre.getChildren().add(entrepotInfo);
             } else {
@@ -480,6 +485,7 @@ public class Main extends Stage {
                 Label entrepots = new Label(" Entrepot ID: " + entrepot.getId() + " | " + " X: " + entrepot.getPosition().getX() + " Y: " + entrepot.getPosition().getY() + " | " + " Capacity: " + entrepot.getStockage() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
+                entrepots.setFont(new Font(cellSize/6));
                 entrepotInfo.getChildren().addAll(r4, entrepots);
                 vEntre.getChildren().add(entrepotInfo);
             }
