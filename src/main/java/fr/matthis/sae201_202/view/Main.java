@@ -437,14 +437,14 @@ public class Main extends Stage {
             Rectangle r4 = new Rectangle(20,20);
             if (mine.getMinerai() == Ore.gold) {
                 Image image = new Image(Main.class.getResource("Gold.jpg").openStream());
-                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + " Type: " + "OR");
+                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " + mine.getStockage() + "/" + mine.getmaxStockage() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
                 mineInfo.getChildren().addAll(r4, mines);
                 recap.getChildren().add(mineInfo);
             } else if (mine.getMinerai() == Ore.nickel){
                 Image image = new Image(Main.class.getResource("Nickel.jpg").openStream());
-                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + " Type: " + "NI");
+                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " +mine.getStockage() + "/" + mine.getmaxStockage() + " | "+ " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
                 mineInfo.getChildren().addAll(r4, mines);
