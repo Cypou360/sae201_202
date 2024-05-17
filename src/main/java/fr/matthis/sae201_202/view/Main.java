@@ -340,7 +340,7 @@ public class Main extends Stage {
         e1.setPrefSize(90, 30);
         e1.setFont(new Font(15));
         e1.setTranslateX(1230);
-        e1.setTranslateY(700);
+        e1.setTranslateY(h - 120);
         exit.getChildren().add(e1);
         e1.setOnMouseClicked(emgr);
 
@@ -349,7 +349,7 @@ public class Main extends Stage {
         r1.setPrefSize(90, 30);
         r1.setFont(new Font(15));
         r1.setTranslateX(950);
-        r1.setTranslateY(700);
+        r1.setTranslateY(h - 120);
         r1.setOnMouseClicked(emgr);
         reset.getChildren().add(r1);
 
