@@ -33,7 +33,11 @@ public class EventManager implements EventHandler  {
                 int x= (int) r.getX()/p.getCellSize();
                 int y= (int) r.getY()/p.getCellSize();
                 Sector s = p.getGrid().getSector(x, y);
-                new InfoCellule(s);
+                try {
+                    new InfoCellule(s);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         } else if (ev.getSource() instanceof Button) {
             Button b = (Button) ev.getSource();
@@ -49,7 +53,11 @@ public class EventManager implements EventHandler  {
                 int x = (int) ((v.getLayoutX())/p.getCellSize());
                 int y = (int) ((v.getLayoutY())/p.getCellSize());
                 Robots r = p.getGrid().getSector(x,y).getRobot();
-                new InfoRobot(r);
+                try {
+                    new InfoRobot(r);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         } else {
             System.out.println(e);

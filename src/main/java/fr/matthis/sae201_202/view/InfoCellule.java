@@ -1,30 +1,25 @@
 package fr.matthis.sae201_202.view;
 
 import fr.matthis.sae201_202.model.*;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 public class InfoCellule extends Info {
     private Sector s;
 
-    public InfoCellule(Sector s) {
+    public InfoCellule(Sector s) throws IOException {
         super();
         this.s = s;
         graphical();
         this.show();
     }
 
-    private void graphical() {
-        this.setResizable(false);
+    private void graphical() throws IOException {
         this.setTitle(genTitle());
-
-        VBox root = new VBox();
-        HBox coord = new HBox();
-
         coord.getChildren().add(new Text(this.s.getPosition().toString()));
         Label type = new Label(genType());
         Label cap = new Label(genCapacity());
@@ -32,10 +27,8 @@ public class InfoCellule extends Info {
         Button fermer = new Button("Fermer");
         fermer.setOnMouseClicked(new EventManager(this));
 
-        root.getChildren().addAll(coord, type, cap, fermer);
-
-        Scene s = new Scene(root,200, 100);
-        this.setScene(s);
+        root.getChildren().addAll(type, cap, fermer);
+        this.getIcons().add(genImage());
     }
 
     @Override
@@ -77,6 +70,28 @@ public class InfoCellule extends Info {
             return "";
         }
     }
+
+    @Override
+    protected Image genImage() throws IOException {
+        if (this.s instanceof Mine) {
+            if (((Mine) this.s).getType() == Ore.gold) {
+                return new Image(InfoCellule.class.getResource("Gold.jpg").openStream());
+            } else {
+                return new Image(InfoCellule.class.getResource("Nickel.jpg").openStream());
+            }
+        } else if (this.s instanceof Entrepot) {
+            if (((Entrepot) this.s).getType() == Ore.gold) {
+                return new Image(InfoCellule.class.getResource("ChestOr.png").openStream());
+            } else {
+                return new Image(InfoCellule.class.getResource("ChestNickel.png").openStream());
+            }
+        } else if (this.s instanceof Lac) {
+            return new Image(InfoCellule.class.getResource("eau.jpg").openStream());
+        } else {
+            return new Image(InfoCellule.class.getResource("herbe.jpg").openStream());
+        }
+    }
+
     private String genCapacity() {
         if (this.s instanceof Mine) {
             Mine m = (Mine) this.s;

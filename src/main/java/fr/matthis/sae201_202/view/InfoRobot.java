@@ -4,11 +4,14 @@ import fr.matthis.sae201_202.model.Ore;
 import fr.matthis.sae201_202.model.Robots;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+
+import java.io.IOException;
 
 public class InfoRobot extends Info {
     private Robots r;
 
-    public InfoRobot(Robots ro) {
+    public InfoRobot(Robots ro) throws IOException {
         super();
         this.r = ro;
         this.setTitle(genTitle());
@@ -16,7 +19,7 @@ public class InfoRobot extends Info {
         this.show();
     }
 
-    private void graphical() {
+    private void graphical() throws IOException {
         this.coord.getChildren().add(new Label(this.r.getPosition().toString()));
         Label type = new Label(genType());
         String capT = "" + this.r.getCapacity() + " / " + this.r.getMaxCapacity();
@@ -26,6 +29,7 @@ public class InfoRobot extends Info {
         fermer.setOnMouseClicked(new EventManager(this));
 
         this.root.getChildren().addAll(type,cap,fermer);
+        this.getIcons().add(genImage());
     }
 
     @Override
@@ -43,6 +47,15 @@ public class InfoRobot extends Info {
             return "Type : OR";
         } else {
             return "Type : NI";
+        }
+    }
+
+    @Override
+    protected Image genImage() throws IOException {
+        if (this.r.getType() == Ore.gold) {
+            return new Image(InfoRobot.class.getResource("Steve.jpg").openStream());
+        } else {
+            return new Image(InfoRobot.class.getResource("Alex.jpg").openStream());
         }
     }
 }
