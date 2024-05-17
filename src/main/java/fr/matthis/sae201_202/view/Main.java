@@ -27,6 +27,7 @@ public class Main extends Stage {
     private int cellSize;
     private Grille grid;
     private int nbTour;
+    private double height;
 
     public int getCellSize() {
         return cellSize;
@@ -52,7 +53,7 @@ public class Main extends Stage {
 
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
         double width = screenSize.getWidth();
-        double height = screenSize.getHeight();
+        this.height = screenSize.getHeight();
 
         this.cellSize = (int) ((height - 100) / 10);
 
@@ -66,7 +67,7 @@ public class Main extends Stage {
         Rectangle espace = new Rectangle(50, height);
         espace.setFill(Color.TRANSPARENT);
         root.getChildren().add(espace);
-        sideBar(root, (int) scene.getHeight(), (int) scene.getWidth(), this.grid);
+        root.getChildren().add(sideBar());
 
         root.setLayoutY(50);
         root.setLayoutX(50);
@@ -234,9 +235,12 @@ public class Main extends Stage {
         g.getChildren().add(generalGrille);
     }
 
-    public void sideBar(HBox g, int h, int w, Grille grille) throws IOException {
+    public Group sideBar() throws IOException {
 
         EventManager emgr = new EventManager(this);
+
+        Grille grille = this.grid;
+        int h = (int) this.height;
 
         // Création du groupe pour la sideBar et du rectangle pour mettre les actions.
         Group sidebar = new Group();
@@ -399,8 +403,8 @@ public class Main extends Stage {
         r1.setOnMouseClicked(emgr);
 
         // Ajout des groupes dans le groupe sidebar
-        g.getChildren().add(sidebar);
         sidebar.getChildren().addAll(rectangle, robot, line, action, direction, recap, exit, reset);
+        return sidebar;
     }
 
     public VBox generateRecap(Grille grid) throws IOException {
@@ -464,7 +468,7 @@ public class Main extends Stage {
 
         VBox vEntre = new VBox();
         vEntre.setId("boxEntre");
-        for (Entrepot entrepot: grid.getEntrepots()) {
+        for (Entrepot entrepot : grid.getEntrepots()) {
             Rectangle r4 = new Rectangle(20,20);
             HBox entrepotInfo = new HBox();
             if (entrepot.getType() == Ore.gold) {
@@ -520,6 +524,8 @@ public class Main extends Stage {
         }
 
         //update recap
-        ObservableList<Node> rtg = (ObservableList<Node>) ((VBox) ((Group) ((Group) ((HBox) this.getScene().getRoot()).getChildren().getLast()).getChildren().get(5)).getChildren().getLast()).getChildren();
+        ((HBox) this.getScene().getRoot()).getChildren().removeLast();
+        ((HBox) this.getScene().getRoot()).getChildren().add(sideBar());
+
     }
 }
