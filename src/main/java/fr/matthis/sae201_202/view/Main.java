@@ -23,6 +23,7 @@ import java.io.IOException;
 
 public class Main extends Stage {
 
+
     private int cellSize;
     private Grille grid;
 
@@ -223,6 +224,7 @@ public class Main extends Stage {
     }
 
     public void sideBar(HBox g, int h, int w, Grille grille) throws IOException {
+        EventManager emgr = new EventManager(this);
 
         Group sidebar = new Group();
         Rectangle rectangle = new Rectangle(850, 50, 600, 710);
@@ -240,6 +242,7 @@ public class Main extends Stage {
         robot.setTranslateY(120);
 
         ChoiceBox<String> cb = new ChoiceBox<>();
+        cb.setId("idRobot");
         cb.setPrefSize(200, 30);
         cb.setStyle("-fx-font: 15px \"None\";");
         Robots[] robots = grille.getRobots();
@@ -250,6 +253,7 @@ public class Main extends Stage {
         }
         cb.setValue("Selectionnez un robot");
         robot.getChildren().add(cb);
+        robot.setId("GroupeCb");
 
         Label label = new Label("Selectionnez un robot");
         label.setFont(new Font(20));
@@ -259,6 +263,7 @@ public class Main extends Stage {
 
         Group action = new Group();
         Group boutonAct = new Group();
+        boutonAct.setId("action");
         Button b = new Button("Extraire");
         Button b2 = new Button("Déposer");
         b.setStyle("-fx-font: 15px \"None\";");
@@ -275,6 +280,9 @@ public class Main extends Stage {
 
         boutonAct.getChildren().addAll(b, b2);
         action.getChildren().addAll(text, boutonAct);
+        b.setOnMouseClicked(emgr);
+        b2.setOnMouseClicked(emgr);
+
 
 
         Group direction = new Group();
@@ -284,6 +292,7 @@ public class Main extends Stage {
         text2.setTranslateY(210);
 
         Group boutonDir = new Group();
+        boutonDir.setId("action");
         Button d1 = new Button("Nord");
         d1.setPrefSize(90, 30);
         d1.setFont(new Font(15));
@@ -309,6 +318,10 @@ public class Main extends Stage {
         d4.setTranslateY(250);
         boutonDir.getChildren().addAll(d1, d2, d3, d4);
         direction.getChildren().addAll(text2, boutonDir);
+        d1.setOnMouseClicked(emgr);
+        d2.setOnMouseClicked(emgr);
+        d3.setOnMouseClicked(emgr);
+        d4.setOnMouseClicked(emgr);
 
         Group recap = new Group();
         Label text3 = new Label("Recapitulatif :");
@@ -331,7 +344,7 @@ public class Main extends Stage {
         e1.setTranslateX(1230);
         e1.setTranslateY(700);
         exit.getChildren().add(e1);
-        e1.setOnMouseClicked(new EventManager(this));
+        e1.setOnMouseClicked(emgr);
 
         Group reset = new Group();
         Button r1 = new Button("Reset");
@@ -340,7 +353,7 @@ public class Main extends Stage {
         r1.setTranslateX(950);
         r1.setTranslateY(700);
         reset.getChildren().add(r1);
-        r1.setOnMouseClicked(new EventManager(this));
+
 
 
         g.getChildren().add(sidebar);
@@ -425,14 +438,8 @@ public class Main extends Stage {
         }
         return recap;
     }
-    /*public void reset() throws IOException {
-        this.close();
-        this.grid = new Grille();
-        this.grid.initialisation();
-        HBox root = (HBox) this.getScene().getRoot();
-        root.getChildren().remove(0);
-        root.getChildren().remove(1);
-        gridgen(root, (int) this.getHeight(), this.grid);
-        sideBar(root, (int) this.getHeight(), (int) this.getWidth(), this.grid);
-    }*/
+
+
+
+
 }
