@@ -49,10 +49,10 @@ public class EventManager implements EventHandler {
             if (b.getText().equals("Fermer")) {
                 info.close();
             } else if (b.getText().equals("Reset")) {
+                p.getGrid().getRobots().clear();
+                p.getGrid().getMines().clear();
+                p.getGrid().getEntrepots().clear();
                 p.close();
-                grille.getRobots().clear();
-                grille.getEntrepots().clear();
-                grille.getMines().clear();
                 launcher launcher = new launcher();
                 try {
                     launcher.start(new Stage());
