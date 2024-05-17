@@ -17,7 +17,7 @@ public class Robots {
     public Robots(int x, int y, Ore type){
         Random r = new Random();
         this.maxCapacity = r.nextInt(5,10);
-        this.capacity = 3;
+        this.capacity = 0;
         this.type = type;
         this.id = idCounter;
         this.position = new Coordonnee(x, y);
