@@ -26,6 +26,7 @@ public class Main extends Stage {
 
     private int cellSize;
     private Grille grid;
+    private int nbTour;
 
     public int getCellSize() {
         return cellSize;
@@ -33,6 +34,10 @@ public class Main extends Stage {
 
     public Grille getGrid() {
         return grid;
+    }
+
+    public int getNbTour() {
+        return nbTour++;
     }
 
     public Main() throws IOException {
@@ -352,13 +357,14 @@ public class Main extends Stage {
         text3.setFont(new Font(20));
         text3.setTranslateX(860);
         text3.setTranslateY(330);
-        recap.getChildren().add(text3);
-
+        recap.getChildren().addAll(text3);
 
         VBox recapText = generateRecap(grille);
         recapText.setStyle("-fx-font: 15px \"None\";");
         recapText.setTranslateX(860);
         recapText.setTranslateY(360);
+
+
 
         // Ajout du récapitulatif dans le groupe recap
         recap.getChildren().add(recapText);
@@ -400,7 +406,12 @@ public class Main extends Stage {
         VBox recap = new VBox();
         Label espace = new Label("\n");
         Label espace2 = new Label("\n");
+        Label espace3 = new Label("\n");
         ArrayList<Robots> robots = grid.getRobots();
+        recap.getChildren().add(espace3);
+
+
+
         for (Robots r : robots) {
             HBox robotInfo = new HBox();
 
@@ -429,14 +440,14 @@ public class Main extends Stage {
             Rectangle r4 = new Rectangle(20,20);
             if (mine.getMinerai() == Ore.gold) {
                 Image image = new Image(Main.class.getResource("Gold.jpg").openStream());
-                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + " Type: " + "OR");
+                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " + mine.getStockage() + "/" + mine.getmaxStockage() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
                 mineInfo.getChildren().addAll(r4, mines);
                 recap.getChildren().add(mineInfo);
             } else if (mine.getMinerai() == Ore.nickel){
                 Image image = new Image(Main.class.getResource("Nickel.jpg").openStream());
-                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + " Type: " + "NI");
+                Label mines  = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " +mine.getStockage() + "/" + mine.getmaxStockage() + " | "+ " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
                 mineInfo.getChildren().addAll(r4, mines);
