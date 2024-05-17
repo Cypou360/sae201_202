@@ -51,10 +51,19 @@ public class EventManager implements EventHandler {
             } else if (b.getText().equals("Quitter")) {
                 p.close();
             } else if (b.getText().equals("Reset")) {
+                p.getGrid().getRobots().get(0).setIdCounter(1);
+                p.getGrid().getMines().get(0).setIdCounter(1);
+                p.getGrid().getEntrepots().get(0).setIdCounter(1);
                 p.getGrid().getRobots().clear();
                 p.getGrid().getMines().clear();
                 p.getGrid().getEntrepots().clear();
                 p.close();
+                launcher launcher = new launcher();
+                try {
+                    launcher.start(new Stage());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             } else if (b.getParent().getId().equals("action")){
                 Group sideBar = (Group) b.getParent().getParent().getParent();
                 ChoiceBox cb = (ChoiceBox) ((Group)sideBar.getChildren().get(1)).getChildren().get(0);
@@ -78,18 +87,6 @@ public class EventManager implements EventHandler {
                 }
             }
 
-            } else if (ev.getSource() instanceof VBox) {
-                VBox v = (VBox) ev.getSource();
-                if (v.getParent().getId().equals("robot")) {
-                    int x = (int) ((v.getLayoutX()) / p.getCellSize());
-                    int y = (int) ((v.getLayoutY()) / p.getCellSize());
-                    Robots r = p.getGrid().getSector(x, y).getRobot();
-                    try {
-                        new InfoRobot(r);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
             } else if (ev.getSource() instanceof VBox) {
                 VBox v = (VBox) ev.getSource();
                 if (v.getParent().getId().equals("robot")) {

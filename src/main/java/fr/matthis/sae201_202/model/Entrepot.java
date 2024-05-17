@@ -50,4 +50,8 @@ public class Entrepot extends Sector {
         return Integer.toString(id);
     }
 
+
+    public void setIdCounter(int idCounter) {
+        Entrepot.idCounter = idCounter;
+    }
 }
