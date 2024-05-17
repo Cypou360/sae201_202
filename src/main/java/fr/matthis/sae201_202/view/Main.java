@@ -483,7 +483,8 @@ public class Main extends Stage {
         vEntre.setId("boxEntre");
         for (Entrepot entrepot : grid.getEntrepots()) {
             Rectangle r4 = new Rectangle(20, 20);
-        //Ajout entrepots recap
+            //Ajout entrepots recap
+        }
         for (Entrepot entrepot: grid.getEntrepots()) {
             Rectangle r4 = new Rectangle(20,20);
             HBox entrepotInfo = new HBox();
