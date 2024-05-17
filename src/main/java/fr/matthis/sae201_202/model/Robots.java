@@ -18,7 +18,8 @@ public class Robots {
         this.maxCapacity = r.nextInt(5,10);
         this.capacity = 3;
         this.type = type;
-        this.id = idCounter;
+        this.id = 0;
+        this.id += idCounter;
         this.position = new Coordonnee(x, y);
         idCounter++;
     }

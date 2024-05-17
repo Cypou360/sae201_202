@@ -20,6 +20,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main extends Stage {
 
@@ -72,7 +73,7 @@ public class Main extends Stage {
     public void gridgen(HBox g, Grille grille) throws IOException {
         Group generalGrille = new Group();
         Group groupGrille = new Group();
-        EventManager emgr = new EventManager(this);
+        EventManager emgr = new EventManager(this,grille);
 
         groupGrille.setId("grille");
 
@@ -159,7 +160,7 @@ public class Main extends Stage {
         Group groupRobot = new Group();
         groupRobot.setId("robot");
         // dessin des robots
-        Robots[] robots = grille.getRobots();
+        ArrayList<Robots> robots = grille.getRobots();
         for (Robots r : robots) {
             Coordonnee pos = r.getPosition();
             Rectangle ro = new Rectangle(this.cellSize / 2, this.cellSize / 2); // steve ou alex
@@ -242,7 +243,7 @@ public class Main extends Stage {
         ChoiceBox<String> cb = new ChoiceBox<>();
         cb.setPrefSize(200, 30);
         cb.setStyle("-fx-font: 15px \"None\";");
-        Robots[] robots = grille.getRobots();
+        ArrayList<Robots> robots = grille.getRobots();
 
         for (Robots ro : robots) {
             String out = "Robot " + ro.getId();
@@ -331,7 +332,7 @@ public class Main extends Stage {
         e1.setTranslateX(1230);
         e1.setTranslateY(700);
         exit.getChildren().add(e1);
-        e1.setOnMouseClicked(new EventManager(this));
+        e1.setOnMouseClicked(new EventManager(this,grille));
 
         Group reset = new Group();
         Button r1 = new Button("Reset");
@@ -340,7 +341,7 @@ public class Main extends Stage {
         r1.setTranslateX(950);
         r1.setTranslateY(700);
         reset.getChildren().add(r1);
-        r1.setOnMouseClicked(new EventManager(this));
+        r1.setOnMouseClicked(new EventManager(this,grille));
 
 
         g.getChildren().add(sidebar);
@@ -358,7 +359,7 @@ public class Main extends Stage {
         VBox recap = new VBox();
         Label espace = new Label("\n");
         Label espace2 = new Label("\n");
-        Robots[] robots = grid.getRobots();
+        ArrayList<Robots> robots = grid.getRobots();
         for (Robots r : robots) {
             HBox robotInfo = new HBox();
 
