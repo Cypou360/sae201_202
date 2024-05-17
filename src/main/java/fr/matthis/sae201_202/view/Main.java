@@ -264,10 +264,13 @@ public class Main extends Stage {
 
         // Ajout des robots dans le choiceBox.
         ArrayList<Robots> robots = grille.getRobots();
-        for (Robots ro : robots) {
-            String out = "Robot " + ro.getId();
-            cb.getItems().add(out);
+        if (!(robots.size() < grille.getNbRobot())) {
+            for (Robots ro : robots) {
+                String out = "Robot " + ro.getId();
+                cb.getItems().add(out);
+            }
         }
+
         cb.setValue("Selectionnez un robot ");
         robot.getChildren().add(cb);
         robot.setId("GroupeCb");
