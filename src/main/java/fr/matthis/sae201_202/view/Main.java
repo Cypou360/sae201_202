@@ -46,15 +46,15 @@ public class Main extends Stage {
         this.show();
     }
 
-    private void graphical() throws IOException {
+    private void graphical() throws IOException { //Methode pour afficher l'ensemble des elements
         this.grid = new Grille();
         this.grid.initialisation();
 
-        Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+        Rectangle2D screenSize = Screen.getPrimary().getVisualBounds(); //Responsive avec taille d'ecran de l'utilisateur
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
 
-        this.cellSize = (int) ((height - 100) / 10);
+        this.cellSize = (int) ((height - 100) / 10); //taille d'un Secteur en graphique
 
         this.setTitle("Robot");
         this.setMaximized(true);
@@ -62,23 +62,23 @@ public class Main extends Stage {
         Scene scene = new Scene(root, width, height);
         this.setScene(scene);
 
-        gridgen(root, this.grid);
+        gridgen(root, this.grid); //Methode generation de la grille
         Rectangle espace = new Rectangle(50, height);
         espace.setFill(Color.TRANSPARENT);
         root.getChildren().add(espace);
-        sideBar(root, (int) scene.getHeight(), (int) scene.getWidth(), this.grid);
+        sideBar(root, (int) scene.getHeight(), (int) scene.getWidth(), this.grid); //Methode generation de la barre latéral
 
         root.setLayoutY(50);
         root.setLayoutX(50);
 
-        Image image = new Image(Main.class.getResource("icon.png").openStream());
+        Image image = new Image(Main.class.getResource("icon.png").openStream()); //Texture à partir du doisser ressources
         this.getIcons().add(image);
 
-        Image image2 = new Image(Main.class.getResource("MinecraftTexture.jpg").openStream());
+        Image image2 = new Image(Main.class.getResource("MinecraftTexture.jpg").openStream()); //Texture
         scene.setFill(new ImagePattern(image2));
     }
 
-    public void gridgen(HBox g, Grille grille) throws IOException {
+    public void gridgen(HBox g, Grille grille) throws IOException { //Methode generation grille
         Group generalGrille = new Group();
         Group groupGrille = new Group();
         EventManager emgr = new EventManager(this);
@@ -234,7 +234,7 @@ public class Main extends Stage {
         g.getChildren().add(generalGrille);
     }
 
-    public void sideBar(HBox g, int h, int w, Grille grille) throws IOException {
+    public void sideBar(HBox g, int h, int w, Grille grille) throws IOException { //Methode barre lateral
 
         EventManager emgr = new EventManager(this);
 
@@ -414,11 +414,11 @@ public class Main extends Stage {
         sidebar.getChildren().addAll(rectangle, robot, line, action, direction, recap, exit, reset, rienFaire);
     }
 
-    public VBox generateRecap(Grille grid) throws IOException {
+    public VBox generateRecap(Grille grid) throws IOException { //Genration du recapitulatif dans la barre lateral
         VBox recap = new VBox();
-        ArrayList<Robots> robots = grid.getRobots();
+        ArrayList<Robots> robots = grid.getRobots(); //Recuperer les robots depuis la Grille
 
-        Label espace = new Label("\n");
+        Label espace = new Label("\n"); //Different espace entres les Secteur
         Label espace1 = new Label("\n");
         Label espace2 = new Label("\n");
 
@@ -428,6 +428,7 @@ public class Main extends Stage {
 
         VBox vRobot = new VBox();
         vRobot.setId("boxRobot");
+        //Ajout robots recap
         for (Robots r : robots) {
             HBox robotInfo = new HBox();
             Rectangle r3 = new Rectangle(20, 20);
@@ -453,6 +454,7 @@ public class Main extends Stage {
 
         VBox vMine = new VBox();
         vMine.setId("boxMine");
+        //Ajout mine recap
         for (Mine mine : grid.getMines()) {
             HBox mineInfo = new HBox();
 
@@ -481,6 +483,9 @@ public class Main extends Stage {
         vEntre.setId("boxEntre");
         for (Entrepot entrepot : grid.getEntrepots()) {
             Rectangle r4 = new Rectangle(20, 20);
+        //Ajout entrepots recap
+        for (Entrepot entrepot: grid.getEntrepots()) {
+            Rectangle r4 = new Rectangle(20,20);
             HBox entrepotInfo = new HBox();
             if (entrepot.getType() == Ore.gold) {
 
@@ -505,7 +510,7 @@ public class Main extends Stage {
         return recap;
     }
 
-    public void update() throws IOException {
+    public void update() throws IOException { //Methode mise à jour en temps reel
         // update affichage robot
         Group rg = (Group) ((Group) ((HBox) this.getScene().getRoot()).getChildren().getFirst()).getChildren().get(1);
         for (int i = 0; i < this.grid.getRobots().size(); i++) {
