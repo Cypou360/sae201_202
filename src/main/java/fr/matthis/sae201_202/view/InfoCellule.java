@@ -30,6 +30,7 @@ public class InfoCellule extends Info {
         Label cap = new Label(genCapacity());
 
         Button fermer = new Button("Fermer");
+        fermer.setOnMouseClicked(new EventManager(this));
 
         root.getChildren().addAll(coord, type, cap, fermer);
 

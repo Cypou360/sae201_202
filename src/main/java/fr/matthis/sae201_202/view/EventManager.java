@@ -36,10 +36,8 @@ public class EventManager implements EventHandler  {
                 new InfoCellule(s);
             }
         } else if (ev.getSource() instanceof Button) {
-            System.out.println("1");
             Button b = (Button) ev.getSource();
             if (b.getText().equals("Fermer")) {
-                System.out.println("2");
                 info.close();
             }
             else if (ev.getSource() instanceof Button) {
@@ -53,23 +51,11 @@ public class EventManager implements EventHandler  {
                 Robots r = p.getGrid().getSector(x,y).getRobot();
                 new InfoRobot(r);
             }
+        } else {
+            System.out.println(e);
         }
-
-
-        }
-        /*if (e.getSource() instanceof Button) {
-            Button clickedButton = (Button) e.getSource();
-            if (("Reset").equals(clickedButton.getText())) {
-                try {
-                    p.reset();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-
-            }
-        }*/
     }
+}
 
 
 

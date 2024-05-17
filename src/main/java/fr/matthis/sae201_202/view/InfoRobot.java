@@ -12,7 +12,6 @@ public class InfoRobot extends Info {
         super();
         this.r = ro;
         this.setTitle(genTitle());
-        System.out.println(this.r);
         graphical();
         this.show();
     }
