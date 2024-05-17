@@ -111,6 +111,22 @@ public class TestRobot {
         assertTrue(rbts2.deposer(grille));
     }
 
+    /** Teste si un robot peut déposer des minerais en dehors des entrepots**/
+    @Test
+    public void DepositOutEntrepot() throws Exception {
+        Robots rbts2 = new Robots(5,6,Ore.nickel);
+        assertTrue(rbts.deposer(grille));
+        assertTrue(rbts2.deposer(grille));
+    }
+
+    /** Teste si un robot peut déposer des minerais **/
+    @Test
+    public void ExtractOutMine() throws Exception {
+        Robots rbts2 = new Robots(5,6,Ore.nickel);
+        assertTrue(rbts.extraction(grille));
+        assertTrue(rbts2.extraction(grille));
+    }
+
     /** Nettoie **/
     @AfterEach
     void clean() {
