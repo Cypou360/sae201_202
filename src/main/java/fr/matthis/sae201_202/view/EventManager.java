@@ -91,12 +91,9 @@ public class EventManager implements EventHandler {
                         }
                     }
 
-                    System.out.println(cb.getItems());
-                    System.out.println(idRobot);
 
                     if(b.getText().equals("Extraire")){
                         r.extraction(p.getGrid());
-                        System.out.println(r.getCapacity());
                         cb.getItems().remove(idRobot);
                     }
                     else if (b.getText().equals("Ne rien faire")){

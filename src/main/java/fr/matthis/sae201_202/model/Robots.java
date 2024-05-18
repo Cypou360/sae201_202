@@ -55,8 +55,6 @@ public class Robots {
                     }else {
                         extraction += r.nextInt(1, 4);
                     }
-
-                    System.out.println("Extraction: " + extraction);
                     if (capacity <= maxCapacity - extraction){
                         if (m.stockage >= extraction){
                             m.stockage -= extraction;
