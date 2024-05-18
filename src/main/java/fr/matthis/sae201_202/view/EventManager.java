@@ -102,7 +102,7 @@ public class EventManager implements EventHandler {
                             cb.getItems().remove(idRobot);
                         }
                         else {
-                            Label l = new Label("Capaciter déja au maximum!");
+                            Label l = new Label(" Capaciter déja au maximum ! ");
                             l.setFont(new Font(20));
                             group.getChildren().add(l);
                             stage.setTitle("Extraction");
@@ -120,15 +120,30 @@ public class EventManager implements EventHandler {
                         cb.getItems().remove(idRobot);
                     }
                     else if (b.getText().equals("Déposer")){
-                        r.deposer(p.getGrid());
-                        cb.getItems().remove(idRobot);
+                        if (r.getCapacity() != 0) {
+                            r.deposer(p.getGrid());
+                            cb.getItems().remove(idRobot);
+                        }else {
+                            Label l = new Label(" Depot pas possible ! ");
+                            l.setFont(new Font(20));
+                            group.getChildren().add(l);
+                            stage.setTitle("Deposer");
+                            Image image = null;
+                            try {
+                                image = new Image(Main.class.getResource("Panneau interdit.png").openStream());
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            stage.getIcons().add(image);
+                            stage.show();
+                        }
                     } else if (b.getText().equals("Nord")) {
                         if (r.getPosition().getY() > 0 && p.getGrid().getSector(r.getPosition().getX(),r.getPosition().getY()-1).getDisponible()) {
                             r.goTo("O", p.getGrid());
                             cb.getItems().remove(idRobot);
                         }
                         else {
-                            Label l = new Label("Impossible d'aller au nord");
+                            Label l = new Label(" Impossible d'aller au nord ! ");
                             l.setFont(new Font(20));
                             group.getChildren().add(l);
                             stage.setTitle("Direction");
@@ -147,7 +162,7 @@ public class EventManager implements EventHandler {
                             cb.getItems().remove(idRobot);
                         }
                         else {
-                            Label l = new Label("Impossible d'aller au sud");
+                            Label l = new Label(" Impossible d'aller au sud ! ");
                             l.setFont(new Font(20));
                             group.getChildren().add(l);
                             stage.setTitle("Direction");
@@ -166,7 +181,7 @@ public class EventManager implements EventHandler {
                             cb.getItems().remove(idRobot);
                         }
                         else {
-                            Label l = new Label("Impossible d'aller a l'est");
+                            Label l = new Label(" Impossible d'aller a l'est ! ");
                             l.setFont(new Font(20));
                             group.getChildren().add(l);
                             stage.setTitle("Direction");
@@ -185,7 +200,7 @@ public class EventManager implements EventHandler {
                             cb.getItems().remove(idRobot);
                         }
                         else {
-                            Label l = new Label("Impossible d'aller a l'ouest");
+                            Label l = new Label(" Impossible d'aller a l'ouest ! ");
                             l.setFont(new Font(20));
                             group.getChildren().add(l);
                             stage.setTitle("Direction");
@@ -200,7 +215,7 @@ public class EventManager implements EventHandler {
                         }
                     }
                 }else{
-                    Label l = new Label("Veuillez choisir un robot !");
+                    Label l = new Label(" Veuillez choisir un robot ! ");
                     l.setFont(new Font(20));
                     group.getChildren().add(l);
                     stage.setTitle("Choix");
