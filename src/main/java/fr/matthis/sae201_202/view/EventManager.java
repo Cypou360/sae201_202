@@ -9,9 +9,12 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -113,7 +116,23 @@ public class EventManager implements EventHandler {
                         cb.getItems().remove(idRobot);
                     }
                 }else{
-                    System.out.println("Veuillez choisir une action");
+                    Stage s = new Stage();
+                    Group g = new Group();
+                    Scene sc = new Scene(g);
+                    s.setScene(sc);
+                    s.setResizable(false);
+                    Label l = new Label("Veuillez choisir un robot !");
+                    l.setFont(new Font(20));
+                    g.getChildren().add(l);
+                    s.setTitle("Choix");
+                    Image image = null;
+                    try {
+                        image = new Image(Main.class.getResource("Panneau interdit.png").openStream());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    s.getIcons().add(image);
+                    s.show();
                 }
                 try {
                     p.update();
