@@ -49,7 +49,14 @@ public class Robots {
             if (m.getMinerai() == type){
                 if (m.stockage > 0){
                     Random r = new Random();
-                    int extraction = r.nextInt(1,4);
+                    int extraction = 0;
+                    if (maxCapacity-capacity +1 <4) {
+                        extraction += r.nextInt(1, (maxCapacity - capacity + 1));
+                    }else {
+                        extraction += r.nextInt(1, 4);
+                    }
+
+                    System.out.println("Extraction: " + extraction);
                     if (capacity <= maxCapacity - extraction){
                         if (m.stockage >= extraction){
                             m.stockage -= extraction;
