@@ -73,29 +73,53 @@ public class EventManager implements EventHandler {
                     String nb = valeur.replace("Robot ", "");
                     int id = Integer.valueOf(nb);
                     Robots r = p.getGrid().getRobot(id);
+                    if (cb.getItems().isEmpty()){
+                        System.out.println(cb.getItems());
+                        for (Robots ro : p.getGrid().getRobots()) {
+                            String out = "Robot " + ro.getId();
+                            cb.getItems().add(out);
+                        }
+                    }
+                    int cpt = 0;
+                    int idRobot = 0;
+
+                    for (Object s: cb.getItems()){
+                        if (s == cb.getValue()){
+                            idRobot += cpt;
+                        }else{
+                            cpt += 1;
+                        }
+                    }
+
+                    System.out.println(cb.getItems());
+                    System.out.println(idRobot);
+
                     if(b.getText().equals("Extraire")){
                         r.extraction(p.getGrid());
-                        cb.getItems().remove(r.getId()-1);
+                        System.out.println(r.getCapacity());
+                        cb.getItems().remove(idRobot);
                     }
                     else if (b.getText().equals("Ne rien faire")){
-                        cb.getItems().remove(r.getId()-1);
+                        cb.getItems().remove(idRobot);
                     }
                     else if (b.getText().equals("Déposer")){
                         r.deposer(p.getGrid());
-                        cb.getItems().remove(r.getId()-1);
+                        cb.getItems().remove(idRobot);
                     } else if (b.getText().equals("Nord")) {
                         r.goTo("O",p.getGrid());
-                        cb.getItems().remove(r.getId()-1);
+                        cb.getItems().remove(idRobot);
                     } else if (b.getText().equals("Sud")) {
                         r.goTo("E",p.getGrid());
-                        cb.getItems().remove(r.getId()-1);
+                        cb.getItems().remove(idRobot);
                     } else if (b.getText().equals("Est")) {
                         r.goTo("S",p.getGrid());
-                        cb.getItems().remove(r.getId()-1);
+                        cb.getItems().remove(idRobot);
                     } else if (b.getText().equals("Ouest")) {
                         r.goTo("N",p.getGrid());
-                        cb.getItems().remove(r.getId()-1);
+                        cb.getItems().remove(idRobot);
                     }
+
+
                 }
                 try {
                     p.update();
@@ -103,6 +127,7 @@ public class EventManager implements EventHandler {
                     throw new RuntimeException(ex);
                 }
             }
+
 
             } else if (ev.getSource() instanceof VBox) {
                 VBox v = (VBox) ev.getSource();
@@ -119,6 +144,8 @@ public class EventManager implements EventHandler {
             } else {
                 System.out.println(e);
             }
+
+
         }
     }
 

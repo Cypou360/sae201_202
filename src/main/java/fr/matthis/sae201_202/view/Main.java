@@ -41,8 +41,11 @@ public class Main extends Stage {
         return nbTour++;
     }
 
+    public ChoiceBox<String> cb;
+
     public Main() throws IOException {
         super();
+        this.cb = new ChoiceBox<>();
         graphical();
         this.show();
     }
@@ -260,15 +263,13 @@ public class Main extends Stage {
         robot.setTranslateX(860);
         robot.setTranslateY(120);
 
-        //Création du choiceBox pour choisir le robot.
-        ChoiceBox<String> cb = new ChoiceBox<>();
         cb.setId("idRobot");
         cb.setPrefSize(200, 30);
         cb.setStyle("-fx-font: 15px \"None\";");
 
         // Ajout des robots dans le choiceBox.
         ArrayList<Robots> robots = grille.getRobots();
-        if (!(robots.size() < grille.getNbRobot())) {
+        if (cb.getItems().isEmpty()) {
             for (Robots ro : robots) {
                 String out = "Robot " + ro.getId();
                 cb.getItems().add(out);
