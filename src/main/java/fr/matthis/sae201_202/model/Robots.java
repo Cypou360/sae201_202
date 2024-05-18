@@ -51,7 +51,7 @@ public class Robots {
                     Random r = new Random();
                     int extraction = 0;
                     if (maxCapacity-capacity +1 <4) {
-                        extraction += r.nextInt(0, (maxCapacity - capacity + 1));
+                        extraction += r.nextInt(1, (maxCapacity - capacity + 1));
                     }else {
                         extraction += r.nextInt(1, 4);
                     }
