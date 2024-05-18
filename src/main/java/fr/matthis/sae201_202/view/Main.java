@@ -269,14 +269,16 @@ public class Main extends Stage {
 
         // Ajout des robots dans le choiceBox.
         ArrayList<Robots> robots = grille.getRobots();
-        if (cb.getItems().isEmpty()) {
+        if (cb.getItems().size() == 1 || cb.getItems().size() == 0) {
+            if (!cb.getItems().contains("Selectionnez un robot")){
+                cb.getItems().add("Selectionnez un robot");
+            }
             for (Robots ro : robots) {
                 String out = "Robot " + ro.getId();
                 cb.getItems().add(out);
             }
         }
-
-        cb.setValue("Selectionnez un robot ");
+        cb.setValue(cb.getItems().get(0));
         robot.getChildren().add(cb);
         robot.setId("GroupeCb");
 

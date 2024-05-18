@@ -82,7 +82,6 @@ public class EventManager implements EventHandler {
                     }
                     int cpt = 0;
                     int idRobot = 0;
-
                     for (Object s: cb.getItems()){
                         if (s == cb.getValue()){
                             idRobot += cpt;
@@ -90,8 +89,6 @@ public class EventManager implements EventHandler {
                             cpt += 1;
                         }
                     }
-
-
                     if(b.getText().equals("Extraire")){
                         r.extraction(p.getGrid());
                         cb.getItems().remove(idRobot);
@@ -115,8 +112,8 @@ public class EventManager implements EventHandler {
                         r.goTo("N",p.getGrid());
                         cb.getItems().remove(idRobot);
                     }
-
-
+                }else{
+                    System.out.println("Veuillez choisir une action");
                 }
                 try {
                     p.update();
@@ -124,27 +121,23 @@ public class EventManager implements EventHandler {
                     throw new RuntimeException(ex);
                 }
             }
-
-
-            } else if (ev.getSource() instanceof VBox) {
-                VBox v = (VBox) ev.getSource();
-                if (v.getParent().getId().equals("robot")) {
-                    int x = (int) ((v.getLayoutX()) / p.getCellSize());
-                    int y = (int) ((v.getLayoutY()) / p.getCellSize());
-                    Robots r = p.getGrid().getSector(x, y).getRobot();
-                    try {
-                        new InfoRobot(r);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
+        } else if (ev.getSource() instanceof VBox) {
+            VBox v = (VBox) ev.getSource();
+            if (v.getParent().getId().equals("robot")) {
+                int x = (int) ((v.getLayoutX()) / p.getCellSize());
+                int y = (int) ((v.getLayoutY()) / p.getCellSize());
+                Robots r = p.getGrid().getSector(x, y).getRobot();
+                try {
+                    new InfoRobot(r);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
-            } else {
-                System.out.println(e);
             }
-
-
+        } else {
+            System.out.println(e);
         }
     }
+}
 
 
 
