@@ -26,7 +26,8 @@ public class Main extends Stage {
 
     private int cellSize;
     private Grille grid;
-    private int nbTour;
+    private int nbTour = -1;
+    private Label labeltour = null;
     private double height;
 
     public int getCellSize() {
@@ -270,6 +271,8 @@ public class Main extends Stage {
         // Ajout des robots dans le choiceBox.
         ArrayList<Robots> robots = grille.getRobots();
         if (cb.getItems().size() == 1 || cb.getItems().size() == 0) {
+            nbTour += 1;
+            labeltour = new Label("NbTour : " + String.valueOf(nbTour));
             if (!cb.getItems().contains("Selectionnez un robot")){
                 cb.getItems().add("Selectionnez un robot");
             }
@@ -405,6 +408,13 @@ public class Main extends Stage {
         r1.setTranslateX(900);
         r1.setTranslateY(h - 120);
 
+        // Affichage nombre de tour
+        Group tour = new Group();
+        labeltour.setFont(new Font(25));
+        labeltour.setTranslateX(1100);
+        labeltour.setTranslateY(h-120);
+        tour.getChildren().addAll(labeltour);
+
         // Ajout du bouton reset dans le groupe reset
         reset.getChildren().add(r1);
 
@@ -412,7 +422,7 @@ public class Main extends Stage {
         r1.setOnMouseClicked(emgr);
 
         // Ajout des groupes dans le groupe sidebar
-        sidebar.getChildren().addAll(rectangle, robot, line, action, direction, recap, exit, reset);
+        sidebar.getChildren().addAll(rectangle, robot, line, action, direction, recap, exit, reset, tour);
         return sidebar;
     }
 
