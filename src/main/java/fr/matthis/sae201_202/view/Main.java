@@ -65,21 +65,23 @@ public class Main extends Stage {
         this.setMaximized(true);
         HBox root = new HBox();
         Scene scene = new Scene(root, width, height);
+        scene.setFill(Color.TRANSPARENT);
         this.setScene(scene);
 
         gridgen(root, this.grid); //Methode generation de la grille
-        Rectangle espace = new Rectangle(50, height);
+        Rectangle espace = new Rectangle(200, height);
         espace.setFill(Color.TRANSPARENT);
         root.getChildren().add(espace);
         root.getChildren().add(sideBar());
 
         root.setLayoutY(50);
         root.setLayoutX(50);
+        root.setStyle("-fx-background-color: transparent;");
 
         Image image = new Image(Main.class.getResource("icon.png").openStream()); //Texture à partir du doisser ressources
         this.getIcons().add(image);
 
-        Image image2 = new Image(Main.class.getResource("MinecraftTexture.jpg").openStream()); //Texture
+        Image image2 = new Image(Main.class.getResource("MinecraftTexture.png").openStream()); //Texture
         scene.setFill(new ImagePattern(image2));
     }
 
@@ -248,20 +250,20 @@ public class Main extends Stage {
 
         // Création du groupe pour la sideBar et du rectangle pour mettre les actions.
         Group sidebar = new Group();
-        Rectangle rectangle = new Rectangle(850, 50, 600, h - 105);
+        Rectangle rectangle = new Rectangle(950, 50, 600, h - 100);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
         // Création des lignes pour séparer les différentes actions.
         Group line = new Group();
-        Line l = new Line(1150, 50, 1150, 200);
-        Line l2 = new Line(850, 200, 1450, 200);
-        Line l3 = new Line(850, 310, 1450, 310);
+        Line l = new Line(1250, 50, 1250, 200);
+        Line l2 = new Line(950, 200, 1550, 200);
+        Line l3 = new Line(950, 310, 1550, 310);
         line.getChildren().addAll(l, l2, l3);
 
         // Création du groupe pour le choix du robot.
         Group robot = new Group();
-        robot.setTranslateX(860);
+        robot.setTranslateX(960);
         robot.setTranslateY(120);
 
         cb.setId("idRobot");
@@ -309,9 +311,10 @@ public class Main extends Stage {
         // Positionnement des boutons et création du label
         Label text = new Label("Selectionnez une action :");
         text.setFont(new Font(20));
-        action.setTranslateX(1160);
+        action.setTranslateX(1260);
         action.setTranslateY(60);
         b.setTranslateY(60);
+        b.setTranslateX(0);
         b2.setTranslateY(60);
         b2.setTranslateX(150);
         b3.setTranslateY(100);
@@ -330,7 +333,7 @@ public class Main extends Stage {
         Group direction = new Group();
         Label text2 = new Label("Selectionnez une direction :");
         text2.setFont(new Font(20));
-        text2.setTranslateX(860);
+        text2.setTranslateX(960);
         text2.setTranslateY(210);
 
         // Création des boutons pour les directions
@@ -339,25 +342,25 @@ public class Main extends Stage {
         Button d1 = new Button("Nord");
         d1.setPrefSize(90, 30);
         d1.setFont(new Font(15));
-        d1.setTranslateX(860);
+        d1.setTranslateX(960);
         d1.setTranslateY(250);
 
         Button d2 = new Button("Sud");
         d2.setPrefSize(90, 30);
         d2.setFont(new Font(15));
-        d2.setTranslateX(960);
+        d2.setTranslateX(1060);
         d2.setTranslateY(250);
 
         Button d3 = new Button("Est");
         d3.setPrefSize(90, 30);
         d3.setFont(new Font(15));
-        d3.setTranslateX(1160);
+        d3.setTranslateX(1260);
         d3.setTranslateY(250);
 
         Button d4 = new Button("Ouest");
         d4.setPrefSize(90, 30);
         d4.setFont(new Font(15));
-        d4.setTranslateX(1060);
+        d4.setTranslateX(1160);
         d4.setTranslateY(250);
 
         // Ajout des boutons dans le groupe direction
@@ -374,13 +377,13 @@ public class Main extends Stage {
         Group recap = new Group();
         Label text3 = new Label("Recapitulatif :");
         text3.setFont(new Font(20));
-        text3.setTranslateX(860);
+        text3.setTranslateX(960);
         text3.setTranslateY(330);
         recap.getChildren().addAll(text3);
 
         VBox recapText = generateRecap(grille);
         recapText.setStyle("-fx-font: 15px \"None\";");
-        recapText.setTranslateX(860);
+        recapText.setTranslateX(960);
         recapText.setTranslateY(360);
 
         // Ajout du récapitulatif dans le groupe recap
@@ -391,7 +394,7 @@ public class Main extends Stage {
         Button e1 = new Button("Quitter");
         e1.setPrefSize(90, 30);
         e1.setFont(new Font(15));
-        e1.setTranslateX(1330);
+        e1.setTranslateX(1430);
         e1.setTranslateY(h - 120);
 
         // Ajout du bouton quitter dans le groupe exit
@@ -405,13 +408,13 @@ public class Main extends Stage {
         Button r1 = new Button("Reset");
         r1.setPrefSize(90, 30);
         r1.setFont(new Font(15));
-        r1.setTranslateX(900);
+        r1.setTranslateX(1000);
         r1.setTranslateY(h - 120);
 
         // Affichage nombre de tour
         Group tour = new Group();
         labeltour.setFont(new Font(25));
-        labeltour.setTranslateX(1100);
+        labeltour.setTranslateX(1200);
         labeltour.setTranslateY(h-120);
         tour.getChildren().addAll(labeltour);
 
