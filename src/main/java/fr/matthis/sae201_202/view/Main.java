@@ -88,6 +88,10 @@ public class Main extends Stage {
     public void gridgen(HBox g, Grille grille) throws IOException { //Methode generation grille
         Group generalGrille = new Group();
         Group groupGrille = new Group();
+        Group Mine = new Group();
+        Group Entrepot = new Group();
+        Group Lac = new Group();
+        Group Vide = new Group();
         EventManager emgr = new EventManager(this);
 
         groupGrille.setId("grille");
@@ -106,14 +110,18 @@ public class Main extends Stage {
                     Image image = new Image(launcher.class.getResource("herbe.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
-                    groupGrille.getChildren().add(r);
+                    Vide.getChildren().add(r);
                     r.setOnMouseClicked(emgr);
-
                 } else if (ss instanceof Entrepot) {
                     Entrepot e = ((Entrepot) ss);
                     Coordonnee pos = e.getPosition();
                     Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
                     Rectangle r2 = new Rectangle(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+                    Text l = new Text("" + e.getId());
+                    l.setFont(new Font(this.cellSize / 3 + 3));
+                    l.setFill(Color.BLUE);
+                    l.setLayoutX(e.getPosition().getX() * this.cellSize +65);
+                    l.setLayoutY(e.getPosition().getY() * this.cellSize +35);
 
                     if (e.getType() == Ore.gold) {
                         Image image = new Image(launcher.class.getResource("ChestOr.png").openStream());
@@ -130,16 +138,17 @@ public class Main extends Stage {
                         r2.setFill(pattern);
                         r2.setOnMouseClicked(emgr);
                     }
-
-                    groupGrille.getChildren().add(r);
-                    groupGrille.getChildren().add(r2);
-
+                    Entrepot.getChildren().addAll(r,r2,l);
                 } else if (ss instanceof Mine) {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
                     Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
                     Rectangle r2 = new Rectangle(r.getX(), r.getY(), r.getWidth(), r.getHeight());
-
+                    Text l = new Text("" + m.getId());
+                    l.setFont(new Font(this.cellSize / 3 + 3));
+                    l.setFill(Color.RED);
+                    l.setLayoutX(m.getPosition().getX() * this.cellSize +65);
+                    l.setLayoutY(m.getPosition().getY() * this.cellSize +35);
                     if (m.getMinerai() == Ore.gold) {
                         Image image = new Image(launcher.class.getResource("Gold.jpg").openStream());
                         ImagePattern pattern = new ImagePattern(image);
@@ -155,10 +164,7 @@ public class Main extends Stage {
                         r2.setFill(pattern);
                         r2.setOnMouseClicked(emgr);
                     }
-
-                    groupGrille.getChildren().add(r);
-                    groupGrille.getChildren().add(r2);
-
+                    Mine.getChildren().addAll(r,r2,l);
                 } else if (ss instanceof Lac) {
                     Lac l = ((Lac) ss);
                     Coordonnee pos = l.getPosition();
@@ -166,12 +172,15 @@ public class Main extends Stage {
                     Image image = new Image(launcher.class.getResource("eau.jpg").openStream());
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
-                    groupGrille.getChildren().add(r);
+                    Lac.getChildren().add(r);
                     r.setOnMouseClicked(emgr);
                 }
             }
         }
-
+        groupGrille.getChildren().add(Vide);
+        groupGrille.getChildren().add(Mine);
+        groupGrille.getChildren().add(Entrepot);
+        groupGrille.getChildren().add(Lac);
         Group groupRobot = new Group();
         groupRobot.setId("robot");
         // dessin des robots
