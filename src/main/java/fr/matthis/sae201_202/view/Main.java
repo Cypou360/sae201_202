@@ -310,11 +310,11 @@ public class Main extends Stage {
         Button b = new Button("Extraire");
         Button b2 = new Button("Déposer");
         Button b3 = new Button("Ne rien faire");
-        b.setStyle("-fx-font: 15px \"None\";");
+        b.setFont(new Font(15));
         b.setPrefSize(90, 30);
-        b2.setStyle("-fx-font: 15px \"None\";");
+        b2.setFont(new Font(15));
         b2.setPrefSize(90, 30);
-        b3.setStyle("-fx-font: 15px \"None\";");
+        b3.setFont(new Font(15));
 
 
         // Positionnement des boutons et création du label

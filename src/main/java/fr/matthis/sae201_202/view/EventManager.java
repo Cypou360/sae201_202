@@ -42,7 +42,7 @@ public class EventManager implements EventHandler {
                 int y = (int) r.getY() / p.getCellSize();
                 Sector s = p.getGrid().getSector(x, y);
                 try {
-                    new InfoCellule(s);
+                    new InfoCell(s);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }

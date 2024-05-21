@@ -8,10 +8,10 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-public class InfoCellule extends Info {
+public class InfoCell extends Info {
     private Sector s;
 
-    public InfoCellule(Sector s) throws IOException {
+    public InfoCell(Sector s) throws IOException {
         super();
         this.s = s;
         graphical();
@@ -75,20 +75,20 @@ public class InfoCellule extends Info {
     protected Image genImage() throws IOException {
         if (this.s instanceof Mine) {
             if (((Mine) this.s).getType() == Ore.gold) {
-                return new Image(InfoCellule.class.getResource("Gold.jpg").openStream());
+                return new Image(InfoCell.class.getResource("Gold.jpg").openStream());
             } else {
-                return new Image(InfoCellule.class.getResource("Nickel.jpg").openStream());
+                return new Image(InfoCell.class.getResource("Nickel.jpg").openStream());
             }
         } else if (this.s instanceof Entrepot) {
             if (((Entrepot) this.s).getType() == Ore.gold) {
-                return new Image(InfoCellule.class.getResource("ChestOr.png").openStream());
+                return new Image(InfoCell.class.getResource("ChestOr.png").openStream());
             } else {
-                return new Image(InfoCellule.class.getResource("ChestNickel.png").openStream());
+                return new Image(InfoCell.class.getResource("ChestNickel.png").openStream());
             }
         } else if (this.s instanceof Lac) {
-            return new Image(InfoCellule.class.getResource("eau.jpg").openStream());
+            return new Image(InfoCell.class.getResource("eau.jpg").openStream());
         } else {
-            return new Image(InfoCellule.class.getResource("herbe.jpg").openStream());
+            return new Image(InfoCell.class.getResource("herbe.jpg").openStream());
         }
     }
 
