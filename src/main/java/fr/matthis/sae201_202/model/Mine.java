@@ -66,8 +66,8 @@ public class Mine extends Sector {
         return Integer.toString(id);
     }
 
-    public String getmaxStockage(){
-        return Integer.toString(maxStockage);
+    public int getmaxStockage(){
+        return maxStockage;
     }
 
     public void setIdCounter(int idCounter) {
