@@ -3,6 +3,8 @@ import java.util.Random;
 
 public class Robots {
 
+
+
     public Robots() {
         Random r = new Random();
         this.maxCapacity = r.nextInt(5,10);
