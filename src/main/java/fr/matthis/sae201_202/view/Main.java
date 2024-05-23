@@ -1,7 +1,7 @@
 package fr.matthis.sae201_202.view;
 
 import fr.matthis.sae201_202.model.*;
-import javafx.collections.ObservableList;
+
 import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
 import javafx.scene.control.Button;
@@ -259,24 +259,24 @@ public class Main extends Stage {
 
         // Création du groupe pour la sideBar et du rectangle pour mettre les actions.
         Group sidebar = new Group();
-        Rectangle rectangle = new Rectangle(950, 50, this.cellSize*7, h - 100);
+        Rectangle rectangle = new Rectangle(0, 50, this.cellSize*7, h - 100);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
         // Création des lignes pour séparer les différentes actions.
         Group line = new Group();
-        Line l = new Line(1250, 50, 1250, 200);
-        Line l2 = new Line(950, 200, 1550, 200);
-        Line l3 = new Line(950, 310, 1550, 310);
+        Line l = new Line(cellSize*3.5, 50, cellSize*3.5, 200);
+        Line l2 = new Line(0, 200, this.cellSize*7, 200);
+        Line l3 = new Line(0, 310, this.cellSize*7, 310);
         line.getChildren().addAll(l, l2, l3);
 
         // Création du groupe pour le choix du robot.
         Group robot = new Group();
-        robot.setTranslateX(960);
+        robot.setTranslateX(this.cellSize /3);
         robot.setTranslateY(120);
 
         cb.setId("idRobot");
-        cb.setPrefSize(200, 30);
+        cb.setPrefSize(this.cellSize*2, this.cellSize/2);
         cb.setStyle("-fx-font: 15px \"None\";");
 
         // Ajout des robots dans le choiceBox.
@@ -298,7 +298,7 @@ public class Main extends Stage {
 
         // Ajout du label pour le choix du robot.
         Label label = new Label("Selectionnez un robot");
-        label.setFont(new Font(20));
+        label.setFont(new Font(cellSize/4));
         label.setTranslateX(0);
         label.setTranslateY(-60);
         robot.getChildren().add(label);
@@ -310,24 +310,22 @@ public class Main extends Stage {
         Button b = new Button("Extraire");
         Button b2 = new Button("Déposer");
         Button b3 = new Button("Ne rien faire");
-        b.setFont(new Font(15));
-        b.setPrefSize(90, 30);
-        b2.setFont(new Font(15));
-        b2.setPrefSize(90, 30);
-        b3.setFont(new Font(15));
+        b.setFont(new Font(cellSize/5));
+        b2.setFont(new Font(cellSize/5));
+        b3.setFont(new Font(cellSize/5));
 
 
         // Positionnement des boutons et création du label
         Label text = new Label("Selectionnez une action :");
-        text.setFont(new Font(20));
-        action.setTranslateX(1260);
+        text.setFont(new Font(cellSize/4));
+        action.setTranslateX(cellSize*4);
         action.setTranslateY(60);
         b.setTranslateY(60);
         b.setTranslateX(0);
         b2.setTranslateY(60);
-        b2.setTranslateX(150);
+        b2.setTranslateX(cellSize*1.5);
         b3.setTranslateY(100);
-        b3.setTranslateX(75);
+        b3.setTranslateX(cellSize/2);
 
         // Ajout des boutons dans le groupe action
         boutonAct.getChildren().addAll(b, b2, b3);
@@ -341,36 +339,38 @@ public class Main extends Stage {
         // Création du groupe pour la direction
         Group direction = new Group();
         Label text2 = new Label("Selectionnez une direction :");
-        text2.setFont(new Font(20));
-        text2.setTranslateX(960);
+        text2.setFont(new Font(cellSize/4));
+        text2.setTranslateX(0);
         text2.setTranslateY(210);
 
         // Création des boutons pour les directions
         Group boutonDir = new Group();
         boutonDir.setId("action");
         Button d1 = new Button("Nord");
-        d1.setPrefSize(90, 30);
-        d1.setFont(new Font(15));
-        d1.setTranslateX(960);
+        d1.setPrefSize(cellSize, cellSize/3);
+        d1.setFont(new Font(cellSize/5));
+        d1.setTranslateX(0);
         d1.setTranslateY(250);
 
         Button d2 = new Button("Sud");
-        d2.setPrefSize(90, 30);
-        d2.setFont(new Font(15));
-        d2.setTranslateX(1060);
+        d2.setPrefSize(cellSize, cellSize/3);
+        d2.setFont(new Font(cellSize/5));
+        d2.setTranslateX(cellSize*1.5);
         d2.setTranslateY(250);
 
         Button d3 = new Button("Est");
-        d3.setPrefSize(90, 30);
-        d3.setFont(new Font(15));
-        d3.setTranslateX(1260);
+        d3.setPrefSize(cellSize, cellSize/3);
+        d3.setFont(new Font(cellSize/5));
+        d3.setTranslateX(cellSize*3);
         d3.setTranslateY(250);
 
         Button d4 = new Button("Ouest");
-        d4.setPrefSize(90, 30);
-        d4.setFont(new Font(15));
-        d4.setTranslateX(1160);
+        d4.setPrefSize(cellSize, cellSize/3);
+        d4.setFont(new Font(cellSize/5));
+        d4.setTranslateX(cellSize*4.5);
         d4.setTranslateY(250);
+
+        direction.setTranslateX(cellSize/3); //deplacement group
 
         // Ajout des boutons dans le groupe direction
         boutonDir.getChildren().addAll(d1, d2, d3, d4);
@@ -385,56 +385,57 @@ public class Main extends Stage {
         // Création du groupe pour le récapitulatif
         Group recap = new Group();
         Label text3 = new Label("Recapitulatif :");
-        text3.setFont(new Font(20));
-        text3.setTranslateX(960);
+        text3.setFont(new Font(cellSize/4));
+        text3.setTranslateX(0);
         text3.setTranslateY(330);
         recap.getChildren().addAll(text3);
 
         VBox recapText = generateRecap(grille);
         recapText.setStyle("-fx-font: 15px \"None\";");
-        recapText.setTranslateX(960);
+        recapText.setTranslateX(0);
         recapText.setTranslateY(360);
 
+        recap.setTranslateX(cellSize/3);
         // Ajout du récapitulatif dans le groupe recap
         recap.getChildren().add(recapText);
 
         // Création du groupe pour le bouton quitter
-        Group exit = new Group();
+        Group bottom = new Group();
         Button e1 = new Button("Quitter");
         e1.setPrefSize(90, 30);
-        e1.setFont(new Font(15));
-        e1.setTranslateX(1430);
+        e1.setFont(new Font(cellSize/5));
+        e1.setTranslateX(0);
         e1.setTranslateY(h - 120);
 
         // Ajout du bouton quitter dans le groupe exit
-        exit.getChildren().add(e1);
+        bottom.getChildren().add(e1);
 
         // Ajout de l'événement sur le bouton quitter
         e1.setOnMouseClicked(emgr);
 
         // Création du groupe pour le bouton reset
-        Group reset = new Group();
         Button r1 = new Button("Reset");
         r1.setPrefSize(90, 30);
-        r1.setFont(new Font(15));
-        r1.setTranslateX(1000);
+        r1.setFont(new Font(cellSize/5));
+        r1.setTranslateX(cellSize*4.5);
         r1.setTranslateY(h - 120);
 
         // Affichage nombre de tour
-        Group tour = new Group();
-        labeltour.setFont(new Font(25));
-        labeltour.setTranslateX(1200);
+        labeltour.setFont(new Font(cellSize/5));
+        labeltour.setTranslateX(cellSize*2.5);
         labeltour.setTranslateY(h-120);
-        tour.getChildren().addAll(labeltour);
+        bottom.getChildren().addAll(labeltour);
+
+        bottom.setTranslateX(cellSize/3);
 
         // Ajout du bouton reset dans le groupe reset
-        reset.getChildren().add(r1);
+        bottom.getChildren().add(r1);
 
         // Ajout de l'événement sur le bouton reset
         r1.setOnMouseClicked(emgr);
 
         // Ajout des groupes dans le groupe sidebar
-        sidebar.getChildren().addAll(rectangle, robot, line, action, direction, recap, exit, reset, tour);
+        sidebar.getChildren().addAll(rectangle, robot, line, action, direction, recap, bottom);
         return sidebar;
     }
 
@@ -567,8 +568,5 @@ public class Main extends Stage {
         //update recap
         ((HBox) this.getScene().getRoot()).getChildren().removeLast();
         ((HBox) this.getScene().getRoot()).getChildren().add(sideBar());
-
     }
 }
-
-
