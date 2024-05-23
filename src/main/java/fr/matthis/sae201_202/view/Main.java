@@ -69,7 +69,7 @@ public class Main extends Stage {
         this.setScene(scene);
 
         gridgen(root, this.grid); //Methode generation de la grille
-        Rectangle espace = new Rectangle(200, height);
+        Rectangle espace = new Rectangle(cellSize*2, height);
         espace.setFill(Color.TRANSPARENT);
         root.getChildren().add(espace);
         root.getChildren().add(sideBar());
@@ -120,8 +120,8 @@ public class Main extends Stage {
                     Text l = new Text("" + e.getId());
                     l.setFont(new Font(this.cellSize / 3 + 3));
                     l.setFill(Color.BLUE);
-                    l.setLayoutX(e.getPosition().getX() * this.cellSize +65);
-                    l.setLayoutY(e.getPosition().getY() * this.cellSize +35);
+                    l.setLayoutX(e.getPosition().getX() * this.cellSize + this.cellSize/1.5);
+                    l.setLayoutY(e.getPosition().getY() * this.cellSize + this.cellSize/2.5);
 
                     if (e.getType() == Ore.gold) {
                         Image image = new Image(launcher.class.getResource("ChestOr.png").openStream());
@@ -147,8 +147,8 @@ public class Main extends Stage {
                     Text l = new Text("" + m.getId());
                     l.setFont(new Font(this.cellSize / 3 + 3));
                     l.setFill(Color.RED);
-                    l.setLayoutX(m.getPosition().getX() * this.cellSize +65);
-                    l.setLayoutY(m.getPosition().getY() * this.cellSize +35);
+                    l.setLayoutX(m.getPosition().getX() * this.cellSize + this.cellSize/1.5);
+                    l.setLayoutY(m.getPosition().getY() * this.cellSize + this.cellSize/2.5);
                     if (m.getMinerai() == Ore.gold) {
                         Image image = new Image(launcher.class.getResource("Gold.jpg").openStream());
                         ImagePattern pattern = new ImagePattern(image);
@@ -259,7 +259,7 @@ public class Main extends Stage {
 
         // Création du groupe pour la sideBar et du rectangle pour mettre les actions.
         Group sidebar = new Group();
-        Rectangle rectangle = new Rectangle(950, 50, 600, h - 100);
+        Rectangle rectangle = new Rectangle(950, 50, this.cellSize*7, h - 100);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
