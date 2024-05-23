@@ -69,7 +69,7 @@ public class Main extends Stage {
         this.setScene(scene);
 
         gridgen(root, this.grid); //Methode generation de la grille
-        Rectangle espace = new Rectangle(cellSize*2, height);
+        Rectangle espace = new Rectangle(cellSize*2.5, height);
         espace.setFill(Color.TRANSPARENT);
         root.getChildren().add(espace);
         root.getChildren().add(sideBar());
