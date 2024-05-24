@@ -507,7 +507,7 @@ public class Main extends Stage {
                 vRobot.getChildren().add(robotInfo);
             }
         }
-        recap.getChildren().addAll(espace2, vRobot, espace);
+        recap.getChildren().addAll(vRobot, espace);
 
         VBox vMine = new VBox();
         vMine.setId("boxMine");
