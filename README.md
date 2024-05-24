@@ -18,7 +18,7 @@ Monde:
 
 L’environnement est une grille de 100 secteurs (10 x 10), composée de terrains (au moins 90) et de plans d’eau. Les robots peuvent se déplacer sur les terrains non occupés par d’autres robots, mais ne peuvent pas traverser les plans d’eau. Un terrain peut être vide, contenir un entrepôt ou une mine, mais jamais les deux à la fois.
 
-Actions des Robots:
+Actions des Robots:  
 
 Les robots peuvent effectuer les actions suivantes :
 
