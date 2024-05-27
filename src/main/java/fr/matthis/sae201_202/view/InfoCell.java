@@ -76,20 +76,26 @@ public class InfoCell extends Info {
     protected Image genImage() throws IOException {
         if (this.s instanceof Mine) {
             if (((Mine) this.s).getType() == Ore.gold) {
-                return new Image(InfoCell.class.getResource("Gold.jpg").openStream());
+                String imagePath = "/images/Gold.jpg";
+                return new Image(getClass().getResourceAsStream(imagePath));
             } else {
-                return new Image(InfoCell.class.getResource("Nickel.jpg").openStream());
+                String imagePath = "/images/Nickel.jpg";
+                return new Image(getClass().getResourceAsStream(imagePath));
             }
         } else if (this.s instanceof Entrepot) {
             if (((Entrepot) this.s).getType() == Ore.gold) {
-                return new Image(InfoCell.class.getResource("ChestOr.png").openStream());
+                String imagePath = "/images/ChestOr.png";
+                return new Image(getClass().getResourceAsStream(imagePath));
             } else {
-                return new Image(InfoCell.class.getResource("ChestNickel.png").openStream());
+                String imagePath = "/images/ChestNickel.png";
+                return new Image(getClass().getResourceAsStream(imagePath));
             }
         } else if (this.s instanceof Lac) {
-            return new Image(InfoCell.class.getResource("Eau.jpg").openStream());
+            String imagePath = "/images/Eau.jpg";
+            return new Image(getClass().getResourceAsStream(imagePath));
         } else {
-            return new Image(InfoCell.class.getResource("Herbe.jpg").openStream());
+            String imagePath = "/images/Herbe.jpg";
+            return new Image(getClass().getResourceAsStream(imagePath));
         }
     }
 

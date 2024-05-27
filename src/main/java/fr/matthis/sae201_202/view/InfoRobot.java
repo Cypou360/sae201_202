@@ -54,9 +54,11 @@ public class InfoRobot extends Info {
     @Override
     protected Image genImage() throws IOException {
         if (this.r.getType() == Ore.gold) {
-            return new Image(InfoRobot.class.getResource("Steve.jpg").openStream());
+            String imagePath = "/images/Steve.jpg";
+            return new Image(getClass().getResourceAsStream(imagePath));
         } else {
-            return new Image(InfoRobot.class.getResource("Alex.jpg").openStream());
+            String imagePath = "/images/Alex.jpg";
+            return new Image(getClass().getResourceAsStream(imagePath));
         }
     }
 }
