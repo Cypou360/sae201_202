@@ -9,4 +9,5 @@ module fr.matthis.sae201_202 {
     exports fr.matthis.sae201_202.controller;
     exports fr.matthis.sae201_202.view;
     opens fr.matthis.sae201_202.view;
+    opens fr.matthis.sae201_202.controller;
 }

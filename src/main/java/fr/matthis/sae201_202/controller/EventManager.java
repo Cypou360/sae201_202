@@ -1,9 +1,10 @@
-package fr.matthis.sae201_202.view;
+package fr.matthis.sae201_202.controller;
 
 import fr.matthis.sae201_202.model.Entrepot;
 import fr.matthis.sae201_202.model.Mine;
 import fr.matthis.sae201_202.model.Robots;
 import fr.matthis.sae201_202.model.Sector;
+import fr.matthis.sae201_202.view.*;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -11,12 +12,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
