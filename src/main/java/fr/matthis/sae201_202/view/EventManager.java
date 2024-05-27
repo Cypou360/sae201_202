@@ -1,11 +1,14 @@
 package fr.matthis.sae201_202.view;
 
+import fr.matthis.sae201_202.model.Entrepot;
+import fr.matthis.sae201_202.model.Mine;
 import fr.matthis.sae201_202.model.Robots;
 import fr.matthis.sae201_202.model.Sector;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -97,45 +100,44 @@ public class EventManager implements EventHandler {
                         }
                     }
                     if(b.getText().equals("Extraire")){
-                        if (r.getCapacity() < r.getMaxCapacity()) {
-                            r.extraction(p.getGrid());
-                            cb.getItems().remove(idRobot);
-                        }
-                        else {
-                            Label l = new Label(" Capaciter déja au maximum ! ");
-                            l.setFont(new Font(20));
-                            group.getChildren().add(l);
-                            stage.setTitle("Extraction");
-                            Image image = null;
-                            try {
-                                image = new Image(Main.class.getResource("Panneau interdit.png").openStream());
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
+                        if (p.getGrid().getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Mine) {
+                            if (((Mine) p.getGrid().getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == r.getType()) {
+                                if (r.getCapacity() < r.getMaxCapacity()) {
+                                    r.extraction(p.getGrid());
+                                    cb.getItems().remove(idRobot);
+                                } else {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR, "Vous êtes déja remplie !");
+                                    alert.show();
+                                }
+                            }else{
+                                Alert alert = new Alert(Alert.AlertType.ERROR, "Pas le bon type de mine!");
+                                alert.show();
                             }
-                            stage.getIcons().add(image);
-                            stage.show();
+                        }else{
+                            Alert alert = new Alert(Alert.AlertType.ERROR, "Vous êtes pas sur une mine !");
+                            alert.show();
                         }
                     }
                     else if (b.getText().equals("Ne rien faire")){
                         cb.getItems().remove(idRobot);
                     }
                     else if (b.getText().equals("Déposer")){
-                        if (r.getCapacity() != 0) {
-                            r.deposer(p.getGrid());
-                            cb.getItems().remove(idRobot);
-                        }else {
-                            Label l = new Label(" Depot pas possible ! ");
-                            l.setFont(new Font(20));
-                            group.getChildren().add(l);
-                            stage.setTitle("Deposer");
-                            Image image = null;
-                            try {
-                                image = new Image(Main.class.getResource("Panneau interdit.png").openStream());
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
+                        if (p.getGrid().getSector(r.getPosition().getX(),r.getPosition().getY()) instanceof Entrepot) {
+                            if (((Entrepot) p.getGrid().getSector(r.getPosition().getX(),r.getPosition().getY())).getType() == r.getType()) {
+                                if (r.getCapacity() != 0) {
+                                    r.deposer(p.getGrid());
+                                    cb.getItems().remove(idRobot);
+                                } else {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR, "Vous êtes déja vide !");
+                                    alert.show();
+                                }
+                            }else{
+                                Alert alert = new Alert(Alert.AlertType.ERROR, "Pas le bon type d'entrepôt !");
+                                alert.show();
                             }
-                            stage.getIcons().add(image);
-                            stage.show();
+                        }else{
+                            Alert alert = new Alert(Alert.AlertType.ERROR, "Vous êtes pas sur un entrepôt !");
+                            alert.show();
                         }
                     } else if (b.getText().equals("Nord")) {
                         if (r.getPosition().getY() > 0 && p.getGrid().getSector(r.getPosition().getX(),r.getPosition().getY()-1).getDisponible()) {
@@ -143,18 +145,8 @@ public class EventManager implements EventHandler {
                             cb.getItems().remove(idRobot);
                         }
                         else {
-                            Label l = new Label(" Impossible d'aller au nord ! ");
-                            l.setFont(new Font(20));
-                            group.getChildren().add(l);
-                            stage.setTitle("Direction");
-                            Image image = null;
-                            try {
-                                image = new Image(Main.class.getResource("Panneau interdit.png").openStream());
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                            stage.getIcons().add(image);
-                            stage.show();
+                            Alert alert = new Alert(Alert.AlertType.ERROR,"Impossible d'aller au nord !");
+                            alert.show();
                         }
                     } else if (b.getText().equals("Sud")) {
                         if (r.getPosition().getY() < 9 && p.getGrid().getSector(r.getPosition().getX(),r.getPosition().getY()+1).getDisponible()) {
@@ -162,18 +154,8 @@ public class EventManager implements EventHandler {
                             cb.getItems().remove(idRobot);
                         }
                         else {
-                            Label l = new Label(" Impossible d'aller au sud ! ");
-                            l.setFont(new Font(20));
-                            group.getChildren().add(l);
-                            stage.setTitle("Direction");
-                            Image image = null;
-                            try {
-                                image = new Image(Main.class.getResource("Panneau interdit.png").openStream());
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                            stage.getIcons().add(image);
-                            stage.show();
+                            Alert alert = new Alert(Alert.AlertType.ERROR,"Impossible d'aller au sud !");
+                            alert.show();
                         }
                     } else if (b.getText().equals("Est")) {
                         if (r.getPosition().getX() < 9 && p.getGrid().getSector(r.getPosition().getX()+1,r.getPosition().getY()).getDisponible()) {
@@ -181,18 +163,8 @@ public class EventManager implements EventHandler {
                             cb.getItems().remove(idRobot);
                         }
                         else {
-                            Label l = new Label(" Impossible d'aller a l'est ! ");
-                            l.setFont(new Font(20));
-                            group.getChildren().add(l);
-                            stage.setTitle("Direction");
-                            Image image = null;
-                            try {
-                                image = new Image(Main.class.getResource("Panneau interdit.png").openStream());
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                            stage.getIcons().add(image);
-                            stage.show();
+                            Alert alert = new Alert(Alert.AlertType.ERROR,"Impossible d'aller à l'est !");
+                            alert.show();
                         }
                     } else if (b.getText().equals("Ouest")) {
                         if (r.getPosition().getX() > 0 && p.getGrid().getSector(r.getPosition().getX()-1,r.getPosition().getY()).getDisponible()) {
@@ -200,33 +172,13 @@ public class EventManager implements EventHandler {
                             cb.getItems().remove(idRobot);
                         }
                         else {
-                            Label l = new Label(" Impossible d'aller a l'ouest ! ");
-                            l.setFont(new Font(20));
-                            group.getChildren().add(l);
-                            stage.setTitle("Direction");
-                            Image image = null;
-                            try {
-                                image = new Image(Main.class.getResource("Panneau interdit.png").openStream());
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                            stage.getIcons().add(image);
-                            stage.show();
+                            Alert alert = new Alert(Alert.AlertType.ERROR,"Impossible d'aller à l'ouest !");
+                            alert.show();
                         }
                     }
                 }else{
-                    Label l = new Label(" Veuillez choisir un robot ! ");
-                    l.setFont(new Font(20));
-                    group.getChildren().add(l);
-                    stage.setTitle("Choix");
-                    Image image = null;
-                    try {
-                        image = new Image(Main.class.getResource("Panneau interdit.png").openStream());
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    stage.getIcons().add(image);
-                    stage.show();
+                    Alert alert = new Alert(Alert.AlertType.ERROR,"Veuillez choisir un robot !");
+                    alert.show();
                 }
                 try {
                     p.update();

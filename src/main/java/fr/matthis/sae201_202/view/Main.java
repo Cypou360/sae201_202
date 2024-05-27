@@ -51,9 +51,41 @@ public class Main extends Stage {
         this.show();
     }
 
-    private void graphical() throws IOException { //Methode pour afficher l'ensemble des elements
+    private void graphical() throws IOException {//Methode pour afficher l'ensemble des elements
         this.grid = new Grille();
         this.grid.initialisation();
+
+        int mgold = 0;
+        int mnickel = 0;
+        int eAll = 0;
+
+        for (Mine m : this.grid.getMines()){
+            if (m.getMinerai() == Ore.gold){
+                mgold += m.getmaxStockage();
+            }else{
+                mnickel += m.getmaxStockage();
+            }
+        }
+        for (Entrepot e: this.grid.getEntrepots()){
+            eAll += e.getStockage();
+        }
+
+        if (eAll == (mnickel+mgold)){
+            Stage a = new Stage();
+            Group g = new Group();
+            Scene s = new Scene(g,200,200);
+
+            Label l = new Label("Partie Terminer !");
+            l.setLayoutX(25);
+            l.setLayoutY(75);
+            l.setFont(new Font(20));
+            g.getChildren().add(l);
+
+            a.setScene(s);
+
+            a.show();
+
+        }
 
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds(); //Responsive avec taille d'ecran de l'utilisateur
         double width = screenSize.getWidth();
@@ -321,9 +353,9 @@ public class Main extends Stage {
         action.setTranslateX(cellSize*4);
         action.setTranslateY(60);
         b.setTranslateY(60);
-        b.setTranslateX(0);
+        b.setTranslateX(cellSize*1.5);
         b2.setTranslateY(60);
-        b2.setTranslateX(cellSize*1.5);
+        b2.setTranslateX(0);
         b3.setTranslateY(100);
         b3.setTranslateX(cellSize/2);
 
@@ -361,13 +393,13 @@ public class Main extends Stage {
         Button d3 = new Button("Est");
         d3.setPrefSize(cellSize, cellSize/3);
         d3.setFont(new Font(cellSize/5));
-        d3.setTranslateX(cellSize*3);
+        d3.setTranslateX(cellSize*4.5);
         d3.setTranslateY(250);
 
         Button d4 = new Button("Ouest");
         d4.setPrefSize(cellSize, cellSize/3);
         d4.setFont(new Font(cellSize/5));
-        d4.setTranslateX(cellSize*4.5);
+        d4.setTranslateX(cellSize*3);
         d4.setTranslateY(250);
 
         direction.setTranslateX(cellSize/3); //deplacement group
@@ -475,7 +507,7 @@ public class Main extends Stage {
                 vRobot.getChildren().add(robotInfo);
             }
         }
-        recap.getChildren().addAll(espace2, vRobot, espace);
+        recap.getChildren().addAll(vRobot, espace);
 
         VBox vMine = new VBox();
         vMine.setId("boxMine");

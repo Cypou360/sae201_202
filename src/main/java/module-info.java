@@ -3,6 +3,7 @@ module fr.matthis.sae201_202 {
     requires org.junit.jupiter.api;
     requires junit;
     requires javafx.fxml;
+    requires org.junit.platform.commons;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
