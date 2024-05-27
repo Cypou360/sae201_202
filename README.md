@@ -30,3 +30,5 @@ Les robots peuvent effectuer les actions suivantes :
 
 Chaque robot, chaque mine et chaque entrepôt possèdent un numéro unique. À chaque tour, chaque robot peut effectuer une seule action valide.
 
+Pour voir nos livrables de cette SAE , il suffit d'aller dans le dossier livrable de la branche master pour les voirs.
+
