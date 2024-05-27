@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="sae201_202:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/sae201_202_jar</output-path>
+  <artifact type="jar" build-on-make="true" name="sae201_202:jar">
+    <output-path>$PROJECT_DIR$/Livrable/</output-path>
     <root id="archive" name="sae201_202.jar">
       <element id="module-output" name="sae201_202" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/21/javafx-controls-21.jar" path-in-jar="/" />
