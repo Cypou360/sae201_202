@@ -50,7 +50,7 @@ class RobotsTest {
     @Test
     void goTo() {
         /** Teste si un robot peut bouger dans la grille **/
-        assertTrue("Je peux me déplacer au Nord ", rbts.goTo("N", grille));
+        assertTrue("Je peux me déplacer au Nord", rbts.goTo("N", grille));
         assertTrue("Je peux me déplacer a l'Ouest", rbts.goTo("O", grille));
         assertTrue("Je peux me déplacer au Sud", rbts.goTo("S", grille));
         assertTrue("Je peux me déplacer a l'est", rbts.goTo("E", grille));
