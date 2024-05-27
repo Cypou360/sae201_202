@@ -1,9 +1,6 @@
 module fr.matthis.sae201_202 {
     requires javafx.controls;
-    requires org.junit.jupiter.api;
-    requires junit;
     requires javafx.fxml;
-    requires org.junit.platform.commons;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -11,5 +8,5 @@ module fr.matthis.sae201_202 {
     exports fr.matthis.sae201_202.model;
     exports fr.matthis.sae201_202.controller;
     exports fr.matthis.sae201_202.view;
-    opens fr.matthis.sae201_202;
+    opens fr.matthis.sae201_202.view to javafx.fxml;
 }
