@@ -86,9 +86,9 @@ public class InfoCell extends Info {
                 return new Image(InfoCell.class.getResource("ChestNickel.png").openStream());
             }
         } else if (this.s instanceof Lac) {
-            return new Image(InfoCell.class.getResource("eau.jpg").openStream());
+            return new Image(InfoCell.class.getResource("Eau.jpg").openStream());
         } else {
-            return new Image(InfoCell.class.getResource("herbe.jpg").openStream());
+            return new Image(InfoCell.class.getResource("Herbe.jpg").openStream());
         }
     }
 
