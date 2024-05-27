@@ -1,5 +1,6 @@
 package fr.matthis.sae201_202.view;
 
+import fr.matthis.sae201_202.controller.EventManager;
 import fr.matthis.sae201_202.model.Ore;
 import fr.matthis.sae201_202.model.Robots;
 import javafx.scene.control.Button;

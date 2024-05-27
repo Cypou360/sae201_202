@@ -1,5 +1,6 @@
 package fr.matthis.sae201_202.view;
 
+import fr.matthis.sae201_202.controller.EventManager;
 import fr.matthis.sae201_202.model.*;
 
 import javafx.geometry.Rectangle2D;
@@ -110,10 +111,12 @@ public class Main extends Stage {
         root.setLayoutX(50);
         root.setStyle("-fx-background-color: transparent;");
 
-        Image image = new Image(Main.class.getResource("icon.png").openStream()); //Texture à partir du doisser ressources
+        String imagePath = "/images/Icon.png";
+        Image image = new Image(getClass().getResourceAsStream(imagePath)); //Texture à partir du dossier ressources
         this.getIcons().add(image);
 
-        Image image2 = new Image(Main.class.getResource("MinecraftTexture.png").openStream()); //Texture
+        String imagePath2 = "/images/MinecraftTexture.png";
+        Image image2 = new Image(getClass().getResourceAsStream(imagePath2)); //Texture
         scene.setFill(new ImagePattern(image2));
     }
 
@@ -139,7 +142,8 @@ public class Main extends Stage {
                     Vide v = ((Vide) ss);
                     Coordonnee pos = v.getPosition();
                     Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
-                    Image image = new Image(launcher.class.getResource("herbe.jpg").openStream());
+                    String imagePath3 = "/images/Herbe.jpg";
+                    Image image = new Image(getClass().getResourceAsStream(imagePath3));
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
                     Vide.getChildren().add(r);
@@ -156,14 +160,16 @@ public class Main extends Stage {
                     l.setLayoutY(e.getPosition().getY() * this.cellSize + this.cellSize/2.5);
 
                     if (e.getType() == Ore.gold) {
-                        Image image = new Image(launcher.class.getResource("ChestOr.png").openStream());
+                        String imagePath4 = "/images/ChestOr.png";
+                        Image image = new Image(getClass().getResourceAsStream(imagePath4));
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
                         r2.setOnMouseClicked(emgr);
                     } else {
-                        Image image = new Image(launcher.class.getResource("ChestNickel.png").openStream());
+                        String imagePath5 = "/images/ChestNickel.png";
+                        Image image = new Image(getClass().getResourceAsStream(imagePath5));
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
 
@@ -182,14 +188,16 @@ public class Main extends Stage {
                     l.setLayoutX(m.getPosition().getX() * this.cellSize + this.cellSize/1.5);
                     l.setLayoutY(m.getPosition().getY() * this.cellSize + this.cellSize/2.5);
                     if (m.getMinerai() == Ore.gold) {
-                        Image image = new Image(launcher.class.getResource("Gold.jpg").openStream());
+                        String imagePath6 = "/images/Gold.jpg";
+                        Image image = new Image(getClass().getResourceAsStream(imagePath6));
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
 
                         r2.setFill(pattern);
                         r2.setOnMouseClicked(emgr);
                     } else {
-                        Image image = new Image(launcher.class.getResource("Nickel.jpg").openStream());
+                        String imagePath7 = "/images/Nickel.jpg";
+                        Image image = new Image(getClass().getResourceAsStream(imagePath7));
                         ImagePattern pattern = new ImagePattern(image);
                         r.setFill(pattern);
 
@@ -201,7 +209,8 @@ public class Main extends Stage {
                     Lac l = ((Lac) ss);
                     Coordonnee pos = l.getPosition();
                     Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
-                    Image image = new Image(launcher.class.getResource("eau.jpg").openStream());
+                    String imagePath8 = "/images/Eau.jpg";
+                    Image image = new Image(getClass().getResourceAsStream(imagePath8));
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
                     Lac.getChildren().add(r);
@@ -228,11 +237,13 @@ public class Main extends Stage {
             hRobot.getChildren().add(ro);
 
             if (r.getType() == Ore.gold) {
-                Image image = new Image(launcher.class.getResource("Steve.jpg").openStream());
+                String imagePath9 = "/images/Steve.jpg";
+                Image image = new Image(getClass().getResourceAsStream(imagePath9));
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
                 if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.gold)) {
-                    Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
+                    String imagePath10 = "/images/Pioche.png";
+                    Image image1 = new Image(getClass().getResourceAsStream(imagePath10));
                     ImagePattern pattern1 = new ImagePattern(image1);
                     Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
                     ro2.setFill(pattern1);
@@ -240,11 +251,13 @@ public class Main extends Stage {
                     r.setPioche(true);
                 }
             } else {
-                Image image = new Image(launcher.class.getResource("Alex.jpg").openStream());
+                String imagePath11 = "/images/Alex.jpg";
+                Image image = new Image(getClass().getResourceAsStream(imagePath11));
                 ImagePattern pattern = new ImagePattern(image);
                 ro.setFill(pattern);
                 if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.nickel)) {
-                    Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
+                    String imagePath12 = "/images/Pioche.png";
+                    Image image1 = new Image(getClass().getResourceAsStream(imagePath12));
                     ImagePattern pattern1 = new ImagePattern(image1);
                     Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
                     ro2.setFill(pattern1);
@@ -490,7 +503,8 @@ public class Main extends Stage {
             HBox robotInfo = new HBox();
             Rectangle r3 = new Rectangle(20, 20);
             if (r.getType() == Ore.gold) {
-                Image image = new Image(Main.class.getResource("Steve.jpg").openStream());
+                String imagePath = "/images/Steve.jpg";
+                Image image = new Image(getClass().getResourceAsStream(imagePath));
                 Label position = new Label(" Robot ID: " + r.getId() + " | " + " X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r3.setFill(pattern);
@@ -498,7 +512,8 @@ public class Main extends Stage {
                 robotInfo.getChildren().addAll(r3, position);
                 vRobot.getChildren().add(robotInfo);
             } else {
-                Image image = new Image(Main.class.getResource("Alex.jpg").openStream());
+                String imagePath2 = "/images/Alex.jpg";
+                Image image = new Image(getClass().getResourceAsStream(imagePath2));
                 Label position = new Label(" Robot ID: " + r.getId() + " | " + " X: " + r.getPosition().getX() + " Y: " + r.getPosition().getY() + " | " + " Capacity: " + r.getCapacity() + "/" + r.getMaxCapacity() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r3.setFill(pattern);
@@ -517,7 +532,8 @@ public class Main extends Stage {
 
             Rectangle r4 = new Rectangle(20, 20);
             if (mine.getMinerai() == Ore.gold) {
-                Image image = new Image(Main.class.getResource("Gold.jpg").openStream());
+                String imagePath3 = "/images/Gold.jpg";
+                Image image = new Image(getClass().getResourceAsStream(imagePath3));
                 Label mines = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " + mine.getStockage() + "/" + mine.getmaxStockage() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
@@ -525,7 +541,8 @@ public class Main extends Stage {
                 mineInfo.getChildren().addAll(r4, mines);
                 vMine.getChildren().add(mineInfo);
             } else if (mine.getMinerai() == Ore.nickel) {
-                Image image = new Image(Main.class.getResource("Nickel.jpg").openStream());
+                String imagePath4 = "/images/Nickel.jpg";
+                Image image = new Image(getClass().getResourceAsStream(imagePath4));
                 Label mines = new Label(" Mine ID: " + mine.getId() + " | " + " X: " + mine.getPosition().getX() + " Y: " + mine.getPosition().getY() + " | " + "Capacity: " + mine.getStockage() + "/" + mine.getmaxStockage() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
@@ -544,7 +561,8 @@ public class Main extends Stage {
             HBox entrepotInfo = new HBox();
             if (entrepot.getType() == Ore.gold) {
 
-                Image image = new Image(Main.class.getResource("ChestOr.png").openStream());
+                String imagePath5 = "/images/ChestOr.png";
+                Image image = new Image(getClass().getResourceAsStream(imagePath5));
                 Label entrepots = new Label(" Entrepot ID: " + entrepot.getId() + " | " + " X: " + entrepot.getPosition().getX() + " Y: " + entrepot.getPosition().getY() + " | " + " Capacity: " + entrepot.getStockage() + " | " + " Type: " + "OR");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
@@ -552,7 +570,8 @@ public class Main extends Stage {
                 entrepotInfo.getChildren().addAll(r4, entrepots);
                 vEntre.getChildren().add(entrepotInfo);
             } else {
-                Image image = new Image(Main.class.getResource("ChestNickel.png").openStream());
+                String imagePath6 = "/images/ChestNickel.png";
+                Image image = new Image(getClass().getResourceAsStream(imagePath6));
                 Label entrepots = new Label(" Entrepot ID: " + entrepot.getId() + " | " + " X: " + entrepot.getPosition().getX() + " Y: " + entrepot.getPosition().getY() + " | " + " Capacity: " + entrepot.getStockage() + " | " + " Type: " + "NI");
                 ImagePattern pattern = new ImagePattern(image);
                 r4.setFill(pattern);
@@ -581,7 +600,8 @@ public class Main extends Stage {
 
             if (s instanceof Mine && r.getCapacity() < r.getMaxCapacity() && (((Mine) s).getMinerai() == r.getType())) {
                 if (((Mine) s).getType() == r.getType() && !r.isPioche()) {
-                    Image image1 = new Image(launcher.class.getResource("pioche.png").openStream());
+                    String imagePath = "/images/Pioche.png";
+                    Image image1 = new Image(getClass().getResourceAsStream(imagePath));
                     ImagePattern pattern1 = new ImagePattern(image1);
                     Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
                     ro2.setFill(pattern1);

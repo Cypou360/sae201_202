@@ -1,26 +1,18 @@
 <component name="ArtifactManager">
-  <artifact build-on-make="true" name="sae201_202:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/sae201_202_jar</output-path>
-    <root id="root">
-      <element id="archive" name="sae201_202.jar">
-        <element id="module-output" name="sae201_202" />
-      </element>
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:21" />
-      <element id="library" level="project" name="Maven: com.dlsc.formsfx:formsfx-core:11.6.0" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:21" />
-      <element id="library" level="project" name="Maven: org.opentest4j:opentest4j:1.3.0" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:21" />
-      <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:win:21" />
-      <element id="library" level="project" name="Maven: org.apiguardian:apiguardian-api:1.1.2" />
-      <element id="library" level="project" name="Maven: junit:junit:4.13.2" />
-      <element id="library" level="project" name="Maven: org.junit.platform:junit-platform-commons:1.10.0" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:21" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:21" />
-      <element id="library" level="project" name="Maven: org.controlsfx:controlsfx:11.1.2" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:21" />
-      <element id="library" level="project" name="Maven: org.junit.jupiter:junit-jupiter-api:5.10.0" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:win:21" />
+  <artifact type="jar" build-on-make="true" name="sae201_202:jar">
+    <output-path>$PROJECT_DIR$/Livrable/</output-path>
+    <root id="archive" name="sae201_202.jar">
+      <element id="module-output" name="sae201_202" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/21/javafx-controls-21.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/21/javafx-controls-21-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/21/javafx-graphics-21-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/controlsfx/controlsfx/11.1.2/controlsfx-11.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21/javafx-base-21-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/dlsc/formsfx/formsfx-core/11.6.0/formsfx-core-11.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/21/javafx-fxml-21-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21/javafx-base-21.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

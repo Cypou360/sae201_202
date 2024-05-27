@@ -1,5 +1,6 @@
 package fr.matthis.sae201_202.view;
 
+import fr.matthis.sae201_202.controller.EventManager;
 import fr.matthis.sae201_202.model.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -86,9 +87,9 @@ public class InfoCell extends Info {
                 return new Image(InfoCell.class.getResource("ChestNickel.png").openStream());
             }
         } else if (this.s instanceof Lac) {
-            return new Image(InfoCell.class.getResource("eau.jpg").openStream());
+            return new Image(InfoCell.class.getResource("Eau.jpg").openStream());
         } else {
-            return new Image(InfoCell.class.getResource("herbe.jpg").openStream());
+            return new Image(InfoCell.class.getResource("Herbe.jpg").openStream());
         }
     }
 

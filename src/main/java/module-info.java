@@ -1,6 +1,6 @@
 module fr.matthis.sae201_202 {
     requires javafx.controls;
-    requires javafx.fxml;
+    //requires javafx.fxml;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -8,5 +8,6 @@ module fr.matthis.sae201_202 {
     exports fr.matthis.sae201_202.model;
     exports fr.matthis.sae201_202.controller;
     exports fr.matthis.sae201_202.view;
-    opens fr.matthis.sae201_202.view to javafx.fxml;
+    opens fr.matthis.sae201_202.view;
+    opens fr.matthis.sae201_202.controller;
 }
