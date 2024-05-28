@@ -465,6 +465,14 @@ public class Main extends Stage {
         r1.setTranslateX(cellSize*4.5);
         r1.setTranslateY(h - 120);
 
+        // Création du boutton automatique
+        Button auto = new Button("Automatique");
+        auto.setPrefSize(100, 30);
+        auto.setFont(new Font(cellSize/5));
+        auto.setTranslateX(cellSize*2.2);
+        auto.setTranslateY(h - 210);
+        bottom.getChildren().add(auto);
+
         // Affichage nombre de tour
         labeltour.setFont(new Font(cellSize/5));
         labeltour.setTranslateX(cellSize*2.5);
