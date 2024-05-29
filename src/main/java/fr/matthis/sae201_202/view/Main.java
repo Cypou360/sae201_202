@@ -45,13 +45,10 @@ public class Main extends Stage {
 
     public ChoiceBox<String> cb;
 
-    private Automatique grilleV2;
-
     public Main() throws IOException {
         super();
         this.cb = new ChoiceBox<>();
         graphical();
-        this.grilleV2 = new Automatique(this.grid);
         this.show();
     }
 
@@ -137,9 +134,8 @@ public class Main extends Stage {
         int prevX = 0;
         int prevY = 0;
 
-        grilleV2.dejaExplorer();
         // dessin des Secteurs
-        for (Sector[] s : grilleV2.getGrilleV2()) {
+        for (Sector[] s : this.grid.getGrille()) {
             for (Sector ss : s) {
                 if (ss instanceof Vide) {
                     Vide v = ((Vide) ss);

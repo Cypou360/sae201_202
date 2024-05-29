@@ -7,6 +7,7 @@ public abstract class Sector {
         this.stockage = 0;
         this.robot = null;
         this.position = new Coordonnee(0, 0);
+        this.discover = false;
     }
 
     public Sector(int x, int y) {
@@ -14,6 +15,7 @@ public abstract class Sector {
         this.stockage = 0;
         this.robot = null;
         this.position = new Coordonnee(x, y);
+        this.discover = false;
     }
 
     protected int maxStockage;
@@ -23,6 +25,15 @@ public abstract class Sector {
     protected Robots robot;
 
     protected Coordonnee position;
+    private boolean discover;
+
+    public boolean isDiscover() {
+        return discover;
+    }
+
+    public void setDiscover(boolean discover) {
+        this.discover = discover;
+    }
 
     /* Permet d'afficher un secteur (partagé aux différents secteurs) */
     public abstract String toString();
