@@ -594,6 +594,7 @@ public class Main extends Stage {
 
         }
         recap.getChildren().add(vEntre);
+        recap.getChildren().add(espace2);
         // Création du boutton automatique
         Button auto = new Button("Automatique");
         auto.setPrefSize(100, 30);
