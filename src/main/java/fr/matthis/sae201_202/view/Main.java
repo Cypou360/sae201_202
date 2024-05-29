@@ -45,13 +45,10 @@ public class Main extends Stage {
 
     public ChoiceBox<String> cb;
 
-    private Automatique grilleV2;
-
     public Main() throws IOException {
         super();
         this.cb = new ChoiceBox<>();
         graphical();
-        this.grilleV2 = new Automatique(this.grid);
         this.show();
     }
 
@@ -121,15 +118,13 @@ public class Main extends Stage {
         String imagePath2 = "/images/MinecraftTexture.png";
         Image image2 = new Image(getClass().getResourceAsStream(imagePath2)); //Texture
         scene.setFill(new ImagePattern(image2));
+
+        update();
     }
 
     public void gridgen(HBox g, Grille grille) throws IOException { //Methode generation grille
         Group generalGrille = new Group();
         Group groupGrille = new Group();
-        Group Mine = new Group();
-        Group Entrepot = new Group();
-        Group Lac = new Group();
-        Group Vide = new Group();
         EventManager emgr = new EventManager(this);
 
         groupGrille.setId("grille");
@@ -137,10 +132,13 @@ public class Main extends Stage {
         int prevX = 0;
         int prevY = 0;
 
-        grilleV2.dejaExplorer();
+        Rectangle fond = new Rectangle(0, 0, this.cellSize * 10, this.cellSize * 10);
+        fond.setFill(Color.BLACK);
+        groupGrille.getChildren().add(fond);
         // dessin des Secteurs
-        for (Sector[] s : grilleV2.getGrilleV2()) {
+        for (Sector[] s : this.grid.getGrille()) {
             for (Sector ss : s) {
+                Group cellule = new Group();
                 if (ss instanceof Vide) {
                     Vide v = ((Vide) ss);
                     Coordonnee pos = v.getPosition();
@@ -149,7 +147,8 @@ public class Main extends Stage {
                     Image image = new Image(getClass().getResourceAsStream(imagePath3));
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
-                    Vide.getChildren().add(r);
+                    cellule.getChildren().add(r);
+
                     r.setOnMouseClicked(emgr);
                 } else if (ss instanceof Entrepot) {
                     Entrepot e = ((Entrepot) ss);
@@ -179,7 +178,8 @@ public class Main extends Stage {
                         r2.setFill(pattern);
                         r2.setOnMouseClicked(emgr);
                     }
-                    Entrepot.getChildren().addAll(r,r2,l);
+                    cellule.getChildren().addAll(r,r2,l);
+
                 } else if (ss instanceof Mine) {
                     Mine m = ((Mine) ss);
                     Coordonnee pos = m.getPosition();
@@ -207,7 +207,8 @@ public class Main extends Stage {
                         r2.setFill(pattern);
                         r2.setOnMouseClicked(emgr);
                     }
-                    Mine.getChildren().addAll(r,r2,l);
+                    cellule.getChildren().addAll(r,r2,l);
+
                 } else if (ss instanceof Lac) {
                     Lac l = ((Lac) ss);
                     Coordonnee pos = l.getPosition();
@@ -216,15 +217,18 @@ public class Main extends Stage {
                     Image image = new Image(getClass().getResourceAsStream(imagePath8));
                     ImagePattern pattern = new ImagePattern(image);
                     r.setFill(pattern);
-                    Lac.getChildren().add(r);
+                    cellule.getChildren().add(r);
                     r.setOnMouseClicked(emgr);
+                }
+                groupGrille.getChildren().add(cellule);
+                if (ss.isDiscover()) {
+                    cellule.setOpacity(1);
+                } else {
+                    cellule.setOpacity(0.5);
                 }
             }
         }
-        groupGrille.getChildren().add(Vide);
-        groupGrille.getChildren().add(Mine);
-        groupGrille.getChildren().add(Entrepot);
-        groupGrille.getChildren().add(Lac);
+
         Group groupRobot = new Group();
         groupRobot.setId("robot");
         // dessin des robots
@@ -296,6 +300,10 @@ public class Main extends Stage {
         generalGrille.getChildren().add(groupRobot);
 
         g.getChildren().add(generalGrille);
+        System.out.println("Grille générale");
+        System.out.println(generalGrille.getChildren());
+        System.out.println("Grille");
+        System.out.println(groupGrille.getChildren());
     }
 
     public Group sideBar() throws IOException {
@@ -607,6 +615,7 @@ public class Main extends Stage {
             HBox hRobot = (HBox) rb.getChildren().getLast();
 
             Sector s = this.getGrid().getSector(pos.getX(), pos.getY());
+            s.setDiscover(true);
 
             if (s instanceof Mine && r.getCapacity() < r.getMaxCapacity() && (((Mine) s).getMinerai() == r.getType())) {
                 if (((Mine) s).getType() == r.getType() && !r.isPioche()) {
@@ -626,6 +635,39 @@ public class Main extends Stage {
             }
 
         }
+
+        //Modification status voisin
+        for (Robots r : this.grid.getRobots()) {
+            Coordonnee pos = r.getPosition();
+            if (pos.getX() < this.grid.getNbLigne() - 1) {
+                this.grid.getSector(pos.getX() + 1, pos.getY()).setDiscover(true);
+            }
+            if (pos.getX() > 0) {
+                this.grid.getSector(pos.getX() - 1, pos.getY()).setDiscover(true);
+            }
+            if (pos.getY() < this.grid.getNbColonne() - 1) {
+                this.grid.getSector(pos.getX(), pos.getY() + 1).setDiscover(true);
+            }
+            if (pos.getY() > 0) {
+                this.grid.getSector(pos.getX(), pos.getY() - 1).setDiscover(true);
+            }
+        }
+
+
+        //mise a jour découverte
+        int i = 1;
+        for (Sector[] s : this.grid.getGrille()) {
+            for (Sector ss : s) {
+                Group sg = (Group) ((Group) ((Group) ((HBox) this.getScene().getRoot()).getChildren().getFirst()).getChildren().get(0)).getChildren().get(i);
+                i++;
+                if (ss.isDiscover()) {
+                    sg.setOpacity(1);
+                } else {
+                    sg.setOpacity(0.5);
+                }
+            }
+        }
+
 
         //update recap
         ((HBox) this.getScene().getRoot()).getChildren().removeLast();
