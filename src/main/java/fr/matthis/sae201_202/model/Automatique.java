@@ -1,20 +1,23 @@
 package fr.matthis.sae201_202.model;
 
+import javafx.scene.control.ChoiceBox;
+
 import java.util.List;
 
 public class Automatique {
 
     private Grille grilleV1;
+
     private Sector[][] grilleV2;
 
 
     public Automatique(Grille g) {
-        grilleV1 = g;
-        grilleV2 = new Sector[10][10];
+        this.grilleV1 = g;
+        this.grilleV2 = new Sector[10][10];
     }
 
     public void afficherGrille() {
-        for (Sector[] s : grilleV2) {
+        for (Sector[] s : grilleV1.getGrille()) {
             System.out.println();
             for (Sector ss : s) {
                 System.out.print(ss);
@@ -39,6 +42,10 @@ public class Automatique {
                 grilleV2[pos.getX()][pos.getY() - 1] = grilleV1.getSector(pos.getX(), pos.getY() - 1);
             }
         }
+    }
+
+    public Sector[][] getGrilleV2(){
+        return grilleV2;
     }
 }
 
