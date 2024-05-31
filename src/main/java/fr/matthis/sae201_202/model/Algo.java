@@ -1,9 +1,16 @@
 package fr.matthis.sae201_202.model;
 
+
 import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class Algo {
+
+    private Grille grid;
+
+    public Algo(Grille grille){
+        this.grid = grille;
+    }
     public ArrayList<Coordonnee> Attent(Robots rbts, Grille grille){
         ArrayList<Coordonnee> lst = new ArrayList<Coordonnee>();
         Coordonnee coord = rbts.getPosition();
@@ -60,5 +67,17 @@ public class Algo {
             System.out.println(P.get(i));
         }
         return grille;
+    }
+
+    public ArrayList<Sector> getDiscover(){
+        ArrayList<Sector> a = new ArrayList<>();
+        for (Sector[] s : grid.getGrille()){
+            for (Sector ss : s){
+                if (ss.isDiscover()){
+                    a.add(ss);
+                }
+            }
+        }
+        return a;
     }
 }
