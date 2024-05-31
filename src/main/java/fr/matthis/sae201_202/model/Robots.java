@@ -1,4 +1,5 @@
 package fr.matthis.sae201_202.model;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Robots {
@@ -34,6 +35,8 @@ public class Robots {
     private Coordonnee position;
     private static int idCounter = 1;
     private boolean pioche;
+    private Algo algo;
+    private ArrayList<Sector> path;
 
     /* Permet de récupérer toutes les informations sur le robot */
     public String toString() {
@@ -161,5 +164,63 @@ public class Robots {
 
     public void setPioche(boolean pioche) {
         this.pioche = pioche;
+    }
+
+    public void setAlgo(Algo algo) {
+        this.algo = algo;
+    }
+
+    public void automation(Grille grid) {
+        if (algo != null) {
+            Sector start = grid.getSector(position.getX(), position.getY());
+            int remainingOre = grid.getRemainingOre(type);
+            Sector end;
+            if (remainingOre > 0 && capacity < maxCapacity) {
+                end = findMine(grid);
+            } else {
+                end = findEntrepot(grid);
+            }
+            if (end != null) {
+                algo.Dijkstra(start, end);
+                path = algo.getPath();
+            }
+        }
+    }
+
+    public void executePath(Grille grid) {
+        if (path != null && !path.isEmpty()) {
+            // Récupération etapes chemin
+            int posIndex = path.indexOf(grid.getSector(position.getX(), position.getY()));
+            Sector actual = path.get(posIndex);
+            Sector next = path.get(posIndex + 1);
+
+            // Déplacement
+            if (actual.getPosition().getX() < next.getPosition().getX()) {
+                goTo("S", grid);
+            } else if (actual.getPosition().getX() > next.getPosition().getX()) {
+                goTo("N", grid);
+            } else if (actual.getPosition().getY() < next.getPosition().getY()) {
+                goTo("E", grid);
+            } else if (actual.getPosition().getY() > next.getPosition().getY()) {
+                goTo("O", grid);
+            }
+        }
+    }
+
+    public Mine findMine(Grille grille) {
+        for (Mine m : grille.getMines()) {
+            if (m.getMinerai() == type && m.getStockage() > 0 && m.isDiscover()) {
+                return m;
+            }
+        }
+        return null;
+    }
+    public Entrepot findEntrepot(Grille grille) {
+        for (Entrepot e : grille.getEntrepots()) {
+            if (e.getType() == type && e.isDiscover()) {
+                return e;
+            }
+        }
+        return null;
     }
 }

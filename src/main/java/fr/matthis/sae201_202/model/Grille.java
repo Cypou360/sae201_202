@@ -246,4 +246,14 @@ public class Grille {
         }
         return out;
     }
+
+    public int getRemainingOre(Ore type) {
+        int out = 0;
+        for (Mine m : mines) {
+            if (m.getType() == type) {
+                out++;
+            }
+        }
+        return out;
+    }
 }
