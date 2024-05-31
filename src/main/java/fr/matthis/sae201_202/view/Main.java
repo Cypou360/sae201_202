@@ -648,10 +648,7 @@ public class Main extends Stage {
         //Modification status voisin
         for (Robots r : this.grid.getRobots()) {
             Sector s = this.grid.getSector(r.getPosition().getX(), r.getPosition().getY());
-            ArrayList<Sector> voisin = this.grid.getVoisin(s);
-            for (Sector ss : voisin) {
-                ss.setDiscover(true);
-            }
+            this.grid.getVoisin(s, true);
         }
 
 
@@ -667,6 +664,10 @@ public class Main extends Stage {
                     sg.setOpacity(0.5);
                 }
             }
+        }
+        if (this.a != null) {
+            this.a.DijkstraCalculate();
+            System.out.println(this.a.getPath());
         }
 
 

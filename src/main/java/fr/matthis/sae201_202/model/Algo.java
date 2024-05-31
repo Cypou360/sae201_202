@@ -16,6 +16,7 @@ public class Algo {
         this.grid = grille;
         this.path = new ArrayList<>();
         this.visited = new ArrayList<>();
+        this.lstAjd = this.getDiscover();
     }
 
     public void Dijkstra(Sector start, Sector end){
@@ -26,8 +27,8 @@ public class Algo {
         file.add(current);
         while (current.getPosition().equals(end.getPosition())) {
             current = file.poll();
-            file.addAll(grid.getVoisin(current));
-            for (Sector s : grid.getVoisin(current)){
+            file.addAll(grid.getVoisin(current, false));
+            for (Sector s : grid.getVoisin(current, false)){
                 if (!visited.contains(s)){
                     visited.add(s);
                     path.add(s);
@@ -38,6 +39,14 @@ public class Algo {
 
     public ArrayList<Sector> getPath() {
         return path;
+    }
+
+    public void DijkstraCalculate() {
+        for (Robots r : this.grid.getRobots()) {
+            Sector start = this.grid.getSector(r.getPosition().getX(), r.getPosition().getY());
+            Sector end = this.grid.getMines().get(0);
+            Dijkstra(start, end);
+        }
     }
 
     public ArrayList<Coordonnee> Attent(Robots rbts, Grille grille){
@@ -104,7 +113,7 @@ public class Algo {
         for (Sector[] s : grid.getGrille()){
             for (Sector ss : s){
                 if (ss.isDiscover()) {
-                    ArrayList<Sector> p = grid.getVoisin(ss);
+                    ArrayList<Sector> p = grid.getVoisin(ss, false);
                     for (Sector s2 : p) {
                         tmp.add(s2);
                     }

@@ -65,6 +65,9 @@ public class EventManager implements EventHandler {
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
+            } else if ( b.getText().equals("Automatique")){
+                Algo a = new Algo(this.p.getGrid());
+                this.p.setA(a);
             } else if (b.getParent().getId().equals("action")){
                 Stage stage = new Stage();
                 Group group = new Group();
@@ -180,9 +183,6 @@ public class EventManager implements EventHandler {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-            } else if ( b.getText().equals("Automatique")){
-                Algo a = new Algo(this.p.getGrid());
-                this.p.setA(a);
             }
         } else if (ev.getSource() instanceof VBox) {
             VBox v = (VBox) ev.getSource();

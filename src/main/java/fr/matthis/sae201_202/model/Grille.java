@@ -205,29 +205,41 @@ public class Grille {
         return mines;
     }
 
-    public ArrayList<Sector> getVoisin(Sector s){
+    public ArrayList<Sector> getVoisin(Sector s, boolean show){
         ArrayList<Sector> out = new ArrayList<>();
         Coordonnee pos = s.getPosition();
         if (pos.getX() < this.getNbLigne() - 1) {
             Sector s2 = this.getSector(pos.getX() + 1, pos.getY());
+            if (show) {
+                s2.setDiscover(true);
+            }
             if (s2.isDiscover() && !(s2 instanceof Lac)){
                 out.add(s2);
             }
         }
         if (pos.getX() > 0) {
             Sector s2 = this.getSector(pos.getX() - 1, pos.getY());
+            if (show) {
+                s2.setDiscover(true);
+            }
             if (s2.isDiscover() && !(s2 instanceof Lac)){
                 out.add(s2);
             }
         }
         if (pos.getY() < this.getNbColonne() - 1) {
             Sector s2 = this.getSector(pos.getX(), pos.getY() + 1);
+            if (show) {
+                s2.setDiscover(true);
+            }
             if (s2.isDiscover() && !(s2 instanceof Lac)){
                 out.add(s2);
             }
         }
         if (pos.getY() > 0) {
             Sector s2 = this.getSector(pos.getX(), pos.getY() - 1);
+            if (show) {
+                s2.setDiscover(true);
+            }
             if (s2.isDiscover() && !(s2 instanceof Lac)){
                 out.add(s2);
             }
