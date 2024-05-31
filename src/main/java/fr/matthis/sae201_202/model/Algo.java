@@ -8,13 +8,13 @@ import java.util.Queue;
 public class Algo {
 
     private Grille grid;
-    private Queue<Sector> path;
+    private ArrayList<Sector> path;
     private ArrayList<Sector> visited;
     private ArrayList<ArrayList<Sector>> lstAjd;
 
     public Algo(Grille grille){
         this.grid = grille;
-        this.path = new ArrayDeque<>();
+        this.path = new ArrayList<>();
         this.visited = new ArrayList<>();
     }
 
@@ -26,10 +26,19 @@ public class Algo {
         file.add(current);
         while (current.getPosition().equals(end.getPosition())) {
             current = file.poll();
-
+            file.addAll(grid.getVoisin(current));
+            for (Sector s : grid.getVoisin(current)){
+                if (!visited.contains(s)){
+                    visited.add(s);
+                    path.add(s);
+                }
+            }
         }
     }
 
+    public ArrayList<Sector> getPath() {
+        return path;
+    }
 
     public ArrayList<Coordonnee> Attent(Robots rbts, Grille grille){
         ArrayList<Coordonnee> lst = new ArrayList<Coordonnee>();
@@ -97,9 +106,7 @@ public class Algo {
                 if (ss.isDiscover()) {
                     ArrayList<Sector> p = grid.getVoisin(ss);
                     for (Sector s2 : p) {
-                        if (!(s2 instanceof Lac)) {
-                            tmp.add(s2);
-                        }
+                        tmp.add(s2);
                     }
                     out.add(tmp);
                 }

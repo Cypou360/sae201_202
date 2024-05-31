@@ -209,16 +209,28 @@ public class Grille {
         ArrayList<Sector> out = new ArrayList<>();
         Coordonnee pos = s.getPosition();
         if (pos.getX() < this.getNbLigne() - 1) {
-            out.add(this.getSector(pos.getX() + 1, pos.getY()));
+            Sector s2 = this.getSector(pos.getX() + 1, pos.getY());
+            if (s2.isDiscover() && !(s2 instanceof Lac)){
+                out.add(s2);
+            }
         }
         if (pos.getX() > 0) {
-            out.add(this.getSector(pos.getX() - 1, pos.getY()));
+            Sector s2 = this.getSector(pos.getX() - 1, pos.getY());
+            if (s2.isDiscover() && !(s2 instanceof Lac)){
+                out.add(s2);
+            }
         }
         if (pos.getY() < this.getNbColonne() - 1) {
-            out.add(this.getSector(pos.getX(), pos.getY() + 1));
+            Sector s2 = this.getSector(pos.getX(), pos.getY() + 1);
+            if (s2.isDiscover() && !(s2 instanceof Lac)){
+                out.add(s2);
+            }
         }
         if (pos.getY() > 0) {
-            out.add(this.getSector(pos.getX(), pos.getY() - 1));
+            Sector s2 = this.getSector(pos.getX(), pos.getY() - 1);
+            if (s2.isDiscover() && !(s2 instanceof Lac)){
+                out.add(s2);
+            }
         }
         return out;
     }
