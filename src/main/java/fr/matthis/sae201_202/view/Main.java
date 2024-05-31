@@ -45,6 +45,16 @@ public class Main extends Stage {
 
     public ChoiceBox<String> cb;
 
+    public Algo getA() {
+        return a;
+    }
+
+    public void setA(Algo a) {
+        this.a = a;
+    }
+
+    private Algo a ;
+
     public Main() throws IOException {
         super();
         this.cb = new ChoiceBox<>();
@@ -425,9 +435,9 @@ public class Main extends Stage {
 
         // Ajout des boutons dans le groupe direction
         boutonDir.getChildren().addAll(d1, d2, d3, d4);
-        direction.getChildren().addAll(text2, boutonDir);
+        boolean b1 = direction.getChildren().addAll(text2, boutonDir);
 
-        // Ajout des événements sur les boutons de direction
+        // Ajout des événements sur les bouton de direction
         d1.setOnMouseClicked(emgr);
         d2.setOnMouseClicked(emgr);
         d3.setOnMouseClicked(emgr);
@@ -492,9 +502,10 @@ public class Main extends Stage {
         return sidebar;
     }
 
-    public VBox generateRecap(Grille grid) throws IOException { //Genration du recapitulatif dans la barre lateral
+    public VBox generateRecap(Grille grid) throws IOException { //Generation du recapitulatif dans la barre lateral
         VBox recap = new VBox();
         ArrayList<Robots> robots = grid.getRobots(); //Recuperer les robots depuis la Grille
+        EventManager emgr = new EventManager(this);
 
         Label espace = new Label("\n"); //Different espace entres les Secteur
         Label espace1 = new Label("\n");
@@ -596,6 +607,7 @@ public class Main extends Stage {
         auto.setPrefSize(100, 30);
         auto.setFont(new Font(cellSize/5));
         recap.getChildren().add(auto);
+        auto.setOnMouseClicked(emgr);
         return recap;
     }
 

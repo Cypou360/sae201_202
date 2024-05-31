@@ -1,9 +1,6 @@
 package fr.matthis.sae201_202.controller;
 
-import fr.matthis.sae201_202.model.Entrepot;
-import fr.matthis.sae201_202.model.Mine;
-import fr.matthis.sae201_202.model.Robots;
-import fr.matthis.sae201_202.model.Sector;
+import fr.matthis.sae201_202.model.*;
 import fr.matthis.sae201_202.view.*;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -183,6 +180,9 @@ public class EventManager implements EventHandler {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
+            } else if ( b.getText().equals("Automatique")){
+                Algo a = new Algo(this.p.getGrid());
+                this.p.setA(a);
             }
         } else if (ev.getSource() instanceof VBox) {
             VBox v = (VBox) ev.getSource();
