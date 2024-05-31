@@ -204,4 +204,22 @@ public class Grille {
     public ArrayList<Mine> getMines() {
         return mines;
     }
+
+    public ArrayList<Sector> getVoisin(Sector s){
+        ArrayList<Sector> out = new ArrayList<>();
+        Coordonnee pos = s.getPosition();
+        if (pos.getX() < this.getNbLigne() - 1) {
+            out.add(this.getSector(pos.getX() + 1, pos.getY()));
+        }
+        if (pos.getX() > 0) {
+            out.add(this.getSector(pos.getX() - 1, pos.getY()));
+        }
+        if (pos.getY() < this.getNbColonne() - 1) {
+            out.add(this.getSector(pos.getX(), pos.getY() + 1));
+        }
+        if (pos.getY() > 0) {
+            out.add(this.getSector(pos.getX(), pos.getY() - 1));
+        }
+        return out;
+    }
 }

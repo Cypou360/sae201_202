@@ -300,10 +300,6 @@ public class Main extends Stage {
         generalGrille.getChildren().add(groupRobot);
 
         g.getChildren().add(generalGrille);
-        System.out.println("Grille générale");
-        System.out.println(generalGrille.getChildren());
-        System.out.println("Grille");
-        System.out.println(groupGrille.getChildren());
     }
 
     public Group sideBar() throws IOException {
@@ -639,18 +635,10 @@ public class Main extends Stage {
 
         //Modification status voisin
         for (Robots r : this.grid.getRobots()) {
-            Coordonnee pos = r.getPosition();
-            if (pos.getX() < this.grid.getNbLigne() - 1) {
-                this.grid.getSector(pos.getX() + 1, pos.getY()).setDiscover(true);
-            }
-            if (pos.getX() > 0) {
-                this.grid.getSector(pos.getX() - 1, pos.getY()).setDiscover(true);
-            }
-            if (pos.getY() < this.grid.getNbColonne() - 1) {
-                this.grid.getSector(pos.getX(), pos.getY() + 1).setDiscover(true);
-            }
-            if (pos.getY() > 0) {
-                this.grid.getSector(pos.getX(), pos.getY() - 1).setDiscover(true);
+            Sector s = this.grid.getSector(r.getPosition().getX(), r.getPosition().getY());
+            ArrayList<Sector> voisin = this.grid.getVoisin(s);
+            for (Sector ss : voisin) {
+                ss.setDiscover(true);
             }
         }
 

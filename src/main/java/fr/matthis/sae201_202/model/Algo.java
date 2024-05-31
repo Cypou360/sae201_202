@@ -1,6 +1,5 @@
 package fr.matthis.sae201_202.model;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 
 public class Algo {
