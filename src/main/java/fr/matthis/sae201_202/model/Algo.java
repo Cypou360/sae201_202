@@ -73,9 +73,12 @@ public class Algo {
         ArrayList<Sector> a = new ArrayList<>();
         for (Sector[] s : grid.getGrille()){
             for (Sector ss : s){
-                if (ss.isDiscover()){
-                    if (!(ss instanceof Lac)){
-                        a.add(ss);
+                ArrayList<Sector> p = grid.getVoisin(ss);
+                for (Sector i : p){
+                    if (i.isDiscover()){
+                        if (!(i instanceof Lac)){
+                            a.add(i);
+                        }
                     }
                 }
             }
