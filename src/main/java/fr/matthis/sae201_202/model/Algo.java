@@ -1,16 +1,36 @@
 package fr.matthis.sae201_202.model;
 
 
-import java.security.PublicKey;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Algo {
 
     private Grille grid;
+    private Queue<Sector> path;
+    private ArrayList<Sector> visited;
+    private ArrayList<ArrayList<Sector>> lstAjd;
 
     public Algo(Grille grille){
         this.grid = grille;
+        this.path = new ArrayDeque<>();
+        this.visited = new ArrayList<>();
     }
+
+    public void Dijkstra(Sector start, Sector end){
+        this.visited.add(start);
+        this.path.add(start);
+        Queue<Sector> file = new ArrayDeque<>();
+        Sector current = start;
+        file.add(current);
+        while (current.getPosition().equals(end.getPosition())) {
+            current = file.poll();
+
+        }
+    }
+
+
     public ArrayList<Coordonnee> Attent(Robots rbts, Grille grille){
         ArrayList<Coordonnee> lst = new ArrayList<Coordonnee>();
         Coordonnee coord = rbts.getPosition();
@@ -69,20 +89,22 @@ public class Algo {
         return grille;
     }
 
-    public ArrayList<Sector> getDiscover(){
-        ArrayList<Sector> a = new ArrayList<>();
+    public ArrayList<ArrayList<Sector>> getDiscover(){
+        ArrayList<ArrayList<Sector>> out = new ArrayList<>();
+        ArrayList<Sector> tmp = new ArrayList<>();
         for (Sector[] s : grid.getGrille()){
             for (Sector ss : s){
-                ArrayList<Sector> p = grid.getVoisin(ss);
-                for (Sector i : p){
-                    if (i.isDiscover()){
-                        if (!(i instanceof Lac)){
-                            a.add(i);
+                if (ss.isDiscover()) {
+                    ArrayList<Sector> p = grid.getVoisin(ss);
+                    for (Sector s2 : p) {
+                        if (!(s2 instanceof Lac)) {
+                            tmp.add(s2);
                         }
                     }
+                    out.add(tmp);
                 }
             }
         }
-        return a;
+        return out;
     }
 }
