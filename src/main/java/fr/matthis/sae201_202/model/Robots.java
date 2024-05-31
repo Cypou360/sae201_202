@@ -223,4 +223,7 @@ public class Robots {
         }
         return null;
     }
+
+    //TODO : faire execution dans le programme principal
+    //TODO : modifier action bouton automatique eventmanager
 }
