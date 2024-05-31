@@ -74,7 +74,9 @@ public class Algo {
         for (Sector[] s : grid.getGrille()){
             for (Sector ss : s){
                 if (ss.isDiscover()){
-                    a.add(ss);
+                    if (!(ss instanceof Lac)){
+                        a.add(ss);
+                    }
                 }
             }
         }
