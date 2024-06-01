@@ -192,15 +192,23 @@ public class Robots {
     }
 
     public void executePath(Sector s, Grille grid) {
-            if (getPosition().getX() < s.getPosition().getX()) {
+        if (getPosition() != s.getPosition()) {
+            if (getPosition().getX() < s.getPosition().getX() && getPosition().getX() < 9 && grid.getSector(getPosition().getX()+1,getPosition().getY()).getDisponible()) {
+                System.out.println("O");
                 goTo("S", grid);
-            } else if (getPosition().getX() > s.getPosition().getX()) {
+            } else if (getPosition().getX() > s.getPosition().getX() && getPosition().getX() > 0 && grid.getSector(getPosition().getX()-1,getPosition().getY()).getDisponible()) {
+                System.out.println("E");
                 goTo("N", grid);
-            } else if (getPosition().getY() < s.getPosition().getY()) {
+            } else if (getPosition().getY() < s.getPosition().getY() && getPosition().getY() > 0 && grid.getSector(getPosition().getX(),getPosition().getY()+1).getDisponible()) {
+                System.out.println("S");
                 goTo("E", grid);
-            } else if (getPosition().getY() > s.getPosition().getY()) {
+            } else if (getPosition().getY() > s.getPosition().getY() && getPosition().getY() < 9 && grid.getSector(getPosition().getX(),getPosition().getY()-1).getDisponible()) {
+                System.out.println("N");
                 goTo("O", grid);
             }
+        }else{
+            System.out.println("C'est bon");
+        }
     }
 
     public Mine findMine(Grille grille) {

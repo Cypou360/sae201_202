@@ -156,9 +156,17 @@ public class Algo {
     }
 
     public void AllezAuSector(ArrayList<Sector> a){
+        Coordonnee pos = null;
         for (int i = 0; i < a.size(); i++){
-            Robots r = grid.getRobot(i+1);
-            r.executePath(a.get(i),grid);
+            Robots r = grid.getRobot(i + 1);
+            if (i < grid.getMines().size()){
+                pos = grid.getMines().get(i).getPosition();
+                System.out.println(pos);
+                System.out.println(r.getPosition());
+                r.executePath(grid.getSector(pos.getX(), pos.getY()), grid);
+            }else {
+                r.executePath(grid.getSector(r.getPosition().getX(), r.getPosition().getY()), grid);
+            }
         }
     }
 
