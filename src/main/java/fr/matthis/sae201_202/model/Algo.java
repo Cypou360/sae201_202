@@ -148,29 +148,41 @@ public class Algo {
         ArrayList<Sector> allAction = new ArrayList<>();
         for (ArrayList<Sector> s : a) {
             System.out.println(s);
-            Sector action = s.getFirst();
-            s.remove(s.getFirst());
-            allAction.add(action);
+            if (s.isEmpty()) {
+                Sector action = s.getFirst();
+                s.remove(s.getFirst());
+                allAction.add(action);
+            }
         }
         return allAction;
     }
 
-    public void AllezAuSector(ArrayList<Sector> a){
+    public boolean AllezAuSector(ArrayList<Sector> a){
         Coordonnee pos = null;
-        for (int i = 0; i < a.size(); i++){
-            Robots r = grid.getRobot(i + 1);
+        for (int i = 0; i < grid.getNbRobot(); i++){
+            Robots r = grid.getRobot(i+1);
             if (i < grid.getMines().size()){
                 pos = grid.getMines().get(i).getPosition();
-                System.out.println(pos);
-                System.out.println(r.getPosition());
-                r.executePath(grid.getSector(pos.getX(), pos.getY()), grid);
-            }else {
-                r.executePath(grid.getSector(r.getPosition().getX(), r.getPosition().getY()), grid);
+                if ((r.getPosition().equals(pos))) {
+                    return false;
+                }else{
+                    r.executePath(grid.getSector(pos.getX(), pos.getY()), grid);
+                }
+            }else{
+                //r.executePath(leplusProchePasDecouvert(), grid);
             }
         }
+        return false;
+    }
+
+    public Sector leplusProchePasDecouvert(){
+        return null;
     }
 
     public void executeAll(){
-        AllezAuSector(actionAllRobot(getListeAllSector()));
+        Boolean bool = true;
+        while(bool){
+            bool = AllezAuSector(actionAllRobot(getListeAllSector()));
+        };
     }
 }

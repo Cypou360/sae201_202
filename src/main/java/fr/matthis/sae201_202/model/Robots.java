@@ -192,22 +192,23 @@ public class Robots {
     }
 
     public void executePath(Sector s, Grille grid) {
-        if (getPosition() != s.getPosition()) {
-            if (getPosition().getX() < s.getPosition().getX() && getPosition().getX() < 9 && grid.getSector(getPosition().getX()+1,getPosition().getY()).getDisponible()) {
-                System.out.println("O");
+        if (getPosition().getX() < s.getPosition().getX() && getPosition().getX() < 9) { //Ouest
+            if (grid.getSector(getPosition().getX() + 1, getPosition().getY()).getDisponible()) {
                 goTo("S", grid);
-            } else if (getPosition().getX() > s.getPosition().getX() && getPosition().getX() > 0 && grid.getSector(getPosition().getX()-1,getPosition().getY()).getDisponible()) {
-                System.out.println("E");
+            }
+        } else if (getPosition().getX() > s.getPosition().getX() && getPosition().getX() > 0) { //Est
+            if (grid.getSector(getPosition().getX() - 1, getPosition().getY()).getDisponible()) {
                 goTo("N", grid);
-            } else if (getPosition().getY() < s.getPosition().getY() && getPosition().getY() > 0 && grid.getSector(getPosition().getX(),getPosition().getY()+1).getDisponible()) {
-                System.out.println("S");
+            }
+        } else if (getPosition().getY() < s.getPosition().getY() && getPosition().getY() < 9) { //Sud
+            if (grid.getSector(getPosition().getX(), getPosition().getY() + 1).getDisponible()) {
                 goTo("E", grid);
-            } else if (getPosition().getY() > s.getPosition().getY() && getPosition().getY() < 9 && grid.getSector(getPosition().getX(),getPosition().getY()-1).getDisponible()) {
-                System.out.println("N");
+            }
+        }
+        else if (getPosition().getY() > s.getPosition().getY() && getPosition().getY() > 0) { //Nord
+            if (grid.getSector(getPosition().getX(),getPosition().getY()-1).getDisponible()) {
                 goTo("O", grid);
             }
-        }else{
-            System.out.println("C'est bon");
         }
     }
 
