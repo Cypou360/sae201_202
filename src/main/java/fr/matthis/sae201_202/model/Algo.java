@@ -123,4 +123,46 @@ public class Algo {
         }
         return out;
     }
+
+    public ArrayList<ArrayList<Sector>> getListeAllSector(){
+        ArrayList<ArrayList<Sector>> discover = new ArrayList<>();
+        for (Robots r : this.grid.getRobots()) {
+            ArrayList<Sector> voisin = djikstraUnvisited(r);
+            discover.add(voisin);
+        }
+        return discover;
+    }
+
+    public ArrayList<Sector> djikstraUnvisited(Robots r){
+        ArrayList<Sector> Allez = new ArrayList<>();
+        ArrayList<Sector> out = grid.getVoisin(grid.getSector(r.getPosition().getX(),r.getPosition().getY()),false);
+        for (Sector s2 : out){
+            if (s2.isDiscover()){
+                Allez.add(s2);
+            }
+        }
+        return Allez;
+    }
+
+    public ArrayList<Sector> actionAllRobot(ArrayList<ArrayList<Sector>> a){
+        ArrayList<Sector> allAction = new ArrayList<>();
+        for (ArrayList<Sector> s : a) {
+            System.out.println(s);
+            Sector action = s.getFirst();
+            s.remove(s.getFirst());
+            allAction.add(action);
+        }
+        return allAction;
+    }
+
+    public void AllezAuSector(ArrayList<Sector> a){
+        for (int i = 0; i < a.size(); i++){
+            Robots r = grid.getRobot(i+1);
+            r.executePath(a.get(i),grid);
+        }
+    }
+
+    public void executeAll(){
+        AllezAuSector(actionAllRobot(getListeAllSector()));
+    }
 }

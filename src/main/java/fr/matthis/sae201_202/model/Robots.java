@@ -170,6 +170,10 @@ public class Robots {
         this.algo = algo;
     }
 
+    public void setPath(ArrayList<Sector> path) {
+        this.path = path;
+    }
+
     public void automation(Grille grid) {
         if (algo != null) {
             Sector start = grid.getSector(position.getX(), position.getY());
@@ -187,24 +191,16 @@ public class Robots {
         }
     }
 
-    public void executePath(Grille grid) {
-        if (path != null && !path.isEmpty()) {
-            // Récupération etapes chemin
-            int posIndex = path.indexOf(grid.getSector(position.getX(), position.getY()));
-            Sector actual = path.get(posIndex);
-            Sector next = path.get(posIndex + 1);
-
-            // Déplacement
-            if (actual.getPosition().getX() < next.getPosition().getX()) {
+    public void executePath(Sector s, Grille grid) {
+            if (getPosition().getX() < s.getPosition().getX()) {
                 goTo("S", grid);
-            } else if (actual.getPosition().getX() > next.getPosition().getX()) {
+            } else if (getPosition().getX() > s.getPosition().getX()) {
                 goTo("N", grid);
-            } else if (actual.getPosition().getY() < next.getPosition().getY()) {
+            } else if (getPosition().getY() < s.getPosition().getY()) {
                 goTo("E", grid);
-            } else if (actual.getPosition().getY() > next.getPosition().getY()) {
+            } else if (getPosition().getY() > s.getPosition().getY()) {
                 goTo("O", grid);
             }
-        }
     }
 
     public Mine findMine(Grille grille) {

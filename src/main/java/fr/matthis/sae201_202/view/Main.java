@@ -603,7 +603,7 @@ public class Main extends Stage {
         recap.getChildren().add(vEntre);
         recap.getChildren().add(espace2);
         // Création du boutton automatique
-        Button auto = new Button("Automatique");
+        Button auto = new Button("Auto");
         auto.setPrefSize(100, 30);
         auto.setFont(new Font(cellSize/5));
         recap.getChildren().add(auto);

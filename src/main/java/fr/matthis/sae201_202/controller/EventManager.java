@@ -65,9 +65,17 @@ public class EventManager implements EventHandler {
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-            } else if ( b.getText().equals("Automatique")){
-                Algo a = new Algo(this.p.getGrid());
-                this.p.setA(a);
+            } else if ( b.getText().equals("Auto")){
+                Algo a = new Algo(p.getGrid());
+                a.executeAll();
+                System.out.println();
+                try {
+                    Thread.sleep(100);
+                    p.update();
+                } catch (IOException | InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+
             } else if (b.getParent().getId().equals("action")){
                 Stage stage = new Stage();
                 Group group = new Group();
