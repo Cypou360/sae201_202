@@ -2,17 +2,27 @@ package fr.matthis.sae201_202.controller;
 
 import fr.matthis.sae201_202.model.*;
 import fr.matthis.sae201_202.view.*;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -65,16 +75,10 @@ public class EventManager implements EventHandler {
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-            } else if ( b.getText().equals("Auto")){
-                Algo a = new Algo(p.getGrid());
-                a.executeAll();
-                System.out.println();
-                try {
-                    Thread.sleep(100);
-                    p.update();
-                } catch (IOException | InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
+            } else if (b.getText().equals("Auto")) {
+                startAutoUpdate();
+
+
 
             } else if (b.getParent().getId().equals("action")){
                 Stage stage = new Stage();
@@ -207,6 +211,30 @@ public class EventManager implements EventHandler {
         } else {
             System.out.println(e);
         }
+    }
+
+    private void executeAndUpdate() throws IOException {
+        Algo a = new Algo(p.getGrid());
+        p.setNbTour(p.getNbTour()+1);
+        a.executeAll();
+        p.setLabeltour(new Label("NbTour : " + String.valueOf(p.getNbTour())));
+        p.update();
+    }
+
+    // Méthode pour démarrer la mise à jour automatique
+    private void startAutoUpdate() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    executeAndUpdate();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE); // Répéter indéfiniment
+        timeline.play(); // Démarrer le timeline
     }
 }
 

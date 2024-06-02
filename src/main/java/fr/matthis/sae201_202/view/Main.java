@@ -3,8 +3,11 @@ package fr.matthis.sae201_202.view;
 import fr.matthis.sae201_202.controller.EventManager;
 import fr.matthis.sae201_202.model.*;
 
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -40,7 +43,15 @@ public class Main extends Stage {
     }
 
     public int getNbTour() {
-        return nbTour++;
+        return nbTour;
+    }
+
+    public void setNbTour(int nbTour) {
+        this.nbTour = nbTour;
+    }
+
+    public void setLabeltour(Label labeltour) {
+        this.labeltour = labeltour;
     }
 
     public ChoiceBox<String> cb;
@@ -669,7 +680,6 @@ public class Main extends Stage {
             this.a.DijkstraCalculate();
             System.out.println(this.a.getPath());
         }
-
 
         //update recap
         ((HBox) this.getScene().getRoot()).getChildren().removeLast();

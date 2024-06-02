@@ -192,22 +192,23 @@ public class Robots {
     }
 
     public void executePath(Sector s, Grille grid) {
-        if (getPosition().getX() < s.getPosition().getX() && getPosition().getX() < 9) { //Ouest
-            if (grid.getSector(getPosition().getX() + 1, getPosition().getY()).getDisponible()) {
-                goTo("S", grid);
-            }
-        } else if (getPosition().getX() > s.getPosition().getX() && getPosition().getX() > 0) { //Est
-            if (grid.getSector(getPosition().getX() - 1, getPosition().getY()).getDisponible()) {
-                goTo("N", grid);
-            }
-        } else if (getPosition().getY() < s.getPosition().getY() && getPosition().getY() < 9) { //Sud
-            if (grid.getSector(getPosition().getX(), getPosition().getY() + 1).getDisponible()) {
-                goTo("E", grid);
-            }
-        }
-        else if (getPosition().getY() > s.getPosition().getY() && getPosition().getY() > 0) { //Nord
-            if (grid.getSector(getPosition().getX(),getPosition().getY()-1).getDisponible()) {
-                goTo("O", grid);
+        if (!(s == null)) {
+            if (getPosition().getX() < s.getPosition().getX() && getPosition().getX() < 9) { //Ouest
+                if (grid.getSector(getPosition().getX() + 1, getPosition().getY()).getDisponible()) {
+                    goTo("S", grid);
+                }
+            } else if (getPosition().getX() > s.getPosition().getX() && getPosition().getX() > 0) { //Est
+                if (grid.getSector(getPosition().getX() - 1, getPosition().getY()).getDisponible()) {
+                    goTo("N", grid);
+                }
+            } else if (getPosition().getY() < s.getPosition().getY() && getPosition().getY() < 9) { //Sud
+                if (grid.getSector(getPosition().getX(), getPosition().getY() + 1).getDisponible()) {
+                    goTo("E", grid);
+                }
+            } else if (getPosition().getY() > s.getPosition().getY() && getPosition().getY() > 0) { //Nord
+                if (grid.getSector(getPosition().getX(), getPosition().getY() - 1).getDisponible()) {
+                    goTo("O", grid);
+                }
             }
         }
     }
@@ -231,4 +232,18 @@ public class Robots {
 
     //TODO : faire execution dans le programme principal
     //TODO : modifier action bouton automatique eventmanager
+
+    //partie Matthis
+
+    public void exectuteChemin(Grille grille){
+        ArrayList<Sector> chemin = getPath();
+        if (!chemin.isEmpty()){
+            executePath(chemin.get(0),grille);
+            chemin.remove(0);
+        }
+    }
+
+    public ArrayList<Sector> getPath() {
+        return path;
+    }
 }

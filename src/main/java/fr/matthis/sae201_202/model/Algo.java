@@ -124,65 +124,72 @@ public class Algo {
         return out;
     }
 
-    public ArrayList<ArrayList<Sector>> getListeAllSector(){
-        ArrayList<ArrayList<Sector>> discover = new ArrayList<>();
-        for (Robots r : this.grid.getRobots()) {
-            ArrayList<Sector> voisin = djikstraUnvisited(r);
-            discover.add(voisin);
-        }
-        return discover;
-    }
+
+    //partie Matthis
 
     public ArrayList<Sector> djikstraUnvisited(Robots r){
-        ArrayList<Sector> Allez = new ArrayList<>();
-        ArrayList<Sector> out = grid.getVoisin(grid.getSector(r.getPosition().getX(),r.getPosition().getY()),false);
-        for (Sector s2 : out){
-            if (s2.isDiscover()){
-                Allez.add(s2);
-            }
-        }
-        return Allez;
+        ArrayList<String> liste = new ArrayList<>();
+        liste.add("N");
+        liste.add("S");
+        liste.add("E");
+        liste.add("O");
+        ArrayList<Sector> liste2 = new ArrayList<>();
+        int index = (int) (Math.random() * liste.size());
+        System.out.println(liste.get(index));
+        liste2.add(getSectorDirection(liste.get(index),r));
+        return liste2;
     }
 
-    public ArrayList<Sector> actionAllRobot(ArrayList<ArrayList<Sector>> a){
-        ArrayList<Sector> allAction = new ArrayList<>();
-        for (ArrayList<Sector> s : a) {
-            System.out.println(s);
-            if (s.isEmpty()) {
-                Sector action = s.getFirst();
-                s.remove(s.getFirst());
-                allAction.add(action);
+    public Sector getSectorDirection(String n,Robots r){
+        Sector s = null;
+        if (n == "N"){
+            if (r.getPosition().getX() > 0) {
+                s = grid.getSector(r.getPosition().getX() - 1, r.getPosition().getY());
+            }else {
+                djikstraUnvisited(r);
             }
-        }
-        return allAction;
-    }
-
-    public boolean AllezAuSector(ArrayList<Sector> a){
-        Coordonnee pos = null;
-        for (int i = 0; i < grid.getNbRobot(); i++){
-            Robots r = grid.getRobot(i+1);
-            if (i < grid.getMines().size()){
-                pos = grid.getMines().get(i).getPosition();
-                if ((r.getPosition().equals(pos))) {
-                    return false;
-                }else{
-                    r.executePath(grid.getSector(pos.getX(), pos.getY()), grid);
-                }
+        }else if (n == "S"){
+            if (r.getPosition().getX() < 9) {
+                s = grid.getSector(r.getPosition().getX() + 1, r.getPosition().getY());
+            }else {
+                djikstraUnvisited(r);
+            }
+        }else if (n == "E"){
+            if (r.getPosition().getY() < 9) {
+                s = grid.getSector(r.getPosition().getX(), r.getPosition().getY() + 1);
             }else{
-                //r.executePath(leplusProchePasDecouvert(), grid);
+                djikstraUnvisited(r);
+            }
+        } else if (n == "O"){
+            if (r.getPosition().getY() > 0) {
+                s = grid.getSector(r.getPosition().getX(), r.getPosition().getY() - 1);
+            }else{
+                djikstraUnvisited(r);
             }
         }
-        return false;
+        return s;
     }
 
-    public Sector leplusProchePasDecouvert(){
-        return null;
+    public ArrayList<ArrayList<Sector>> actionAllRobot(){
+        ArrayList<ArrayList<Sector>> Allez = new ArrayList<>();
+          for (Robots r : this.grid.getRobots()) {
+                Allez.add(djikstraUnvisited(r));
+          }
+          return Allez;
     }
+
+
+    public void definirChemin(ArrayList<ArrayList<Sector>> a){
+        for (int i = 0; i < a.size(); i++) {
+            grid.getRobot(i+1).setPath(a.get(i));
+        }
+        for (Robots r : grid.getRobots()) {
+            r.exectuteChemin(grid);
+        }
+    }
+
 
     public void executeAll(){
-        Boolean bool = true;
-        while(bool){
-            bool = AllezAuSector(actionAllRobot(getListeAllSector()));
-        };
+        definirChemin(actionAllRobot());
     }
 }
