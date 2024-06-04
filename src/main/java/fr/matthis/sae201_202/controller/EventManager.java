@@ -77,9 +77,6 @@ public class EventManager implements EventHandler {
                 }
             } else if (b.getText().equals("Auto")) {
                 startAutoUpdate();
-
-
-
             } else if (b.getParent().getId().equals("action")){
                 Stage stage = new Stage();
                 Group group = new Group();
@@ -214,10 +211,15 @@ public class EventManager implements EventHandler {
     }
 
     private void executeAndUpdate() throws IOException {
-        Algo a = new Algo(p.getGrid());
+        /*Algo a = new Algo(p.getGrid());
         p.setNbTour(p.getNbTour()+1);
         a.executeAll();
         p.setLabeltour(new Label("NbTour : " + String.valueOf(p.getNbTour())));
+        p.update();*/
+
+        for (Robots r : p.getGrid().getRobots()) {
+            r.automation(p.getGrid());
+        }
         p.update();
     }
 

@@ -15,6 +15,7 @@ public class Robots {
         this.position = new Coordonnee(0, 0);
         idCounter++;
         this.pioche = false;
+        path = new ArrayList<>();
     }
 
     public Robots(int x, int y, Ore type){
@@ -26,6 +27,7 @@ public class Robots {
         this.position = new Coordonnee(x, y);
         idCounter++;
         this.pioche = false;
+        path = new ArrayList<>();
     }
 
     private int maxCapacity;
@@ -174,6 +176,10 @@ public class Robots {
         this.path = path;
     }
 
+    public Algo getAlgo() {
+        return algo;
+    }
+
     public void automation(Grille grid) {
         if (algo != null) {
             Sector start = grid.getSector(position.getX(), position.getY());
@@ -188,27 +194,57 @@ public class Robots {
                 algo.Dijkstra(start, end);
                 path = algo.getPath();
             }
+        } else {
+            algo = new Algo(grid);
         }
+        executePath(grid);
     }
 
-    public void executePath(Sector s, Grille grid) {
-        if (!(s == null)) {
-            if (getPosition().getX() < s.getPosition().getX() && getPosition().getX() < 9) { //Ouest
-                if (grid.getSector(getPosition().getX() + 1, getPosition().getY()).getDisponible()) {
-                    goTo("S", grid);
-                }
-            } else if (getPosition().getX() > s.getPosition().getX() && getPosition().getX() > 0) { //Est
-                if (grid.getSector(getPosition().getX() - 1, getPosition().getY()).getDisponible()) {
+    public void executePath(Grille grid) {
+        /*if (getPosition().getX() < s.getPosition().getX() && getPosition().getX() < grid.getNbLigne()-1) { //Ouest
+            if (grid.getSector(getPosition().getX() + 1, getPosition().getY()).getDisponible()) {
+                goTo("S", grid);
+            }
+        } else if (getPosition().getX() > s.getPosition().getX() && getPosition().getX() > 0) { //Est
+            if (grid.getSector(getPosition().getX() - 1, getPosition().getY()).getDisponible()) {
+                goTo("N", grid);
+            }
+        } else if (getPosition().getY() < s.getPosition().getY() && getPosition().getY() < grid.getNbColonne()-1) { //Sud
+            if (grid.getSector(getPosition().getX(), getPosition().getY() + 1).getDisponible()) {
+                goTo("E", grid);
+            }
+        } else if (getPosition().getY() > s.getPosition().getY() && getPosition().getY() > 0) { //Nord
+            if (grid.getSector(getPosition().getX(), getPosition().getY() - 1).getDisponible()) {
+                goTo("O", grid);
+            }
+        }*/
+        if (!path.isEmpty()) {
+            int sid = path.indexOf(grid.getSector(this.position.getX(),this.position.getY()));
+            Sector s = path.get(sid);
+            if (sid != path.size()-1) {
+                Sector s2 = path.get(sid + 1);
+                if (s2.getPosition().getX() < s.getPosition().getX()) {
                     goTo("N", grid);
-                }
-            } else if (getPosition().getY() < s.getPosition().getY() && getPosition().getY() < 9) { //Sud
-                if (grid.getSector(getPosition().getX(), getPosition().getY() + 1).getDisponible()) {
+                } else if (s2.getPosition().getX() > s.getPosition().getX()) {
+                    goTo("S", grid);
+                } else if (s2.getPosition().getY() < s.getPosition().getY()) {
+                    goTo("O", grid);
+                } else if (s2.getPosition().getY() > s.getPosition().getY()) {
                     goTo("E", grid);
                 }
-            } else if (getPosition().getY() > s.getPosition().getY() && getPosition().getY() > 0) { //Nord
-                if (grid.getSector(getPosition().getX(), getPosition().getY() - 1).getDisponible()) {
-                    goTo("O", grid);
-                }
+            }
+        } else {
+            // mouvement aléatoire
+            Random r = new Random();
+            int i = r.nextInt(4);
+            if (i == 0) {
+                goTo("N", grid);
+            } else if (i == 1) {
+                goTo("S", grid);
+            } else if (i == 2) {
+                goTo("E", grid);
+            } else if (i == 3) {
+                goTo("O", grid);
             }
         }
     }
@@ -236,11 +272,11 @@ public class Robots {
     //partie Matthis
 
     public void exectuteChemin(Grille grille){
-        ArrayList<Sector> chemin = getPath();
+        /*ArrayList<Sector> chemin = getPath();
         if (!chemin.isEmpty()){
             executePath(chemin.get(0),grille);
             chemin.remove(0);
-        }
+        }*/
     }
 
     public ArrayList<Sector> getPath() {

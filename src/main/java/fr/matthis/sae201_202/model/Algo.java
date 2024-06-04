@@ -4,6 +4,7 @@ package fr.matthis.sae201_202.model;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Queue;
+import java.util.Random;
 
 public class Algo {
 
@@ -20,19 +21,28 @@ public class Algo {
     }
 
     public void Dijkstra(Sector start, Sector end){
+        this.path.clear();
+        this.visited.clear();
         this.visited.add(start);
         this.path.add(start);
-        Queue<Sector> file = new ArrayDeque<>();
+        ArrayList<Sector> file = new ArrayList<>();
         Sector current = start;
         file.add(current);
         while (current.getPosition().equals(end.getPosition())) {
-            current = file.poll();
-            file.addAll(grid.getVoisin(current, false));
-            for (Sector s : grid.getVoisin(current, false)){
-                if (!visited.contains(s)){
-                    visited.add(s);
-                    path.add(s);
+            ArrayList<Sector> voisin = this.grid.getVoisin(current, false);
+            for (Sector s : voisin){
+                if (!this.visited.contains(s)){
+                    file.add(s);
                 }
+            }
+            if (!file.isEmpty()){
+                Random rand = new Random();
+                current = file.get(rand.nextInt(file.size()));
+                visited.add(current);
+                path.add(current);
+            } else {
+                current = path.get(path.size()-2);
+                path.remove(path.size()-1);
             }
         }
     }
@@ -178,7 +188,6 @@ public class Algo {
           return Allez;
     }
 
-
     public void definirChemin(ArrayList<ArrayList<Sector>> a){
         for (int i = 0; i < a.size(); i++) {
             grid.getRobot(i+1).setPath(a.get(i));
@@ -187,7 +196,6 @@ public class Algo {
             r.exectuteChemin(grid);
         }
     }
-
 
     public void executeAll(){
         definirChemin(actionAllRobot());
