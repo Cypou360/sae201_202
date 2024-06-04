@@ -2,6 +2,7 @@ package fr.matthis.sae201_202.model;
 
 public class Lac extends Sector {
 
+    /* Constructeur par défaut des lacs */
     public Lac() {
         super();
         this.maxStockage = 0;
@@ -9,6 +10,7 @@ public class Lac extends Sector {
         this.robot = null;
     }
 
+    /* Constructeurs modifiables des lacs */
     public Lac(int x, int y) {
         super(x, y);
         this.maxStockage = 0;
