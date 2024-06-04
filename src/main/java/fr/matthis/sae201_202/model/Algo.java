@@ -135,46 +135,23 @@ public class Algo {
     }
 
 
-    //partie Matthis
-
-    public ArrayList<Sector> djikstraUnvisited(Robots r){
-        ArrayList<String> liste = new ArrayList<>();
-        liste.add("N");
-        liste.add("S");
-        liste.add("E");
-        liste.add("O");
-        ArrayList<Sector> liste2 = new ArrayList<>();
-        int index = (int) (Math.random() * liste.size());
-        System.out.println(liste.get(index));
-        liste2.add(getSectorDirection(liste.get(index),r));
-        return liste2;
-    }
-
     public Sector getSectorDirection(String n,Robots r){
         Sector s = null;
         if (n == "N"){
             if (r.getPosition().getX() > 0) {
                 s = grid.getSector(r.getPosition().getX() - 1, r.getPosition().getY());
-            }else {
-                djikstraUnvisited(r);
             }
         }else if (n == "S"){
             if (r.getPosition().getX() < 9) {
                 s = grid.getSector(r.getPosition().getX() + 1, r.getPosition().getY());
-            }else {
-                djikstraUnvisited(r);
             }
         }else if (n == "E"){
             if (r.getPosition().getY() < 9) {
                 s = grid.getSector(r.getPosition().getX(), r.getPosition().getY() + 1);
-            }else{
-                djikstraUnvisited(r);
             }
         } else if (n == "O"){
             if (r.getPosition().getY() > 0) {
                 s = grid.getSector(r.getPosition().getX(), r.getPosition().getY() - 1);
-            }else{
-                djikstraUnvisited(r);
             }
         }
         return s;
@@ -183,7 +160,7 @@ public class Algo {
     public ArrayList<ArrayList<Sector>> actionAllRobot(){
         ArrayList<ArrayList<Sector>> Allez = new ArrayList<>();
           for (Robots r : this.grid.getRobots()) {
-                Allez.add(djikstraUnvisited(r));
+                Allez.add();
           }
           return Allez;
     }

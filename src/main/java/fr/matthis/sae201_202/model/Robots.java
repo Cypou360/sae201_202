@@ -140,30 +140,37 @@ public class Robots {
         return this.id;
     }
 
+    /* Récupère la position du robot */
     public Coordonnee getPosition() {
         return position;
     }
 
+    /* Récupère le type du robot */
     public Ore getType() {
         return type;
     }
 
+    /* Récupère la capacité maximale du robot */
     public int getMaxCapacity() {
         return maxCapacity;
     }
 
+    /* Récupère la capacité actuelle du robot */
     public int getCapacity() {
         return capacity;
     }
 
+    /* Initialise l'idCounter du robot */
     public void setIdCounter(int idCounter) {
         Robots.idCounter = idCounter;
     }
 
+    /* Vérifie si le robot a une pioche */
     public boolean isPioche() {
         return pioche;
     }
 
+    /* Initialise la pioche du robot */
     public void setPioche(boolean pioche) {
         this.pioche = pioche;
     }
@@ -172,6 +179,7 @@ public class Robots {
         this.algo = algo;
     }
 
+    /* Initialise le path */
     public void setPath(ArrayList<Sector> path) {
         this.path = path;
     }
@@ -180,6 +188,7 @@ public class Robots {
         return algo;
     }
 
+    /* Execute l'algo de Dijkstra */
     public void automation(Grille grid) {
         if (algo != null) {
             Sector start = grid.getSector(position.getX(), position.getY());
@@ -249,6 +258,7 @@ public class Robots {
         }
     }
 
+    /* Trouve la mine approprié au robot */
     public Mine findMine(Grille grille) {
         for (Mine m : grille.getMines()) {
             if (m.getMinerai() == type && m.getStockage() > 0 && m.isDiscover()) {
@@ -257,6 +267,8 @@ public class Robots {
         }
         return null;
     }
+
+    /* Trouve l'entrepot approprié au robot */
     public Entrepot findEntrepot(Grille grille) {
         for (Entrepot e : grille.getEntrepots()) {
             if (e.getType() == type && e.isDiscover()) {
@@ -279,6 +291,7 @@ public class Robots {
         }*/
     }
 
+    /* Récupère le path du robot */
     public ArrayList<Sector> getPath() {
         return path;
     }

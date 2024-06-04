@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Mine extends Sector {
 
+    /* Constructeur des mines par défault */
     public Mine() {
         super();
         Random r = new Random();
@@ -14,6 +15,7 @@ public class Mine extends Sector {
         idCounter++;
     }
 
+    /* Constructeur modifiable des mines */
     public Mine(int x, int y, Ore m) {
         super(x, y);
         Random r = new Random();
@@ -29,7 +31,7 @@ public class Mine extends Sector {
     private int id;
     private static int idCounter = 1;
 
-    /* affiche toutes les informations sur la mine */
+    /* Affiche toutes les informations sur la mine */
     public String toString() {
         if (minerai == Ore.gold) {
             if (this.stockage > 10){
@@ -51,25 +53,27 @@ public class Mine extends Sector {
     }
 
 
-    /* Montre le type de minerai disponible dans la grille */
+    /* Récupère le type de minerai disponible dans la grille */
     public Ore getMinerai() {
         return minerai;
     }
 
-    /* Permet de montrer le type de batiment (ici, une Mine) */
+    /* Récupère le type de batiment (ici, une Mine) */
     public Ore getType() {
         return minerai;
     }
 
-    /* Affiche l'ID de la Mine */
+    /* Récupère l'ID de la Mine */
     public String getId() {
         return Integer.toString(id);
     }
 
+    /* Récupère le stockage maximum disponible pour une mine */
     public int getmaxStockage(){
         return maxStockage;
     }
 
+    /* Initialise Id de la mine */
     public void setIdCounter(int idCounter) {
         Mine.idCounter = idCounter;
     }

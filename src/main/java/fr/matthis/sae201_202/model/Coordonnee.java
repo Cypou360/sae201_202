@@ -2,6 +2,7 @@ package fr.matthis.sae201_202.model;
 
 public class Coordonnee {
 
+    /* Constructeur modifiable de la classe Coordonnee */
     public Coordonnee(int x, int y) {
         this.x = x;
         this.y = y;
