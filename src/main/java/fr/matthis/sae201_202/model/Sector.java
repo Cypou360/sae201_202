@@ -2,6 +2,7 @@ package fr.matthis.sae201_202.model;
 
 public abstract class Sector {
 
+    /* Constructeur par défaut de la classe secteur */
     public Sector() {
         this.maxStockage = 0;
         this.stockage = 0;
@@ -10,6 +11,7 @@ public abstract class Sector {
         this.discover = false;
     }
 
+    /* Constructeur modifiable de la classe secteur */
     public Sector(int x, int y) {
         this.maxStockage = 0;
         this.stockage = 0;
@@ -27,15 +29,17 @@ public abstract class Sector {
     protected Coordonnee position;
     private boolean discover;
 
+    /* Récupère si le secteur est découvert*/
     public boolean isDiscover() {
         return discover;
     }
 
+    /* Initialise si le secteur est découvert */
     public void setDiscover(boolean discover) {
         this.discover = discover;
     }
 
-    /* Permet d'afficher un secteur (partagé aux différents secteurs) */
+    /* Affiche un secteur (partagé aux différents secteurs) */
     public abstract String toString();
 
     /* Sélectionne le robot voulu */
@@ -43,7 +47,7 @@ public abstract class Sector {
         this.robot = r;
     }
 
-    /* Permet de savoir si un robot peut venir */
+    /* Récupère si un robot peut venir */
     public boolean getDisponible() {
         if (this instanceof Lac) {
             return false;
@@ -51,16 +55,17 @@ public abstract class Sector {
         return this.robot == null;
     }
 
-    /* Permet de récupérer le robot actuel */
+    /* Récupère le robot actuel */
     public Robots getRobot() {
         return this.robot;
     }
 
-    /* Permet de récupérer les coordonnées actuelles */
+    /* Récupere les coordonnées actuelles */
     public Coordonnee getPosition() {
         return this.position;
     }
 
+    /* Récupère le stockage du secteur actuel */
     public int getStockage() {
         return this.stockage;
     }
