@@ -2,6 +2,7 @@ package fr.matthis.sae201_202.model;
 
 public class Vide extends Sector {
 
+    /* Constructeur par défaut de la classe Vide */
     public Vide() {
         super();
         this.stockage = 0;
@@ -9,6 +10,7 @@ public class Vide extends Sector {
         this.maxStockage = 0;
     }
 
+    /* Constructeur par défaut de la classe Vide */
     public Vide(int x, int y) {
         super(x, y);
         this.stockage = 0;
