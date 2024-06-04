@@ -7,6 +7,8 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.shuffle;
 
 public class Grille {
+
+    /* Constructeur par défaut de la grille */
     public Grille() {
         this.nbLigne = 10;
         this.nbColonne = 10;
@@ -23,7 +25,7 @@ public class Grille {
     private final ArrayList<Entrepot> entrepots;
     private final ArrayList<Mine> mines;
 
-    /* Permet d'afficher la grille dans la console */
+    /* Affiche la grille dans la console */
     public String toString() {
         StringBuilder out = new StringBuilder();
         out.append("    0       1       2       3       4       5       6       7       8       9" + "\n");
@@ -67,7 +69,7 @@ public class Grille {
         return out.toString();
     }
 
-    /* Permet d'initialiser les différents secteurs */
+    /* Initialise les différents secteurs */
     public void initialisation() {
         Random r = new Random();
         int nbMineOr = r.nextInt(1,3);
@@ -142,21 +144,22 @@ public class Grille {
         }
     }
 
-    /* Permet de récuperer le secteur situé dans l'emplacement voulu */
+    /* Récupère le secteur situé dans l'emplacement voulu */
     public Sector getSector(int x, int y){
         return grille[x][y];
     }
 
-    /* Permet de récupérer le nombre de colones */
+    /* Récupère le nombre de colones */
     public int getNbColonne() {
         return nbColonne;
     }
 
-    /* Permet de récupérer le nombre de lignes */
+    /* Récupère le nombre de lignes */
     public int getNbLigne() {
         return nbLigne;
     }
 
+    /* Récupère le robot */
     public Robots getRobot(int id) {
         for (Robots r : robots) {
             if (r.getId() == id) {
@@ -165,10 +168,13 @@ public class Grille {
         }
         return null;
     }
+
+    /* Récupère le nombre de robots présents dans la grille */
     public int getNbRobot(){
         return robots.size();
     }
 
+    /* Affiche le récapitulatif */
     public String afficherRecap(){
         StringBuilder out = new StringBuilder();
         out.append("|---------------------------|\n");
@@ -189,22 +195,27 @@ public class Grille {
         return out.toString();
     }
 
+    /* Récupère la grille */
     public Sector[][] getGrille() {
         return grille;
     }
 
+    /* Récupère la liste des robots */
     public ArrayList<Robots> getRobots() {
         return robots;
     }
 
+    /* Récupère la liste des entrepots */
     public ArrayList<Entrepot> getEntrepots() {
         return entrepots;
     }
 
+    /* Récupère la liste des mines */
     public ArrayList<Mine> getMines() {
         return mines;
     }
 
+    /* Récupère les voisins */
     public ArrayList<Sector> getVoisin(Sector s, boolean show) {
         ArrayList<Sector> out = new ArrayList<>();
         Coordonnee pos = s.getPosition();
@@ -249,6 +260,7 @@ public class Grille {
         return out;
     }
 
+    /* Récupère mles différents minerais encore récoltables */
     public int getRemainingOre(Ore type) {
         int out = 0;
         for (Mine m : mines) {
