@@ -2,6 +2,7 @@ package fr.matthis.sae201_202.model;
 
 public class Entrepot extends Sector {
 
+    /* Constructeur par défaut de la classe entrepot */
     public Entrepot() {
         this.type = null;
         this.position = new Coordonnee(0,0);
@@ -10,6 +11,8 @@ public class Entrepot extends Sector {
         this.id = idCounter;
         idCounter++;
     }
+
+    /* Constructeur modifiable de la classe entrepot */
     public Entrepot( Ore type, int x, int y) {
         super();
         this.type = type;
@@ -36,21 +39,22 @@ public class Entrepot extends Sector {
     }
 
 
-    /* Permet de montrer le type de batiment (ici, un Entrepot) */
+    /* Récupère le type de batiment (ici, un Entrepot) */
     public Ore getType() {
         return type;
     }
 
+    /* Récupère le nom*/
     public String getNom(){
         return "E";
     }
 
-    /* Permet d'avoir l'Id de l'entrepot */
+    /* Récupère Id de l'entrepot */
     public String getId() {
         return Integer.toString(id);
     }
 
-
+    /* Récupère l'idCounter */
     public void setIdCounter(int idCounter) {
         Entrepot.idCounter = idCounter;
     }
