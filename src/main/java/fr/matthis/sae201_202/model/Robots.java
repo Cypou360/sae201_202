@@ -138,30 +138,37 @@ public class Robots {
         return this.id;
     }
 
+    /* Récupère la position du robot */
     public Coordonnee getPosition() {
         return position;
     }
 
+    /* Récupère le type du robot */
     public Ore getType() {
         return type;
     }
 
+    /* Récupère la capacité maximale du robot */
     public int getMaxCapacity() {
         return maxCapacity;
     }
 
+    /* Récupère la capacité actuelle du robot */
     public int getCapacity() {
         return capacity;
     }
 
+    /* Initialise l'idCounter du robot */
     public void setIdCounter(int idCounter) {
         Robots.idCounter = idCounter;
     }
 
+    /* Vérifie si le robot a une pioche */
     public boolean isPioche() {
         return pioche;
     }
 
+    /* Initialise la pioche du robot */
     public void setPioche(boolean pioche) {
         this.pioche = pioche;
     }
@@ -170,10 +177,12 @@ public class Robots {
         this.algo = algo;
     }
 
+    /* Initialise le path */
     public void setPath(ArrayList<Sector> path) {
         this.path = path;
     }
 
+    /* Execute l'algo de Dijkstra */
     public void automation(Grille grid) {
         if (algo != null) {
             Sector start = grid.getSector(position.getX(), position.getY());
@@ -191,20 +200,26 @@ public class Robots {
         }
     }
 
+    /* Déplace le robot si le secteur désiré est libre */
     public void executePath(Sector s, Grille grid) {
+        /* Vérifie si le secteur est null */
         if (!(s == null)) {
             if (getPosition().getX() < s.getPosition().getX() && getPosition().getX() < 9) { //Ouest
+                /* Vérifie si le Sud est libre */
                 if (grid.getSector(getPosition().getX() + 1, getPosition().getY()).getDisponible()) {
                     goTo("S", grid);
                 }
+                /* Vérifie si le Nord est libre */
             } else if (getPosition().getX() > s.getPosition().getX() && getPosition().getX() > 0) { //Est
                 if (grid.getSector(getPosition().getX() - 1, getPosition().getY()).getDisponible()) {
                     goTo("N", grid);
                 }
+                /* Vérifie si l'Est est libre */
             } else if (getPosition().getY() < s.getPosition().getY() && getPosition().getY() < 9) { //Sud
                 if (grid.getSector(getPosition().getX(), getPosition().getY() + 1).getDisponible()) {
                     goTo("E", grid);
                 }
+                /* Vérifie si l'Ouest est libre */
             } else if (getPosition().getY() > s.getPosition().getY() && getPosition().getY() > 0) { //Nord
                 if (grid.getSector(getPosition().getX(), getPosition().getY() - 1).getDisponible()) {
                     goTo("O", grid);
@@ -213,6 +228,7 @@ public class Robots {
         }
     }
 
+    /* Trouve la mine approprié au robot */
     public Mine findMine(Grille grille) {
         for (Mine m : grille.getMines()) {
             if (m.getMinerai() == type && m.getStockage() > 0 && m.isDiscover()) {
@@ -221,6 +237,8 @@ public class Robots {
         }
         return null;
     }
+
+    /* Trouve l'entrepot approprié au robot */
     public Entrepot findEntrepot(Grille grille) {
         for (Entrepot e : grille.getEntrepots()) {
             if (e.getType() == type && e.isDiscover()) {
@@ -235,6 +253,7 @@ public class Robots {
 
     //partie Matthis
 
+    /*  */
     public void exectuteChemin(Grille grille){
         ArrayList<Sector> chemin = getPath();
         if (!chemin.isEmpty()){
@@ -243,6 +262,7 @@ public class Robots {
         }
     }
 
+    /* Récupère le path du robot */
     public ArrayList<Sector> getPath() {
         return path;
     }
