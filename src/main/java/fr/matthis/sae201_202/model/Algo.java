@@ -160,7 +160,7 @@ public class Algo {
     public ArrayList<ArrayList<Sector>> actionAllRobot(){
         ArrayList<ArrayList<Sector>> Allez = new ArrayList<>();
           for (Robots r : this.grid.getRobots()) {
-                Allez.add();
+                //Allez.add();
           }
           return Allez;
     }
@@ -177,4 +177,5 @@ public class Algo {
     public void executeAll(){
         definirChemin(actionAllRobot());
     }
+
 }
