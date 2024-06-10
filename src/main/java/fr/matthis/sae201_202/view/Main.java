@@ -56,16 +56,6 @@ public class Main extends Stage {
 
     public ChoiceBox<String> cb;
 
-    public Algo getA() {
-        return a;
-    }
-
-    public void setA(Algo a) {
-        this.a = a;
-    }
-
-    private Algo a ;
-
     public Main() throws IOException {
         super();
         this.cb = new ChoiceBox<>();
@@ -675,10 +665,6 @@ public class Main extends Stage {
                     sg.setOpacity(0.5);
                 }
             }
-        }
-        if (this.a != null) {
-            this.a.DijkstraCalculate();
-            System.out.println(this.a.getPath());
         }
 
         //update recap

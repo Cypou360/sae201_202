@@ -91,7 +91,6 @@ public class EventManager implements EventHandler {
                     int id = Integer.valueOf(nb);
                     Robots r = p.getGrid().getRobot(id);
                     if (cb.getItems().isEmpty()){
-                        System.out.println(cb.getItems());
                         for (Robots ro : p.getGrid().getRobots()) {
                             String out = "Robot " + ro.getId();
                             cb.getItems().add(out);
@@ -211,15 +210,12 @@ public class EventManager implements EventHandler {
     }
 
     private void executeAndUpdate() throws IOException {
-        /*Algo a = new Algo(p.getGrid());
-        p.setNbTour(p.getNbTour()+1);
-        a.executeAll();
-        p.setLabeltour(new Label("NbTour : " + String.valueOf(p.getNbTour())));
-        p.update();*/
-
         for (Robots r : p.getGrid().getRobots()) {
             r.automation(p.getGrid());
+
         }
+        p.setNbTour(p.getNbTour()+1);
+        p.setLabeltour(new Label("NbTour : " + String.valueOf(p.getNbTour())));
         p.update();
     }
 

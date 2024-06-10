@@ -37,7 +37,6 @@ public class Robots {
     private Coordonnee position;
     private static int idCounter = 1;
     private boolean pioche;
-    private Algo algo;
     private ArrayList<Sector> path;
 
     /* Permet de récupérer toutes les informations sur le robot */
@@ -72,7 +71,7 @@ public class Robots {
                             m.stockage = 0;
                         }
                     } else if (capacity == maxCapacity) {
-                        System.out.println("Capcity trop elevée");
+                        return false;
                     } else{
                         capacity += (maxCapacity - capacity);
                     }
@@ -175,61 +174,65 @@ public class Robots {
         this.pioche = pioche;
     }
 
-    public void setAlgo(Algo algo) {
-        this.algo = algo;
-    }
 
     /* Initialise le path */
     public void setPath(ArrayList<Sector> path) {
         this.path = path;
     }
 
-    public Algo getAlgo() {
-        return algo;
-    }
 
     /* Execute l'algo de Dijkstra */
     public void automation(Grille grid) {
-        if (algo != null) {
-            Sector start = grid.getSector(position.getX(), position.getY());
-            int remainingOre = grid.getRemainingOre(type);
-            Sector end;
-            if (remainingOre > 0 && capacity < maxCapacity) {
-                end = findMine(grid);
-            } else {
-                end = findEntrepot(grid);
-            }
-            if (end != null) {
-                algo.Dijkstra(start, end);
-                path = algo.getPath();
-            }
+        Sector start = grid.getSector(position.getX(), position.getY());
+        int remainingOre = grid.getRemainingOre(type);
+        Sector end;
+        if (remainingOre > 0 && capacity < maxCapacity) {
+            end = findMine(grid);
         } else {
-            algo = new Algo(grid);
+            end = findEntrepot(grid);
+        }
+        System.out.println("Secteur arv " + end);
+        if (end != null) {
+            Dijkstrat dj = new Dijkstrat();
+            this.path = dj.findShortest(start, end, grid);
         }
         executePath(grid);
     }
 
     public void executePath(Grille grid) {
-        /*if (getPosition().getX() < s.getPosition().getX() && getPosition().getX() < grid.getNbLigne()-1) { //Ouest
-            if (grid.getSector(getPosition().getX() + 1, getPosition().getY()).getDisponible()) {
-                goTo("S", grid);
+        Sector s = grid.getSector(position.getX(), position.getY());
+        if (s instanceof Mine) {
+            if(!extraction(grid)) {
+                Random r = new Random();
+                int i = r.nextInt(4);
+                if (i == 0) {
+                    goTo("N", grid);
+                } else if (i == 1) {
+                    goTo("S", grid);
+                } else if (i == 2) {
+                    goTo("E", grid);
+                } else if (i == 3) {
+                    goTo("O", grid);
+                }
             }
-        } else if (getPosition().getX() > s.getPosition().getX() && getPosition().getX() > 0) { //Est
-            if (grid.getSector(getPosition().getX() - 1, getPosition().getY()).getDisponible()) {
-                goTo("N", grid);
+
+        } else if (s instanceof Entrepot) {
+            if (!deposer(grid)) {
+                Random r = new Random();
+                int i = r.nextInt(4);
+                if (i == 0) {
+                    goTo("N", grid);
+                } else if (i == 1) {
+                    goTo("S", grid);
+                } else if (i == 2) {
+                    goTo("E", grid);
+                } else if (i == 3) {
+                    goTo("O", grid);
+                }
             }
-        } else if (getPosition().getY() < s.getPosition().getY() && getPosition().getY() < grid.getNbColonne()-1) { //Sud
-            if (grid.getSector(getPosition().getX(), getPosition().getY() + 1).getDisponible()) {
-                goTo("E", grid);
-            }
-        } else if (getPosition().getY() > s.getPosition().getY() && getPosition().getY() > 0) { //Nord
-            if (grid.getSector(getPosition().getX(), getPosition().getY() - 1).getDisponible()) {
-                goTo("O", grid);
-            }
-        }*/
-        if (!path.isEmpty()) {
+        } else if (!path.isEmpty()) {
             int sid = path.indexOf(grid.getSector(this.position.getX(),this.position.getY()));
-            Sector s = path.get(sid);
+            s = path.get(sid);
             if (sid != path.size()-1) {
                 Sector s2 = path.get(sid + 1);
                 if (s2.getPosition().getX() < s.getPosition().getX()) {
@@ -240,6 +243,12 @@ public class Robots {
                     goTo("O", grid);
                 } else if (s2.getPosition().getY() > s.getPosition().getY()) {
                     goTo("E", grid);
+                }
+            } else {
+                if (s instanceof Mine) {
+                    extraction(grid);
+                } else if (s instanceof Entrepot) {
+                    deposer(grid);
                 }
             }
         } else {
@@ -280,19 +289,4 @@ public class Robots {
 
     //TODO : faire execution dans le programme principal
     //TODO : modifier action bouton automatique eventmanager
-
-    //partie Matthis
-
-    public void exectuteChemin(Grille grille){
-        /*ArrayList<Sector> chemin = getPath();
-        if (!chemin.isEmpty()){
-            executePath(chemin.get(0),grille);
-            chemin.remove(0);
-        }*/
-    }
-
-    /* Récupère le path du robot */
-    public ArrayList<Sector> getPath() {
-        return path;
-    }
 }
