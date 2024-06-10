@@ -7,12 +7,11 @@ import java.util.Queue;
 import static java.util.Collections.shuffle;
 
 public class Dijkstrat {
-    private ArrayList<Sector[]> deterChemin(Sector dep, Sector arv, Grille grille){
-        ArrayList<Sector[]> lstchemins = new ArrayList<>();
+    private ArrayList<ArrayList<Sector>> deterChemin(Sector dep, Sector arv, Grille grille){
+        ArrayList<ArrayList<Sector>> lstchemins = new ArrayList<>();
         ArrayList<Sector> file = new ArrayList<>();
         file.add(dep);
-        ArrayList<Sector> chemin = new ArrayList<Sector>();
-        ArrayList<Sector> visited = new ArrayList<Sector>();
+        ArrayList<Sector> visited = new ArrayList<>();
         visited.add(dep);
 
         Sector exCurrent = null;
@@ -20,7 +19,6 @@ public class Dijkstrat {
         while (!visited.contains(arv)){
             Sector current = file.getFirst();
             file.remove(0);
-            chemin.add(current);
             visited.add(current);
             ArrayList<Sector> vois = grille.getVoisin(current, false);
 
@@ -31,33 +29,34 @@ public class Dijkstrat {
                 }
             }
 
-            Sector[] tmp = new Sector[2];
-            tmp[0] = current;
-            tmp[1] = exCurrent;
+            ArrayList<Sector> tmp = new ArrayList<>();
+            tmp.add(current);
+            tmp.add(exCurrent);
             lstchemins.add(tmp);
             exCurrent = current;
         }
+        System.out.println(lstchemins);
         return lstchemins;
     }
 
     public ArrayList<Sector> findShortest(Sector dep, Sector arv, Grille grille) {
-        ArrayList<Sector[]> lstChemins = this.deterChemin(dep,arv,grille);
+        ArrayList<ArrayList<Sector>> lstChemins = this.deterChemin(dep,arv,grille);
         ArrayList<Sector> chemin = new ArrayList<>();
         chemin.add(arv);
 
         int arvIndex = findIndex(arv,lstChemins);
 
         if (arvIndex >= 0) {
-            Sector prev = lstChemins.get(arvIndex)[1];
+            Sector prev = lstChemins.get(arvIndex).get(1);
             chemin.add(arv);
 
             while (prev != null) {
-                chemin.add(lstChemins.get(arvIndex)[0]);
+                chemin.add(lstChemins.get(arvIndex).get(0));
                 arvIndex = findIndex(prev,lstChemins);
                 if (arvIndex <= 0){
                     break;
                 }
-                prev = lstChemins.get(arvIndex)[1];
+                prev = lstChemins.get(arvIndex).get(0);
             }
 
             chemin.reversed();
@@ -67,9 +66,9 @@ public class Dijkstrat {
         return null;
     }
 
-    private int findIndex(Sector s, ArrayList<Sector[]> lst){
+    private int findIndex(Sector s, ArrayList<ArrayList<Sector>> lst){
         for (int i = 0; i < lst.size(); i++){
-            if (lst.get(i)[0] == s){
+            if (lst.get(i).get(0) == s){
                 return i;
             }
         }
