@@ -1,14 +1,15 @@
 package fr.matthis.sae201_202.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 import static java.util.Collections.shuffle;
 
 public class Dijkstrat {
-    private ArrayList<ArrayList<Sector>> deterChemin(Sector dep, Sector arv, Grille grille){
-        ArrayList<ArrayList<Sector>> lstchemins = new ArrayList<>();
+    private ArrayList<Distance> deterChemin(Sector dep, Sector arv, Grille grille){
+        ArrayList<Distance> lstchemins = new ArrayList<>();
         ArrayList<Sector> file = new ArrayList<>();
         file.add(dep);
         ArrayList<Sector> visited = new ArrayList<>();
@@ -24,14 +25,17 @@ public class Dijkstrat {
 
             // Ajoute des voisins non présent dans visited
             for (Sector s: vois){
-                if (!visited.contains(s)){
+                if (s != arv) {
                     file.add(s);
+                }else{
+                    visited.add(s);
+                    lstchemins.add(new Distance(1,current,s));
+                    current = s;
+                    break;
                 }
             }
 
-            ArrayList<Sector> tmp = new ArrayList<>();
-            tmp.add(current);
-            tmp.add(exCurrent);
+            Distance tmp = new Distance(1,current,exCurrent);
             lstchemins.add(tmp);
             exCurrent = current;
         }
@@ -40,35 +44,38 @@ public class Dijkstrat {
     }
 
     public ArrayList<Sector> findShortest(Sector dep, Sector arv, Grille grille) {
-        ArrayList<ArrayList<Sector>> lstChemins = this.deterChemin(dep,arv,grille);
+        ArrayList<Distance> lstChemins = this.deterChemin(dep,arv,grille);
         ArrayList<Sector> chemin = new ArrayList<>();
         chemin.add(arv);
 
         int arvIndex = findIndex(arv,lstChemins);
 
         if (arvIndex >= 0) {
-            Sector prev = lstChemins.get(arvIndex).get(1);
-            chemin.add(arv);
+            Sector prev = lstChemins.get(arvIndex).getPrevious();
 
             while (prev != null) {
-                chemin.add(lstChemins.get(arvIndex).get(0));
+                chemin.add(lstChemins.get(arvIndex).getCurrent());
                 arvIndex = findIndex(prev,lstChemins);
                 if (arvIndex <= 0){
                     break;
                 }
-                prev = lstChemins.get(arvIndex).get(0);
+                prev = lstChemins.get(arvIndex).getCurrent();
             }
 
-            chemin.reversed();
             chemin.add(dep);
-            return chemin;
+            ArrayList<Sector> cheminInvert = new ArrayList<>();
+            for (int i = chemin.size() ; i > 0 ; i--){
+                cheminInvert.add(chemin.get(i-1));
+            }
+            System.out.println(cheminInvert);
+            return cheminInvert;
         }
         return null;
     }
 
-    private int findIndex(Sector s, ArrayList<ArrayList<Sector>> lst){
+    private int findIndex(Sector s, ArrayList<Distance> lst){
         for (int i = 0; i < lst.size(); i++){
-            if (lst.get(i).get(0) == s){
+            if (lst.get(i).getCurrent() == s){
                 return i;
             }
         }

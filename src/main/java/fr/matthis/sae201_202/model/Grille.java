@@ -262,7 +262,7 @@ public class Grille {
     public int getRemainingOre(Ore type) {
         int out = 0;
         for (Mine m : mines) {
-            if (m.getType() == type) {
+            if (m.getType() == type && m.getStockage() > 0) {
                 out++;
             }
         }

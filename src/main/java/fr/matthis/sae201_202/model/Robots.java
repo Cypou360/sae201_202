@@ -52,28 +52,29 @@ public class Robots {
     /* Permet d'extraire un minerai si la mine possède le minerai adéquat */
     public Boolean extraction(Grille grille) {
         if (grille.getSector(getPosition().getX(),getPosition().getY()) instanceof Mine m){
-            if (m.getMinerai() == type){
-                if (m.stockage > 0){
-                    Random r = new Random();
-                    int extraction = 0;
-                    if (maxCapacity-capacity +1 <4) {
-                        extraction += r.nextInt(1, (maxCapacity - capacity + 1));
-                    }else {
-                        extraction += r.nextInt(1, 4);
-                    }
-                    if (capacity <= maxCapacity - extraction){
-                        if (m.stockage >= extraction){
-                            m.stockage -= extraction;
-                            capacity += extraction;
+            if (m.getMinerai() == type) {
+                if (capacity != maxCapacity) {
+                    if (m.stockage > 0) {
+                        Random r = new Random();
+                        int extraction = 0;
+                        if (maxCapacity - capacity + 1 < 4) {
+                            extraction += r.nextInt(1, (maxCapacity - capacity + 1));
+                        } else {
+                            extraction += r.nextInt(1, 4);
                         }
-                        else{
-                            capacity += m.stockage;
-                            m.stockage = 0;
+                        if (capacity <= maxCapacity - extraction) {
+                            if (m.stockage >= extraction) {
+                                m.stockage -= extraction;
+                                capacity += extraction;
+                            } else {
+                                capacity += m.stockage;
+                                m.stockage = 0;
+                            }
+                        } else if (capacity == maxCapacity) {
+                            return false;
+                        } else {
+                            capacity += (maxCapacity - capacity);
                         }
-                    } else if (capacity == maxCapacity) {
-                        return false;
-                    } else{
-                        capacity += (maxCapacity - capacity);
                     }
                 }
             }
@@ -185,39 +186,36 @@ public class Robots {
     public void automation(Grille grid) {
         Sector start = grid.getSector(position.getX(), position.getY());
         int remainingOre = grid.getRemainingOre(type);
-        Sector end;
-        if (remainingOre > 0 && capacity < maxCapacity) {
+        Sector end = null;
+
+        if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine)) {
+            System.out.println("Cherche Mine");
             end = findMine(grid);
         } else {
+            System.out.println("Cherche Entrepot");
             end = findEntrepot(grid);
+            System.out.println(end);
         }
-        System.out.println("Secteur arv " + end);
-        if (end != null) {
+
+        if (end != null && this.path.isEmpty()) {
             Dijkstrat dj = new Dijkstrat();
             this.path = dj.findShortest(start, end, grid);
+            System.out.println(this.path);
+        } else {
+            executePath(grid);
         }
-        executePath(grid);
+
     }
 
     public void executePath(Grille grid) {
         Sector s = grid.getSector(position.getX(), position.getY());
         if (s instanceof Mine) {
-            if(!extraction(grid)) {
-                Random r = new Random();
-                int i = r.nextInt(4);
-                if (i == 0) {
-                    goTo("N", grid);
-                } else if (i == 1) {
-                    goTo("S", grid);
-                } else if (i == 2) {
-                    goTo("E", grid);
-                } else if (i == 3) {
-                    goTo("O", grid);
-                }
+            if(this.capacity < this.maxCapacity) {
+
             }
 
         } else if (s instanceof Entrepot) {
-            if (!deposer(grid)) {
+            if (this.capacity != 0) {
                 Random r = new Random();
                 int i = r.nextInt(4);
                 if (i == 0) {
@@ -231,10 +229,9 @@ public class Robots {
                 }
             }
         } else if (!path.isEmpty()) {
-            int sid = path.indexOf(grid.getSector(this.position.getX(),this.position.getY()));
-            s = path.get(sid);
+            int sid = path.indexOf(grid.getSector(this.position.getX(),this.position.getY())) ;
             if (sid != path.size()-1) {
-                Sector s2 = path.get(sid + 1);
+                Sector s2 = path.get(sid+1);
                 if (s2.getPosition().getX() < s.getPosition().getX()) {
                     goTo("N", grid);
                 } else if (s2.getPosition().getX() > s.getPosition().getX()) {
