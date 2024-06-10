@@ -32,7 +32,7 @@ public class Mine extends Sector {
     private static int idCounter = 1;
 
     /* Affiche toutes les informations sur la mine */
-    public String toString() {
+    /*public String toString() {
         if (minerai == Ore.gold) {
             if (this.stockage > 10){
                 return "| M" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + stockage + " / " + maxStockage + " \t|";
@@ -50,6 +50,11 @@ public class Mine extends Sector {
 
             }
         }
+    }*/
+    public String toString() {
+        return "Mine{" +
+                "position=" + position +
+                '}';
     }
 
 

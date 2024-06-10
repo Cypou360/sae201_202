@@ -29,13 +29,19 @@ public class Entrepot extends Sector {
     private static int idCounter = 1;
 
     /* Avoir toutes les infos sur les entrepots */
-    public String toString() {
+    /*public String toString() {
         if (type == Ore.gold) {
             return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + stockage + "\t\t\t|";
         }
         else{
             return "| E" + id + "  " + position.getX() + "  " + position.getY() + "  " + "NI" + "  " + stockage + "\t\t\t|";
         }
+    }*/
+
+    public String toString() {
+        return "Entrepot{" +
+                "position=" + position +
+                '}';
     }
 
 

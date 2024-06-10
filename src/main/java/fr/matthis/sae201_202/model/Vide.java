@@ -19,7 +19,12 @@ public class Vide extends Sector {
     }
 
     /* Affiche une section vide */
-    public String toString() {
+    /*public String toString() {
         return "   |   /";
+    }*/
+    public String toString() {
+        return "Vide{" +
+                "position=" + position +
+                '}';
     }
 }

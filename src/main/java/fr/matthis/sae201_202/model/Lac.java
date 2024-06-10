@@ -19,14 +19,18 @@ public class Lac extends Sector {
     }
 
     /* Permet d'afficher le lac */
-    public String toString() {
+    /*public String toString() {
         return "/X X/";
-    }
+    }*/
 
     /* Défini que le lac est une zone ou les robots ne peuvent pas aller */
     /* @Override
     public boolean getDisponible() {
         return false;
     }*/
-
+    public String toString() {
+        return "Lac{" +
+                "position=" + position +
+                '}';
+    }
 }
