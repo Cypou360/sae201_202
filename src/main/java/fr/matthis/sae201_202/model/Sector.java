@@ -1,5 +1,7 @@
 package fr.matthis.sae201_202.model;
 
+import java.util.Objects;
+
 public abstract class Sector {
 
     /* Constructeur par défaut de la classe secteur */
@@ -68,5 +70,17 @@ public abstract class Sector {
     /* Récupère le stockage du secteur actuel */
     public int getStockage() {
         return this.stockage;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sector sector)) return false;
+        return maxStockage == sector.maxStockage && getStockage() == sector.getStockage() && isDiscover() == sector.isDiscover() && Objects.equals(getRobot(), sector.getRobot()) && Objects.equals(getPosition(), sector.getPosition());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(maxStockage, getStockage(), getRobot(), getPosition(), isDiscover());
     }
 }
