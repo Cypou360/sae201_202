@@ -37,8 +37,7 @@ public class Grille {
                     out.append(" ").append("M").append(" | ").append(m.getId()).append(" /");
                     if (!m.getDisponible()) {
                         tmp.append(" R | ").append(m.getRobot().getId()).append(" /");
-                    }
-                    else {
+                    } else {
                         tmp.append("   |   /");
                     }
                 } else if (ss instanceof Lac) {
@@ -48,16 +47,14 @@ public class Grille {
                     out.append(" ").append(e.getNom()).append(" | ").append(e.getId()).append(" /");
                     if (!e.getDisponible()) {
                         tmp.append(" R | ").append(e.getRobot().getId()).append(" /");
-                    }
-                    else {
+                    } else {
                         tmp.append("   |   /");
                     }
                 } else if (ss instanceof Vide m) {
                     out.append("   |   /");
                     if (!m.getDisponible()) {
                         tmp.append(" R | ").append(m.getRobot().getId()).append(" /");
-                    }
-                    else {
+                    } else {
                         tmp.append("   |   /");
                     }
                 }
@@ -72,13 +69,13 @@ public class Grille {
     /* Initialise les différents secteurs */
     public void initialisation() {
         Random r = new Random();
-        int nbMineOr = r.nextInt(1,3);
-        int nbMineNickel = r.nextInt(1,3);
-        int nbRobot = r.nextInt(1,2);
+        int nbMineOr = r.nextInt(1, 3);
+        int nbMineNickel = r.nextInt(1, 3);
+        int nbRobot = r.nextInt(1, 2);
 
         Integer[] Entier = new Integer[100];
         int tmp = -1;
-        for(int i = 0; i!= 100; i++){
+        for (int i = 0; i != 100; i++) {
             tmp++;
             Entier[i] = tmp;
         }
@@ -88,32 +85,27 @@ public class Grille {
             for (int c = 0; c < nbColonne; c++) {
                 entier++;
                 int a = Entier[entier];
-                if (a > 80 && a <91){
-                    grille[l][c] = new Lac(l,c);
-                }
-                else if(a == 91){
+                if (a > 80 && a < 91) {
+                    grille[l][c] = new Lac(l, c);
+                } else if (a == 91) {
                     Entrepot e = new Entrepot(Ore.nickel, l, c);
                     grille[l][c] = e;
                     entrepots.add(e);
-                }
-                else if(a == 92){
+                } else if (a == 92) {
                     Entrepot e = new Entrepot(Ore.gold, l, c);
                     grille[l][c] = e;
                     entrepots.add(e);
-                }
-                else if((a == 93 | a == 94) && nbMineNickel != 0){
+                } else if ((a == 93 | a == 94) && nbMineNickel != 0) {
                     nbMineNickel--;
                     Mine m = new Mine(l, c, Ore.nickel);
                     grille[l][c] = m;
                     mines.add(m);
-                }
-                else if((a == 95 | a == 96) && nbMineOr != 0){
+                } else if ((a == 95 | a == 96) && nbMineOr != 0) {
                     nbMineOr--;
                     Mine m = new Mine(l, c, Ore.gold);
                     grille[l][c] = m;
                     mines.add(m);
-                }
-                else{
+                } else {
                     grille[l][c] = new Vide(l, c);
                 }
             }
@@ -145,7 +137,7 @@ public class Grille {
     }
 
     /* Récupère le secteur situé dans l'emplacement voulu */
-    public Sector getSector(int x, int y){
+    public Sector getSector(int x, int y) {
         return grille[x][y];
     }
 
@@ -170,20 +162,20 @@ public class Grille {
     }
 
     /* Récupère le nombre de robots présents dans la grille */
-    public int getNbRobot(){
+    public int getNbRobot() {
         return robots.size();
     }
 
     /* Affiche le récapitulatif */
-    public String afficherRecap(){
+    public String afficherRecap() {
         StringBuilder out = new StringBuilder();
         out.append("|---------------------------|\n");
         // génération affichage mines
-        for(Mine m: mines){
+        for (Mine m : mines) {
             out.append(m).append("\n");
         }
         // génération affichage entrepots
-        for(Entrepot e: entrepots){
+        for (Entrepot e : entrepots) {
             out.append(e).append("\n");
         }
         // génération affichage robots
@@ -220,39 +212,63 @@ public class Grille {
         ArrayList<Sector> out = new ArrayList<>();
         Coordonnee pos = s.getPosition();
         if (pos.getX() < this.getNbLigne() - 1) {
-            Sector s2 = this.getSector(pos.getX() + 1, pos.getY());
-            if (show) {
-                s2.setDiscover(true);
-            }
-            if (!(s2 instanceof Lac)) {
-                out.add(s2);
+            if (this.getSector(pos.getX()+1, pos.getY()).getDisponible()) {
+                Sector s2 = this.getSector(pos.getX() + 1, pos.getY());
+                if (show) {
+                    s2.setDiscover(true);
+                }
+                if (!(s2 instanceof Lac)) {
+                    out.add(s2);
+                }
+            }else{
+                if(show) {
+                    this.getSector(pos.getX() + 1, pos.getY()).setDiscover(true);
+                }
             }
         }
         if (pos.getX() > 0) {
-            Sector s2 = this.getSector(pos.getX() - 1, pos.getY());
-            if (show) {
-                s2.setDiscover(true);
-            }
-            if (!(s2 instanceof Lac)) {
-                out.add(s2);
+            if (this.getSector(pos.getX()-1, pos.getY()).getDisponible()) {
+                Sector s2 = this.getSector(pos.getX() - 1, pos.getY());
+                if (show) {
+                    s2.setDiscover(true);
+                }
+                if (!(s2 instanceof Lac)) {
+                    out.add(s2);
+                }
+            }else{
+                if (show) {
+                    this.getSector(pos.getX() - 1, pos.getY()).setDiscover(true);
+                }
             }
         }
         if (pos.getY() < this.getNbColonne() - 1) {
-            Sector s2 = this.getSector(pos.getX(), pos.getY() + 1);
-            if (show) {
-                s2.setDiscover(true);
-            }
-            if (!(s2 instanceof Lac)) {
-                out.add(s2);
+            if (this.getSector(pos.getX(), pos.getY()+1).getDisponible()) {
+                Sector s2 = this.getSector(pos.getX(), pos.getY()+1);
+                if (show) {
+                    s2.setDiscover(true);
+                }
+                if (!(s2 instanceof Lac)) {
+                    out.add(s2);
+                }
+            }else{
+                if(show) {
+                    this.getSector(pos.getX(), pos.getY() + 1).setDiscover(true);
+                }
             }
         }
         if (pos.getY() > 0) {
-            Sector s2 = this.getSector(pos.getX(), pos.getY() - 1);
-            if (show) {
-                s2.setDiscover(true);
-            }
-            if (!(s2 instanceof Lac)) {
-                out.add(s2);
+            if (this.getSector(pos.getX(), pos.getY()-1).getDisponible()) {
+                Sector s2 = this.getSector(pos.getX(), pos.getY()-1);
+                if (show) {
+                    s2.setDiscover(true);
+                }
+                if (!(s2 instanceof Lac)) {
+                    out.add(s2);
+                }
+            } else {
+                if (show) {
+                    this.getSector(pos.getX(), pos.getY() - 1).setDiscover(true);
+                }
             }
         }
         return out;
@@ -267,5 +283,43 @@ public class Grille {
             }
         }
         return out;
+    }
+
+    public int[][] genAdjacent() {
+        int[][] out = new int[this.getNbColonne() *this.getNbLigne()][this.getNbColonne() *this.getNbLigne()];
+
+        //initialisation matrice
+        for (int i = 0; i < this.getNbColonne() *this.getNbLigne();i++){
+            for (int j = 0; j < this.getNbColonne() *this.getNbLigne();j++){
+                out[i][j] = 0;
+            }
+        }
+
+        //remplissage matrice
+        for (int i = 0; i < this.getNbColonne() *this.getNbLigne();i++){
+            int x = i / this.getNbColonne();
+            int y = i % this.getNbColonne();
+
+            Sector s = this.getSector(y, x);
+            ArrayList<Sector> vois = this.getVoisin(s, false);
+
+            for (Sector v : vois) {
+                int index = v.getPosition().getY() *10 + v.getPosition().getX();
+                out[i][index] = 1;
+                out[index][i] = 1;
+            }
+        }
+        return out;
+    }
+
+    public void printMatrix(int[][] m) {
+        for (int[] ints : m) {
+            for (int j = 0; j < m.length; j++) {
+                System.out.print(ints[j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println(m.length);
+        System.out.println(m[0].length);
     }
 }

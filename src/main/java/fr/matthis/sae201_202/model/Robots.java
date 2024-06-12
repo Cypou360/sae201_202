@@ -93,32 +93,32 @@ public class Robots {
             return true;
 
         } else
-        // vérification SUD
+            // vérification SUD
             if (orientation.equals("S") && position.getX() < grille.getNbLigne()-1 && grille.getSector(position.getX()+1, position.getY()).getDisponible()) {
-            grille.getSector(position.getX(), position.getY()).setRobot(null);
-            position.setX(position.getX()+1);
-            grille.getSector(position.getX(), position.getY()).setRobot(this);
-            return true;
+                grille.getSector(position.getX(), position.getY()).setRobot(null);
+                position.setX(position.getX()+1);
+                grille.getSector(position.getX(), position.getY()).setRobot(this);
+                return true;
 
-        } else
-            // vérification EST
-            if (orientation.equals("E") && position.getY() < grille.getNbColonne()-1 && grille.getSector(position.getX(), position.getY()+1).getDisponible()) {
-            grille.getSector(position.getX(), position.getY()).setRobot(null);
-            position.setY(position.getY()+1);
-            grille.getSector(position.getX(), position.getY()).setRobot(this);
-            return true;
+            } else
+                // vérification EST
+                if (orientation.equals("E") && position.getY() < grille.getNbColonne()-1 && grille.getSector(position.getX(), position.getY()+1).getDisponible()) {
+                    grille.getSector(position.getX(), position.getY()).setRobot(null);
+                    position.setY(position.getY()+1);
+                    grille.getSector(position.getX(), position.getY()).setRobot(this);
+                    return true;
 
-        } else
-            // vérification OUEST
-            if (orientation.equals("O") && position.getY() > 0 && grille.getSector(position.getX(), position.getY()-1).getDisponible()) {
-            grille.getSector(position.getX(), position.getY()).setRobot(null);
-            position.setY(position.getY()-1);
-            grille.getSector(position.getX(), position.getY()).setRobot(this);
-            return true;
+                } else
+                    // vérification OUEST
+                    if (orientation.equals("O") && position.getY() > 0 && grille.getSector(position.getX(), position.getY()-1).getDisponible()) {
+                        grille.getSector(position.getX(), position.getY()).setRobot(null);
+                        position.setY(position.getY()-1);
+                        grille.getSector(position.getX(), position.getY()).setRobot(this);
+                        return true;
 
-        } else {
-            return false;
-        }
+                    } else {
+                        return false;
+                    }
     }
 
     /* Permet de déposer les minerais que possède le robot dans l'entrepot approprié */
@@ -186,70 +186,47 @@ public class Robots {
     public void automation(Grille grid) {
         Sector start = grid.getSector(position.getX(), position.getY());
         int remainingOre = grid.getRemainingOre(type);
-        Sector end = null;
-
-        if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine)) {
-            System.out.println("Cherche Mine");
-            end = findMine(grid);
-        } else {
-            System.out.println("Cherche Entrepot");
-            end = findEntrepot(grid);
-            System.out.println(end);
+        Sector end = findSector(grid);
+        Sector end2 = end;
+        while (end == null){
+            end = findSector(grid);
+            end2 = end;
         }
+
+        if (start instanceof Mine && this.capacity < this.maxCapacity && this.type == ((Mine) start).getMinerai() && start.getStockage() > 0) {
+            this.extraction(grid);
+            return;
+        } else if (start instanceof Entrepot && this.capacity != 0 && ((Entrepot) start).getType() == this.type) {
+            this.deposer(grid);
+            return;
+        }
+        if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine)) {
+            end = findMine(grid);
+        }else if (remainingOre > 0 && !(start instanceof Entrepot)) {
+            if (this.capacity != 0) {
+                end = findEntrepot(grid);
+            }
+        }
+        if (end == null) {
+            end = end2;
+        }
+        System.out.println(end);
+        System.out.println(end2);
+
 
         if (end != null && this.path.isEmpty()) {
             Dijkstrat dj = new Dijkstrat();
-            this.path = dj.findShortest(start, end, grid);
-            System.out.println(this.path);
+            this.path = dj.genPath(start, end, grid);
         } else {
             executePath(grid);
+            this.path.clear();
         }
 
     }
 
     public void executePath(Grille grid) {
         Sector s = grid.getSector(position.getX(), position.getY());
-        if (s instanceof Mine) {
-            if(this.capacity < this.maxCapacity) {
-
-            }
-
-        } else if (s instanceof Entrepot) {
-            if (this.capacity != 0) {
-                Random r = new Random();
-                int i = r.nextInt(4);
-                if (i == 0) {
-                    goTo("N", grid);
-                } else if (i == 1) {
-                    goTo("S", grid);
-                } else if (i == 2) {
-                    goTo("E", grid);
-                } else if (i == 3) {
-                    goTo("O", grid);
-                }
-            }
-        } else if (!path.isEmpty()) {
-            int sid = path.indexOf(grid.getSector(this.position.getX(),this.position.getY())) ;
-            if (sid != path.size()-1) {
-                Sector s2 = path.get(sid+1);
-                if (s2.getPosition().getX() < s.getPosition().getX()) {
-                    goTo("N", grid);
-                } else if (s2.getPosition().getX() > s.getPosition().getX()) {
-                    goTo("S", grid);
-                } else if (s2.getPosition().getY() < s.getPosition().getY()) {
-                    goTo("O", grid);
-                } else if (s2.getPosition().getY() > s.getPosition().getY()) {
-                    goTo("E", grid);
-                }
-            } else {
-                if (s instanceof Mine) {
-                    extraction(grid);
-                } else if (s instanceof Entrepot) {
-                    deposer(grid);
-                }
-            }
-        } else {
-            // mouvement aléatoire
+        if (this.path.isEmpty()) {
             Random r = new Random();
             int i = r.nextInt(4);
             if (i == 0) {
@@ -260,6 +237,23 @@ public class Robots {
                 goTo("E", grid);
             } else if (i == 3) {
                 goTo("O", grid);
+            }
+        }
+        else {
+            int sid = path.indexOf(grid.getSector(this.position.getX(), this.position.getY()));
+            if (sid != path.size() - 1) {
+                Sector s2 = path.get(sid + 1);
+                System.out.println(s2);
+                if (s2.getPosition().getX() < s.getPosition().getX()) {
+                    goTo("N", grid);
+                } else if (s2.getPosition().getX() > s.getPosition().getX()) {
+                    goTo("S", grid);
+                } else if (s2.getPosition().getY() < s.getPosition().getY()) {
+                    goTo("O", grid);
+                } else if (s2.getPosition().getY() > s.getPosition().getY()) {
+                    goTo("E", grid);
+
+                }
             }
         }
     }
@@ -283,6 +277,23 @@ public class Robots {
         }
         return null;
     }
+
+    /* Trouve un non visité */
+    public Sector findSector(Grille grille) {
+        ArrayList<Sector> sectors = new ArrayList<>();
+        for (Sector[] s : grille.getGrille()){
+            for (Sector ss : s){
+                if (!ss.isDiscover()){
+                    sectors.add(ss);
+                }
+            }
+        }
+        Random r = new Random();
+        int i = r.nextInt(sectors.size());
+        System.out.println(sectors.get(i));
+        return sectors.get(i);
+    }
+
 
     //TODO : faire execution dans le programme principal
     //TODO : modifier action bouton automatique eventmanager
