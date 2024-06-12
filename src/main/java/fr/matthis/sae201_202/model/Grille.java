@@ -71,7 +71,7 @@ public class Grille {
         Random r = new Random();
         int nbMineOr = r.nextInt(1, 3);
         int nbMineNickel = r.nextInt(1, 3);
-        int nbRobot = r.nextInt(1, 2);
+        int nbRobot = r.nextInt(2, 6);
 
         Integer[] Entier = new Integer[100];
         int tmp = -1;
@@ -212,7 +212,6 @@ public class Grille {
         ArrayList<Sector> out = new ArrayList<>();
         Coordonnee pos = s.getPosition();
         if (pos.getX() < this.getNbLigne() - 1) {
-            if (this.getSector(pos.getX()+1, pos.getY()).getDisponible()) {
                 Sector s2 = this.getSector(pos.getX() + 1, pos.getY());
                 if (show) {
                     s2.setDiscover(true);
@@ -220,14 +219,8 @@ public class Grille {
                 if (!(s2 instanceof Lac)) {
                     out.add(s2);
                 }
-            }else{
-                if(show) {
-                    this.getSector(pos.getX() + 1, pos.getY()).setDiscover(true);
-                }
             }
-        }
         if (pos.getX() > 0) {
-            if (this.getSector(pos.getX()-1, pos.getY()).getDisponible()) {
                 Sector s2 = this.getSector(pos.getX() - 1, pos.getY());
                 if (show) {
                     s2.setDiscover(true);
@@ -235,14 +228,9 @@ public class Grille {
                 if (!(s2 instanceof Lac)) {
                     out.add(s2);
                 }
-            }else{
-                if (show) {
-                    this.getSector(pos.getX() - 1, pos.getY()).setDiscover(true);
-                }
-            }
         }
         if (pos.getY() < this.getNbColonne() - 1) {
-            if (this.getSector(pos.getX(), pos.getY()+1).getDisponible()) {
+
                 Sector s2 = this.getSector(pos.getX(), pos.getY()+1);
                 if (show) {
                     s2.setDiscover(true);
@@ -250,14 +238,8 @@ public class Grille {
                 if (!(s2 instanceof Lac)) {
                     out.add(s2);
                 }
-            }else{
-                if(show) {
-                    this.getSector(pos.getX(), pos.getY() + 1).setDiscover(true);
-                }
-            }
         }
         if (pos.getY() > 0) {
-            if (this.getSector(pos.getX(), pos.getY()-1).getDisponible()) {
                 Sector s2 = this.getSector(pos.getX(), pos.getY()-1);
                 if (show) {
                     s2.setDiscover(true);
@@ -265,12 +247,7 @@ public class Grille {
                 if (!(s2 instanceof Lac)) {
                     out.add(s2);
                 }
-            } else {
-                if (show) {
-                    this.getSector(pos.getX(), pos.getY() - 1).setDiscover(true);
-                }
             }
-        }
         return out;
     }
 
@@ -304,7 +281,7 @@ public class Grille {
             ArrayList<Sector> vois = this.getVoisin(s, false);
 
             for (Sector v : vois) {
-                int index = v.getPosition().getY() *10 + v.getPosition().getX();
+                int index = v.getPosition().getY() * 10 + v.getPosition().getX();
                 out[i][index] = 1;
                 out[index][i] = 1;
             }
