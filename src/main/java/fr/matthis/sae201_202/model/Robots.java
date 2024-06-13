@@ -194,6 +194,9 @@ public class Robots {
             this.path.clear();
             this.end = null;
         }
+        if (remainingOre == 0 && nbMine(grid) > 0){
+            return;
+        }
 
         if (this.end == null){
             System.out.println("Cherche un chemin");
@@ -308,7 +311,7 @@ public class Robots {
     public int nbMine(Grille grille){
         int nb = 0;
         for (Mine m : grille.getMines()) {
-            if (m.isDiscover() && m.getMinerai() == this.type && m.getStockage() != 0) {
+            if (m.isDiscover() && m.getMinerai() == this.type) {
                 nb+=1;
             }
         }
