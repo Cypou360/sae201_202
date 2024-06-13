@@ -94,11 +94,6 @@ public class Dijkstrat {
             int x = pathMatrix.get(i) % 10;
             path.add(grid.getSector(x, y));
         }
-
-        System.out.println(path);
-        System.out.println(pathMatrix);
-        System.out.println();
-
         return path;
     }
 }
