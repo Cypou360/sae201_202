@@ -51,6 +51,7 @@ public abstract class Sector {
 
     /* Récupère si un robot peut venir */
     public boolean getDisponible() {
+        /* vérifie si le secteur est un lac */
         if (this instanceof Lac) {
             return false;
         }
@@ -72,6 +73,7 @@ public abstract class Sector {
         return this.stockage;
     }
 
+    /* Compare 2 secteurs */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,6 +81,7 @@ public abstract class Sector {
         return maxStockage == sector.maxStockage && getStockage() == sector.getStockage() && isDiscover() == sector.isDiscover() && Objects.equals(getRobot(), sector.getRobot()) && Objects.equals(getPosition(), sector.getPosition());
     }
 
+    /* Récupère les hash du Stockage max, stockage actuel, robot, position et de la condition si le secteur est découvert */
     @Override
     public int hashCode() {
         return Objects.hash(maxStockage, getStockage(), getRobot(), getPosition(), isDiscover());

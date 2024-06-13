@@ -22,7 +22,7 @@ public class Coordonnee {
         return y;
     }
 
-    /* Opération pour avoir les informations  */
+    /* Opération pour voir les informations  */
     public String toString() {
         return "Coordonnées (" + x +"; " + y + ")";
     }

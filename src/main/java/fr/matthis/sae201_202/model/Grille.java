@@ -212,6 +212,7 @@ public class Grille {
         ArrayList<Sector> out = new ArrayList<>();
         Coordonnee pos = s.getPosition();
         if (pos.getX() < this.getNbLigne() - 1) {
+            if (this.getSector(pos.getX() + 1, pos.getY()).getDisponible()) {
                 Sector s2 = this.getSector(pos.getX() + 1, pos.getY());
                 if (show) {
                     s2.setDiscover(true);
@@ -220,7 +221,9 @@ public class Grille {
                     out.add(s2);
                 }
             }
+        }
         if (pos.getX() > 0) {
+            if (this.getSector(pos.getX() - 1, pos.getY()).getDisponible()) {
                 Sector s2 = this.getSector(pos.getX() - 1, pos.getY());
                 if (show) {
                     s2.setDiscover(true);
@@ -228,19 +231,11 @@ public class Grille {
                 if (!(s2 instanceof Lac)) {
                     out.add(s2);
                 }
+            }
         }
         if (pos.getY() < this.getNbColonne() - 1) {
-
-                Sector s2 = this.getSector(pos.getX(), pos.getY()+1);
-                if (show) {
-                    s2.setDiscover(true);
-                }
-                if (!(s2 instanceof Lac)) {
-                    out.add(s2);
-                }
-        }
-        if (pos.getY() > 0) {
-                Sector s2 = this.getSector(pos.getX(), pos.getY()-1);
+            if (this.getSector(pos.getX(), pos.getY()+1).getDisponible()) {
+                Sector s2 = this.getSector(pos.getX(), pos.getY() + 1);
                 if (show) {
                     s2.setDiscover(true);
                 }
@@ -248,6 +243,18 @@ public class Grille {
                     out.add(s2);
                 }
             }
+        }
+        if (pos.getY() > 0) {
+            if (this.getSector(pos.getX(), pos.getY()-1).getDisponible()) {
+                Sector s2 = this.getSector(pos.getX(), pos.getY() - 1);
+                if (show) {
+                    s2.setDiscover(true);
+                }
+                if (!(s2 instanceof Lac)) {
+                    out.add(s2);
+                }
+            }
+        }
         return out;
     }
 
@@ -262,6 +269,7 @@ public class Grille {
         return out;
     }
 
+    /* Récupère une matrice de 100 par 100 */
     public int[][] genAdjacent() {
         int[][] out = new int[this.getNbColonne() *this.getNbLigne()][this.getNbColonne() *this.getNbLigne()];
 
@@ -289,6 +297,7 @@ public class Grille {
         return out;
     }
 
+    /* Affiche la matrice */
     public void printMatrix(int[][] m) {
         for (int[] ints : m) {
             for (int j = 0; j < m.length; j++) {

@@ -7,7 +7,7 @@ import static java.lang.Math.abs;
 public class Robots {
 
 
-
+    /* Constructeur de robots par défaut */
     public Robots() {
         Random r = new Random();
         this.maxCapacity = r.nextInt(5,10);
@@ -20,6 +20,7 @@ public class Robots {
         path = new ArrayList<>();
     }
 
+    /* Constructeur de robots personnaliable */
     public Robots(int x, int y, Ore type){
         Random r = new Random();
         this.maxCapacity = r.nextInt(5,10);
@@ -45,6 +46,7 @@ public class Robots {
 
     /* Permet de récupérer toutes les informations sur le robot */
     public String toString() {
+        /* vérifie si le type du robot correspond au type de la mine */
         if (type == Ore.gold) {
             return "| R" + id + "  " + position.getX() + "  " + position.getY() + "  " + "OR" + "  " + capacity + " / " + maxCapacity + "\t\t|";
         }
@@ -55,9 +57,12 @@ public class Robots {
 
     /* Permet d'extraire un minerai si la mine possède le minerai adéquat */
     public Boolean extraction(Grille grille) {
+        /* vérifie si le secteur actuel est une mine */
         if (grille.getSector(getPosition().getX(),getPosition().getY()) instanceof Mine m){
+            /* vérifie si le type du robot correspond au type de la mine */
             if (m.getMinerai() == type) {
                 if (capacity != maxCapacity) {
+                    /* vérifie si la mine n'est pas vide */
                     if (m.stockage > 0) {
                         Random r = new Random();
                         int extraction = 0;
@@ -66,7 +71,9 @@ public class Robots {
                         } else {
                             extraction += r.nextInt(1, 4);
                         }
+                        /* vérifie si le robot a assez de place pour prendre tout le minerai */
                         if (capacity <= maxCapacity - extraction) {
+                            /* vérifie si il y a assez de minerai dans la mine pour extraire */
                             if (m.stockage >= extraction) {
                                 m.stockage -= extraction;
                                 capacity += extraction;
@@ -119,8 +126,11 @@ public class Robots {
 
     /* Permet de déposer les minerais que possède le robot dans l'entrepot approprié */
     public Boolean deposer(Grille grille){
+        /* vérifie si le secteur est un entrepot */
         if (grille.getSector(getPosition().getX(),getPosition().getY()) instanceof Entrepot e){
+            /* vérifie si le type de l'entrepot correspond au type du robot */
             if (e.getType() == type){
+                /* vérifie si le robot n'est pas vide */
                 if (capacity != 0){
                     e.stockage += capacity;
                     capacity = 0;
@@ -185,6 +195,9 @@ public class Robots {
         if (this.path.size() == 1){
             this.path.clear();
             this.end = null;
+        }
+        if (remainingOre == 0 && nbMine(grid) > 0){
+            return;
         }
 
         if (this.end == null){
@@ -280,6 +293,7 @@ public class Robots {
     /* Trouve la mine approprié au robot */
     public Mine findMine(Grille grille) {
         for (Mine m : grille.getMines()) {
+            /* vérifie si le type du robot correspond au type de la mine, si le stockage est supperieur a 0 et si la mine est découverte */
             if (m.getMinerai() == type && m.getStockage() > 0 && m.isDiscover()) {
                 return m;
             }
@@ -290,6 +304,7 @@ public class Robots {
     /* Trouve l'entrepot approprié au robot */
     public Entrepot findEntrepot(Grille grille) {
         for (Entrepot e : grille.getEntrepots()) {
+            /* vérifie si le type du robot correspond au type de l'entrepôt et si l'entrepôt est découvert */
             if (e.getType() == type && e.isDiscover()) {
                 return e;
             }
@@ -297,16 +312,18 @@ public class Robots {
         return null;
     }
 
+    /* vérifie le nombre de mine découverte pour un type de minerai */
     public int nbMine(Grille grille){
         int nb = 0;
         for (Mine m : grille.getMines()) {
-            if (m.isDiscover() && m.getMinerai() == this.type && m.getStockage() != 0) {
+            if (m.isDiscover() && m.getMinerai() == this.type) {
                 nb+=1;
             }
         }
         return nb;
     }
 
+    /* vérifie le nombre d'entrepôt découvert pour un type de minerai */
     public int nbEntrepot(Grille grille){
         int nb = 0;
         for (Entrepot m : grille.getEntrepots()) {
@@ -317,7 +334,7 @@ public class Robots {
         return nb;
     }
 
-    /* Trouve un non visité */
+    /* Trouve un secteur non visité */
     public Sector findSector(Grille grille) {
         ArrayList<Sector> sectors = new ArrayList<>();
         for (Sector[] s : grille.getGrille()){
