@@ -96,33 +96,25 @@ public class Robots {
             grille.getSector(position.getX(), position.getY()).setRobot(this);
             return true;
 
-        } else
-            // vérification SUD
-            if (orientation.equals("S") && position.getX() < grille.getNbLigne()-1 && grille.getSector(position.getX()+1, position.getY()).getDisponible()) {
+        } else if (orientation.equals("S") && position.getX() < grille.getNbLigne()-1 && grille.getSector(position.getX()+1, position.getY()).getDisponible()) { // vérification SUD
                 grille.getSector(position.getX(), position.getY()).setRobot(null);
                 position.setX(position.getX()+1);
                 grille.getSector(position.getX(), position.getY()).setRobot(this);
                 return true;
 
-            } else
-                // vérification EST
-                if (orientation.equals("E") && position.getY() < grille.getNbColonne()-1 && grille.getSector(position.getX(), position.getY()+1).getDisponible()) {
-                    grille.getSector(position.getX(), position.getY()).setRobot(null);
-                    position.setY(position.getY()+1);
-                    grille.getSector(position.getX(), position.getY()).setRobot(this);
-                    return true;
-
-                } else
-                    // vérification OUEST
-                    if (orientation.equals("O") && position.getY() > 0 && grille.getSector(position.getX(), position.getY()-1).getDisponible()) {
-                        grille.getSector(position.getX(), position.getY()).setRobot(null);
-                        position.setY(position.getY()-1);
-                        grille.getSector(position.getX(), position.getY()).setRobot(this);
-                        return true;
-
-                    } else {
-                        return false;
-                    }
+        } else if (orientation.equals("E") && position.getY() < grille.getNbColonne()-1 && grille.getSector(position.getX(), position.getY()+1).getDisponible()) { // vérification EST
+            grille.getSector(position.getX(), position.getY()).setRobot(null);
+            position.setY(position.getY()+1);
+            grille.getSector(position.getX(), position.getY()).setRobot(this);
+            return true;
+        } else if (orientation.equals("O") && position.getY() > 0 && grille.getSector(position.getX(), position.getY()-1).getDisponible()) { // vérification OUEST
+            grille.getSector(position.getX(), position.getY()).setRobot(null);
+            position.setY(position.getY()-1);
+            grille.getSector(position.getX(), position.getY()).setRobot(this);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /* Permet de déposer les minerais que possède le robot dans l'entrepot approprié */
