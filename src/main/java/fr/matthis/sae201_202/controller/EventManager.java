@@ -26,7 +26,6 @@ import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.IOException;
-import java.sql.Time;
 
 public class EventManager implements EventHandler {
 
@@ -80,8 +79,6 @@ public class EventManager implements EventHandler {
                 }
             } else if (b.getText().equals("Auto")) {
                 startAutoUpdate();
-                //int[][] tab = p.getGrid().genAdjacent();
-                //p.getGrid().printMatrix(tab);
             } else if (b.getParent().getId().equals("action")){
                 Stage stage = new Stage();
                 Group group = new Group();

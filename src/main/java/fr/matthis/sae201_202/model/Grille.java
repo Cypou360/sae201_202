@@ -71,7 +71,7 @@ public class Grille {
         Random r = new Random();
         int nbMineOr = r.nextInt(1, 3);
         int nbMineNickel = r.nextInt(1, 3);
-        int nbRobot = r.nextInt(5, 6);
+        int nbRobot = r.nextInt(2, 3);
 
         Integer[] Entier = new Integer[100];
         int tmp = -1;
