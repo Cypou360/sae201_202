@@ -26,11 +26,13 @@ import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.IOException;
+import java.sql.Time;
 
 public class EventManager implements EventHandler {
 
     private Main p;
     private Info info;
+    private Timeline timeline;
 
     public EventManager(Main p) {
         this.p = p;
@@ -223,23 +225,21 @@ public class EventManager implements EventHandler {
 
     // Méthode pour démarrer la mise à jour automatique
     private void startAutoUpdate() {
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.3), new EventHandler<ActionEvent>() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(0.3), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
                     executeAndUpdate();
                     if (event.getSource() instanceof KeyFrame && p.getGrid().getRemainingOre(Ore.gold) + p.getGrid().getRemainingOre(Ore.nickel) == 0) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Plus de minerai !");
-                        //alert.show();
+                        alert.show();
+                        timeline.stop();
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
-        });
-        Timeline timeline = new Timeline(keyFrame);
-
-        System.out.println(p.getGrid().getRemainingOre(Ore.gold) + p.getGrid().getRemainingOre(Ore.nickel));
+        }));
         timeline.setCycleCount(Timeline.INDEFINITE); // Répéter indéfiniment
         timeline.play(); // Démarrer le timeline
     }

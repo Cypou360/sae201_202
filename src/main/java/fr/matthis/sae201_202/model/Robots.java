@@ -207,24 +207,24 @@ public class Robots {
 
         //recherche du point de destination
         if (!(start instanceof Entrepot) && this.nbEntrepot(grid) > 0) {
-            System.out.println(this.id + " REcherche entrepot");
             this.end = findEntrepot(grid);
         } else if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine) && this.nbMine(grid) > 0) {
-            System.out.println(this.id + " REcherche mine");
             this.end = findMine(grid);
         } else {
-            System.out.println(this.id  + " REcherche secteur");
             this.end = findSector(grid);
         }
 
+        if (start instanceof Entrepot && this.capacity == 0) {
+            this.end = findMine(grid);
+        }
+
         if (end == null) {
-            System.out.println(this.id  + " Aleatoire");
             moveAleatoire(grid);
         }
-        System.out.println(this.id +" " + end);
         if (this.end != null && this.path.isEmpty()) {
-            this.path = Dijkstrat.genPath(start, end, grid);
-            System.out.println(this.id + " " + this.path);
+            this.path = Dijkstrat.genPath(start, this.end, grid);
+            executePath(grid);
+        } else if (this.end != null) {
             executePath(grid);
         } else {
             executePath(grid); // provoque un aleatoire
