@@ -71,7 +71,7 @@ public class Grille {
         Random r = new Random();
         int nbMineOr = r.nextInt(1, 3);
         int nbMineNickel = r.nextInt(1, 3);
-        int nbRobot = r.nextInt(2, 6);
+        int nbRobot = r.nextInt(5, 6);
 
         Integer[] Entier = new Integer[100];
         int tmp = -1;
@@ -276,7 +276,7 @@ public class Grille {
         int out = 0;
         for (Mine m : mines) {
             if (m.getType() == type && m.getStockage() > 0) {
-                out++;
+                out += m.getStockage();
             }
         }
         return out;

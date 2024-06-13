@@ -196,12 +196,8 @@ public class Robots {
             this.path.clear();
             this.end = null;
         }
-        if (remainingOre == 0 && nbMine(grid) > 0){
-            return;
-        }
 
         if (this.end == null){
-            System.out.println("Cherche un chemin");
             this.end = findSector(grid);
         }
 
@@ -212,75 +208,79 @@ public class Robots {
             this.deposer(grid);
             return;
         }
-        if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine) && this.nbMine(grid) > 0) {
-            this.end = findMine(grid);
-        }else if (remainingOre > 0 && !(start instanceof Entrepot) && this.nbEntrepot(grid) > 0 && this.capacity > 0) {
+
+        if (!(start instanceof Entrepot) && this.nbEntrepot(grid) > 0 && this.capacity > 0) {
             this.end = findEntrepot(grid);
+        } else if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine) && this.nbMine(grid) > 0) {
+            this.end = findMine(grid);
         }
 
         if (this.end != null && this.path.isEmpty()) {
-            System.out.print(this.id);
             this.path = Dijkstrat.genPath(start, end, grid);
             executePath(grid);
         } else {
-            //System.out.println(this.id + " Path = " + this.path);
             executePath(grid); // proque un aleatoire
-            this.path.clear();
-            this.end = null;
         }
 
     }
 
     public void executePath(Grille grid) {
         Sector s = grid.getSector(position.getX(), position.getY());
-        System.out.println("Execute path");
         if (this.path.isEmpty()) {
-            Random r = new Random();
-            int i = -1;
-            while (i == -1) {
-                i = r.nextInt(4);
-                if (i == 0 && s.getPosition().getX() > 0) {
-                    if (goTo("N", grid)) {
-                        System.out.println("N");
-                    }
-                } else if (i == 1 && s.getPosition().getX() < grid.getNbLigne()-1) {
-                    if (goTo("S", grid)) {
-                        System.out.println("S");
-                    }
-                } else if (i == 2 && s.getPosition().getY() < grid.getNbColonne()-1) {
-                    if (goTo("E", grid)) {
-                        System.out.println("E");
-                    }
-                } else if (i == 3 && s.getPosition().getY() > 0) {
-                    if (goTo("O", grid)) {
-                        System.out.println("O");
-                    }
-                } else {
-                    i = -1;
-                }
-            }
-        }
-        else {
+            moveAleatoire(grid);
+        } else {
             int sid = path.indexOf(grid.getSector(this.position.getX(), this.position.getY()));
             if (sid != path.size() - 1) {
                 Sector s2 = path.get(sid + 1);
                 if (s2.getPosition().getX() < s.getPosition().getX() && s.getPosition().getX() > 0) {
-                    goTo("N", grid);
-                    System.out.println("Nord");
-                    this.path.remove(s);
+                    if (goTo("N", grid)) {
+                        this.path.remove(s);
+                    }
                 } else if (s2.getPosition().getX() > s.getPosition().getX() && s.getPosition().getX() < grid.getNbLigne()) {
-                    goTo("S", grid);
-                    System.out.println("Sud");
-                    this.path.remove(s);
+                    if (goTo("S", grid)) {
+                        this.path.remove(s);
+                    }
+
                 } else if (s2.getPosition().getY() < s.getPosition().getY() && s.getPosition().getY() > 0) {
-                    goTo("O", grid);
-                    System.out.println("Ouest");
-                    this.path.remove(s);
+                    if (goTo("O", grid)) {
+                        this.path.remove(s);
+                    }
                 } else if (s2.getPosition().getY() > s.getPosition().getY() && s.getPosition().getY() < grid.getNbColonne()) {
-                    goTo("E", grid);
-                    System.out.println("Est");
-                    this.path.remove(s);
+                    if (goTo("E", grid)) {
+                        this.path.remove(s);
+                    }
+                } else {
+                    moveAleatoire(grid);
                 }
+            }
+        }
+    }
+
+    private void moveAleatoire(Grille grid) {
+        Sector s = grid.getSector(this.position.getX(), this.position.getY());
+        System.out.println("Random");
+        Random r = new Random();
+        int i = -1;
+        while (i == -1) {
+            i = r.nextInt(4);
+            if (i == 0 && s.getPosition().getX() > 0) {
+                if (!goTo("N", grid)) {
+                    i = -1;
+                } else i = 5465;
+            } else if (i == 1 && s.getPosition().getX() < grid.getNbLigne() - 1) {
+                if (!goTo("S", grid)) {
+                    i = -1;
+                } else i = 5465;
+            } else if (i == 2 && s.getPosition().getY() < grid.getNbColonne() - 1) {
+                if (!goTo("E", grid)) {
+                    i = -1;
+                } else i = 5465;
+            } else if (i == 3 && s.getPosition().getY() > 0) {
+                if (!goTo("O", grid)) {
+                    i = -1;
+                } else i = 5465;
+            } else {
+                i = -1;
             }
         }
     }
