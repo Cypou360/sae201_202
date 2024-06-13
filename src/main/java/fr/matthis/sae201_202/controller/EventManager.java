@@ -233,8 +233,14 @@ public class EventManager implements EventHandler {
                 }
             }
         }));
-        timeline.setCycleCount(Timeline.INDEFINITE); // Répéter indéfiniment
-        timeline.play(); // Démarrer le timeline
+        if (p.getGrid().getRemainingOre(Ore.gold) + p.getGrid().getRemainingOre(Ore.nickel) == 0) {
+            timeline.stop();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Plus de minerai !");
+            alert.show();
+        } else {
+            timeline.setCycleCount(Timeline.INDEFINITE); // Répéter indéfiniment
+            timeline.play(); // Démarrer le timeline
+        }
     }
 }
 
