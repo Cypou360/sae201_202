@@ -72,15 +72,15 @@ public class Dijkstrat {
         }
 
         if (chemin.get(0) != depart) {
-            // Si le chemin ne commence pas par le point de dÃ©part, il n'y a pas de chemin valide
+            // Si le chemin ne commence pas par le point de depart, il n'y a pas de chemin valide
             return new ArrayList<>(); // Retourner une liste vide pour indiquer qu'il n'y a pas de chemin
         }
         return chemin;
     }
 
     /* Génère un path */
-    public ArrayList<Sector> genPath(Sector start, Sector end, Grille grid) {
-        // Generate the adjacency matrix
+    public static ArrayList<Sector> genPath(Sector start, Sector end, Grille grid) {
+        // recupreration de la matrice d'adjacent
         int[][] M = grid.genAdjacent();
 
         int startId = start.getPosition().getY() * 10 + start.getPosition().getX();
@@ -90,10 +90,15 @@ public class Dijkstrat {
 
         ArrayList<Sector> path = new ArrayList<>();
         for (int i = 0; i < pathMatrix.size(); i++) {
-            int x = pathMatrix.get(i) / 10;
-            int y = pathMatrix.get(i) % 10;
-            path.add(grid.getSector(y, x));
-        };
+            int y = pathMatrix.get(i) / 10;
+            int x = pathMatrix.get(i) % 10;
+            path.add(grid.getSector(x, y));
+        }
+
+        System.out.println(path);
+        System.out.println(pathMatrix);
+        System.out.println();
+
         return path;
     }
 }

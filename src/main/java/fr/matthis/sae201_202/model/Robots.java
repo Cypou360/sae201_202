@@ -214,50 +214,45 @@ public class Robots {
         }
         if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine) && this.nbMine(grid) > 0) {
             this.end = findMine(grid);
-        }else if (remainingOre > 0 && !(start instanceof Entrepot) && this.nbEntrepot(grid) > 0) {
-            if (this.capacity != 0) {
-                this.end = findEntrepot(grid);
-            }
+        }else if (remainingOre > 0 && !(start instanceof Entrepot) && this.nbEntrepot(grid) > 0 && this.capacity > 0) {
+            this.end = findEntrepot(grid);
         }
-        System.out.println("fin = " + end);
-
 
         if (this.end != null && this.path.isEmpty()) {
-            Dijkstrat dj = new Dijkstrat();
-            this.path = dj.genPath(start, end, grid);
-        } else {
-            System.out.println("Path = " + this.path);
+            System.out.print(this.id);
+            this.path = Dijkstrat.genPath(start, end, grid);
             executePath(grid);
+        } else {
+            //System.out.println(this.id + " Path = " + this.path);
+            executePath(grid); // proque un aleatoire
             this.path.clear();
+            this.end = null;
         }
 
     }
 
     public void executePath(Grille grid) {
         Sector s = grid.getSector(position.getX(), position.getY());
+        System.out.println("Execute path");
         if (this.path.isEmpty()) {
             Random r = new Random();
             int i = -1;
             while (i == -1) {
                 i = r.nextInt(4);
                 if (i == 0 && s.getPosition().getX() > 0) {
-                    if (grid.getSector(s.getPosition().getX() - 1 ,s.getPosition().getY()).getDisponible()) {
-                        goTo("N", grid);
+                    if (goTo("N", grid)) {
                         System.out.println("N");
                     }
                 } else if (i == 1 && s.getPosition().getX() < grid.getNbLigne()-1) {
-                    if (grid.getSector(s.getPosition().getX() + 1, s.getPosition().getY()).getDisponible()) {
-                        goTo("S", grid);
+                    if (goTo("S", grid)) {
                         System.out.println("S");
                     }
                 } else if (i == 2 && s.getPosition().getY() < grid.getNbColonne()-1) {
-                    if (grid.getSector(s.getPosition().getX(), s.getPosition().getY() +1).getDisponible()) {
-                        goTo("E", grid);
+                    if (goTo("E", grid)) {
                         System.out.println("E");
                     }
                 } else if (i == 3 && s.getPosition().getY() > 0) {
-                    if (grid.getSector(s.getPosition().getX(), s.getPosition().getY() - 1).getDisponible()) {
-                        goTo("O", grid);
+                    if (goTo("O", grid)) {
                         System.out.println("O");
                     }
                 } else {

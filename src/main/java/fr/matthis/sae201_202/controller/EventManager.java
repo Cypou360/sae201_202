@@ -77,6 +77,8 @@ public class EventManager implements EventHandler {
                 }
             } else if (b.getText().equals("Auto")) {
                 startAutoUpdate();
+                //int[][] tab = p.getGrid().genAdjacent();
+                //p.getGrid().printMatrix(tab);
             } else if (b.getParent().getId().equals("action")){
                 Stage stage = new Stage();
                 Group group = new Group();

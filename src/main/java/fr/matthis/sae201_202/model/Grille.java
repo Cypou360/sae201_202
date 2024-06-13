@@ -258,6 +258,19 @@ public class Grille {
         return out;
     }
 
+    public ArrayList<Sector> getDiscoveredVoisin(Sector s) {
+        ArrayList<Sector> out = new ArrayList<>();
+        if (!(s instanceof Lac)) {
+            ArrayList<Sector> voisins = getVoisin(s, false);
+            for (Sector v : voisins) {
+                if (v.isDiscover() && !(v instanceof Lac)) {
+                    out.add(v);
+                }
+            }
+        }
+        return out;
+    }
+
     /* Récupère mles différents minerais encore récoltables */
     public int getRemainingOre(Ore type) {
         int out = 0;
@@ -274,24 +287,32 @@ public class Grille {
         int[][] out = new int[this.getNbColonne() *this.getNbLigne()][this.getNbColonne() *this.getNbLigne()];
 
         //initialisation matrice
-        for (int i = 0; i < this.getNbColonne() *this.getNbLigne();i++){
-            for (int j = 0; j < this.getNbColonne() *this.getNbLigne();j++){
+        for (int i = 0 ; i < this.getNbColonne() * this.getNbLigne() ; i++){
+            for (int j = 0 ; j < this.getNbColonne() * this.getNbLigne() ; j++){
                 out[i][j] = 0;
             }
         }
 
         //remplissage matrice
-        for (int i = 0; i < this.getNbColonne() *this.getNbLigne();i++){
-            int x = i / this.getNbColonne();
-            int y = i % this.getNbColonne();
+        for (int i = 0; i < this.getNbColonne() *this.getNbLigne();i++) {
+            // calcul coordonée cellule la cellule a remplir
+            int y = i / this.getNbColonne();
+            int x = i % this.getNbColonne();
 
-            Sector s = this.getSector(y, x);
-            ArrayList<Sector> vois = this.getVoisin(s, false);
+            Sector cur = this.getSector(x,y);
 
-            for (Sector v : vois) {
-                int index = v.getPosition().getY() * 10 + v.getPosition().getX();
-                out[i][index] = 1;
-                out[index][i] = 1;
+            ArrayList<Sector> voisin = this.getDiscoveredVoisin(cur); // recupération voisin
+            //System.out.println(" lst Voisin de " + cur + " : " + voisin);
+
+            if (!voisin.isEmpty()) {
+                for (Sector s : voisin) {
+                    // calcul index secteur
+                    int index = s.getPosition().getY() * this.getNbLigne() + s.getPosition().getX();
+                    //System.out.println("Sector : " + s + " index : " + index);
+
+                    // remplissage grille
+                    out[i][index] = 1;
+                }
             }
         }
         return out;
@@ -305,7 +326,5 @@ public class Grille {
             }
             System.out.println();
         }
-        System.out.println(m.length);
-        System.out.println(m[0].length);
     }
 }
