@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Dijkstrat {
 
+    /* Constructeur personnalisé */
     public static int indexMinimum(List<Integer> list, List<Boolean> visited) {
         int mini = Integer.MAX_VALUE;
         int index = -1;
@@ -18,6 +19,7 @@ public class Dijkstrat {
         return index;
     }
 
+    /* Algorithme de dijksta principal */
     public static List<Integer> dijkstra(int[][] M, int depart, List<Integer> precedents) {
         int n = M.length;
 
@@ -56,6 +58,7 @@ public class Dijkstrat {
         return distances;
     }
 
+    /* Calcul du chemin le plus court */
     public static List<Integer> cheminPlusCourt(int[][] M, int depart, int arrivee) {
         List<Integer> precedents = new ArrayList<>();
         List<Integer> distances = dijkstra(M, depart, precedents);
@@ -75,6 +78,7 @@ public class Dijkstrat {
         return chemin;
     }
 
+    /* Génère un path */
     public ArrayList<Sector> genPath(Sector start, Sector end, Grille grid) {
         // Generate the adjacency matrix
         int[][] M = grid.genAdjacent();

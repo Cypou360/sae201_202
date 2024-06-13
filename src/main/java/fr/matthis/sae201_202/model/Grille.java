@@ -262,6 +262,7 @@ public class Grille {
         return out;
     }
 
+    /* Récupère une matrice de 100 par 100 */
     public int[][] genAdjacent() {
         int[][] out = new int[this.getNbColonne() *this.getNbLigne()][this.getNbColonne() *this.getNbLigne()];
 
@@ -289,6 +290,7 @@ public class Grille {
         return out;
     }
 
+    /* Affiche la matrice */
     public void printMatrix(int[][] m) {
         for (int[] ints : m) {
             for (int j = 0; j < m.length; j++) {
