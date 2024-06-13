@@ -1,5 +1,4 @@
-
-        package fr.matthis.sae201_202.model;
+package fr.matthis.sae201_202.model;
 
 import java.util.*;
 

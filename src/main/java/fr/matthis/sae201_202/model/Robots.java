@@ -192,13 +192,9 @@ public class Robots {
     public void automation(Grille grid) {
         Sector start = grid.getSector(position.getX(), position.getY());
         int remainingOre = grid.getRemainingOre(type);
-        if (this.path.size() == 1){
+        if (this.path.size() == 1){ // si le robot est sur l'arrivée
             this.path.clear();
             this.end = null;
-        }
-
-        if (this.end == null){
-            this.end = findSector(grid);
         }
 
         if (start instanceof Mine && this.capacity < this.maxCapacity && this.type == ((Mine) start).getMinerai() && start.getStockage() > 0) {
@@ -209,17 +205,29 @@ public class Robots {
             return;
         }
 
-        if (!(start instanceof Entrepot) && this.nbEntrepot(grid) > 0 && this.capacity > 0) {
+        //recherche du point de destination
+        if (!(start instanceof Entrepot) && this.nbEntrepot(grid) > 0) {
+            System.out.println(this.id + " REcherche entrepot");
             this.end = findEntrepot(grid);
         } else if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine) && this.nbMine(grid) > 0) {
+            System.out.println(this.id + " REcherche mine");
             this.end = findMine(grid);
+        } else {
+            System.out.println(this.id  + " REcherche secteur");
+            this.end = findSector(grid);
         }
 
+        if (end == null) {
+            System.out.println(this.id  + " Aleatoire");
+            moveAleatoire(grid);
+        }
+        System.out.println(this.id +" " + end);
         if (this.end != null && this.path.isEmpty()) {
             this.path = Dijkstrat.genPath(start, end, grid);
+            System.out.println(this.id + " " + this.path);
             executePath(grid);
         } else {
-            executePath(grid); // proque un aleatoire
+            executePath(grid); // provoque un aleatoire
         }
 
     }
@@ -228,6 +236,8 @@ public class Robots {
         Sector s = grid.getSector(position.getX(), position.getY());
         if (this.path.isEmpty()) {
             moveAleatoire(grid);
+
+
         } else {
             int sid = path.indexOf(grid.getSector(this.position.getX(), this.position.getY()));
             if (sid != path.size() - 1) {
@@ -235,19 +245,27 @@ public class Robots {
                 if (s2.getPosition().getX() < s.getPosition().getX() && s.getPosition().getX() > 0) {
                     if (goTo("N", grid)) {
                         this.path.remove(s);
+                    } else {
+                        moveAleatoire(grid);
                     }
                 } else if (s2.getPosition().getX() > s.getPosition().getX() && s.getPosition().getX() < grid.getNbLigne()) {
                     if (goTo("S", grid)) {
                         this.path.remove(s);
+                    } else {
+                        moveAleatoire(grid);
                     }
 
                 } else if (s2.getPosition().getY() < s.getPosition().getY() && s.getPosition().getY() > 0) {
                     if (goTo("O", grid)) {
                         this.path.remove(s);
+                    } else {
+                        moveAleatoire(grid);
                     }
                 } else if (s2.getPosition().getY() > s.getPosition().getY() && s.getPosition().getY() < grid.getNbColonne()) {
                     if (goTo("E", grid)) {
                         this.path.remove(s);
+                    } else {
+                        moveAleatoire(grid);
                     }
                 } else {
                     moveAleatoire(grid);
@@ -258,10 +276,10 @@ public class Robots {
 
     private void moveAleatoire(Grille grid) {
         Sector s = grid.getSector(this.position.getX(), this.position.getY());
-        System.out.println("Random");
         Random r = new Random();
         int i = -1;
-        while (i == -1) {
+        int cpt = 0;
+        while (i == -1 && cpt < 10) {
             i = r.nextInt(4);
             if (i == 0 && s.getPosition().getX() > 0) {
                 if (!goTo("N", grid)) {
@@ -282,6 +300,7 @@ public class Robots {
             } else {
                 i = -1;
             }
+            cpt += 1;
         }
     }
 
@@ -322,7 +341,7 @@ public class Robots {
     public int nbEntrepot(Grille grille){
         int nb = 0;
         for (Entrepot m : grille.getEntrepots()) {
-            if (m.isDiscover() && m.getType() == this.type && this.capacity != 0) {
+            if (m.isDiscover() && m.getType() == this.type && this.capacity > 0) {
                 nb+=1;
             }
         }
@@ -345,16 +364,13 @@ public class Robots {
         int y = 0;
         for (Sector d : sectors){
             dist = abs(this.getPosition().getX() - d.getPosition().getX()) + abs(this.getPosition().getY() - d.getPosition().getY());
+
             if (dist < good) {
                 good = dist;
                 x = d.getPosition().getX();
                 y = d.getPosition().getY();
             }
         }
-        System.out.println("dist = " + grille.getSector(x,y));
         return grille.getSector(x, y);
     }
-
-    //TODO : faire execution dans le programme principal
-    //TODO : modifier action bouton automatique eventmanager
 }

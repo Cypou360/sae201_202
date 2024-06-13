@@ -24,6 +24,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class EventManager implements EventHandler {
@@ -214,7 +215,6 @@ public class EventManager implements EventHandler {
     private void executeAndUpdate() throws IOException {
         for (Robots r : p.getGrid().getRobots()) {
             r.automation(p.getGrid());
-
         }
         p.setNbTour(p.getNbTour()+1);
         p.setLabeltour(new Label("NbTour : " + String.valueOf(p.getNbTour())));
@@ -223,24 +223,25 @@ public class EventManager implements EventHandler {
 
     // Méthode pour démarrer la mise à jour automatique
     private void startAutoUpdate() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), new EventHandler<ActionEvent>() {
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.3), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
                     executeAndUpdate();
+                    if (event.getSource() instanceof KeyFrame && p.getGrid().getRemainingOre(Ore.gold) + p.getGrid().getRemainingOre(Ore.nickel) == 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Plus de minerai !");
+                        //alert.show();
+                    }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
-        }));
-        if (p.getGrid().getRemainingOre(Ore.gold) + p.getGrid().getRemainingOre(Ore.nickel) == 0) {
-            timeline.stop();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Plus de minerai !");
-            alert.show();
-        } else {
-            timeline.setCycleCount(Timeline.INDEFINITE); // Répéter indéfiniment
-            timeline.play(); // Démarrer le timeline
-        }
+        });
+        Timeline timeline = new Timeline(keyFrame);
+
+        System.out.println(p.getGrid().getRemainingOre(Ore.gold) + p.getGrid().getRemainingOre(Ore.nickel));
+        timeline.setCycleCount(Timeline.INDEFINITE); // Répéter indéfiniment
+        timeline.play(); // Démarrer le timeline
     }
 }
 
