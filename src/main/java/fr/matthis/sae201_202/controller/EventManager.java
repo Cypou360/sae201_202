@@ -222,7 +222,7 @@ public class EventManager implements EventHandler {
 
     // Méthode pour démarrer la mise à jour automatique
     private void startAutoUpdate() {
-        timeline = new Timeline(new KeyFrame(Duration.seconds(0.1), new EventHandler<ActionEvent>() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(0.3), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
