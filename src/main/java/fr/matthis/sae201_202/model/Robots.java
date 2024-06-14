@@ -216,8 +216,6 @@ public class Robots {
         } else if (end == null) {
             this.end = findSector(grid);
             this.path.clear();
-        }else{
-            System.out.println("Ne cherche pas");
         }
 
         if (start instanceof Entrepot && this.capacity == 0) {
