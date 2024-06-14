@@ -198,31 +198,31 @@ public class Robots {
         }
 
         if (start instanceof Mine && this.capacity < this.maxCapacity && this.type == ((Mine) start).getMinerai() && start.getStockage() > 0) {
-            this.extraction(grid);
+            this.extraction(grid); // Extraction
             return;
         } else if (start instanceof Entrepot && this.capacity != 0 && ((Entrepot) start).getType() == this.type) {
-            this.deposer(grid);
+            this.deposer(grid); // Depot
             return;
         }
 
 
         //recherche du point de destination
         if (!(start instanceof Entrepot) && this.nbEntrepot(grid) > 0) {
-            this.end = findEntrepot(grid);
+            this.end = findEntrepot(grid); // Trouver entrepot
             this.path.clear();
         } else if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine) && this.nbMine(grid) > 0) {
-            this.end = findMine(grid);
+            this.end = findMine(grid); // Trouver mine
             this.path.clear();
         } else if (end == null) {
-            this.end = findSector(grid);
+            this.end = findSector(grid); // Trouver secteur non decouvert
             this.path.clear();
         }
 
-        if (start instanceof Entrepot && this.capacity == 0) {
+        if (start instanceof Entrepot && this.capacity == 0) { // Evite de bloquer l'entrepot
             this.end = findMine(grid);
         }
 
-        if (remainingOre == 0){
+        if (remainingOre == 0){ // Arret quand plus besoins du robot
             return;
         }
 
