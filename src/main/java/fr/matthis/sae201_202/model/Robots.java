@@ -205,17 +205,25 @@ public class Robots {
             return;
         }
 
+
         //recherche du point de destination
         if (!(start instanceof Entrepot) && this.nbEntrepot(grid) > 0) {
             this.end = findEntrepot(grid);
+            this.path.clear();
         } else if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine) && this.nbMine(grid) > 0) {
             this.end = findMine(grid);
+            this.path.clear();
         } else {
             this.end = findSector(grid);
+            this.path.clear();
         }
 
         if (start instanceof Entrepot && this.capacity == 0) {
             this.end = findMine(grid);
+        }
+
+        if (remainingOre == 0){
+            return;
         }
 
         if (end == null) {
@@ -236,8 +244,6 @@ public class Robots {
         Sector s = grid.getSector(position.getX(), position.getY());
         if (this.path.isEmpty()) {
             moveAleatoire(grid);
-
-
         } else {
             int sid = path.indexOf(grid.getSector(this.position.getX(), this.position.getY()));
             if (sid != path.size() - 1) {
@@ -364,7 +370,6 @@ public class Robots {
         int y = 0;
         for (Sector d : sectors){
             dist = abs(this.getPosition().getX() - d.getPosition().getX()) + abs(this.getPosition().getY() - d.getPosition().getY());
-
             if (dist < good) {
                 good = dist;
                 x = d.getPosition().getX();
