@@ -145,6 +145,31 @@ public class Main extends Stage {
         Group groupGrille = new Group();
         EventManager emgr = new EventManager(this);
 
+        //prechargement des images
+        String imagePath = "/images/Herbe.jpg";
+        Image image = new Image(getClass().getResourceAsStream(imagePath));
+        ImagePattern patternHerbe = new ImagePattern(image);
+
+        imagePath = "/images/Eau.jpg";
+        image = new Image(getClass().getResourceAsStream(imagePath));
+        ImagePattern patternEau = new ImagePattern(image);
+
+        imagePath = "/images/ChestOr.png";
+        image = new Image(getClass().getResourceAsStream(imagePath));
+        ImagePattern patternChestOr = new ImagePattern(image);
+
+        imagePath = "/images/ChestNickel.png";
+        image = new Image(getClass().getResourceAsStream(imagePath));
+        ImagePattern patternChestNickel = new ImagePattern(image);
+
+        imagePath = "/images/Gold.jpg";
+        image = new Image(getClass().getResourceAsStream(imagePath));
+        ImagePattern patternGold = new ImagePattern(image);
+
+        imagePath = "/images/Nickel.jpg";
+        image = new Image(getClass().getResourceAsStream(imagePath));
+        ImagePattern patternNickel = new ImagePattern(image);
+
         groupGrille.setId("grille");
 
         int prevX = 0;
@@ -161,10 +186,7 @@ public class Main extends Stage {
                     Vide v = ((Vide) ss);
                     Coordonnee pos = v.getPosition();
                     Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
-                    String imagePath3 = "/images/Herbe.jpg";
-                    Image image = new Image(getClass().getResourceAsStream(imagePath3));
-                    ImagePattern pattern = new ImagePattern(image);
-                    r.setFill(pattern);
+                    r.setFill(patternHerbe);
                     cellule.getChildren().add(r);
 
                     r.setOnMouseClicked(emgr);
@@ -180,20 +202,14 @@ public class Main extends Stage {
                     l.setLayoutY(e.getPosition().getY() * this.cellSize + this.cellSize/2.5);
 
                     if (e.getType() == Ore.gold) {
-                        String imagePath4 = "/images/ChestOr.png";
-                        Image image = new Image(getClass().getResourceAsStream(imagePath4));
-                        ImagePattern pattern = new ImagePattern(image);
-                        r.setFill(pattern);
+                        r.setFill(patternChestOr);
 
-                        r2.setFill(pattern);
+                        r2.setFill(patternChestOr);
                         r2.setOnMouseClicked(emgr);
                     } else {
-                        String imagePath5 = "/images/ChestNickel.png";
-                        Image image = new Image(getClass().getResourceAsStream(imagePath5));
-                        ImagePattern pattern = new ImagePattern(image);
-                        r.setFill(pattern);
+                        r.setFill(patternChestNickel);
 
-                        r2.setFill(pattern);
+                        r2.setFill(patternChestNickel);
                         r2.setOnMouseClicked(emgr);
                     }
                     cellule.getChildren().addAll(r,r2,l);
@@ -209,20 +225,14 @@ public class Main extends Stage {
                     l.setLayoutX(m.getPosition().getX() * this.cellSize + this.cellSize/1.5);
                     l.setLayoutY(m.getPosition().getY() * this.cellSize + this.cellSize/2.5);
                     if (m.getMinerai() == Ore.gold) {
-                        String imagePath6 = "/images/Gold.jpg";
-                        Image image = new Image(getClass().getResourceAsStream(imagePath6));
-                        ImagePattern pattern = new ImagePattern(image);
-                        r.setFill(pattern);
+                        r.setFill(patternGold);
 
-                        r2.setFill(pattern);
+                        r2.setFill(patternGold);
                         r2.setOnMouseClicked(emgr);
                     } else {
-                        String imagePath7 = "/images/Nickel.jpg";
-                        Image image = new Image(getClass().getResourceAsStream(imagePath7));
-                        ImagePattern pattern = new ImagePattern(image);
-                        r.setFill(pattern);
+                        r.setFill(patternNickel);
 
-                        r2.setFill(pattern);
+                        r2.setFill(patternNickel);
                         r2.setOnMouseClicked(emgr);
                     }
                     cellule.getChildren().addAll(r,r2,l);
@@ -231,10 +241,7 @@ public class Main extends Stage {
                     Lac l = ((Lac) ss);
                     Coordonnee pos = l.getPosition();
                     Rectangle r = new Rectangle(pos.getX() * this.cellSize, pos.getY() * this.cellSize, this.cellSize, this.cellSize);
-                    String imagePath8 = "/images/Eau.jpg";
-                    Image image = new Image(getClass().getResourceAsStream(imagePath8));
-                    ImagePattern pattern = new ImagePattern(image);
-                    r.setFill(pattern);
+                    r.setFill(patternEau);
                     cellule.getChildren().add(r);
                     r.setOnMouseClicked(emgr);
                 }
@@ -247,9 +254,24 @@ public class Main extends Stage {
             }
         }
 
+
+        // dessin des robots
         Group groupRobot = new Group();
         groupRobot.setId("robot");
-        // dessin des robots
+
+        // Chargement des robots
+        imagePath = "/images/Steve.jpg";
+        image = new Image(getClass().getResourceAsStream(imagePath));
+        ImagePattern patternSteve = new ImagePattern(image);
+
+        imagePath = "/images/Alex.jpg";
+        image = new Image(getClass().getResourceAsStream(imagePath));
+        ImagePattern patternAlex = new ImagePattern(image);
+
+        imagePath = "/images/Pioche.png";
+        image = new Image(getClass().getResourceAsStream(imagePath));
+        ImagePattern patternPioche = new ImagePattern(image);
+
         ArrayList<Robots> robots = grille.getRobots();
         for (Robots r : robots) {
             Coordonnee pos = r.getPosition();
@@ -262,30 +284,18 @@ public class Main extends Stage {
             hRobot.getChildren().add(ro);
 
             if (r.getType() == Ore.gold) {
-                String imagePath9 = "/images/Steve.jpg";
-                Image image = new Image(getClass().getResourceAsStream(imagePath9));
-                ImagePattern pattern = new ImagePattern(image);
-                ro.setFill(pattern);
+                ro.setFill(patternSteve);
                 if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.gold)) {
-                    String imagePath10 = "/images/Pioche.png";
-                    Image image1 = new Image(getClass().getResourceAsStream(imagePath10));
-                    ImagePattern pattern1 = new ImagePattern(image1);
                     Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
-                    ro2.setFill(pattern1);
+                    ro2.setFill(patternPioche);
                     hRobot.getChildren().add(ro2);
                     r.setPioche(true);
                 }
             } else {
-                String imagePath11 = "/images/Alex.jpg";
-                Image image = new Image(getClass().getResourceAsStream(imagePath11));
-                ImagePattern pattern = new ImagePattern(image);
-                ro.setFill(pattern);
+                ro.setFill(patternAlex);
                 if ((grille.getSector(r.getPosition().getX(), r.getPosition().getY()) instanceof Mine) && (((Mine) grille.getSector(r.getPosition().getX(), r.getPosition().getY())).getType() == Ore.nickel)) {
-                    String imagePath12 = "/images/Pioche.png";
-                    Image image1 = new Image(getClass().getResourceAsStream(imagePath12));
-                    ImagePattern pattern1 = new ImagePattern(image1);
                     Rectangle ro2 = new Rectangle(this.cellSize / 2, this.cellSize / 2); // pioche
-                    ro2.setFill(pattern1);
+                    ro2.setFill(patternPioche);
                     hRobot.getChildren().add(ro2);
                     r.setPioche(true);
                 }
