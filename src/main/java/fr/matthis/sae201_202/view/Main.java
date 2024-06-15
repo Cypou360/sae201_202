@@ -636,8 +636,14 @@ public class Main extends Stage {
         // utilisation d'une lambda pour la modification du nombre d'action par seconde
         nbMove.setOnAction(e -> {
             try {
-                setNbMoveSecond(Double.parseDouble(nbMove.getText()));
-                text.setText("Nombre d'action par seconde (A definir avant utiliser auto) : \n (Actuellement " + nbMoveSecond + ")");
+                double nbtest = Double.parseDouble(nbMove.getText());
+                if (nbtest < 0.06){
+                    Alert a = new Alert(Alert.AlertType.INFORMATION, "Nombre de seconde trop petit");
+                    a.show();
+                }else {
+                    setNbMoveSecond(Double.parseDouble(nbMove.getText()));
+                    text.setText("Nombre d'action par seconde (A definir avant utiliser auto) : \n (Actuellement " + nbMoveSecond + ")");
+                }
             } catch (NumberFormatException ex) {
                 nbMove.setText("2");
             }
