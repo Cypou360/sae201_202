@@ -24,11 +24,12 @@ public class InfoCell extends Info {
         coord.getChildren().add(new Text(this.s.getPosition().toString()));
         Label type = new Label(genType());
         Label cap = new Label(genCapacity());
+        Label discover = new Label("Decouvert : " + this.s.isDiscover());
 
         Button fermer = new Button("Fermer");
         fermer.setOnMouseClicked(new EventManager(this));
 
-        root.getChildren().addAll(type, cap, fermer);
+        root.getChildren().addAll(type, cap, discover, fermer);
         this.getIcons().add(genImage());
     }
 
