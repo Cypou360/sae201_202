@@ -1,4 +1,5 @@
 package fr.matthis.sae201_202.model;
+
 import java.util.ArrayList;
 import java.util.Random;
 
