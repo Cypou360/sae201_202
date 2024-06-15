@@ -8,9 +8,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -33,6 +31,15 @@ public class Main extends Stage {
     private int nbTour = -1;
     private Label labeltour = null;
     private double height;
+    private double nbMoveSecond = 2;
+
+    public double getNbMoveSecond() {
+        return nbMoveSecond;
+    }
+
+    public void setNbMoveSecond(double nbMoveSecond) {
+        this.nbMoveSecond = nbMoveSecond;
+    }
 
     public int getCellSize() {
         return cellSize;
@@ -603,12 +610,34 @@ public class Main extends Stage {
         }
         recap.getChildren().add(vEntre);
         recap.getChildren().add(espace2);
+
         // Création du boutton automatique
+        HBox autoH = new HBox();
         Button auto = new Button("Auto");
         auto.setPrefSize(100, 30);
         auto.setFont(new Font(cellSize/5));
-        recap.getChildren().add(auto);
         auto.setOnMouseClicked(emgr);
+
+        Label text = new Label("Nombre d'action par seconde (A definir avant utiliser auto) : \n (Actuellement " + nbMoveSecond + ")");
+        text.setFont(new Font(cellSize/6));
+
+        TextField nbMove = new TextField();
+        nbMove.setFont(new Font(cellSize/6));
+        // utilisation d'une lambda pour la modification du nombre d'action par seconde
+        nbMove.setOnAction(e -> {
+            try {
+                setNbMoveSecond(Double.parseDouble(nbMove.getText()));
+                text.setText("Nombre d'action par seconde (A definir avant utiliser auto) : \n (Actuellement " + nbMoveSecond + ")");
+            } catch (NumberFormatException ex) {
+                nbMove.setText("2");
+            }
+        });
+
+        nbMove.setPrefSize(50, 30);
+
+
+        autoH.getChildren().addAll(auto, text, nbMove);
+        recap.getChildren().add(autoH);
         return recap;
     }
 

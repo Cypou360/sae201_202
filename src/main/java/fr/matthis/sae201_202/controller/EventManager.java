@@ -20,13 +20,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.awt.*;
 import java.io.IOException;
-import java.sql.Time;
 
 public class EventManager implements EventHandler {
 
@@ -80,8 +77,6 @@ public class EventManager implements EventHandler {
                 }
             } else if (b.getText().equals("Auto")) {
                 startAutoUpdate();
-                //int[][] tab = p.getGrid().genAdjacent();
-                //p.getGrid().printMatrix(tab);
             } else if (b.getParent().getId().equals("action")){
                 Stage stage = new Stage();
                 Group group = new Group();
@@ -225,7 +220,7 @@ public class EventManager implements EventHandler {
 
     // Méthode pour démarrer la mise à jour automatique
     private void startAutoUpdate() {
-        timeline = new Timeline(new KeyFrame(Duration.seconds(0.3), new EventHandler<ActionEvent>() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1/p.getNbMoveSecond()), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
