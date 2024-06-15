@@ -226,7 +226,7 @@ public class Robots {
         } else if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine) && this.nbMine(grid) > 0) {
             this.end = findMine(grid); // Trouver mine
             this.path.clear();
-        } else if (end == null) {
+        } else {
             this.end = findSector(grid); // Trouver secteur non decouvert
             this.path.clear();
         }

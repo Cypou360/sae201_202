@@ -634,8 +634,8 @@ public class Main extends Stage {
         nbMove.setOnAction(e -> {
             try {
                 double nbtest = Double.parseDouble(nbMove.getText());
-                if (nbtest < 0.06){
-                    Alert a = new Alert(Alert.AlertType.INFORMATION, "Nombre de seconde trop petit");
+                if (nbtest > 15){
+                    Alert a = new Alert(Alert.AlertType.INFORMATION, "Nombre d'action par seconde trop grand");
                     a.show();
                 }else {
                     setNbMoveSecond(Double.parseDouble(nbMove.getText()));
