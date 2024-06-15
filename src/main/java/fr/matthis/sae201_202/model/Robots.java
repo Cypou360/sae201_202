@@ -205,17 +205,25 @@ public class Robots {
             return;
         }
 
+
         //recherche du point de destination
         if (!(start instanceof Entrepot) && this.nbEntrepot(grid) > 0) {
             this.end = findEntrepot(grid);
+            this.path.clear();
         } else if (remainingOre > 0 && this.capacity < this.maxCapacity && !(start instanceof Mine) && this.nbMine(grid) > 0) {
             this.end = findMine(grid);
-        } else {
+            this.path.clear();
+        } else if (end == null) {
             this.end = findSector(grid);
+            this.path.clear();
         }
 
         if (start instanceof Entrepot && this.capacity == 0) {
             this.end = findMine(grid);
+        }
+
+        if (remainingOre == 0){
+            return;
         }
 
         if (end == null) {
@@ -236,8 +244,6 @@ public class Robots {
         Sector s = grid.getSector(position.getX(), position.getY());
         if (this.path.isEmpty()) {
             moveAleatoire(grid);
-
-
         } else {
             int sid = path.indexOf(grid.getSector(this.position.getX(), this.position.getY()));
             if (sid != path.size() - 1) {
@@ -353,24 +359,37 @@ public class Robots {
         ArrayList<Sector> sectors = new ArrayList<>();
         for (Sector[] s : grille.getGrille()){
             for (Sector ss : s){
-                if (!ss.isDiscover() && !(ss instanceof Lac)){
+                if (!ss.isDiscover() && !(ss instanceof Lac) && ss.getRobot() == null){
                     sectors.add(ss);
                 }
             }
         }
-        int dist = 0;
-        int good = 100;
-        int x = 0;
-        int y = 0;
-        for (Sector d : sectors){
-            dist = abs(this.getPosition().getX() - d.getPosition().getX()) + abs(this.getPosition().getY() - d.getPosition().getY());
 
-            if (dist < good) {
-                good = dist;
-                x = d.getPosition().getX();
-                y = d.getPosition().getY();
+        ArrayList<Sector> sectors2 = new ArrayList<>();
+        for (Sector[] s : grille.getGrille()){
+            for (Sector ss : s){
+                if (ss.isDiscover() && !(ss instanceof Lac) && ss.getRobot() == null){
+                    sectors2.add(ss);
+                }
             }
         }
+
+
+        int dist = 0;
+        int good = 100;
+        int x = 9;
+        int y = 9;
+        for (Sector d : sectors) {
+            for (Sector g : sectors2) {
+                dist = abs(this.getPosition().getX() - d.getPosition().getX()) + abs(this.getPosition().getY() - d.getPosition().getY());
+                if (dist < good) {
+                    x = d.getPosition().getX();
+                    good = dist;
+                    y = d.getPosition().getY();
+                }
+            }
+        }
+        grille.getSector(x,y).setDiscover(true);
         return grille.getSector(x, y);
     }
 }
