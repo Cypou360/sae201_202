@@ -3,11 +3,8 @@ package fr.matthis.sae201_202.view;
 import fr.matthis.sae201_202.controller.EventManager;
 import fr.matthis.sae201_202.model.*;
 
-import javafx.animation.AnimationTimer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;

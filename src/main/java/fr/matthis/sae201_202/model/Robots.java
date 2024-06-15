@@ -1,4 +1,5 @@
 package fr.matthis.sae201_202.model;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -43,6 +44,10 @@ public class Robots {
     private boolean pioche;
     private ArrayList<Sector> path;
     private Sector end;
+
+    public ArrayList<Sector> getPath() {
+        return path;
+    }
 
     /* Permet de récupérer toutes les informations sur le robot */
     public String toString() {
@@ -100,24 +105,32 @@ public class Robots {
         if (orientation.equals("N") && position.getX() > 0 && grille.getSector(position.getX()-1, position.getY()).getDisponible()) {
             grille.getSector(position.getX(), position.getY()).setRobot(null);
             position.setX(position.getX()-1);
-            grille.getSector(position.getX(), position.getY()).setRobot(this);
+            Sector s = grille.getSector(position.getX(), position.getY());
+            s.setRobot(this);
+            this.path.add(s);
             return true;
 
         } else if (orientation.equals("S") && position.getX() < grille.getNbLigne()-1 && grille.getSector(position.getX()+1, position.getY()).getDisponible()) { // vérification SUD
-                grille.getSector(position.getX(), position.getY()).setRobot(null);
-                position.setX(position.getX()+1);
-                grille.getSector(position.getX(), position.getY()).setRobot(this);
-                return true;
+            grille.getSector(position.getX(), position.getY()).setRobot(null);
+            position.setX(position.getX()+1);
+            Sector s = grille.getSector(position.getX(), position.getY());
+            s.setRobot(this);
+            this.path.add(s);
+            return true;
 
         } else if (orientation.equals("E") && position.getY() < grille.getNbColonne()-1 && grille.getSector(position.getX(), position.getY()+1).getDisponible()) { // vérification EST
             grille.getSector(position.getX(), position.getY()).setRobot(null);
             position.setY(position.getY()+1);
-            grille.getSector(position.getX(), position.getY()).setRobot(this);
+            Sector s = grille.getSector(position.getX(), position.getY());
+            s.setRobot(this);
+            this.path.add(s);
             return true;
         } else if (orientation.equals("O") && position.getY() > 0 && grille.getSector(position.getX(), position.getY()-1).getDisponible()) { // vérification OUEST
             grille.getSector(position.getX(), position.getY()).setRobot(null);
             position.setY(position.getY()-1);
-            grille.getSector(position.getX(), position.getY()).setRobot(this);
+            Sector s = grille.getSector(position.getX(), position.getY());
+            s.setRobot(this);
+            this.path.add(s);
             return true;
         } else {
             return false;

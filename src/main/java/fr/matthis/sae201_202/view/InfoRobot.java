@@ -5,7 +5,10 @@ import fr.matthis.sae201_202.model.Ore;
 import fr.matthis.sae201_202.model.Robots;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
@@ -26,10 +29,23 @@ public class InfoRobot extends Info {
         String capT = "" + this.r.getCapacity() + " / " + this.r.getMaxCapacity();
         Label cap = new Label(capT);
 
+        Label chemin = new Label("Chemin : " + this.r.getPath());
+        ScrollBar scroll = new ScrollBar();
+        scroll.setMin(0);
+        scroll.setMax(100);
+        scroll.setValue(50);
+        scroll.setOrientation(javafx.geometry.Orientation.HORIZONTAL);
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(chemin);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        VBox cheminScroll = new VBox();
+        cheminScroll.getChildren().addAll(chemin,sp);
+
+
         Button fermer = new Button("Fermer");
         fermer.setOnMouseClicked(new EventManager(this));
 
-        this.root.getChildren().addAll(type,cap,fermer);
+        this.root.getChildren().addAll(type,cap,cheminScroll,fermer);
         this.getIcons().add(genImage());
     }
 
