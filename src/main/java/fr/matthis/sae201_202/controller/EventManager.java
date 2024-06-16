@@ -235,11 +235,3 @@ public class EventManager implements EventHandler {
         timeline.play(); // Démarrer le timeline
     }
 }
-
-
-
-
-
-
-
-
